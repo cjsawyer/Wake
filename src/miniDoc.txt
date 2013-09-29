@@ -1,0 +1,19 @@
+timer:
+	double time = System.currentTimeMillis();
+	Log.e("reywas", (System.currentTimeMillis() - time) + "");
+	
+Log.e("reywas", "");
+
+// Tweening (in function):
+new_value = start_Value * ( t * ( end_value - start_value ) );
+
+// Easing (run every frame):
+x+= (target - x) * 0.1 * ref.main.time_scale;
+
+// Load high score
+String high_score_string = ref.file.load("int_high_score");
+if (high_score_string.equals("")) {
+	high_score = 0;
+} else {
+	high_score = Integer.parseInt(ref.file.load("int_high_score")); 
+}

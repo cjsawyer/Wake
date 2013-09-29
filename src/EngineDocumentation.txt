@@ -1,0 +1,88 @@
+Hello. This is Chris Sawyer. I'm the author of this engine.
+I've been working on it since January 2012.
+Unless I've messed something up, you shouldn't need to change anything in the gameEngine directory -- but then again, nobody but me should be reading this but me anyway ;)
+
+
+Note to self: Ctrl+F "TODO" and fill those bits in before release
+
+
+When changing the directory name for a new game, remember to update the package name in the Manifest. It doesn't update itself for some reason.
+	package="com.reywas.testGameName"
+
+
+ENTITIES:
+
+
+
+
+
+STRINGS:
+
+	Using the normal way of dealing with Java strings is slow for drawing every frame and eventually causes game-killing garbage collection.
+	This method gets us around that.
+	
+	Copy this to wherever you need to draw a string, and copy the second line as many times as needed to concatenate all parts of the final string:
+
+		ref.strings.builder.setLength(0);
+			ref.strings.builder.append(  your_string_here  );
+			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+			ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, draw_angle, depth, ref.strings.stringChars, ref.strings.builder.length(), game_textures.FONT_TEXTURE_NAME);
+
+
+
+
+
+ROOMS:
+
+	To add a new room:
+		TODO
+	
+	Relevant Methods:
+		TODO
+
+
+SOUNDS:
+
+Only one music track can be loaded at a time, but you can load as many sound effects as you want.
+
+
+DRAWING:
+
+	COLOR:
+	
+	TEXTURES:
+	
+		To add a new texture:
+			If the texture is going to be recolored, it needs to be white. (White is the color that's effected the most) 
+			TODO
+		
+		To load a texture:
+			TODO
+	
+		When drawing textures, get the texture_sheet's id with:
+			game_textuers.TEXTURE_NAME
+	
+	SHAPES:
+	
+		Rectangles:
+	
+
+
+
+
+ADS:
+
+FILE IO:
+
+	EXAMPLE:
+		String temp_string = ref.file.load("test");
+		if (temp_string != "")
+			// Do stuff with temp_string
+
+MENU/BACK BUTTON HANDLING:
+	In game_physicalButton, edit handleBackButton() and handleMenuButton() to your wishes.
+	You can add any game entities or other objects to help with this in the constructor.
+	
+	To replicate the default back button behavior, call this:
+		ref.android.finish();
+
