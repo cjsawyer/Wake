@@ -1,9 +1,6 @@
 package com.reywas.testGameName.gameEngine;
 
-import android.util.Log;
-
-import com.reywas.testGameName.game.game_rooms;
-import com.reywas.testGameName.game.entities.*;
+import com.reywas.testGameName.testbed.game_rooms;
 
 public class engine_room {
 	

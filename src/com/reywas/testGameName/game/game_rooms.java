@@ -2,25 +2,8 @@ package com.reywas.testGameName.game;
 
 import android.util.Log;
 
-import com.reywas.testGameName.game.entities.feature_tests.entity_adMob_test;
-import com.reywas.testGameName.game.entities.feature_tests.entity_bugFixing;
-import com.reywas.testGameName.game.entities.feature_tests.entity_collisionTest;
-import com.reywas.testGameName.game.entities.feature_tests.entity_loadingDebug;
-import com.reywas.testGameName.game.entities.feature_tests.entity_loadingTest;
-import com.reywas.testGameName.game.entities.feature_tests.entity_particleComparison;
-import com.reywas.testGameName.game.entities.feature_tests.entity_poolTest;
-import com.reywas.testGameName.game.entities.feature_tests.entity_saveTest;
-import com.reywas.testGameName.game.entities.feature_tests.entity_soundTest;
-import com.reywas.testGameName.game.entities.feature_tests.entity_textureTest;
-import com.reywas.testGameName.game.entities.feature_tests.old.entity_BLANK;
-import com.reywas.testGameName.game.entities.feature_tests.old.entity_OBAMA;
-import com.reywas.testGameName.game.entities.feature_tests.old.entity_multiTouchTest;
-import com.reywas.testGameName.game.entities.feature_tests.old.entity_particleTest;
-import com.reywas.testGameName.game.entities.neonFlux.entity_gameMain;
-import com.reywas.testGameName.game.entities.neonFlux.entity_greenOrbSpawner;
-import com.reywas.testGameName.game.entities.neonFlux.entity_mammothLoadingScreen;
-import com.reywas.testGameName.game.entities.neonFlux.entity_menuMain;
-import com.reywas.testGameName.game.entities.neonFlux.entity_debugLoadingScreen;
+import com.reywas.testGameName.game.entities.wake.entity_mammothLoadingScreen;
+import com.reywas.testGameName.game.entities.wake.entity_menuMain;
 import com.reywas.testGameName.gameEngine.engine_reference;
 
 public class game_rooms {

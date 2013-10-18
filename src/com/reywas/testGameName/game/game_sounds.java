@@ -17,8 +17,8 @@ public class game_sounds {
 	};
 	
 	
-	public static final int MSC_CEPHALOPOD = 0;
+//	public static final int MSC_CEPHALOPOD = 0;
 	public static String[] music_array = {
-		"Cephalopod.mp3",
+//		"Cephalopod.mp3",
 	};
 }

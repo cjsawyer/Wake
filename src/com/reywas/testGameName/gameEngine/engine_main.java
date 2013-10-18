@@ -360,13 +360,22 @@ public class engine_main {
 		
 		ref.loadHelper.checkFinished();
 		
+		ref.android.sys_updateTouchDurations();
+		
 //		sys_entityBeforeSteps();
 		sys_entitySteps();
 //		sys_entityAfterSteps();
 		
-		ref.android.sys_updateTouchDurations();
 
 		ref.room.sys_moveRooms();
+		
+		//LAG FOR TESTINGG!!
+//		try {
+//			Thread.sleep(500);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	private boolean backButton = false, menuButton = false; 

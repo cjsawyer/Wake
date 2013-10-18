@@ -23,17 +23,18 @@ public class utility_pool <T extends utility_poolObject> {
 	private Class<T> clazzOfT; 
 	
 	private engine_reference ref;
-		public utility_pool (engine_reference r, Class<T> clazz, int max_objects){
+	
+	public utility_pool (engine_reference r, Class<T> clazz, int max_objects){
+	
+	clazzOfT = clazz;
+	
+	ref = r;
+	MAX_OBJECTS = max_objects;
+	
+	objects = new utility_poolObject[MAX_OBJECTS];
+	
+	for(temp_i=0;temp_i<MAX_OBJECTS;temp_i++) {
 		
-		clazzOfT = clazz;
-		
-		ref = r;
-		MAX_OBJECTS = max_objects;
-		
-		objects = new utility_poolObject[MAX_OBJECTS];
-		
-		for(temp_i=0;temp_i<MAX_OBJECTS;temp_i++) {
-			
 //			try {
 //				addObject((utility_poolObject)object_class.newInstance());
 //			} catch (InstantiationException e) {
@@ -41,20 +42,20 @@ public class utility_pool <T extends utility_poolObject> {
 //			} catch (IllegalAccessException e) {
 //				e.printStackTrace();
 //			}
-			try {
-				temp_object = clazzOfT.newInstance();
-				temp_object.ref = ref;
-				
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			addObject(temp_object);
+		try {
+			temp_object = clazzOfT.newInstance();
+			temp_object.ref = ref;
+			
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		addObject(temp_object);
 	}
+}
 	
 	private void addObject(utility_poolObject new_object) {
 		
@@ -81,14 +82,16 @@ public class utility_pool <T extends utility_poolObject> {
 //	}  
 	
 //	private Class<T> classOfT;  
-//    private T getInstance() throws Exception {  
+//	private T getInstance(int id) throws Exception {  
+    public T getInstance(int id) {  
 //        //return new T(); // won't compile  
 //        //return T.newInstance(); // won't compile  
 //        //return T.class.newInstance(); // won't compile  
 ////        return classOfT.newInstance();  
 //    	
 //        return (T) rtrn; 
-//    }
+        return (T) objects[id]; 
+    }
 	public int getNumberObjectsFree() {
 //		Log.e("free", "free: " + (MAX_OBJECTS - objects_current));
 		return MAX_OBJECTS - objects_current;

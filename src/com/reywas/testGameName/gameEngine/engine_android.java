@@ -1,5 +1,6 @@
 package com.reywas.testGameName.gameEngine;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import com.mammothGames.wake.R;
@@ -254,13 +255,17 @@ public class engine_android extends Activity {
     	}
     	
     	steps_held = new int[NUMBER_OF_TOUCH_POINTS];
+    	steps_held_stepSync = new int[NUMBER_OF_TOUCH_POINTS];
 	    for(temp_i=0; temp_i<NUMBER_OF_TOUCH_POINTS;temp_i++){
 	    	steps_held[temp_i] = 0;
+	    }
+	    
+	    for(temp_i=0; temp_i<NUMBER_OF_TOUCH_POINTS;temp_i++){
+	    	steps_held_stepSync[temp_i] = steps_held[temp_i];
 	    }
     }
     
     public int sys_get_touch_x(int index){
-
     	return (int) touch_points_array[index].x;
     }
     public int sys_get_touch_y(int index){
@@ -268,6 +273,7 @@ public class engine_android extends Activity {
     }
     
     private int[] steps_held;
+    private int[] steps_held_stepSync;
 	private int sys_steps_held = 0;
 	
 	protected static final int TOUCH_NONE = 0;
@@ -276,25 +282,21 @@ public class engine_android extends Activity {
 	protected static final int TOUCH_UP = -1;
 	
     public int sys_get_touch_state(int index){
+    	
     	if (index < NUMBER_OF_TOUCH_POINTS-1){
-    		sys_steps_held = steps_held[index];
+    		sys_steps_held = steps_held_stepSync[index];
     	} else {
     		sys_steps_held = TOUCH_NONE;
     	}
     	
-//    	if (sys_steps_held == TOUCH_NONE){
-//			return TOUCH_NONE;
-//		} else if (sys_steps_held == TOUCH_DOWN){
-//			return TOUCH_DOWN;
-//		} else if (sys_steps_held > TOUCH_DOWN){
-//			return TOUCH_HELD;
-//		}
-//    	
-//    	return TOUCH_UP;
     	return sys_steps_held;
     }
     
     protected void sys_updateTouchDurations(){
+    	for(temp_i=0; temp_i<NUMBER_OF_TOUCH_POINTS;temp_i++){
+    		steps_held_stepSync[temp_i] = steps_held[temp_i];
+    	}
+    	
     	for(temp_i=0; temp_i<NUMBER_OF_TOUCH_POINTS;temp_i++){
     		
 	    	if (steps_held[temp_i] == TOUCH_UP){
@@ -343,10 +345,16 @@ public class engine_android extends Activity {
 		temp_index = event.getActionIndex();
 		temp_id = event.getPointerId(temp_index);
 		
+		
+//		Log.e("DOWN", "ID: " + temp_id);
+//		Log.e("DOWN", "INDEX: " + temp_index);
+//		Log.e("DOWN", ".");
+		
 		if (temp_id < NUMBER_OF_TOUCH_POINTS-1){
 			touch_points_array[temp_id].set(event.getX(temp_index), event.getY(temp_index));
 			steps_held[temp_id] = TOUCH_DOWN;
 		}
+//		Log.e("DOWN", Arrays.toString(steps_held));
 		
 		//Log.e("reywas",temp_id + " down.");
 		
@@ -375,7 +383,9 @@ public class engine_android extends Activity {
 				if (temp_id < NUMBER_OF_TOUCH_POINTS-1){
 					try {
 						touch_points_array[temp_id].set(event.getX(temp_i), event.getY(temp_i));
-					} catch (Exception e) {}
+					} catch (Exception e) {
+						Log.e("TOUCH", "was unable to set x and y coords for moving pointer.");
+					}
 				}
 				
 				

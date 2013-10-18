@@ -194,6 +194,9 @@ public class engine_gl_textureLoader {
 	    			}
 	    			//System.gc();
 	    			
+	    			Log.e("texture", "width: " + temp_width);
+	    			Log.e("texture", "height: " + temp_height);
+	    			
 	    			byteBuffer = ByteBuffer.allocateDirect(temp_width * temp_height * 4);
 	    			byteBuffer.put(buffer).position(0);
 	    			

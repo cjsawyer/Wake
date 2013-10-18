@@ -89,15 +89,24 @@ public class engine_gl_texture {
 				
 				stride = (8 * (texture_id-1)) + 2;
 				
+				                                                                                                       
+				calc_square_texture_coord_data[0] = ((texture_locations_arrays[texture_sheet_to_bind - 1][stride]      )/texture_width);//+
+				calc_square_texture_coord_data[1] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 1)])/texture_height);//-
+				calc_square_texture_coord_data[2] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 2)])/texture_width);//-
+				calc_square_texture_coord_data[3] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 3)])/texture_height);//-
+				calc_square_texture_coord_data[4] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 4)])/texture_width);//+
+				calc_square_texture_coord_data[5] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 5)])/texture_height);//+
+				calc_square_texture_coord_data[6] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 6)])/texture_width);//-
+				calc_square_texture_coord_data[7] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 7)])/texture_height);//+
 				
-				calc_square_texture_coord_data[0] = ((texture_locations_arrays[texture_sheet_to_bind - 1][stride]       + 0.5f)/texture_width);//+
-				calc_square_texture_coord_data[1] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 1)] - 0.5f)/texture_height);//-
-				calc_square_texture_coord_data[2] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 2)] - 0.5f)/texture_width);//-
-				calc_square_texture_coord_data[3] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 3)] - 0.5f)/texture_height);//-
-				calc_square_texture_coord_data[4] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 4)] + 0.5f)/texture_width);//+
-				calc_square_texture_coord_data[5] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 5)] + 0.5f)/texture_height);//+
-				calc_square_texture_coord_data[6] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 6)] - 0.5f)/texture_width);//-
-				calc_square_texture_coord_data[7] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 7)] + 0.5f)/texture_height);//+
+//				calc_square_texture_coord_data[0] = ((texture_locations_arrays[texture_sheet_to_bind - 1][stride]       + 0.5f)/texture_width);//+
+//				calc_square_texture_coord_data[1] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 1)] - 0.5f)/texture_height);//-
+//				calc_square_texture_coord_data[2] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 2)] - 0.5f)/texture_width);//-
+//				calc_square_texture_coord_data[3] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 3)] - 0.5f)/texture_height);//-
+//				calc_square_texture_coord_data[4] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 4)] + 0.5f)/texture_width);//+
+//				calc_square_texture_coord_data[5] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 5)] + 0.5f)/texture_height);//+
+//				calc_square_texture_coord_data[6] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 6)] - 0.5f)/texture_width);//-
+//				calc_square_texture_coord_data[7] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 7)] + 0.5f)/texture_height);//+
 				
 				ref.floatbuffers.texture_coords_FloatBuffer.put(calc_square_texture_coord_data);
 				GLES20.glVertexAttribPointer(ref.renderer.VS_a_Texture, 2, GLES20.GL_FLOAT, false, 0, ref.floatbuffers.texture_coords_FloatBuffer);
