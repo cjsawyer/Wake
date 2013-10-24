@@ -81,7 +81,7 @@ public class entity_mammothLoadingScreen extends engine_entity {
 		ref.loadHelper.setNumberToLoad(4);
 //		ref.textureLoader.loadTexture(game_textures.TEX_SPRITES);
 		ref.textureLoader.loadTexture(game_textures.TEX_FONT1);
-		ref.sound.loadMusic(game_sounds.MSC_CEPHALOPOD);
+//		ref.sound.loadMusic(game_sounds.MSC_CEPHALOPOD);
 		ref.sound.loadSound(game_sounds.SND_SPLASH);
 		ref.sound.loadSound(game_sounds.SND_DING);
 	}
