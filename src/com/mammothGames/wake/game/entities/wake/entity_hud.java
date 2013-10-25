@@ -38,7 +38,6 @@ public class entity_hud extends engine_entity {
 		
 	}
 	
-	String _scoreToDraw = "";
 	
 	@Override
 	public void sys_step() {
@@ -47,7 +46,6 @@ public class entity_hud extends engine_entity {
 		score = mgr.gameMain.score;
 		if (old_score != score) {
 			shake = true;
-			_scoreToDraw = score + "";
 		}
 		old_score = score;
 		
@@ -65,15 +63,11 @@ public class entity_hud extends engine_entity {
 		if (ref.room.get_current_room() == game_rooms.ROOM_GAME) {
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			
-//			ref.strings.builder.setLength(0);
-//			ref.strings.builder.append(  score   );
-//			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-//			//ref.draw.drawText(text_x + shake_x, text_y + shake_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, 100,  ref.strings.stringChars, ref.strings.temp_stringBuilder.length(), game_textures.TEX_FONT1);
-//			ref.draw.drawText(shake_x, shake_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, 200,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
-			
-			ref.draw.drawText(shake_x, shake_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 200, _scoreToDraw, game_textures.TEX_FONT1);
-			
-//			ref.draw.drawText(text_x, text_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 100, "" + mgr.gameMain.score, game_textures.TEX_FONT1);
+			ref.strings.builder.setLength(0);
+			ref.strings.builder.append(  score   );
+			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+			ref.draw.drawText(shake_x, shake_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, 200,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			//text_x + shake_x, text_y + shake_y,
 		}
 	}
 }

@@ -43,19 +43,23 @@ public class entity_menuPostGame extends engine_entity {
 			if (shade_alpha >= 1) {
 				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
 					// Update the high-score string.
-					mgr.gameMenu.updateHighScoreString(); 
 					ref.room.changeRoom(game_rooms.ROOM_MENU);
 				}
 			}
 			
 			ref.draw.setDrawColor(1, 1, 1, 1);
-			ref.draw.drawText(screen_width/2, screen_height/2 + mgr.gameMain.text_size*3/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 101, "SCORE", game_textures.TEX_FONT1);
+			ref.draw.drawTextSingleString(screen_width/2, screen_height/2 + mgr.gameMain.text_size*3/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 101, "SCORE", game_textures.TEX_FONT1);
 			
-			ref.draw.drawText(screen_width/2, screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 101, "" + mgr.gameMain.score, game_textures.TEX_FONT1);
+			
+			ref.strings.builder.setLength(0);
+			ref.strings.builder.append(  mgr.gameMain.score   );
+			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+			ref.draw.drawText(screen_width/2, screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, 101,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			
 			
 			if (mgr.gameMain.new_high_score) {
 				ref.draw.setDrawColor(0.5f, 0.5f, 1, ((float)Math.sin((float)(SystemClock.uptimeMillis() * mgr.gameMenu.DEG_TO_RAD / 500f * 180f))) + 1);
-				ref.draw.drawText(screen_width/2, screen_height/2 - mgr.gameMain.text_size*3/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 101, "NEW BEST!", game_textures.TEX_FONT1);
+				ref.draw.drawTextSingleString(screen_width/2, screen_height/2 - mgr.gameMain.text_size*3/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 101, "NEW BEST!", game_textures.TEX_FONT1);
 			}
 			
 		}

@@ -57,8 +57,8 @@ public class entity_menuPause extends engine_entity {
 				ref.draw.drawCapturedDraw();
 				
 				ref.draw.setDrawColor(1, 1, 1, 1);
-				ref.draw.drawText(ref.main.get_screen_width()/2, ref.main.get_screen_height()/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, "tap to unpause", game_textures.TEX_FONT1);
-				ref.draw.drawText(ref.main.get_screen_width()/2, ref.main.get_screen_height()/2 - (mgr.gameMain.text_size), mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, "press back to quit", game_textures.TEX_FONT1);
+				ref.draw.drawTextSingleString(ref.main.get_screen_width()/2, ref.main.get_screen_height()/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, "tap to unpause", game_textures.TEX_FONT1);
+				ref.draw.drawTextSingleString(ref.main.get_screen_width()/2, ref.main.get_screen_height()/2 - (mgr.gameMain.text_size), mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, "press back to quit", game_textures.TEX_FONT1);
 			}
 
 			

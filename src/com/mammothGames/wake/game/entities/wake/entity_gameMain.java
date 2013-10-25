@@ -63,7 +63,6 @@ public class entity_gameMain extends engine_entity {
 		} else {
 			high_score = Integer.parseInt(ref.file.load("int_high_score")); 
 		}
-		mgr.gameMenu.updateHighScoreString();
 		
 		floor_per_miss = ref.main.get_screen_height()/15;
 		floor_per_hit = floor_per_miss/7;
