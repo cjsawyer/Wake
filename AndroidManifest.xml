@@ -25,7 +25,7 @@
         
         <activity
             android:immersive="true"
-            android:name="com.reywas.testGameName.gameEngine.engine_android"
+            android:name="com.mammothGames.wake.gameEngine.engine_android"
             android:label="@string/app_name"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 			
