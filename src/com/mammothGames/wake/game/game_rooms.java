@@ -2,8 +2,8 @@ package com.mammothGames.wake.game;
 
 import android.util.Log;
 
-import com.mammothGames.wake.game.entities.wake.entity_mammothLoadingScreen;
-import com.mammothGames.wake.game.entities.wake.entity_menuMain;
+import com.mammothGames.wake.game.entities.entity_mammothLoadingScreen;
+import com.mammothGames.wake.game.entities.entity_menuMain;
 import com.mammothGames.wake.gameEngine.engine_reference;
 
 public class game_rooms {
@@ -82,9 +82,6 @@ public class game_rooms {
 		}
 		
 	}
-	
-	
-	
 	
 	
 	

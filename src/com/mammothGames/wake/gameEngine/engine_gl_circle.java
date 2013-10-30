@@ -30,8 +30,8 @@ public class engine_gl_circle {
 		
 		for(int i=1; i<points;i++) {
 //			Log.e("sad", "percent " + (theta*i));
-			verts[i*3] = (float) Math.cos(theta*(i-1));
-			verts[i*3+1] = (float) Math.sin(theta*(i-1));
+			verts[i*3] = (float) FloatMath.cos(theta*(i-1));
+			verts[i*3+1] = (float) FloatMath.sin(theta*(i-1));
 			verts[i*3+2] = 0;
 //			Log.e("sad", "A:	" + verts[i*3] + "	" + verts[i*3+1] + "	" + verts[i*3+2]);
 		}
@@ -94,7 +94,7 @@ public class engine_gl_circle {
 		
 		GLES20.glUniformMatrix4fv(ref.renderer.VS_u_MVP_Matrix, 1, false, ref.renderer.mMVPMatrix, 0);
 //		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, ref.floatbuffers.circle_vertices_data.length/3);
-		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, (int)(ref.floatbuffers.circle_vertices_data.length/3 * Math.abs(shape_angle/360f) + 1));// verts in circle * percent of circle + 1 for the first vert in the middle
+		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, (int)((ref.floatbuffers.circle_vertices_data.length-1)/3 * Math.abs(shape_angle/360f) + 1));// verts in circle * percent of circle + 1 for the first vert in the middle
 		
 		ref.draw.mainDrawList.sys_sync_remaining_calls -= 1;
 	}

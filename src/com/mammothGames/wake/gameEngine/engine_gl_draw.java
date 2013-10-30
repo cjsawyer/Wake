@@ -249,78 +249,51 @@ public class engine_gl_draw {
 			}
 		} else {
 			// The texture isn't loaded. Add this dummy call with the error texture so the draw color system isn't effected.
-			addToDrawList(x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x, y + temp_alignment_y, 0, 0, (ref.text.cell_width[texture_sheet-1])*temp_scale, (ref.text.cell_height[texture_sheet-1])*temp_scale, (ref.text.cell_width[texture_sheet-1]/2)*temp_scale, (ref.text.cell_height[texture_sheet-1]/2)*temp_scale, draw_angle, depth, 1, game_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
-		}
-		return temp_total_width;
-	}
-
-//	/*
-	public float drawText(float x, float y, float size, int x_align, int y_align, int depth, String string_to_draw, int texture_sheet){
-
-		if (ref.textureLoader.has_loaded[texture_sheet-1]) {
-			
-			temp_string_length = string_to_draw.length();
-			temp_scale = size/ref.text.size;
-			temp_total_width = 0;
-			
-			switch(y_align){
-				case Y_ALIGN_TEXT_BASELINE:
-					temp_alignment_y = ((ref.text.padding_y[texture_sheet-1] - ref.text.font_ascent[texture_sheet-1])*temp_scale);
-					break;
-				case Y_ALIGN_BOTTOM:
-					temp_alignment_y = ((ref.text.padding_y[texture_sheet-1] - ref.text.font_descent[texture_sheet-1])*temp_scale);
-					break;
-				case Y_ALIGN_CENTER:
-					temp_alignment_y =  ((-ref.text.padding_y[texture_sheet-1] - (ref.text.font_height[texture_sheet-1]/2))*temp_scale);
-					break;
-				case Y_ALIGN_TOP:
-					temp_alignment_y = ((-ref.text.padding_y[texture_sheet-1] - ref.text.font_ascent[texture_sheet-1] - ref.text.font_descent[texture_sheet-1])*temp_scale);
-					break;
-				default:
-					Log.e("reywas","ERROR: In engine_gl_draw.drawText(), use ref.draw.X/Y_ALIGN_* for y_align and x_align arguments.");
-			}
-			
-			// Get the total scaled length in pixels of the string to draw for horizontal alignment.
-			for(int i=0; i < temp_string_length; i++){
-				temp_char = string_to_draw.charAt(i);
-				for(int i_char_width=32; i_char_width<126;i_char_width++){
-					if (((char) i_char_width)  == temp_char){
-						temp_total_width += ((ref.text.char_widths[texture_sheet-1][i_char_width-31]) * temp_scale);
-					}
-				}
-			}
-			
+			// I'm estimating the width/height ratio of an average character is 3/4. This times the number of letters is about how wide a string would be.
+			temp_total_width = size * 3/4 * ref.strings.builder.length();
 			
 			switch(x_align){
 				case X_ALIGN_LEFT:
 					temp_alignment_x = -(temp_total_width);
 					break;
 				case X_ALIGN_CENTER:				
-					temp_alignment_x = -(temp_total_width/2);
+					temp_alignment_x = (temp_total_width/2);
 					break;
 				case X_ALIGN_RIGHT:				
-					temp_alignment_x = 0;
+					temp_alignment_x = (temp_total_width);
 					break;
 			}
 			
-			
-			temp_total_width = 0;
-			for(int i=0; i < temp_string_length; i++){
-	
-				temp_char = string_to_draw.charAt(i);
-	
-				for(int i_char_width=32; i_char_width<126;i_char_width++){
-					if (((char) i_char_width)  == temp_char){
-						addToDrawList(x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x, y + temp_alignment_y, 0, 0, (ref.text.cell_width[texture_sheet-1])*temp_scale, (ref.text.cell_height[texture_sheet-1])*temp_scale, (ref.text.cell_width[texture_sheet-1]/2)*temp_scale, (ref.text.cell_height[texture_sheet-1]/2)*temp_scale, 0, depth, i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
-						temp_total_width += ((ref.text.char_widths[texture_sheet-1][i_char_width-31]) * temp_scale);
-					}
-				}
-	
+			switch(y_align){
+				case Y_ALIGN_TEXT_BASELINE:
+				case Y_ALIGN_BOTTOM:
+					temp_alignment_y = size/2;
+					break;
+				case Y_ALIGN_CENTER:
+					temp_alignment_y =  0;
+					break;
+				case Y_ALIGN_TOP:
+					temp_alignment_y = -size/2;
+					break;
 			}
+			
+			temp_alignment_x=0;
+			ref.draw.setDrawColor(1, 1, 1, 1);
+			addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, draw_angle, depth, 1, game_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
 		}
 		return temp_total_width;
 	}
-//	*/
+
+	public float drawTextSingleString(float x, float y, float size, int x_align, int y_align, int depth, String string_to_draw, int texture_sheet){
+
+		// String-buffer setup
+		ref.strings.builder.setLength(0);
+		ref.strings.builder.append(  string_to_draw  );
+		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+
+//		return ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, 200,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);;
+		return ref.draw.drawText(x, y, size, x_align, y_align, 0, depth, ref.strings.stringChars, ref.strings.builder.length(), texture_sheet); 
+	}
 
 	private final int DRAW_TYPE_TEXTURE= 0;
 	private final int DRAW_TYPE_RECTANGLE = 1;

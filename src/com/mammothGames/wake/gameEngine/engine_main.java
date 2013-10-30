@@ -54,7 +54,6 @@ public class engine_main {
 
 	public int addEntity(engine_entity ge){
 
-
 		ge.id = entities_total;
 
 		entity_list[entities_total] = ge;
@@ -107,8 +106,6 @@ public class engine_main {
 				
 				// Main steps, also ticks alarms
 				if ((temp_entity.paused == false)) {
-					
-					
 					temp_entity.sys_step();
 					temp_entity.alarmStep();
 					sys_cleanDeletedEntities();
@@ -136,36 +133,13 @@ public class engine_main {
 		sys_checkIfEntityListIsFull();
 	}
 
-
-//	private void sys_entityBeforeSteps(){
-//		for(temp_i_steps = 0; temp_i_steps < entities_total; temp_i_steps++){
-//			temp_entity = null;
-//			temp_entity = entity_list[temp_i_steps];
-//			if ((temp_entity != null) && ( temp_entity.paused == false)){
-//				temp_entity.sys_beforeStep();
-//			}
-//			sys_cleanDeletedEntities();
-//		}
-//	}
-//	private void sys_entityAfterSteps(){
-//		for(temp_i_steps = 0; temp_i_steps < entities_total; temp_i_steps++){
-//
-//			temp_entity = null;
-//			temp_entity = entity_list[temp_i_steps];
-//
-//			if ((temp_entity != null) && ( temp_entity.paused == false)){
-//				temp_entity.sys_afterStep();
-//			}
-//			sys_cleanDeletedEntities();
-//		}
-//	}
-	private void sys_cleanDeletedEntities(){
+	private void sys_cleanDeletedEntities() {
 
 		temp_entity = null;
 		temp_entity = entity_list[temp_i_steps];
 
 		if (temp_entity != null){
-			if (temp_entity.sys_delete_me == true){
+			if (temp_entity.sys_delete_me == true) {
 
 				entity_list[temp_i_steps] = null;
 
