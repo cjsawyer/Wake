@@ -1,0 +1,32 @@
+timer:
+	double time = System.currentTimeMillis();
+	Log.e("reywas", (System.currentTimeMillis() - time) + "");
+	
+Log.e("reywas", "");
+
+// Tweening (in function):
+new_value = start_Value * ( t * ( end_value - start_value ) );
+
+// Easing (run every frame):
+x+= (target - x) * 0.1 * ref.main.time_scale;
+
+// Load high score
+String high_score_string = ref.file.load("int_high_score");
+if (high_score_string.equals("")) {
+	high_score = 0;
+} else {
+	high_score = Integer.parseInt(ref.file.load("int_high_score")); 
+}
+
+
+Object pools:
+
+	utility_pool<poolObj_greenOrb> greenOrb_pool;
+	poolObj_greenOrb temp_greenOrb;
+
+	for(int i_objects = 0; i_objects < greenOrb_pool.MAX_OBJECTS; i_objects++) {
+			temp_greenOrb = greenOrb_pool.getInstance(i_objects);
+			if ((temp_greenOrb.sys_in_use)) {
+				// Do some stuff with the pool objects.
+			}
+	}
