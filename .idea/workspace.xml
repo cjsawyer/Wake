@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" name="Default" comment="" />
+    <list default="true" id="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameStateManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_masterOrbSpawner.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_debugLoadingScreen.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingDebug.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_greenOrbSpawner.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_mammothLoadingScreen.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingMammoth.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawnerState.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbPatternMaker.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_greenOrb.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_orb.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/masterGameReference.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/masterGameReference.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Wake.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383174732772" ignored="false" />
+    <file path="/Dummy.txt" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383193736385" ignored="false" />
     <file path="/game_rooms.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383172265366" ignored="false" />
     <file path="/revision.txt" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383174369877" ignored="false" />
+    <file path="/a.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383187281985" ignored="false" />
+    <file path="/sample.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383187293628" ignored="false" />
+    <file path="/fragment.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383187831478" ignored="false" />
+    <file path="/game_constants.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383188395715" ignored="false" />
+    <file path="/entity_menuMain.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383196031340" ignored="false" />
+    <file path="/entity_orbSpawnerState.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383193915828" ignored="false" />
+    <file path="/poolObj_greenOrb.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383193983645" ignored="false" />
+    <file path="/entity_greenOrbSpawner.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383194671918" ignored="false" />
+    <file path="/entity_debugLoadingScreen.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383194706734" ignored="false" />
+    <file path="/entity_mammothLoadingScreen.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383194739667" ignored="false" />
+    <file path="/entity_orbPatternMaker.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383195750322" ignored="false" />
+    <file path="/masterGameReference.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383195915617" ignored="false" />
+    <file path="/entity_orbSpawner.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383205442334" ignored="false" />
+    <file path="/engine_gl_draw.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383203834126" ignored="false" />
+    <file path="/entity_gameMain.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383204683888" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +55,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -58,6 +91,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -67,19 +101,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="game_rooms.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java">
+      <file leaf-file-name="entity_menuMain.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="70" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
+            <state line="33" column="81" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="revision.txt" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/revision.txt">
+      <file leaf-file-name="entity_menuPause.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="43" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
+            <state line="61" column="0" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="entity_menuPostGame.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="13" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="entity_orbPatternMaker.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbPatternMaker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="161" column="56" selection-start="5875" selection-end="5875" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="entity_orbSpawner.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="238" column="50" selection-start="8630" selection-end="8630" vertical-scroll-proportion="0.8551308">
+              <folding>
+                <element signature="method#sys_firstStep#0;class#entity_orbSpawner#0" expanded="false" />
+                <element signature="method#spawnOrb#0;class#entity_orbSpawner#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="entity_gameMain.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="111" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -103,8 +176,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java" />
-        <option value="$PROJECT_DIR$/src/revision.txt" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawnerState.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_greenOrb.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_orb.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_greenOrbSpawner.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_debugLoadingScreen.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingDebug.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_mammothLoadingScreen.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_oadingMammoth.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingMammoth.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_masterOrbSpawner.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbPatternMaker.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/masterGameReference.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/gameEngine/engine_gl_draw.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java" />
       </list>
     </option>
   </component>
@@ -138,6 +225,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -188,21 +277,68 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="settings.github" />
+    <property name="options.lastSelected" value="preferences.keymap" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../jIdea" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
@@ -337,7 +473,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
       <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
@@ -384,31 +520,51 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3254364" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32917705" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32793018" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30922693" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33428982" sideWeight="0.67206985" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671958" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.6745636" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31133428" sideWeight="0.6745636" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3254364" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -476,87 +632,111 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="8" column="38" selection-start="244" selection-end="244" vertical-scroll-proportion="0.15936255">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/revision.txt">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/gameEngine/utility_poolObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="43" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
+        <state line="2" column="13" selection-start="56" selection-end="56" vertical-scroll-proportion="0.03994674">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/masterGameReference.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="11" column="4" selection-start="233" selection-end="233" vertical-scroll-proportion="0.21970706">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/revision.txt">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="31" selection-start="31" selection-end="31" vertical-scroll-proportion="0.0">
+        <state line="61" column="0" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_hud.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="22" column="26" selection-start="640" selection-end="640" vertical-scroll-proportion="0.32520324">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/revision.txt">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingDebug.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="31" selection-start="31" selection-end="31" vertical-scroll-proportion="0.0">
+        <state line="24" column="32" selection-start="494" selection-end="494" vertical-scroll-proportion="0.39946738">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingMammoth.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/revision.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="41" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
+        <state line="27" column="31" selection-start="679" selection-end="679" vertical-scroll-proportion="0.42682928">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="57" column="55" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.2596538">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/revision.txt">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="41" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
+        <state line="33" column="81" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_orb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="70" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
+        <state line="11" column="36" selection-start="367" selection-end="367" vertical-scroll-proportion="0.13565892">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/revision.txt">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="43" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
+        <state line="9" column="13" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbPatternMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="56" selection-start="5875" selection-end="5875" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/gameEngine/engine_gl_draw.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="441" column="57" selection-start="15237" selection-end="15237" vertical-scroll-proportion="0.2759527">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="111" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="238" column="50" selection-start="8630" selection-end="8630" vertical-scroll-proportion="0.8551308">
+          <folding>
+            <element signature="method#sys_firstStep#0;class#entity_orbSpawner#0" expanded="false" />
+            <element signature="method#spawnOrb#0;class#entity_orbSpawner#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

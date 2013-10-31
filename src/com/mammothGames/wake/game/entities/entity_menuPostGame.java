@@ -58,7 +58,7 @@ public class entity_menuPostGame extends engine_entity {
 			
 			
 			if (mgr.gameMain.new_high_score) {
-				ref.draw.setDrawColor(0.5f, 0.5f, 1, ((float)Math.sin((float)(SystemClock.uptimeMillis() * mgr.gameMenu.DEG_TO_RAD / 500f * 180f))) + 1);
+				ref.draw.setDrawColor(0.5f, 0.5f, 1, ((float)Math.sin((float)(SystemClock.uptimeMillis() * mgr.menuMain.DEG_TO_RAD / 500f * 180f))) + 1);
 				ref.draw.drawTextSingleString(screen_width/2, screen_height/2 - mgr.gameMain.text_size*3/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 101, "NEW BEST!", game_textures.TEX_FONT1);
 			}
 			

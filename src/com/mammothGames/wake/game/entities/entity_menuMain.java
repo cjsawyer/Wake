@@ -13,55 +13,54 @@ public class entity_menuMain extends engine_entity {
 	public entity_menuMain() {
 		this.persistent = true;
 		this.pausable = false;
-		
+
 		mgr = new masterGameReference();
 	}
 	
 	final float DEG_TO_RAD = (float)(Math.PI/180f);
 	
 	private float screen_width, screen_height;
-	int random_number = (int) (Math.random() * 100);
+
 	float screen_cover_alpha = 1;
-	
+
 	@Override
 	public void sys_firstStep() {
 		
 		ref.ad.loadAd(ref.ad.H_CENTER, ref.ad.V_BOTTOM);
-		
-		
+
 		ref.main.pauseEntities();
 		
-		mgr.gameMenu = this;
+		mgr.menuMain = this;
 		
 		mgr.gameMain = new entity_gameMain(mgr);
 		ref.main.addEntity(mgr.gameMain);
 
-		mgr.masterOrbSpawner = new entity_masterOrbSpawner(mgr);
-		ref.main.addEntity(mgr.masterOrbSpawner);
+        mgr.orbSpawner = new entity_orbSpawner(mgr);
+        ref.main.addEntity(mgr.orbSpawner);
+
+		mgr.orbPatternMaker = new entity_orbPatternMaker(mgr);
+		ref.main.addEntity(mgr.orbPatternMaker);
 		
-		mgr.orbSpawnerState = new entity_orbSpawnerState(mgr);
-		ref.main.addEntity(mgr.orbSpawnerState);
+		mgr.orbPatternMaker = new entity_orbPatternMaker(mgr);
+		ref.main.addEntity(mgr.orbPatternMaker);
 		
-		mgr.gameStateManager = new entity_gameStateManager(mgr);
-		ref.main.addEntity(mgr.gameStateManager);
+		mgr.menuPause = new entity_menuPause(mgr);
+		ref.main.addEntity(mgr.menuPause);
 		
-		mgr.pauseMenu = new entity_menuPause(mgr);
-		ref.main.addEntity(mgr.pauseMenu);
-		
-		mgr.greenOrbSpawner = new entity_greenOrbSpawner(mgr);
-		ref.main.addEntity(mgr.greenOrbSpawner);
+		mgr.orbSpawner = new entity_orbSpawner(mgr);
+		ref.main.addEntity(mgr.orbSpawner);
 		
 		mgr.menuPostGame = new entity_menuPostGame(mgr);
 		ref.main.addEntity(mgr.menuPostGame);
 		
-		mgr.hud = new entity_hud(mgr);
-		ref.main.addEntity(mgr.hud);
-		
+		mgr.gameHud = new entity_hud(mgr);
+		ref.main.addEntity(mgr.gameHud);
+
 		screen_width = ref.main.get_screen_width();
 		screen_height = ref.main.get_screen_height();
 		
 	}
-	
+
 	@Override
 	public void sys_step() {
 		

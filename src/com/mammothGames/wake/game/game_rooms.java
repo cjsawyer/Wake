@@ -2,7 +2,7 @@ package com.mammothGames.wake.game;
 
 import android.util.Log;
 
-import com.mammothGames.wake.game.entities.entity_mammothLoadingScreen;
+import com.mammothGames.wake.game.entities.entity_loadingMammoth;
 import com.mammothGames.wake.game.entities.entity_menuMain;
 import com.mammothGames.wake.gameEngine.engine_reference;
 
@@ -35,8 +35,8 @@ public class game_rooms {
 				ref.draw.setBackgroundColor(0,0,0);
 //				ref.main.addEntity(new entity_particleTest());
 //				ref.main.addEntity(new entity_loadingDebug());
-//				ref.main.addEntity(new entity_debugLoadingScreen());
-				ref.main.addEntity(new entity_mammothLoadingScreen());
+//				ref.main.addEntity(new entity_loadingDebug());
+				ref.main.addEntity(new entity_loadingMammoth());
 				break;
 			}
 			

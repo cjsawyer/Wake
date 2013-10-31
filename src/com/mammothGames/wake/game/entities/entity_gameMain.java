@@ -25,7 +25,7 @@ public class entity_gameMain extends engine_entity {
 	public final float speed_gain_per_orb = 0.009f; // 0.01
 	
 	public float time_start_between_orbs = 333;
-	private float time_minimum_between_orbs = 150;
+	public float time_minimum_between_orbs = 150;
 	public float time_between_orbs = time_start_between_orbs; // in milliseconds
 	public float time_between_orbs_double = time_between_orbs*2; // in milliseconds
 	public final float time_change_per_orb = 0.1f; //2, in ms
@@ -87,16 +87,16 @@ public class entity_gameMain extends engine_entity {
 		time_between_orbs_double = time_between_orbs*2;
 		
 		
-		if (mgr.orbSpawnerState.state_finished) {
+		if (mgr.orbPatternMaker.state_finished) {
 			
 			if ((float)Math.random() > CHANCE_OF_LAST_STATE) {
 				// Set a random one.
-				state = (int) Math.round( Math.random() * (mgr.orbSpawnerState.num_states-1) );
+				state = (int) Math.round( Math.random() * (mgr.orbPatternMaker.num_states-1) );
 			}
-			mgr.orbSpawnerState.setState(state);
+			mgr.orbPatternMaker.setState(state);
 			
 			// For testing custom ones
-//			mgr.orbSpawnerState.setState(mgr.orbSpawnerState.STATE_2TIER_Z);
+//			mgr.orbPatternMaker.setState(mgr.orbPatternMaker.STATE_2TIER_Z);
 			
 			
 			
@@ -121,9 +121,9 @@ public class entity_gameMain extends engine_entity {
 	public void restartGame() {
 		ref.main.unPauseEntities();
 		mgr.gameMain.restart();
-		mgr.greenOrbSpawner.restart();
-		mgr.orbSpawnerState.restart();
-		mgr.pauseMenu.restart();
+		mgr.orbSpawner.restart();
+		mgr.orbPatternMaker.restart();
+		mgr.menuPause.restart();
 		mgr.menuPostGame.restart();
 	}
 	

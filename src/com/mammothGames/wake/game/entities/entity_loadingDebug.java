@@ -7,9 +7,9 @@ import com.mammothGames.wake.game.game_textures;
 import com.mammothGames.wake.gameEngine.*;
 
 
-public class entity_debugLoadingScreen extends engine_entity {
+public class entity_loadingDebug extends engine_entity {
 
-	public entity_debugLoadingScreen() {
+	public entity_loadingDebug() {
 		this.persistent = false;
 		this.pausable = false;
 	}

@@ -2,15 +2,17 @@ package com.mammothGames.wake.game.entities;
 
 import java.util.Random;
 
+import android.os.SystemClock;
+import android.util.Log;
 import com.mammothGames.wake.game.game_sounds;
 import com.mammothGames.wake.game.game_textures;
 import com.mammothGames.wake.gameEngine.*;
 
 
-public class entity_greenOrbSpawner extends engine_entity {
+public class entity_orbSpawner extends engine_entity {
 	masterGameReference mgr;
 	private boolean isFirstStart;
-	public entity_greenOrbSpawner(masterGameReference mgr) {
+	public entity_orbSpawner(masterGameReference mgr) {
 		
 		this.persistent = true;
 		this.pausable = true;
@@ -20,12 +22,16 @@ public class entity_greenOrbSpawner extends engine_entity {
 	}
 	Random rand = new Random();
 	
-	utility_pool<poolObj_greenOrb> greenOrb_pool = new utility_pool<poolObj_greenOrb>(ref, poolObj_greenOrb.class, 20);
-	poolObj_greenOrb temp_greenOrb;
-//	greenOrb_pool = new utility_pool<poolObj_greenOrb>(ref, poolObj_greenOrb.class, 20);
+	utility_pool<poolObj_orb> greenOrb_pool = new utility_pool<poolObj_orb>(ref, poolObj_orb.class, 20);
+	poolObj_orb temp_greenOrb;
+//	greenOrb_pool = new utility_pool<poolObj_orb>(ref, poolObj_orb.class, 20);
 	
 	int screen_width, screen_height;
-	
+    protected int radius, border_size, radius_total;
+
+    private final int TRAIL_SEGMENTS = 6;
+    private float trail_total_height, TRAIL_PERIOD_MS = 333;
+
 	private engine_particleEmitter emitterWhite, emitterGreen, emitterWhiteSparks, emitterGreenSparks, emitterWhiteShards;
 	
 	public void restart() {
@@ -37,13 +43,18 @@ public class entity_greenOrbSpawner extends engine_entity {
 	
 	@Override
 	public void sys_firstStep(){
-//		greenOrb_pool = new utility_pool<poolObj_greenOrb>(ref, poolObj_greenOrb.class, 20);
-		
+//		greenOrb_pool = new utility_pool<poolObj_orb>(ref, poolObj_orb.class, 20);
+
+        radius = (ref.main.get_screen_width()/10);
+        border_size = radius/10;
+        radius_total = radius + border_size;
+
 		screen_width = ref.main.get_screen_width();
 		screen_height = ref.main.get_screen_height();
-		
-		
-		
+
+        trail_total_height =  radius*3;
+
+
 		emitterWhite = new engine_particleEmitter(ref);
 		ref.main.addEntity(emitterWhite);
 		
@@ -106,10 +117,9 @@ public class entity_greenOrbSpawner extends engine_entity {
 	}
 	
 	
-//	public void spawnGreenOrb(float x, float y) {
-	public void spawnGreenOrb(float x, float y, float speed, int radius, int border_size) {
+	public void spawnOrb(float x, float y, float speed, int radius, int border_size) {
 		if (greenOrb_pool != null) {
-			temp_greenOrb = (poolObj_greenOrb) greenOrb_pool.takeObject();
+			temp_greenOrb = (poolObj_orb) greenOrb_pool.takeObject();
 			temp_greenOrb.x = x;
 			temp_greenOrb.y = y;
 			temp_greenOrb.speed = speed;
@@ -120,23 +130,32 @@ public class entity_greenOrbSpawner extends engine_entity {
 	
 	
 	private float tRadius, tExtraV, tHalfTotalV, tBoxY, tShardAngle, tCurrentAngle;
-	private int number_shards;
+	private float number_shards;
+    private float resettingTimeCounter = 0;
 	@Override
 	public void sys_step(){
 		
 //		if ((Math.random() * 250) < 5) {
 //			greenOrb_pool.takeObject();
 //		}
+
+        //TODO: test to see if this crashes!
+        resettingTimeCounter += ref.main.time_delta;
+        if (resettingTimeCounter > Integer.MAX_VALUE/2) {
+            if (resettingTimeCounter%1000 == 0)
+                resettingTimeCounter =0;
+        }
 		
 		for(int i_objects = 0; i_objects < greenOrb_pool.MAX_OBJECTS; i_objects++) {
 			temp_greenOrb = greenOrb_pool.getInstance(i_objects);
-//			temp_greenOrb = (poolObj_greenOrb) greenOrb_pool.objects[i_objects];
+//			temp_greenOrb = (poolObj_orb) greenOrb_pool.objects[i_objects];
 			
 			boolean delete_this_one = false;
 			
 			if ((temp_greenOrb.sys_in_use)) {
-				
-				temp_greenOrb.y -= temp_greenOrb.speed * ref.main.time_scale;
+
+                float dy = temp_greenOrb.speed * ref.main.time_scale;
+				temp_greenOrb.y -= dy;
 				
 				tRadius = (temp_greenOrb.radius + temp_greenOrb.border_size);
 				tExtraV = 7 * ref.main.time_scale * temp_greenOrb.speed;
@@ -183,20 +202,47 @@ public class entity_greenOrbSpawner extends engine_entity {
 				//Green interior
 				ref.draw.setDrawColor(0, 1, 0, 1);
 				ref.draw.drawCircle(temp_greenOrb.x, temp_greenOrb.y, temp_greenOrb.radius, 0, 0, 360, 0, 2);
+
+                // White trail
+
+                float old_x = temp_greenOrb.x;
+                float old_x_reverse = temp_greenOrb.x;
+                float old_y = temp_greenOrb.y;
+                float deg_ammount = (float)Math.PI/TRAIL_SEGMENTS;
+                float flipper = 1;
+                float degradation = 1;
+                float degradationFactor = 1.25f;
+
+
+                for(int i=0; i<TRAIL_SEGMENTS; i++) {
+
+                    trail_total_height = temp_greenOrb.speed/4;
+
+				    // ref.draw.setDrawColor((float)Math.random(), (float)Math.random(), (float)Math.random(), 1); //TEMP
+
+                    //Sperm-ball tails?
+//                    float new_x = temp_greenOrb.x + flipper*degradation*((float) Math.sin(degradation * resettingTimeCounter/TRAIL_PERIOD_MS * (mgr.gameMain.time_minimum_between_orbs/mgr.gameMain.time_between_orbs) * 2*Math.PI) * temp_greenOrb.radius);
+                    float new_x = flipper*degradation*((float) Math.sin(resettingTimeCounter/TRAIL_PERIOD_MS/degradation * (mgr.gameMain.time_minimum_between_orbs/mgr.gameMain.time_between_orbs) * 2*Math.PI) * temp_greenOrb.radius);
+                    float new_x_reverse = -new_x;
+                    new_x += temp_greenOrb.x;
+                    new_x_reverse += temp_greenOrb.x;
+
+                    float new_y = old_y + degradation*trail_total_height/TRAIL_SEGMENTS;
+
+				    ref.draw.setDrawColor(1, 1, 1, 1);
+                    ref.draw.drawLine(old_x, old_y, new_x, new_y ,temp_greenOrb.border_size*2, 2);
+
+				    ref.draw.setDrawColor(0, 1, 0, 1);
+                    ref.draw.drawLine(old_x_reverse, old_y, new_x_reverse, new_y ,temp_greenOrb.border_size*2, 2);
+
+                    old_x = new_x;
+                    old_x_reverse = new_x_reverse;
+                    old_y = new_y;
+                    flipper*=-1;
+                    degradation/=degradationFactor;
+                }
 				
-				
-				
-				/*
-				// white spazzyness
-				ref.draw.setDrawColor(1, 1, 1, 0.8f);
-				ref.draw.drawCircle(temp_greenOrb.x, temp_greenOrb.y, temp_greenOrb.radius + temp_greenOrb.border_size, 0, 0, rand.nextFloat() * 270, rand.nextFloat() * 360, 6);
-				
-				// black spazzyness
-				ref.draw.setDrawColor(0, 0, 0, 1);
-				ref.draw.drawCircle(temp_greenOrb.x, temp_greenOrb.y, temp_greenOrb.radius + temp_greenOrb.border_size, 0, 0, rand.nextFloat() * 45, rand.nextFloat() * 360, 6);
-				ref.draw.drawCircle(temp_greenOrb.x, temp_greenOrb.y, temp_greenOrb.radius + temp_greenOrb.border_size, 0, 0, rand.nextFloat() * 45, rand.nextFloat() * 360, 6);
-				*/
-				
+
 				if (temp_greenOrb.y < -temp_greenOrb.radius - temp_greenOrb.border_size + mgr.gameMain.floor_height) {
 					
 					// particle boxes shooting up

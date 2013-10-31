@@ -9,9 +9,9 @@ import com.mammothGames.wake.game.game_textures;
 import com.mammothGames.wake.gameEngine.*;
 
 
-public class entity_mammothLoadingScreen extends engine_entity {
+public class entity_loadingMammoth extends engine_entity {
 
-	public entity_mammothLoadingScreen() {
+	public entity_loadingMammoth() {
 		this.persistent = false;
 		this.pausable = false;
 	}

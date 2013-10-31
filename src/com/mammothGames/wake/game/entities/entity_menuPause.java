@@ -62,7 +62,7 @@ public class entity_menuPause extends engine_entity {
 
 			
 			if (gamePaused) {
-				ref.draw.setDrawColor(1, 0, 0, ((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.gameMenu.DEG_TO_RAD / 667f))) + 1);
+				ref.draw.setDrawColor(1, 0, 0, ((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuMain.DEG_TO_RAD / 667f))) + 1);
 			} else {
 				ref.draw.setDrawColor(1, 1, 1, 1);
 			}
