@@ -27,12 +27,10 @@ public class entity_loadingDebug extends engine_entity {
 		angle += (target_angle - angle) * 10 * ref.main.time_scale;
 		
 		ref.draw.setDrawColor(0.5f, 0.5f, 0.5f, 1);
-		ref.draw.drawCircle(ref.main.get_screen_width()/2, ref.main.get_screen_height()/2,
-				ref.main.get_screen_width()/4, 0, 0, 360, 0, 1);
+		ref.draw.drawCircle(ref.main.get_screen_width()/2, ref.main.get_screen_height()/2, ref.main.get_screen_width()/4, 0, 0, 360, 0, 1);
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
-		ref.draw.drawCircle(ref.main.get_screen_width()/2, ref.main.get_screen_height()/2,
-				ref.main.get_screen_width()/5, 0, 0, angle, 0, 2);
+		ref.draw.drawCircle(ref.main.get_screen_width()/2, ref.main.get_screen_height()/2, ref.main.get_screen_width()/5, 0, 0, angle, 0, 2);
 		
 		if (ref.loadHelper.checkFinished()) {
 			if (angle > 350)

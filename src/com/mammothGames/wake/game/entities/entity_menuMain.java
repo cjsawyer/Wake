@@ -2,6 +2,7 @@ package com.mammothGames.wake.game.entities;
 
 import android.os.SystemClock;
 
+import com.mammothGames.wake.game.game_constants;
 import com.mammothGames.wake.game.game_rooms;
 import com.mammothGames.wake.game.game_textures;
 import com.mammothGames.wake.gameEngine.*;
@@ -68,7 +69,7 @@ public class entity_menuMain extends engine_entity {
 			
 			screen_cover_alpha -= ref.main.time_scale * 2;
 			ref.draw.setDrawColor(0, 1, 0, screen_cover_alpha);
-			ref.draw.drawRectangle(screen_width/2, screen_height/2, screen_width, screen_height, 0, 0, 0, 200);
+			ref.draw.drawRectangle(screen_width/2, screen_height/2, screen_width, screen_height, 0, 0, 0, game_constants.layer6_HUD);
 			
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			

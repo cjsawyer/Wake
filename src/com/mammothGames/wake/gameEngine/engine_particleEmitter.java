@@ -45,6 +45,11 @@ public class engine_particleEmitter extends engine_entity {
 			ref.partPool.returnParticle(ref.partPool.particles[temp_i].id);
 		}
 	}
+	
+	private void copyColorArrays(float[] from, float[] to) {
+		for (int i=0; i<number_of_colors;i++)
+			to[i]=from[i];
+	}
 	public void addParticle(int number){
 
 		for (temp_i=0; temp_i<number; temp_i++) {
@@ -66,6 +71,11 @@ public class engine_particleEmitter extends engine_entity {
 			temp_particle.size_y = size_y;
 			temp_particle.change_x = change_x;
 			temp_particle.change_y = change_y;
+			
+			copyColorArrays(r,temp_particle.r);
+			copyColorArrays(b,temp_particle.b);
+			copyColorArrays(g,temp_particle.g);
+			copyColorArrays(a,temp_particle.a);
 			
 			temp_velocity = randomRange(velocity_low, velocity_high);
 			temp_direction = DEG_TO_RAD * randomRange(direction_low, direction_high);
@@ -146,10 +156,10 @@ public class engine_particleEmitter extends engine_entity {
 					}
 					
 					// update color
-					temp_r = interpolate(r);
-					temp_g = interpolate(g);
-					temp_b = interpolate(b);
-					temp_a = interpolate(a);
+					temp_r = interpolate(temp_particle.r);
+					temp_g = interpolate(temp_particle.g);
+					temp_b = interpolate(temp_particle.b);
+					temp_a = interpolate(temp_particle.a);
 					
 					// draw particle
 					ref.draw.setDrawColor(temp_r, temp_g, temp_b, temp_a);

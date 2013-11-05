@@ -1,5 +1,6 @@
 package com.mammothGames.wake.game.entities;
 
+import com.mammothGames.wake.game.game_constants;
 import com.mammothGames.wake.game.game_rooms;
 import com.mammothGames.wake.gameEngine.*;
 
@@ -105,11 +106,11 @@ public class entity_gameMain extends engine_entity {
 		// Ease the floor line up
 		floor_height_draw+= (floor_height - floor_height_draw) * 7 * ref.main.time_scale;
 		
-		ref.draw.setDrawColor(0, 1f, 0, 1);
-		ref.draw.drawRectangle(0, 0, ref.main.get_screen_width(), floor_height_draw, ref.main.get_screen_width()/2, floor_height_draw/2, 0, 99);
+		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 1); // Floor color
+		ref.draw.drawRectangle(0, 0, ref.main.get_screen_width(), floor_height_draw, ref.main.get_screen_width()/2, floor_height_draw/2, 0, game_constants.layer4_overGame);
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
-		ref.draw.drawLine(ref.main.get_screen_width(), floor_height_draw, 0, floor_height_draw, ref.main.get_screen_width()/25, 100);
+		ref.draw.drawLine(ref.main.get_screen_width(), floor_height_draw, 0, floor_height_draw, ref.main.get_screen_width()/25, game_constants.layer4_overGame);
 		
 		if (floor_height < 0)
 			floor_height = 0;

@@ -5,25 +5,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameStateManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_masterOrbSpawner.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_debugLoadingScreen.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingDebug.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_greenOrbSpawner.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_mammothLoadingScreen.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingMammoth.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawnerState.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbPatternMaker.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_greenOrb.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_orb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/Game Engine rev.95.apk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/Game Engine rev.96.apk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/Game Engine rev.97.apk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/Game Engine rev.98.apk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/Wake.apk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes.dex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_adMob_test.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_bugFixing.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_collisionTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_loadingDebug.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_loadingTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_particleComparison.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_poolTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_saveTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_soundTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/entity_textureTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/feature_tests/test_pool_object.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_debugLoadingScreen.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_gameMain.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_gameStateManager.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_greenOrbSpawner.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_hud.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_mammothLoadingScreen.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_masterOrbSpawner.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_menuMain.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_menuPause.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_menuPostGame.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/entity_orbSpawnerState.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/masterGameReference.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/entities/wake/poolObj_greenOrb.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/GoogleAdMobAdsSdk-6.4.1-391b4ce701c792ac492a374dfbaf081d.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/GoogleAdMobAdsSdk-6.4.1-6a152088a727c4af5819a0e5dfdd2fb9.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/GoogleAdMobAdsSdk-6.4.1-8cab226079c539b162aaac4fa4eecdb0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/GoogleAdMobAdsSdk-6.4.1-9d86decb9aa94c05e2e1b8bd8e01c6f6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/GoogleAdMobAdsSdk-6.4.1-c2b9bd6f1143f77e6fc09f12bec03c30.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/GoogleAdMobAdsSdk-6.4.1-f8f171adf7f012f352c7f8b0afbaadaf.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/android-support-v4-5a495b3afafb5290c7c4a9fc4c465389.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/android-support-v4-83ec007ef2e17c34b2bd0b80e93af740.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/android-support-v4-a17ec28b204c48ed3568346e23ac0ab4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/android-support-v4-bba7df613137261c0cba2973309ed85b.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/android-support-v4-ccab66ee19db4559772ae0732a41f56b.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/dexedLibs/android-support-v4-eab7494090c75ceaa621f28390428991.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/jarlist.cache" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/res/drawable-nodpi/neon_icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/resources.ap_" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/game_constants.class" afterPath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/game_constants.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/game_rooms.class" afterPath="$PROJECT_DIR$/bin/classes/com/mammothGames/wake/game/game_rooms.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.project" afterPath="$PROJECT_DIR$/.project" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/masterGameReference.java" afterPath="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/masterGameReference.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/revision.txt" afterPath="$PROJECT_DIR$/bin/classes/revision.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Wake.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383193736385" ignored="false" />
+    <file path="/Dummy.txt" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383517881741" ignored="false" />
     <file path="/game_rooms.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383172265366" ignored="false" />
     <file path="/revision.txt" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383174369877" ignored="false" />
     <file path="/a.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383187281985" ignored="false" />
@@ -38,7 +77,7 @@
     <file path="/entity_mammothLoadingScreen.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383194739667" ignored="false" />
     <file path="/entity_orbPatternMaker.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383195750322" ignored="false" />
     <file path="/masterGameReference.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383195915617" ignored="false" />
-    <file path="/entity_orbSpawner.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383205442334" ignored="false" />
+    <file path="/entity_orbSpawner.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383380090083" ignored="false" />
     <file path="/engine_gl_draw.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383203834126" ignored="false" />
     <file path="/entity_gameMain.java" changelist="aaae8b97-dc0b-4e51-b85b-19a4d79dfba6" time="1383204683888" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -55,6 +94,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -91,7 +131,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -101,58 +140,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="entity_menuMain.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java">
+      <file leaf-file-name="game_constants.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="81" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="entity_menuPause.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="0" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="entity_menuPostGame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="13" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="entity_orbPatternMaker.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbPatternMaker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="56" selection-start="5875" selection-end="5875" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="entity_orbSpawner.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="238" column="50" selection-start="8630" selection-end="8630" vertical-scroll-proportion="0.8551308">
-              <folding>
-                <element signature="method#sys_firstStep#0;class#entity_orbSpawner#0" expanded="false" />
-                <element signature="method#spawnOrb#0;class#entity_orbSpawner#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="entity_gameMain.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="111" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
+            <state line="17" column="30" selection-start="562" selection-end="562" vertical-scroll-proportion="0.4015748">
               <folding />
             </state>
           </provider>
@@ -176,7 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawnerState.java" />
         <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_greenOrb.java" />
         <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_orb.java" />
         <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_greenOrbSpawner.java" />
@@ -192,12 +182,13 @@
         <option value="$PROJECT_DIR$/src/com/mammothGames/wake/gameEngine/engine_gl_draw.java" />
         <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java" />
         <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java" />
+        <option value="$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -225,8 +216,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -327,6 +316,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -335,7 +326,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="preferences.keymap" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../jIdea" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -541,28 +532,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="false" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3254364" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32917705" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32793018" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32723576" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30922693" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.6745636" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31133428" sideWeight="0.6745636" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3254364" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31109926" sideWeight="0.6751528" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484725" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
@@ -632,10 +623,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="38" selection-start="244" selection-end="244" vertical-scroll-proportion="0.15936255">
-          <folding />
+        <state line="230" column="118" selection-start="8242" selection-end="8242" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#sys_firstStep#0;class#entity_orbSpawner#0" expanded="false" />
+            <element signature="method#spawnOrb#0;class#entity_orbSpawner#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -653,18 +647,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_hud.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="26" selection-start="640" selection-end="640" vertical-scroll-proportion="0.32520324">
-          <folding />
-        </state>
+        <state line="22" column="26" selection-start="640" selection-end="640" vertical-scroll-proportion="0.32520324" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_loadingDebug.java">
@@ -683,35 +668,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_rooms.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="55" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.2596538">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="81" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="57" column="55" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.2596538" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/poolObj_orb.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="36" selection-start="367" selection-end="367" vertical-scroll-proportion="0.13565892">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbPatternMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="56" selection-start="5875" selection-end="5875" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -723,20 +685,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="111" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbSpawner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="238" column="50" selection-start="8630" selection-end="8630" vertical-scroll-proportion="0.8551308">
+        <state line="240" column="54" selection-start="8777" selection-end="8777" vertical-scroll-proportion="0.14121339">
           <folding>
             <element signature="method#sys_firstStep#0;class#entity_orbSpawner#0" expanded="false" />
             <element signature="method#spawnOrb#0;class#entity_orbSpawner#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_orbPatternMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="56" selection-start="5875" selection-end="5875" vertical-scroll-proportion="0.015690377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPostGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="231" selection-end="231" vertical-scroll-proportion="0.015690377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuPause.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="0" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.01590668">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_menuMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="81" selection-start="699" selection-end="699" vertical-scroll-proportion="0.015690377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/entities/entity_gameMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="111" selection-start="488" selection-end="488" vertical-scroll-proportion="0.015690377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mammothGames/wake/game/game_constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="30" selection-start="562" selection-end="562" vertical-scroll-proportion="0.4015748">
+          <folding />
         </state>
       </provider>
     </entry>

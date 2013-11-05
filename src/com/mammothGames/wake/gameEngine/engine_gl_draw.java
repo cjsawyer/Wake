@@ -331,6 +331,8 @@ public class engine_gl_draw {
 		}
 	}
 	
+	final float RAD_TO_DEG = (float) (180/Math.PI);
+	
 	private void drawList(engine_gl_drawlist list, boolean clearList){
 		int temp_draw_type;
 		int temp_array_lengths = 0;
@@ -357,6 +359,10 @@ public class engine_gl_draw {
 					if (list.list_depth[temp_i_lists] == temp_i_arrays){
 						
 						temp_draw_type = list.list_draw_type[temp_i_lists];
+						
+						//Debug stuff to figure out what draw layers are being used.
+						if (ref.input.get_touch_state(2) == ref.input.TOUCH_DOWN)
+							Log.e("reywas", "depth: "+ temp_i_arrays);
 						
 						ref.floatbuffers.system_changeDrawColor(
 								list.list_color_r[temp_i_lists],
@@ -403,10 +409,10 @@ public class engine_gl_draw {
 								y1 = list.list_y[temp_i_lists];
 								y2 = list.list_y2[temp_i_lists];
 								
-								length = (float) Math.hypot((Math.abs(x1 - x2)), (Math.abs(y1 - y2)));
+								length = (float) Math.hypot(x1 - x2, y1 - y2);
 								width = list.list_size_x[temp_i_lists];
-								
-								ref.rectangle.draw(x1, y1, length, width/2, -length/2, 0, (float) ((180/Math.PI) * Math.atan2(y2 - y1, x2 - x1)), mainDrawList.list_depth[temp_i_lists]);
+								//hack for non zero arguments
+								ref.rectangle.draw(x1, y1, length, width/2, -length/2, 0, (float) ((RAD_TO_DEG) * Math.atan2(y2 - y1 + 0.000001f, x2 - x1 + 0.000001f)), mainDrawList.list_depth[temp_i_lists]);
 								// public void draw(float x, float y, float size_x, float size_y, float origin_x, float origin_y, float rotate_angle, float depth){...}
 								break;
 							}
@@ -453,7 +459,6 @@ public class engine_gl_draw {
 			}
 		}
 		
-//		drawList.copy(lastDrawList);
 		// Draw main drawList
 		drawList(mainDrawList, true);
 		
@@ -473,6 +478,43 @@ public class engine_gl_draw {
 	}
 	public void captureDraw() {
 		captureDrawList = true;
+	}
+	
+	public float hsvToRgb(float hue, float saturation, float value, int r_g_or_b) {
+
+		// From: http://stackoverflow.com/questions/7896280/converting-from-hsv-hsb-in-java-to-rgb-without-using-java-awt-color-disallowe
+	    int h = (int)(hue * 5);
+	    float f = hue * 6 - h;
+	    float p = value * (1 - saturation);
+	    float q = value * (1 - f * saturation);
+	    float t = value * (1 - (1 - f) * saturation);
+
+	    float r,g,b;
+	    switch (h) {
+			case 0: {r=value; g=t; b=p; break;} //return rgbToString(value, t, p);
+			case 1: {r=q; g=value; b=p; break;} //return rgbToString(q, value, p);
+			case 2: {r=p; g=value; b=t; break;} //return rgbToString(p, value, t);
+			case 3: {r=p; g=q; b=value; break;} //return rgbToString(p, q, value);
+			case 4: {r=t; g=p; b=value; break;} //return rgbToString(t, p, value);
+			case 5: {r=value; g=p; b=q; break;} //return rgbToString(value, p, q);
+			default: {
+				r=0;
+				g=0;
+				b=0;
+				Log.e("reywas","Something went wrong when converting from HSV to RGB. Input was " + hue + ", " + saturation + ", " + value);
+			}
+	    }
+	    
+//	    Log.e("reywas","r " + r + "  g " + g +"  b " + b);
+	    switch (r_g_or_b) {
+	    	case 0: return r; // This generates rgb values from 0 to 255. The engine uses 0 to 1
+	    	case 1: return g;
+	    	case 2: return b;
+	    	default: {
+	    		Log.e("reywas","Invalid argument. Use 0, 1, or 2 for r, g, or b to be returned");
+	    		return 0;
+	    	}
+	    }
 	}
 }
 

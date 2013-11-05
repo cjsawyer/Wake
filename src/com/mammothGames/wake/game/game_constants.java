@@ -11,7 +11,15 @@ public class game_constants {
 	
 	// Leave null for no ads.
 	public static String adMob_publisher_id = "ca-app-pub-6028924870146472/5120597547";
-//	public static String adMob_publisher_id = "ca-app-pub-9883954473009669/2577113236";
 	
 	public static int max_particles = 200;
+	
+	public static int layer0_backgroundSquares = 10;
+	public static int layer1_waterSpreadEffect = 11;
+	public static int layer2_underGame = 11;
+	public static int layer3_game = 12;
+	public static int layer4_overGame = 13;
+	public static int layer5_underHUD = 14;
+	public static int layer6_HUD = 15;
+	public static int layer7_ = 16;
 }

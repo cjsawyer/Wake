@@ -1,5 +1,6 @@
 package com.mammothGames.wake.game.entities;
 
+import com.mammothGames.wake.game.game_constants;
 import com.mammothGames.wake.game.game_rooms;
 import com.mammothGames.wake.game.game_textures;
 import com.mammothGames.wake.gameEngine.*;
@@ -66,7 +67,7 @@ public class entity_hud extends engine_entity {
 			ref.strings.builder.setLength(0);
 			ref.strings.builder.append(  score   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(shake_x, shake_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, 200,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(shake_x, shake_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, game_constants.layer6_HUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 			//text_x + shake_x, text_y + shake_y,
 		}
 	}

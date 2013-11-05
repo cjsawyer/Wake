@@ -3,11 +3,16 @@ package com.mammothGames.wake.gameEngine;
 public class engine_particle {
 
 	float life_remaining, gravity, draw_angle, image_angle_change, size_x, size_y, change_x, change_y, x, y, x_p, y_p, dxv, dyv, arc_angle;
+	float[] r,g,b,a;
 	boolean in_use;
 	int id, my_emitter_index;
 	
 	public engine_particle(){
 		reset();
+		r = new float[9];
+		g = new float[9];
+		b = new float[9];
+		a = new float[9];
 	}
 	
 	public void reset() {
