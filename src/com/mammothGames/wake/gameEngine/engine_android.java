@@ -269,7 +269,7 @@ public class engine_android extends Activity {
     	return (int) touch_points_array[index].x;
     }
     public int sys_get_touch_y(int index){
-    	return (int) (ref.main.get_screen_height() - touch_points_array[index].y);
+    	return (int) (ref.screen_height - touch_points_array[index].y);
     }
     
     private int[] steps_held;

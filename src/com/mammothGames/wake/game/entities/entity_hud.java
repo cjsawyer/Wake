@@ -16,24 +16,22 @@ public class entity_hud extends engine_entity {
 		this.pausable = true;
 	}
 	
-	private float screen_width, screen_height, text_x, text_y, text_size, shake_x, shake_y, shake_range_x, shake_range_y, shake_snap_back_time;
+	private float text_x, text_y, text_size, shake_x, shake_y, shake_range_x, shake_range_y, shake_snap_back_time;
 	private int score, old_score;
 	private boolean shake;
 	@Override
 	public void sys_firstStep() {
-		screen_width = ref.main.get_screen_width();
-		screen_height = ref.main.get_screen_height();
 		
 		
 		text_size = mgr.gameMain.text_size;
-		text_x = screen_width/2;
-		text_y = screen_height - text_size/2;
+		text_x = ref.screen_width/2;
+		text_y = ref.screen_height - text_size/2;
 		
 		score = -1;
 		old_score = score;
 		
 		shake = false;
-		shake_range_x = screen_width/10;
+		shake_range_x = ref.screen_width/10;
 		shake_range_y = text_size;
 		shake_snap_back_time = shake_range_x/2;
 		

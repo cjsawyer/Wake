@@ -45,7 +45,7 @@ public class entity_gameMain extends engine_entity {
 		new_high_score = false;
 		
 		floor_height = 0;
-		floor_height_draw = ref.main.get_screen_height(); // For a nice little intro animation
+		floor_height_draw = ref.screen_height; // For a nice little intro animation
 		time_between_orbs = time_start_between_orbs;
 		time_between_orbs_double = time_between_orbs*2;	
 		speed_multiplier = 1;
@@ -63,12 +63,12 @@ public class entity_gameMain extends engine_entity {
 			high_score = Integer.parseInt(ref.file.load("int_high_score")); 
 		}
 		
-		floor_per_miss = ref.main.get_screen_height()/15;
+		floor_per_miss = ref.screen_height/15;
 		floor_per_hit = floor_per_miss/7;
 		
-		speed_base = ref.main.get_screen_height()/3;
-		speed_max = ref.main.get_screen_height()/1.05f;
-		text_size = ref.main.get_screen_width()/12;
+		speed_base = ref.screen_height/3;
+		speed_max = ref.screen_height/1.05f;
+		text_size = ref.screen_width/12;
 	}
 	
 	private int state;
@@ -107,15 +107,15 @@ public class entity_gameMain extends engine_entity {
 		floor_height_draw+= (floor_height - floor_height_draw) * 7 * ref.main.time_scale;
 		
 		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 1); // Floor color
-		ref.draw.drawRectangle(0, 0, ref.main.get_screen_width(), floor_height_draw, ref.main.get_screen_width()/2, floor_height_draw/2, 0, game_constants.layer4_overGame);
+		ref.draw.drawRectangle(0, 0, ref.screen_width, floor_height_draw, ref.screen_width/2, floor_height_draw/2, 0, game_constants.layer4_overGame);
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
-		ref.draw.drawLine(ref.main.get_screen_width(), floor_height_draw, 0, floor_height_draw, ref.main.get_screen_width()/25, game_constants.layer4_overGame);
+		ref.draw.drawLine(ref.screen_width, floor_height_draw, 0, floor_height_draw, ref.screen_width/25, game_constants.layer4_overGame);
 		
 		if (floor_height < 0)
 			floor_height = 0;
 		
-		if (floor_height >= ref.main.get_screen_height())
+		if (floor_height >= ref.screen_height)
 			endGame();
 	}
 	

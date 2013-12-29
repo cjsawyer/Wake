@@ -230,8 +230,6 @@ public class engine_gl_renderer implements GLSurfaceView.Renderer {
 		sys_first_step_executed = true;
 	}
 
-	public float screen_width;
-	public float screen_height;
 
 	float[] mViewMatrix = new float[16];
 	float[] mProjectionMatrix = new float[16];
@@ -243,8 +241,8 @@ public class engine_gl_renderer implements GLSurfaceView.Renderer {
 	public void onSurfaceChanged(GL10 glUnused, int width, int height) {
 		GLES20.glViewport(0, 0, width, height);
 
-		screen_width = width;
-		screen_height = height;
+		ref.screen_width = width;
+		ref.screen_height = height;
 		
 		// Make the world size/coordinates the same as the pixel dimensions of the screen.
 		final float ratio = (float) width / height;

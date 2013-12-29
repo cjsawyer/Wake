@@ -28,9 +28,9 @@ public class entity_particleComparison extends engine_entity {
 		emitter1.setColor(0,    0,0,1, 1);
 		
 		for(int i=0; i< 500; i++) {
-			emitter1.setXY((int) (Math.random() * ref.main.get_screen_width()),(int) (Math.random() * ref.main.get_screen_height()));
-			x[i] = (int) (Math.random() * ref.main.get_screen_width());
-			y[i] = (int) (Math.random() * ref.main.get_screen_height());
+			emitter1.setXY((int) (Math.random() * ref.screen_width),(int) (Math.random() *ref.screen_width));
+			x[i] = (int) (Math.random() * ref.screen_width);
+			y[i] = (int) (Math.random() *ref.screen_height);
 			emitter1.addParticle(1);
 		}
 		

@@ -1,13 +1,43 @@
-Hello. This is Chris Sawyer. I'm the author of this engine.
-I've been working on it since January 2012.
-Unless I've messed something up, you shouldn't need to change anything in the gameEngine directory -- but then again, nobody but me should be reading this but me anyway ;)
-
-
-Note to self: Ctrl+F "TODO" and fill those bits in before release
-
+Don't even bother reading this. It's not filled out enough to actually use.
+I'm planning an entire website for this.
 
 When changing the directory name for a new game, remember to update the package name in the Manifest. It doesn't update itself for some reason.
 	package="com.reywas.testGameName"
+	
+PROJECT SET UP:
+
+	Changing your icon:
+		It's in res/drawable-nodpi/icon_name.png
+		
+		Note:
+			The icon name cannot contain Upper Case letters!
+			
+		In AndroidManifest.xml:
+        	android:icon="@drawable/icon_name"
+			
+	Changing your Application Package:
+	
+		Rename all folders in src/yourName/gameName
+		In AndroidManifest.xml
+			Change the package name to the new name
+			package="com.yourName.gameName"
+			Find all imports of yourName.oldGameName.R and rename them appropriately.
+		
+		For Eclipse IDE users:
+			Right Click project name in Package Explorer > Android Tools > Rename Application Package
+			Right Click src > packageName name in Package Explorer > Refactor > Rename
+			
+			
+	Changing your Application Name:
+		res > values > strings.xml
+			<?xml version="1.0" encoding="utf-8"?>
+			<resources>
+			    <string name="app_name">App Name Here</string>
+			</resources>
+		
+	
+RESOURCES:
+	
 
 
 ENTITIES:
@@ -28,6 +58,15 @@ STRINGS:
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
 			ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, draw_angle, depth, ref.strings.stringChars, ref.strings.builder.length(), game_textures.FONT_TEXTURE_NAME);
 
+	The other option is to use strings like normal, but only update them when they would contain new values.
+		EXAMPLE:
+			String score = "Score: ";
+			updateScore() {
+				score = "Score: " + int_points;
+			}
+			draw() {
+				drawString(args,...,score);
+			}
 
 
 
@@ -35,54 +74,63 @@ STRINGS:
 ROOMS:
 
 	To add a new room:
-		TODO
+	To move between rooms, and what happens when you do:
 	
-	Relevant Methods:
-		TODO
+	Note - Persistent objects:
 
 
 SOUNDS:
 
-Only one music track can be loaded at a time, but you can load as many sound effects as you want.
+	Only one music track can be loaded at a time, but you can load as many sound effects as you want.
+	
+	Loading Sounds:
+	Loading Music:
+	
+	Playing Sounds:
+	Playing Music:
 
 
 DRAWING:
 
 	COLOR:
-	
+		Background:
+		Sprite/Shape:
+		
 	TEXTURES:
 	
 		To add a new texture:
-			If the texture is going to be recolored, it needs to be white. (White is the color that's effected the most) 
-			TODO
-		
 		To load a texture:
-			TODO
-	
-		When drawing textures, get the texture_sheet's id with:
-			game_textuers.TEXTURE_NAME
+		
+		game_textuers.TEXTURE_NAME
 	
 	SHAPES:
 	
 		Rectangles:
+		Circles:
 	
 
-
-
-
 ADS:
+	
+	Setting your admob ID
+	Positioning
+	Loading/Unloading
 
 FILE IO:
 
-	EXAMPLE:
-		String temp_string = ref.file.load("test");
-		if (temp_string != "")
-			// Do stuff with temp_string
+	Saving:
+	
+	Loading:
+		EXAMPLE:
+			String temp_string = ref.file.load("test");
+			if (temp_string != "")
+				// Do stuff with temp_string
 
 MENU/BACK BUTTON HANDLING:
-	In game_physicalButton, edit handleBackButton() and handleMenuButton() to your wishes.
-	You can add any game entities or other objects to help with this in the constructor.
-	
+
+Override
+	engine_entity.backButton()
+	engine_entity.menuButton()
+		
 	To replicate the default back button behavior, call this:
 		ref.android.finish();
 

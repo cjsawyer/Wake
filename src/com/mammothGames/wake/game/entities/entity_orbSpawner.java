@@ -47,12 +47,12 @@ public class entity_orbSpawner extends engine_entity {
 	public void sys_firstStep(){
 //		greenOrb_pool = new utility_pool<poolObj_orb>(ref, poolObj_orb.class, 20);
 
-        radius = (ref.main.get_screen_width()/10);
+        radius = (ref.screen_width/10);
         border_size = radius/10;
         radius_total = radius + border_size;
 
-		screen_width = ref.main.get_screen_width();
-		screen_height = ref.main.get_screen_height();
+		screen_width = ref.screen_width;
+		screen_height = ref.screen_height;
 
         trail_total_height =  radius*3;
 

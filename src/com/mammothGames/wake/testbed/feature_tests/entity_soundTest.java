@@ -17,8 +17,8 @@ public class entity_soundTest extends engine_entity {
 		
 		x = new int[number_buttons];
 		
-		screenx = ref.main.get_screen_width();
-		screeny = ref.main.get_screen_height();
+		screenx = ref.screen_width;
+		screeny = ref.screen_height;
 		y= screeny/2;
 		size = screenx/((number_buttons+1)*3/2);
 		

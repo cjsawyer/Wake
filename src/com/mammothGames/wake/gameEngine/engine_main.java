@@ -255,8 +255,8 @@ public class engine_main {
 	}
 
 
-	public int get_screen_height(){ return Math.round(ref.renderer.screen_height); }
-	public int get_screen_width(){ return Math.round(ref.renderer.screen_width); }
+//	public int get_screen_height(){ return Math.round(ref.renderer.screen_height); }
+//	public int get_screen_width(){ return Math.round(ref.renderer.screen_width); }
 
 	
 	

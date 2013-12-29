@@ -10,7 +10,7 @@ public class entity_poolTest extends engine_entity {
 	
 	@Override
 	public void sys_firstStep(){
-		int a = ref.main.get_screen_height();
+		int a = ref.screen_height;
 		test_pool = new utility_pool<test_pool_object>(ref, test_pool_object.class, 200);
 		for(int temp_i=0;temp_i<test_pool.MAX_OBJECTS;temp_i++) {
 			test_pool.takeObject();
@@ -31,7 +31,7 @@ public class entity_poolTest extends engine_entity {
 				ref.draw.drawCircle(temp_object.x, temp_object.y, temp_object.radius, 0, 0, 360, 0, 0);
 				temp_object.y += temp_object.speed * ref.main.time_scale;
 				
-				if (temp_object.y >= ref.main.get_screen_height() + temp_object.radius) {
+				if (temp_object.y >= ref.screen_height + temp_object.radius) {
 					test_pool.returnObject(temp_object.sys_id);
 				}
 				

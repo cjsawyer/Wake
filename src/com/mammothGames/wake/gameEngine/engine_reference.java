@@ -40,6 +40,7 @@ public class engine_reference {
 	protected float system_clearColor_b = 1f;
 	
 	
+	public int screen_width, screen_height;
 
 	
 	public engine_reference() {

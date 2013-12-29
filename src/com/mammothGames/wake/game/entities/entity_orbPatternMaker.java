@@ -34,7 +34,6 @@ public class entity_orbPatternMaker extends engine_entity {
 	private int number_positions = 4;
 	
 	private boolean spawn_orb;
-	private float width;
 	private float oneWidth;
 	
 	private boolean use_double_spawn_time = false;
@@ -52,8 +51,7 @@ public class entity_orbPatternMaker extends engine_entity {
 	
 	@Override
 	public void sys_firstStep() {
-		width = ref.main.get_screen_width();
-		oneWidth = width/number_positions;
+		oneWidth = ref.screen_width/number_positions;
 	}
 	
 	@Override
@@ -67,9 +65,9 @@ public class entity_orbPatternMaker extends engine_entity {
 					mgr.orbSpawner.spawnOrb(
                             // x
                             (current_position - 1) * oneWidth + oneWidth / 2,
-//							(   (  ( ref.main.get_screen_width() - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * STRIPE_position   ) + mgr.masterOrbSpawner.radius_total,
+//							(   (  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * STRIPE_position   ) + mgr.masterOrbSpawner.radius_total,
                             //y
-                            ref.main.get_screen_height() + mgr.orbSpawner.radius_total,
+                            ref.screen_height + mgr.orbSpawner.radius_total,
                             //speed
                             mgr.gameMain.speed,
                             mgr.orbSpawner.radius,
@@ -83,10 +81,10 @@ public class entity_orbPatternMaker extends engine_entity {
 					spawn_orb = false;
 					mgr.orbSpawner.spawnOrb(
                             // x
-                            -((current_position - 1) * oneWidth + oneWidth / 2) + width,
-                            //(   -(  ( ref.main.get_screen_width() - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * (STRIPE_position-1)   ) - mgr.masterOrbSpawner.radius_total + ref.main.get_screen_width(),
+                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
+                            //(   -(  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * (STRIPE_position-1)   ) - mgr.masterOrbSpawner.radius_total + ref.screen_width,
                             //y
-                            ref.main.get_screen_height() + mgr.orbSpawner.radius_total,
+                            ref.screen_height + mgr.orbSpawner.radius_total,
                             //speed
                             mgr.gameMain.speed,
                             mgr.orbSpawner.radius,
@@ -101,9 +99,9 @@ public class entity_orbPatternMaker extends engine_entity {
 					mgr.orbSpawner.spawnOrb(
                             //x
                             (current_position - 1) * oneWidth + oneWidth / 2,
-                            //(   (  ( ref.main.get_screen_width() - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * (STRIPE_position-1)   ) + mgr.masterOrbSpawner.radius_total,
+                            //(   (  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * (STRIPE_position-1)   ) + mgr.masterOrbSpawner.radius_total,
                             //y
-                            ref.main.get_screen_height() + mgr.orbSpawner.radius_total,
+                            ref.screen_height + mgr.orbSpawner.radius_total,
                             //speed
                             mgr.gameMain.speed,
                             mgr.orbSpawner.radius,
@@ -111,9 +109,9 @@ public class entity_orbPatternMaker extends engine_entity {
 					//left
 					mgr.orbSpawner.spawnOrb(
                             // x
-                            -((current_position - 1) * oneWidth + oneWidth / 2) + width,
+                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
                             //y
-                            ref.main.get_screen_height() + mgr.orbSpawner.radius_total,
+                            ref.screen_height + mgr.orbSpawner.radius_total,
                             //speed
                             mgr.gameMain.speed,
                             mgr.orbSpawner.radius,
@@ -128,14 +126,14 @@ public class entity_orbPatternMaker extends engine_entity {
 					
 					mgr.orbSpawner.spawnOrb(
                             (current_position - 2) * oneWidth + oneWidth / 2,
-                            ref.main.get_screen_height() + mgr.orbSpawner.radius_total,
+                            ref.screen_height + mgr.orbSpawner.radius_total,
                             mgr.gameMain.speed,
                             mgr.orbSpawner.radius,
                             mgr.orbSpawner.border_size);
 					
 					mgr.orbSpawner.spawnOrb(
                             (current_position - 1) * oneWidth + oneWidth / 2,
-                            ref.main.get_screen_height() + mgr.orbSpawner.radius_total,
+                            ref.screen_height + mgr.orbSpawner.radius_total,
                             mgr.gameMain.speed,
                             mgr.orbSpawner.radius,
                             mgr.orbSpawner.border_size);
@@ -148,15 +146,15 @@ public class entity_orbPatternMaker extends engine_entity {
 					spawn_orb = false;
 					
 					mgr.orbSpawner.spawnOrb(
-                            -((current_position - 2) * oneWidth + oneWidth / 2) + width,
-                            ref.main.get_screen_height() + mgr.orbSpawner.radius_total,
+                            -((current_position - 2) * oneWidth + oneWidth / 2) + ref.screen_width,
+                            ref.screen_height + mgr.orbSpawner.radius_total,
                             mgr.gameMain.speed,
                             mgr.orbSpawner.radius,
                             mgr.orbSpawner.border_size);
 					
 					mgr.orbSpawner.spawnOrb(
-                            -((current_position - 1) * oneWidth + oneWidth / 2) + width,
-                            ref.main.get_screen_height() + mgr.orbSpawner.radius_total,
+                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
+                            ref.screen_height + mgr.orbSpawner.radius_total,
                             mgr.gameMain.speed,
                             mgr.orbSpawner.radius,
                             mgr.orbSpawner.border_size);

@@ -17,18 +17,7 @@ public final class game_textures {
 	public static final int SUB_MAMMOTH = 5;
 	public static final int SUB_PARTICLE = 6;
 	
-	// TODO: replace all of these references 
-//	public static final int TEX_PARTICLE = 3;
-//	public static final int TEX_LOGO = 4;
-//	public static final int TEX_MENU_BUTTONS = 5;
-//	public static final int TEX_MAMMOTH_LOGO = 6;
-//	
-//		public static final int TEX_MENU_BUTTONS_pause = 1;
-//		public static final int TEX_MENU_BUTTONS_mute = 2;
-//		public static final int TEX_MENU_BUTTONS_muted = 3;
-	
-	
-	
+	public static final int TEX_STARS = 4;
 	
 //	Use the command line tool in the tools directory
 	public static float[][] texture_locations_arrays = {
@@ -38,7 +27,7 @@ public final class game_textures {
 			
 			{ 1024, 1024,  0,950+64, 0+64,950+64, 0,950, 0+64,950,  0,886+64, 0+64,886+64, 0,886, 0+64,886,  0,822+64, 0+64,822+64, 0,822, 0+64,822,  0,0+370, 0+600,0+370, 0,0, 0+600,0,  0,370+452, 0+454,370+452, 0,370, 0+454,370,  64,822+58, 64+58,822+58, 64,822, 64+58,822,  },
 			
-			
+			{ 512, 512, 0,512, 512,512, 0,0, 512,0}, //stars
 //			{ 64,64,   0,64, 64,64, 0,0, 64,0,}, // particle texture
 //;
 //			{ 600,370,   0,370, 600,370, 0,0, 600,0, }, // Neon mist logo
@@ -62,6 +51,7 @@ public final class game_textures {
 			"error",
 			"font_sheet_1", // generated at runtime, so there is no file in assets
 			"wakesheet",
+			"stars",
 	};
 	
 	// These are used for font loading
@@ -70,12 +60,14 @@ public final class game_textures {
 		null,
 		"Square.ttf",
 		null,
+		null,
 	};
 	
 	public static int[] font_size = {
 		// Put -1 if not a font.
 		-1,
 		50,
+		-1,
 		-1,
 	};
 	public static float[] font_stroke_color = {
@@ -85,6 +77,7 @@ public final class game_textures {
 		// Inner color          Outer color
 		  -1,   -1,   -1,      -1,   -1,   -1,
 		   0,    0,    0,       1,    1,    1, // font 1
+		  -1,   -1,   -1,      -1,   -1,   -1,
 		  -1,   -1,   -1,      -1,   -1,   -1,
 	};	
 }

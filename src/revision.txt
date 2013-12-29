@@ -1,8 +1,4 @@
 Game:
-Added orb trails.
-Added individual orb colors
-Added explosion particle when an orb hits the water
-Added draw layer constants in game_constants
 
 Engine:
-Made each particle have it's own color arrays, so an emitter's color can be changed without breaking existing particles.
+Added entBLANK_pool and entBLANK_poolObj

@@ -1,9 +1,9 @@
-package com.mammothGames.wake.game.entities;
+package com.mammothGames.wake.blanks;
 
 import com.mammothGames.wake.gameEngine.*;
 
 
-public class entity_BLANK extends engine_entity {
+public class entBLANK_basic extends engine_entity {
 
 	@Override
 	public void sys_firstStep() {}

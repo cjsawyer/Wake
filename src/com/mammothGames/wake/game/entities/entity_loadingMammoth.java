@@ -17,15 +17,12 @@ public class entity_loadingMammoth extends engine_entity {
 	}
 	
 	boolean logoLoaded = false;
-	float screen_width, screen_height;
+//	float screen_width, screen_height;
 	float start_time, current_time;
 	float logo_alpha = 0;
 	
 	@Override
 	public void sys_firstStep(){
-		
-		screen_width = ref.main.get_screen_width();
-		screen_height = ref.main.get_screen_height();
 		
 		ref.loadHelper.setNumberToLoad(1);
 		ref.textureLoader.loadTexture(game_textures.TEX_SPRITES);
@@ -46,13 +43,13 @@ public class entity_loadingMammoth extends engine_entity {
 			
 			float tWidth = ref.draw.getSubTextureWidth(game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
 			float tHeight = ref.draw.getSubTextureHeight(game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
-			float tFinalWidth = screen_width*2f/3f;
+			float tFinalWidth = ref.screen_width*2f/3f;
 			float tWidthHeightRatio = tFinalWidth/tWidth;
 			float tFinalHeight = tHeight * tWidthHeightRatio;
 			
 			
-			float tLogoX = (screen_width - tFinalWidth) / 2f;
-			float tLogoY = screen_height/2;
+			float tLogoX = (ref.screen_width - tFinalWidth) / 2f;
+			float tLogoY = ref.screen_height/2;
 			
 			logo_alpha += ref.main.time_scale * 2f;
 			
@@ -78,9 +75,10 @@ public class entity_loadingMammoth extends engine_entity {
 	
 	public void loadRest() {
 		ref.loadHelper.reset();
-		ref.loadHelper.setNumberToLoad(3);
+		ref.loadHelper.setNumberToLoad(4);
 //		ref.textureLoader.loadTexture(game_textures.TEX_SPRITES);
 		ref.textureLoader.loadTexture(game_textures.TEX_FONT1);
+		ref.textureLoader.loadTexture(game_textures.TEX_STARS);
 //		ref.sound.loadMusic(game_sounds.MSC_CEPHALOPOD);
 		ref.sound.loadSound(game_sounds.SND_SPLASH);
 		ref.sound.loadSound(game_sounds.SND_DING);

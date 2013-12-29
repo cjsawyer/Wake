@@ -43,11 +43,11 @@ public class engine_hud {
 			
 			// A little hacky, but it keeps it the same size regardless of orientation.
 			if (game_constants.is_landscape) {
-				screen_width = ref.main.get_screen_width();
-				screen_height = ref.main.get_screen_height();
+				screen_width = ref.screen_width;
+				screen_height = ref.screen_height;
 			} else {
-				screen_width = ref.main.get_screen_height();
-				screen_height = ref.main.get_screen_width();	
+				screen_width = ref.screen_height;
+				screen_height = ref.screen_width;
 			}
 			
 			debug_hud_text_size = (int) (screen_height * 0.04);
@@ -87,8 +87,8 @@ public class engine_hud {
 			button_back.button_text = "back";
 			button_next.button_text = "next";
 			
-			button_back.y = ref.main.get_screen_height() - 9 * debug_hud_text_size;
-			button_next.y = ref.main.get_screen_height() - 9 * debug_hud_text_size;
+			button_back.y = ref.screen_height - 9 * debug_hud_text_size;
+			button_next.y = ref.screen_height - 9 * debug_hud_text_size;
 		}
 	}
 	
@@ -114,7 +114,7 @@ public class engine_hud {
 		
 		
 		if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
-			if ((ref.input.get_touch_x(0) < 100)&&(ref.input.get_touch_y(0) > ref.main.get_screen_height() - 100)) {
+			if ((ref.input.get_touch_x(0) < 100)&&(ref.input.get_touch_y(0) > ref.screen_height - 100)) {
 				hidden = !hidden;
 			}
 		}
@@ -131,7 +131,7 @@ public class engine_hud {
 			ref.strings.builder.setLength(0);
 			ref.strings.builder.append(  adjusted_FPS   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(0, ref.main.get_screen_height(), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(0, ref.screen_height, debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 			
 		} else {
 			button_next.draw = true;
@@ -160,7 +160,7 @@ public class engine_hud {
 		if (system_x > -hud_width + 5) {
 			// Draw the background
 			ref.draw.setDrawColor(.75f, .75f, .75f, .6f);
-			ref.draw.drawRectangle(system_x + hud_width/2, ref.main.get_screen_height() - 7*debug_hud_text_size/2, hud_width, 7*debug_hud_text_size, 0, 0, 0, 499);
+			ref.draw.drawRectangle(system_x + hud_width/2, ref.screen_height - 7*debug_hud_text_size/2, hud_width, 7*debug_hud_text_size, 0, 0, 0, 499);
 	
 			//Draw the graph
 			for(temp_i=0; temp_i<adjusted_FPS_graph_length-1; temp_i++) {
@@ -168,7 +168,7 @@ public class engine_hud {
 				graph_temp_height = graph_height_index*graph_height;
 				ref.draw.setDrawColor(graph_height_index, (1f-graph_height_index), 0, 1);
 				
-				ref.draw.drawRectangle(system_x + hud_width - (graph_x_scale*(temp_i+1)), (ref.main.get_screen_height() - graph_height), graph_x_scale, graph_temp_height, -graph_x_scale/2, graph_temp_height/2, 0, 500);			
+				ref.draw.drawRectangle(system_x + hud_width - (graph_x_scale*(temp_i+1)), (ref.screen_height - graph_height), graph_x_scale, graph_temp_height, -graph_x_scale/2, graph_temp_height/2, 0, 500);			
 			}
 			/// End FPS graph
 	
@@ -181,7 +181,7 @@ public class engine_hud {
 			ref.strings.builder.append("FPS: ");
 			ref.strings.builder.append(  adjusted_FPS   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(system_x, ref.main.get_screen_height()-(2*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(system_x, ref.screen_height-(2*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 			
 			ref.strings.builder.setLength(0);
 			ref.strings.builder.append("Room:");
@@ -190,7 +190,7 @@ public class engine_hud {
 			ref.strings.builder.append(  ") "   );
 			ref.strings.builder.append(  ref.room.get_current_room_name()   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(system_x, ref.main.get_screen_height()-(3*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(system_x, ref.screen_height-(3*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 			
 			ref.strings.builder.setLength(0);
 			ref.strings.builder.append("Entities: ");
@@ -199,13 +199,13 @@ public class engine_hud {
 			ref.strings.builder.append(  ") "   );
 			ref.strings.builder.append(  ref.main.entities_current   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(system_x, ref.main.get_screen_height()-(4*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(system_x, ref.screen_height-(4*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 			
 			ref.strings.builder.setLength(0);
 			ref.strings.builder.append("Particles: ");
 			ref.strings.builder.append(  ref.partPool.particles_current   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(system_x, ref.main.get_screen_height()-(5*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(system_x, ref.screen_height-(5*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 
 			
 			ref.strings.builder.setLength(0);
@@ -216,7 +216,7 @@ public class engine_hud {
 			ref.strings.builder.append(  ref.input.get_touch_state(3)   );
 			ref.strings.builder.append(  ref.input.get_touch_state(4)   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(system_x, ref.main.get_screen_height()-(6*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(system_x, ref.screen_height-(6*debug_hud_text_size), debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 0, 500, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 		} else {
 			button_next.draw = false;
 			button_back.draw = false;
