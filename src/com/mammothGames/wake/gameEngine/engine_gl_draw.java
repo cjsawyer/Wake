@@ -337,8 +337,8 @@ public class engine_gl_draw {
 		int temp_draw_type;
 		int temp_array_lengths = 0;
 		
-		int temp_i_arrays;
-		int temp_i_lists;
+		int i_depth;
+		int i_list_index;
 		
 		// All for line drawing.
 		float x1;
@@ -352,82 +352,82 @@ public class engine_gl_draw {
 			temp_array_lengths = list.temp_number_of_calls;
 			list.sys_sync_remaining_calls = list.temp_number_of_calls;
 			
-			for (temp_i_arrays=0; temp_i_arrays <= list.temp_max_depth; temp_i_arrays++){
+			for (i_depth=0; i_depth <= list.temp_max_depth; i_depth++){
 				// loop through all of the arrays,
-				for (temp_i_lists=0; temp_i_lists < temp_array_lengths; temp_i_lists++){
+				for (i_list_index=0; i_list_index < temp_array_lengths; i_list_index++){
 					// if this is the correct depth, draw
-					if (list.list_depth[temp_i_lists] == temp_i_arrays){
+					if (list.list_depth[i_list_index] == i_depth){
 						
-						temp_draw_type = list.list_draw_type[temp_i_lists];
+						temp_draw_type = list.list_draw_type[i_list_index];
 						
 						//Debug stuff to figure out what draw layers are being used.
 						if (ref.input.get_touch_state(2) == ref.input.TOUCH_DOWN)
-							Log.e("reywas", "depth: "+ temp_i_arrays);
+							Log.e("reywas", "depth: "+ i_depth);
 						
 						ref.floatbuffers.system_changeDrawColor(
-								list.list_color_r[temp_i_lists],
-								list.list_color_g[temp_i_lists],
-								list.list_color_b[temp_i_lists],
-								list.list_color_a[temp_i_lists]);
+								list.list_color_r[i_list_index],
+								list.list_color_g[i_list_index],
+								list.list_color_b[i_list_index],
+								list.list_color_a[i_list_index]);
 						
 						switch(temp_draw_type){
 							case DRAW_TYPE_TEXTURE:{
 								
 								ref.texture.draw(
-										list.list_x[temp_i_lists],
-										list.list_y[temp_i_lists],
-										list.list_size_x[temp_i_lists],
-										list.list_size_y[temp_i_lists],
-										list.list_origin_x[temp_i_lists],
-										list.list_origin_y[temp_i_lists],
-										list.list_draw_angle[temp_i_lists],
-										list.list_depth[temp_i_lists],
-										list.list_textureID[temp_i_lists],
-										list.list_texture_sheet[temp_i_lists]);
+										list.list_x[i_list_index],
+										list.list_y[i_list_index],
+										list.list_size_x[i_list_index],
+										list.list_size_y[i_list_index],
+										list.list_origin_x[i_list_index],
+										list.list_origin_y[i_list_index],
+										list.list_draw_angle[i_list_index],
+										list.list_depth[i_list_index],
+										list.list_textureID[i_list_index],
+										list.list_texture_sheet[i_list_index]);
 								
 								break;
 							}
 							case DRAW_TYPE_RECTANGLE:{
 								
 								ref.rectangle.draw(
-										list.list_x[temp_i_lists],
-										list.list_y[temp_i_lists],
-										list.list_size_x[temp_i_lists],
-										list.list_size_y[temp_i_lists],
-										list.list_origin_x[temp_i_lists],
-										list.list_origin_y[temp_i_lists],
-										list.list_draw_angle[temp_i_lists],
-										list.list_depth[temp_i_lists]);
+										list.list_x[i_list_index],
+										list.list_y[i_list_index],
+										list.list_size_x[i_list_index],
+										list.list_size_y[i_list_index],
+										list.list_origin_x[i_list_index],
+										list.list_origin_y[i_list_index],
+										list.list_draw_angle[i_list_index],
+										list.list_depth[i_list_index]);
 								
 								break;
 							}
 							case DRAW_TYPE_LINE:{
 								
-								x1 = list.list_x[temp_i_lists];
-								x2 = list.list_x2[temp_i_lists];
+								x1 = list.list_x[i_list_index];
+								x2 = list.list_x2[i_list_index];
 								
-								y1 = list.list_y[temp_i_lists];
-								y2 = list.list_y2[temp_i_lists];
+								y1 = list.list_y[i_list_index];
+								y2 = list.list_y2[i_list_index];
 								
 								length = (float) Math.hypot(x1 - x2, y1 - y2);
-								width = list.list_size_x[temp_i_lists];
+								width = list.list_size_x[i_list_index];
 								//hack for non zero arguments
-								ref.rectangle.draw(x1, y1, length, width/2, -length/2, 0, (float) ((RAD_TO_DEG) * Math.atan2(y2 - y1 + 0.000001f, x2 - x1 + 0.000001f)), mainDrawList.list_depth[temp_i_lists]);
+								ref.rectangle.draw(x1, y1, length, width/2, -length/2, 0, (float) ((RAD_TO_DEG) * Math.atan2(y2 - y1 + 0.000001f, x2 - x1 + 0.000001f)), mainDrawList.list_depth[i_list_index]);
 								// public void draw(float x, float y, float size_x, float size_y, float origin_x, float origin_y, float rotate_angle, float depth){...}
 								break;
 							}
 							case DRAW_TYPE_CIRCLE:{
 								
 								ref.circle.draw(
-										list.list_x[temp_i_lists],
-										list.list_y[temp_i_lists],
-										list.list_x2[temp_i_lists],
-										list.list_size_x[temp_i_lists],
-										list.list_size_y[temp_i_lists],
-										list.list_origin_x[temp_i_lists],
-										list.list_origin_y[temp_i_lists],
-										list.list_draw_angle[temp_i_lists],
-										list.list_depth[temp_i_lists]);
+										list.list_x[i_list_index],
+										list.list_y[i_list_index],
+										list.list_x2[i_list_index],
+										list.list_size_x[i_list_index],
+										list.list_size_y[i_list_index],
+										list.list_origin_x[i_list_index],
+										list.list_origin_y[i_list_index],
+										list.list_draw_angle[i_list_index],
+										list.list_depth[i_list_index]);
 								
 								// public void draw(float x, float y, float size_x, float size_y, float origin_x, float origin_y, float rotate_angle, float depth){...}
 								break;

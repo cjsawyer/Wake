@@ -54,6 +54,8 @@ public class entity_menuMain extends engine_entity {
 		
 		mgr.gameHud = new entity_hud(mgr);
 		ref.main.addEntity(mgr.gameHud);
+		
+		ref.main.addEntity(new entity_stars());
 
 		
 	}
@@ -83,7 +85,7 @@ public class entity_menuMain extends engine_entity {
 			float tLogoY = ref.screen_height*3f/4f - tFinalHeight/2;
 			
 			
-			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, tFinalWidth/2, 0, 0, 0, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, tFinalWidth/2, 0, 0, game_constants.layer3_game, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
 			
 			ref.draw.setDrawColor(1, 1, 1, ((float)Math.sin((float)(SystemClock.uptimeMillis() * DEG_TO_RAD / 1000f * 180f))) + 1);
 			ref.draw.drawTextSingleString(ref.screen_width/2, tTextY, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, "-tap to play-", game_textures.TEX_FONT1);

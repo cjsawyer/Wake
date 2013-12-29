@@ -25,7 +25,7 @@ public class engine_entity {
 	public void menuButton() { }
 	
 	public void onScreenSleep() { }
-	
+	public void onRoomLoad() { }
 	
 	
 	Boolean sys_delete_me = false;
@@ -121,5 +121,4 @@ public class engine_entity {
 	public void sys_step(){ }
 	public void sys_afterStep(){ }
 	public void sys_beforeStep(){ }
-
 }

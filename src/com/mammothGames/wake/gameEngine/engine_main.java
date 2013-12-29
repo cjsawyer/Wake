@@ -272,6 +272,18 @@ public class engine_main {
 		}
 	}
 	
+	protected void onRoomLoad() {
+		for(int i = 0; i < entities_total; i++){
+			
+			temp_entity = null;
+			temp_entity = entity_list[i];
+			
+			if (temp_entity != null){
+				temp_entity.onRoomLoad();
+			}
+		}
+	}
+	
 	
 	/// PAUSING ///
 	private engine_entity temp_entity_pause;
@@ -283,7 +295,7 @@ public class engine_main {
 		for(int i=0; i<entities_total; i++){
 			temp_entity_pause = null;
 			temp_entity_pause = entity_list[i];
-			if ( (temp_entity_pause != null) && (temp_entity_pause.pausable==true) ){
+			if (temp_entity_pause != null){
 				temp_entity_pause.paused = true;
 			}
 		}
@@ -295,8 +307,20 @@ public class engine_main {
 		for(int i=0; i<entities_total; i++){
 			temp_entity_pause = null;
 			temp_entity_pause = entity_list[i];
-			if ( (temp_entity_pause != null) && (temp_entity_pause.pausable==true) ){
+			if ( temp_entity_pause != null ){
 				temp_entity_pause.paused = false;
+			}
+		}
+	}
+	
+	public void sys_cleanPausableEntities() {
+		// If an entity is changed from unpausable to pausable while the game is paused, it should be unpaused.
+		for(int i=0; i<entities_total; i++){
+			temp_entity_pause = null;
+			temp_entity_pause = entity_list[i];
+			if ( temp_entity_pause != null ){
+				if (temp_entity_pause.pausable==false)
+					temp_entity_pause.paused = false;
 			}
 		}
 	}
@@ -342,6 +366,8 @@ public class engine_main {
 		
 
 		ref.room.sys_moveRooms();
+		
+		sys_cleanPausableEntities();
 		
 		//LAG FOR TESTINGG!!
 //		try {

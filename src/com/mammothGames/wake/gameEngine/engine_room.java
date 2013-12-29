@@ -36,12 +36,13 @@ public class engine_room {
 	public void sys_moveRooms(){
 		if (current_room != new_room){
 			
-			
 			ref.main.deleteAllNonPersistentEntities();
 			ref.main.cleanDeletedEntitiesStepIndependent();
 			ref.partPool.sys_clearParticleSystem();
 			old_room = current_room;
 			current_room = new_room;
+			
+			ref.main.onRoomLoad();
 			
 			// If the room move failed, then we assume it's because we tried to move to a non-existent room. So we roll back the changes.
 			if ( ! rooms.sys_startRoom(new_room) ) {
@@ -49,6 +50,7 @@ public class engine_room {
 				new_room = old_room;
 			}
 			ref.main.sys_condenseEntityList();
+			
 			
 		}
 	}
