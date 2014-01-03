@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
+import android.util.SparseArray;
 
 public class engine_gl_textureLoader {
 	
@@ -26,14 +27,14 @@ public class engine_gl_textureLoader {
 	volatile int[] textures;
 	volatile int[] texture_ids;
 	
-	final Object loaded_lock = new Object();;
+	final Object loaded_lock = new Object();
 	volatile boolean[] has_loaded;
 	volatile int[] widths;
 	volatile int[] heights;
 	
 	volatile byte[] buffer;
 	
-	volatile Map<Integer, byte[]> byte_map;
+	volatile SparseArray<byte[]> byte_map;
 	
 	int temp_i;
 	
@@ -41,7 +42,7 @@ public class engine_gl_textureLoader {
 		ref = r;
 		number_of_textures = ref.texture.texture_locations_arrays.length;
 		
-		byte_map = new HashMap<Integer, byte[]>();
+		byte_map = new SparseArray<byte[]>();
 		
 		textures = new int[number_of_textures+1];
 		texture_ids = new int[number_of_textures+1];
@@ -105,10 +106,6 @@ public class engine_gl_textureLoader {
             	
             	Bitmap temp_bitmap = null;
             	
-//            	try {
-//					condition.wait();
-//				} catch (InterruptedException e1) {}
-            	
             	if (isLoading) {
             		synchronized(condition) {
                 		try {
@@ -120,19 +117,11 @@ public class engine_gl_textureLoader {
 	            	
 	            	isLoading = true;
 	            	final int id = texture_id-1;
-	            	//texture_id-=1;
-	    			
-	    			//Log.e("reywas","texture_id: "+texture_id);
-	    			
-	    			//texture_id = 1;
 	    			
 	    			resource_name = ref.texture.texture_name_array[id];
 	    	
 	    			// Bitmap bitmap = null;
 	    	
-	    			//if (resource_name != ""){			
-	    			//if (texture_id_load_status[texture_id+1] == false){
-	    			
 	    			if (has_loaded[id] == false){
 	    				
 	    				if (isFont) {

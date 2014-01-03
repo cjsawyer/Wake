@@ -70,14 +70,32 @@ public final class game_textures {
 		-1,
 		-1,
 	};
-	public static float[] font_stroke_color = {
+	public static float[][] font_stroke_color = {
 		// If not a font (or a font with no stroke):
 		//-1,   -1,   -1,      -1,   -1,   -1,
 		//
 		// Inner color          Outer color
-		  -1,   -1,   -1,      -1,   -1,   -1,
-		   0,    0,    0,       1,    1,    1, // font 1
-		  -1,   -1,   -1,      -1,   -1,   -1,
-		  -1,   -1,   -1,      -1,   -1,   -1,
+		  {-1,   -1,   -1,      -1,   -1,   -1},
+		  { 0,    0,    0,       1,    1,    1}, // font 1
+		  {-1,   -1,   -1,      -1,   -1,   -1},
+		  {-1,   -1,   -1,      -1,   -1,   -1},
 	};	
+
+
+	public float[] get_texCoords(int id) {
+		return texture_locations_arrays[id];
+	}
+	public String get_texNameAndExtension(int id) {
+		return texture_name_array[id];
+	}
+	public boolean getIsFont(int id) {
+		return (font_name_and_extension[id].equals(null)) ? false:true;
+	}
+	public int getStokeSize(int id) {
+		return font_size[id];
+	}
+	public float[] getStrokeColor(int id) {
+		return font_stroke_color[id];
+	}
+	
 }

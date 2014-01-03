@@ -350,7 +350,6 @@ public class engine_gl_draw {
 		
 		// for each draw call,
 			temp_array_lengths = list.temp_number_of_calls;
-			list.sys_sync_remaining_calls = list.temp_number_of_calls;
 			
 			for (i_depth=0; i_depth <= list.temp_max_depth; i_depth++){
 				// loop through all of the arrays,
@@ -522,7 +521,6 @@ class engine_gl_drawlist {
 	
 	int temp_max_depth = 0;
 	int temp_number_of_calls = 0;
-	int sys_sync_remaining_calls = 0;
 	
 	float[] list_x;
 	float[] list_y;
@@ -545,7 +543,6 @@ class engine_gl_drawlist {
 	public void copy(engine_gl_drawlist outputList) {
 		outputList.temp_max_depth = temp_max_depth;
 		outputList.temp_number_of_calls = temp_number_of_calls;
-		outputList.sys_sync_remaining_calls = sys_sync_remaining_calls;
 		
 		outputList.list_x = list_x.clone();
 		outputList.list_y = list_y.clone();

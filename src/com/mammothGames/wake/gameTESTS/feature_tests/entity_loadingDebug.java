@@ -1,4 +1,4 @@
-package com.mammothGames.wake.testbed.feature_tests;
+package com.mammothGames.wake.gameTESTS.feature_tests;
 
 import com.mammothGames.wake.gameEngine.*;
 

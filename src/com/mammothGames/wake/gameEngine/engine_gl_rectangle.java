@@ -69,7 +69,6 @@ public class engine_gl_rectangle {
 //		GLES20.glDrawArrays(GLES20.GL_LINE_LOOP, 0, 4);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
 		
-		ref.draw.mainDrawList.sys_sync_remaining_calls -= 1;
 		//*/
 	}
 }

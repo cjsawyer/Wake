@@ -96,6 +96,5 @@ public class engine_gl_circle {
 //		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, ref.floatbuffers.circle_vertices_data.length/3);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, (int)((ref.floatbuffers.circle_vertices_data.length-1)/3 * Math.abs(shape_angle/360f) + 1));// verts in circle * percent of circle + 1 for the first vert in the middle
 		
-		ref.draw.mainDrawList.sys_sync_remaining_calls -= 1;
 	}
 }

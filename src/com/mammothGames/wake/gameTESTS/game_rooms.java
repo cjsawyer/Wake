@@ -1,4 +1,4 @@
-package com.mammothGames.wake.testbed;
+package com.mammothGames.wake.gameTESTS;
 
 import android.util.Log;
 

@@ -1,4 +1,4 @@
-package com.mammothGames.wake.testbed;
+package com.mammothGames.wake.gameTESTS;
 
 public class game_constants {
 	

@@ -69,7 +69,8 @@ public class engine_gl_text {
 			Log.d("reywas", "About to generate font atlas.");
 			
 			boolean stroke = false;
-			if (game_textures.font_stroke_color[((texture_sheet-1)*6)] >= 0) // 6 is stride
+//			if (game_textures.font_stroke_color[((texture_sheet-1)*6)] >= 0) // 6 is stride
+			if (game_textures.font_stroke_color[texture_sheet-1][0] >= 0) // 6 is stride
 				stroke = true;
 			
 			generateFontAtlas(texture_sheet, size, stroke, font_name_and_extension);
@@ -141,14 +142,14 @@ public class engine_gl_text {
 		
 		if (stroke) {
 			p.setColor(Color.rgb(
-					(int) (255*game_textures.font_stroke_color[texture_id*6]),
-					(int) (255*game_textures.font_stroke_color[texture_id*6 + 1]),
-					(int) (255*game_textures.font_stroke_color[texture_id*6 + 2]))
+					(int) (255*game_textures.font_stroke_color[texture_id][0]),
+					(int) (255*game_textures.font_stroke_color[texture_id][1]),
+					(int) (255*game_textures.font_stroke_color[texture_id][2]))
 			);
 			stkPaint.setColor(Color.rgb(
-					(int) (255*game_textures.font_stroke_color[texture_id*6 + 3]),
-					(int) (255*game_textures.font_stroke_color[texture_id*6 + 4]),
-					(int) (255*game_textures.font_stroke_color[texture_id*6 + 5]))
+					(int) (255*game_textures.font_stroke_color[texture_id][3]),
+					(int) (255*game_textures.font_stroke_color[texture_id][4]),
+					(int) (255*game_textures.font_stroke_color[texture_id][5]))
 			);
 		} else {
 			p.setColor(Color.WHITE);
