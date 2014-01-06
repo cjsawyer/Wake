@@ -57,7 +57,6 @@ public class engine_gl_textureLoader {
 	}
 	
 	
-	//TODO
 	public void initTextures(){
 		if (textures != null){
 			GLES20.glDeleteTextures(number_of_textures, textures, 0);		
@@ -80,6 +79,7 @@ public class engine_gl_textureLoader {
 	
 	/**
 	 * Does not report to texture loadHelper.
+	 * Used when not using loadHelper, like the error texture
 	 */
 	protected void sys_loadTexture(int texture_id) {
 		loadTexture(texture_id, false);

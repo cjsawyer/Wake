@@ -1,5 +1,7 @@
 package com.mammothGames.wake.gameEngine;
 
+import com.mammothGames.wake.game.game_textures;
+
 import android.util.Log;
 
 public class engine_gl_draw {
@@ -106,7 +108,7 @@ public class engine_gl_draw {
 			addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, textureID, texture_sheet, DRAW_TYPE_TEXTURE);
 		} else {
 			setDrawColor(1,1,1,1);
-			addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 1, ref.g_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+			addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 1, game_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
 		}
 	}
 	
@@ -281,7 +283,7 @@ public class engine_gl_draw {
 			
 			temp_alignment_x=0;
 			ref.draw.setDrawColor(1, 1, 1, 1);
-			addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, draw_angle, depth, 1, ref.g_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+			addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, draw_angle, depth, 1, game_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
 		}
 		return temp_total_width;
 	}
