@@ -6,7 +6,6 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
 import com.mammothGames.wake.game.game_constants;
-import com.mammothGames.wake.game.game_textures;
 
 import android.graphics.Bitmap;
 import android.opengl.GLES20;
@@ -17,8 +16,8 @@ import android.util.Log;
 public class engine_gl_texture {
 
 
-	float[][] texture_locations_arrays = game_textures.texture_locations_arrays;
-	String[] texture_name_array = game_textures.texture_name_array;
+//	float[][] texture_locations_arrays = ref.g_textures.texture_locations_arrays;
+//	String[] texture_name_array = ref.g_textures.texture_name_array;
 	
 	final engine_reference ref;
 	
@@ -41,8 +40,8 @@ public class engine_gl_texture {
 	
 	int binded_texture;
 	int stride; //for setting the texture cords
-	float texture_width;
-	float texture_height;
+	float sheet_width;
+	float sheet_height;
 	
 	protected int number_times_binded_this_frame = 0;
 	private void setTextureCoordsAndSheet(int texture_id, int texture_sheet_to_bind){
@@ -55,8 +54,8 @@ public class engine_gl_texture {
 				GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture_sheet_to_bind);
 				number_times_binded_this_frame++;
 				
-				texture_width = texture_locations_arrays[texture_sheet_to_bind - 1][0];
-				texture_height = texture_locations_arrays[texture_sheet_to_bind - 1][1];
+				sheet_width = ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[0]; 
+				sheet_height = ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[1];
 				
 				
 				ref.current_texture_sheet = texture_sheet_to_bind;
@@ -65,22 +64,22 @@ public class engine_gl_texture {
 			
 			if(game_constants.devmode) {
 				// Check if the sheet has the requested sprite on it
-				if ((texture_locations_arrays[texture_sheet_to_bind - 1].length - 2)/8 < texture_id){
-					Log.e("reywas","ERROR: tried to bind sprite " + texture_id + " on sheet #" + texture_sheet_to_bind + ", but texture sheet #" + texture_sheet_to_bind + " only has " + ((texture_locations_arrays[texture_sheet_to_bind - 1].length - 2)/8) + " sprite/s.");
+				if ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1).length - 2)/8 < texture_id){
+					Log.e("reywas","ERROR: tried to bind sprite " + texture_id + " on sheet #" + texture_sheet_to_bind + ", but texture sheet #" + texture_sheet_to_bind + " only has " + ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1).length - 2)/8) + " sprite/s.");
 				}
 			}
 			
 			stride = (8 * (texture_id-1)) + 2;
 			
 			                                                                                                       
-			calc_square_texture_coord_data[0] = ((texture_locations_arrays[texture_sheet_to_bind - 1][stride]      )/texture_width);//+
-			calc_square_texture_coord_data[1] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 1)])/texture_height);//-
-			calc_square_texture_coord_data[2] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 2)])/texture_width);//-
-			calc_square_texture_coord_data[3] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 3)])/texture_height);//-
-			calc_square_texture_coord_data[4] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 4)])/texture_width);//+
-			calc_square_texture_coord_data[5] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 5)])/texture_height);//+
-			calc_square_texture_coord_data[6] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 6)])/texture_width);//-
-			calc_square_texture_coord_data[7] = ((texture_locations_arrays[texture_sheet_to_bind - 1][(stride + 7)])/texture_height);//+
+			calc_square_texture_coord_data[0] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[stride]      )/sheet_width);//+
+			calc_square_texture_coord_data[1] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 1)])/sheet_height);//-
+			calc_square_texture_coord_data[2] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 2)])/sheet_width);//-
+			calc_square_texture_coord_data[3] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 3)])/sheet_height);//-
+			calc_square_texture_coord_data[4] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 4)])/sheet_width);//+
+			calc_square_texture_coord_data[5] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 5)])/sheet_height);//+
+			calc_square_texture_coord_data[6] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 6)])/sheet_width);//-
+			calc_square_texture_coord_data[7] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 7)])/sheet_height);//+
 			
 			ref.floatbuffers.texture_coords_FloatBuffer.put(calc_square_texture_coord_data);
 			GLES20.glVertexAttribPointer(ref.renderer.VS_a_Texture, 2, GLES20.GL_FLOAT, false, 0, ref.floatbuffers.texture_coords_FloatBuffer);

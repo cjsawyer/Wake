@@ -1,8 +1,5 @@
 package com.mammothGames.wake.gameEngine;
 
-
-import com.mammothGames.wake.game.game_textures;
-
 import android.util.Log;
 
 public class engine_gl_draw {
@@ -75,14 +72,19 @@ public class engine_gl_draw {
 
 	public float getSubTextureWidth(int subTextureID, int sheetID) {
 		return (
-				game_textures.texture_locations_arrays[sheetID-1][  (  ( subTextureID ) * 8  ) - 6  + 2  ]
-				-game_textures.texture_locations_arrays[sheetID-1][  (  ( subTextureID ) * 8  ) - 4  + 2  ]	
+//				ref.g_textures.texture_locations_arrays[sheetID-1][  (  ( subTextureID ) * 8  ) - 6  + 2  ]
+				ref.g_textures.get_texCoords(sheetID-1)[  (  ( subTextureID ) * 8  ) - 6  + 2  ]
+				-
+//				ref.g_textures.texture_locations_arrays[sheetID-1]  [  (( subTextureID ) * 8  ) - 4  + 2  ]
+				ref.g_textures.get_texCoords(sheetID-1)[  (( subTextureID ) * 8  ) - 4  + 2  ]
 			   );
 	}
 	
 	public float getSubTextureHeight(int subTextureID, int sheetID) {
-		return (game_textures.texture_locations_arrays[sheetID-1][  (  ( subTextureID) * 8  ) - 5  + 2  ]	
-				-game_textures.texture_locations_arrays[sheetID-1][  (  ( subTextureID ) * 8  ) - 3  + 2  ]	
+		return (
+					ref.g_textures.get_texCoords(sheetID-1)[  (  ( subTextureID ) * 8  ) - 5  + 2  ]
+					-
+					ref.g_textures.get_texCoords(sheetID-1)[  (( subTextureID ) * 8  ) - 3  + 2  ]
 			   );
 	}
 
@@ -104,7 +106,7 @@ public class engine_gl_draw {
 			addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, textureID, texture_sheet, DRAW_TYPE_TEXTURE);
 		} else {
 			setDrawColor(1,1,1,1);
-			addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 1, game_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+			addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 1, ref.g_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
 		}
 	}
 	
@@ -279,7 +281,7 @@ public class engine_gl_draw {
 			
 			temp_alignment_x=0;
 			ref.draw.setDrawColor(1, 1, 1, 1);
-			addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, draw_angle, depth, 1, game_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+			addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, draw_angle, depth, 1, ref.g_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
 		}
 		return temp_total_width;
 	}
@@ -291,7 +293,7 @@ public class engine_gl_draw {
 		ref.strings.builder.append(  string_to_draw  );
 		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
 
-//		return ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, 200,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);;
+//		return ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, 200,  ref.strings.stringChars, ref.strings.builder.length(), ref.g_textures.TEX_FONT1);;
 		return ref.draw.drawText(x, y, size, x_align, y_align, 0, depth, ref.strings.stringChars, ref.strings.builder.length(), texture_sheet); 
 	}
 

@@ -1,6 +1,6 @@
 package com.mammothGames.wake.game;
 
-import com.mammothGames.wake.gameEngine.engine_reference;
+import android.util.Log;
 
 public final class game_textures {
 
@@ -20,7 +20,7 @@ public final class game_textures {
 	public static final int TEX_STARS = 4;
 	
 //	Use the command line tool in the tools directory
-	public static float[][] texture_locations_arrays = {
+	private float[][] texture_locations_arrays = {
 			{ 32, 32,   0,32, 32,32, 0,0, 32,0, }, // TEX_ERROR --- DO NOT EDIT
 			
 			{}, // font_sheet_1
@@ -47,7 +47,7 @@ public final class game_textures {
 	};
 	
 	// These are the names of the PNG's in the assets folder.
-	public static String[] texture_name_array = {
+	private String[] texture_name_array = {
 			"error",
 			"font_sheet_1", // generated at runtime, so there is no file in assets
 			"wakesheet",
@@ -55,7 +55,7 @@ public final class game_textures {
 	};
 	
 	// These are used for font loading
-	public static String[] font_name_and_extension = {
+	private String[] font_name_and_extension = {
 		// Put null if not a font.
 		null,
 		"Square.ttf",
@@ -63,14 +63,14 @@ public final class game_textures {
 		null,
 	};
 	
-	public static int[] font_size = {
+	private int[] font_size = {
 		// Put -1 if not a font.
 		-1,
 		50,
 		-1,
 		-1,
 	};
-	public static float[][] font_stroke_color = {
+	private float[][] font_stroke_color = {
 		// If not a font (or a font with no stroke):
 		//-1,   -1,   -1,      -1,   -1,   -1,
 		//
@@ -81,17 +81,28 @@ public final class game_textures {
 		  {-1,   -1,   -1,      -1,   -1,   -1},
 	};	
 
-
+	public int get_numTextures() {
+		return texture_name_array.length;
+	}
 	public float[] get_texCoords(int id) {
 		return texture_locations_arrays[id];
+	}
+	public void set_texCoords(int id, float[] array) {
+		texture_locations_arrays[id] = array;
+	}
+	public void set_texCoords(int id, int array_index, float array_value) {
+		texture_locations_arrays[id][array_index] = array_value;
 	}
 	public String get_texNameAndExtension(int id) {
 		return texture_name_array[id];
 	}
+	public String get_fontNameAndExtension(int id) {
+		return font_name_and_extension[id];
+	}
 	public boolean getIsFont(int id) {
 		return (font_name_and_extension[id].equals(null)) ? false:true;
 	}
-	public int getStokeSize(int id) {
+	public int getFontSize(int id) {
 		return font_size[id];
 	}
 	public float[] getStrokeColor(int id) {

@@ -30,7 +30,6 @@ public class engine_reference {
 	protected engine_particlePool partPool;
 	protected engine_hud hud;
 	protected engine_gl_matrix matrix;
-//	protected game_physicalButtons back;
 	 
 	protected int current_texture_sheet = 0;
 	protected int current_texture_id = 0;
@@ -44,9 +43,10 @@ public class engine_reference {
 
 	
 	public engine_reference() {
-		
+		g_textures = new game_textures();
 	}
 	
+	protected game_textures g_textures;
 	
 	
 }

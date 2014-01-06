@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.mammothGames.wake.game.game_textures;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -32,15 +31,27 @@ public class engine_gl_text {
 
 	
 	final engine_reference ref;
+	private int numTextures;
 
 	public engine_gl_text(engine_reference r){
 //		public engine_gl_text(engine_reference r, int texture_sheet, int size, String font_name_and_extension){
 		
 		ref = r;
-
+		numTextures = ref.g_textures.get_numTextures();
+		
 		p = new Paint();
 		stkPaint = new Paint();
 		
+		cell_height = new int[numTextures];
+		cell_width = new int[numTextures];
+
+		char_widths = new float[numTextures][];
+		padding_x = new int[numTextures];
+		padding_y = new int[numTextures];
+		font_height  = new float[numTextures];
+		font_ascent  = new float[numTextures];
+		font_descent = new float[numTextures];
+		font_leading = new float[numTextures];
 	}
 
 	//*
@@ -69,8 +80,8 @@ public class engine_gl_text {
 			Log.d("reywas", "About to generate font atlas.");
 			
 			boolean stroke = false;
-//			if (game_textures.font_stroke_color[((texture_sheet-1)*6)] >= 0) // 6 is stride
-			if (game_textures.font_stroke_color[texture_sheet-1][0] >= 0) // 6 is stride
+//			if (ref.g_textures.font_stroke_color[texture_sheet-1][0] >= 0) // 6 is stride
+			if (ref.g_textures.getStrokeColor(texture_sheet-1)[0] >= 0) // 6 is stride
 				stroke = true;
 			
 			generateFontAtlas(texture_sheet, size, stroke, font_name_and_extension);
@@ -101,17 +112,17 @@ public class engine_gl_text {
 	private float tSingleCharWidth[] = new float[1];
 	private float max_char_width = 0;
 	
-	protected int[] cell_height = new int[game_textures.texture_name_array.length];;
-	protected int[] cell_width = new int[game_textures.texture_name_array.length];;
+	protected int[] cell_height;
+	protected int[] cell_width;
 	//10x10 cells
 
-	protected float[][] char_widths = new float[game_textures.texture_name_array.length][];
-	protected int[] padding_x = new int[game_textures.texture_name_array.length];
-	protected int[] padding_y = new int[game_textures.texture_name_array.length];
-	protected float[] font_height  = new float[game_textures.texture_name_array.length];
-	protected float[] font_ascent  = new float[game_textures.texture_name_array.length];
-	protected float[] font_descent = new float[game_textures.texture_name_array.length];
-	protected float[] font_leading = new float[game_textures.texture_name_array.length];
+	protected float[][] char_widths;
+	protected int[] padding_x;
+	protected int[] padding_y;
+	protected float[] font_height;
+	protected float[] font_ascent;
+	protected float[] font_descent;
+	protected float[] font_leading;
 	   
 	private void generateFontAtlas(int texture_sheet, int size, boolean stroke, String font_name_and_extension) {
 		
@@ -142,14 +153,14 @@ public class engine_gl_text {
 		
 		if (stroke) {
 			p.setColor(Color.rgb(
-					(int) (255*game_textures.font_stroke_color[texture_id][0]),
-					(int) (255*game_textures.font_stroke_color[texture_id][1]),
-					(int) (255*game_textures.font_stroke_color[texture_id][2]))
+					(int) (255*ref.g_textures.getStrokeColor(texture_id)[0]),
+					(int) (255*ref.g_textures.getStrokeColor(texture_id)[1]),
+					(int) (255*ref.g_textures.getStrokeColor(texture_id)[2]))
 			);
 			stkPaint.setColor(Color.rgb(
-					(int) (255*game_textures.font_stroke_color[texture_id][3]),
-					(int) (255*game_textures.font_stroke_color[texture_id][4]),
-					(int) (255*game_textures.font_stroke_color[texture_id][5]))
+					(int) (255*ref.g_textures.getStrokeColor(texture_id)[3]),
+					(int) (255*ref.g_textures.getStrokeColor(texture_id)[4]),
+					(int) (255*ref.g_textures.getStrokeColor(texture_id)[5]))
 			);
 		} else {
 			p.setColor(Color.WHITE);
@@ -303,12 +314,14 @@ public class engine_gl_text {
 		}*/
 		
 		int length = temp_texture_locations_arrays.length;
-		ref.texture.texture_locations_arrays[font_texture_sheet-1] = new float[length];
+		ref.g_textures.set_texCoords(font_texture_sheet-1, new float[length]);
+//		ref.texture.texture_locations_arrays[font_texture_sheet-1] = new float[length];
 //		ref.texture.texture_locations_arrays[texture_sheet+2] = new float[length];
 		
 		for(int i = 0; i < length; i++){
 //			ref.texture.texture_locations_arrays[texture_sheet+2][i] = temp_texture_locations_arrays[i];
-			ref.texture.texture_locations_arrays[font_texture_sheet-1][i] = temp_texture_locations_arrays[i];
+			ref.g_textures.set_texCoords(font_texture_sheet-1, i, temp_texture_locations_arrays[i]);
+//			ref.texture.texture_locations_arrays[font_texture_sheet-1][i] = temp_texture_locations_arrays[i];
 		}
 		temp_texture_locations_arrays = null;
 		System.gc();

@@ -8,8 +8,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.mammothGames.wake.game.game_textures;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
@@ -40,7 +38,7 @@ public class engine_gl_textureLoader {
 	
 	public engine_gl_textureLoader(engine_reference r){
 		ref = r;
-		number_of_textures = ref.texture.texture_locations_arrays.length;
+		number_of_textures = ref.g_textures.get_numTextures();
 		
 		byte_map = new SparseArray<byte[]>();
 		
@@ -93,7 +91,7 @@ public class engine_gl_textureLoader {
 		
 		
 		boolean isFontLocal;
-		if ( game_textures.font_name_and_extension[texture_id-1] == null ) {
+		if ( ref.g_textures.get_fontNameAndExtension(texture_id-1) == null ) {
 			isFontLocal = false;
 		} else {
 			isFontLocal = true;
@@ -118,15 +116,14 @@ public class engine_gl_textureLoader {
 	            	isLoading = true;
 	            	final int id = texture_id-1;
 	    			
-	    			resource_name = ref.texture.texture_name_array[id];
-	    	
+	    			resource_name = ref.g_textures.get_texNameAndExtension(id); 
+	    					
 	    			// Bitmap bitmap = null;
 	    	
 	    			if (has_loaded[id] == false){
 	    				
 	    				if (isFont) {
-	    					
-	    					temp_bitmap = ref.text.returnGeneratedFontAtlas(id+1, game_textures.font_size[id], game_textures.font_name_and_extension[id]);
+	    					temp_bitmap = ref.text.returnGeneratedFontAtlas(id+1, ref.g_textures.getFontSize(id), ref.g_textures.get_fontNameAndExtension(id));
 	    					if (temp_bitmap == null) {
 	    						Log.e("reywas", "Font " + resource_name + " failed to generate!");
 	    					}
