@@ -67,7 +67,7 @@ public class entity_menuMain extends engine_entity {
 			
 			screen_cover_alpha -= ref.main.time_scale * 2;
 			ref.draw.setDrawColor(0, 1, 0, screen_cover_alpha);
-			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, game_constants.layer6_HUD);
+			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, game_constants.layer7_overHUD);
 			
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			
@@ -85,10 +85,10 @@ public class entity_menuMain extends engine_entity {
 			float tLogoY = ref.screen_height*3f/4f - tFinalHeight/2;
 			
 			
-			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, tFinalWidth/2, 0, 0, game_constants.layer3_game, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, tFinalWidth/2, 0, 0, game_constants.layer6_HUD, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
 			
 			ref.draw.setDrawColor(1, 1, 1, ((float)Math.sin((float)(SystemClock.uptimeMillis() * DEG_TO_RAD / 1000f * 180f))) + 1);
-			ref.draw.drawTextSingleString(ref.screen_width/2, tTextY, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, "-tap to play-", game_textures.TEX_FONT1);
+			ref.draw.drawTextSingleString(ref.screen_width/2, tTextY, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "-tap to play-", game_textures.TEX_FONT1);
 			
 			// Draw high-score
 			ref.draw.setDrawColor(1, 1, 1, 1);
@@ -97,7 +97,7 @@ public class entity_menuMain extends engine_entity {
 			ref.strings.builder.append(  "BEST: "  );
 			ref.strings.builder.append(  mgr.gameMain.high_score  );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(ref.screen_width/2, ref.screen_height - mgr.gameMain.text_size/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, 0, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2, ref.screen_height - mgr.gameMain.text_size/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, game_constants.layer6_HUD, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 //			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height - mgr.gameMain.text_size/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, _scoreToDraw, game_textures.TEX_FONT1);
 			
 			if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {

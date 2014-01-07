@@ -106,7 +106,7 @@ public class entity_gameMain extends engine_entity {
 		// Ease the floor line up
 		floor_height_draw+= (floor_height - floor_height_draw) * 7 * ref.main.time_scale;
 		
-		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 1); // Floor color
+		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 0.8f); // Floor color
 		ref.draw.drawRectangle(0, 0, ref.screen_width, floor_height_draw, ref.screen_width/2, floor_height_draw/2, 0, game_constants.layer4_overGame);
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);

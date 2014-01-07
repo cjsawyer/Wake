@@ -21,5 +21,5 @@ public class game_constants {
 	public static int layer4_overGame = 13;
 	public static int layer5_underHUD = 14;
 	public static int layer6_HUD = 15;
-	public static int layer7_ = 16;
+	public static int layer7_overHUD = 16;
 }

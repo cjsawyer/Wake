@@ -67,7 +67,7 @@ public class entity_menuPause extends engine_entity {
 			} else {
 				ref.draw.setDrawColor(1, 1, 1, 1);
 			}
-			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2, button_size, button_size, -button_size/2, -button_size/2, 0, 200, game_textures.SUB_PAUSE, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2, button_size, button_size, -button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_PAUSE, game_textures.TEX_SPRITES);
 			
 
 			// Unpause if the screen is touched
@@ -105,9 +105,9 @@ public class entity_menuPause extends engine_entity {
 		}
 		ref.draw.setDrawColor(1, 1, 1, 1);
 		if (gameMuted) {
-			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, -button_size/2, 0, 200, game_textures.SUB_MUTED, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTED, game_textures.TEX_SPRITES);
 		} else {
-			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, -button_size/2, 0, 200, game_textures.SUB_MUTE, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTE, game_textures.TEX_SPRITES);
 		}
 		
 	}
