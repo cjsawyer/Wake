@@ -54,8 +54,8 @@ public class engine_gl_texture {
 				GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture_sheet_to_bind);
 				number_times_binded_this_frame++;
 				
-				sheet_width = ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[0]; 
-				sheet_height = ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[1];
+				sheet_width = ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[0]; 
+				sheet_height = ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[1];
 				
 				
 				ref.current_texture_sheet = texture_sheet_to_bind;
@@ -64,22 +64,22 @@ public class engine_gl_texture {
 			
 			if(game_constants.devmode) {
 				// Check if the sheet has the requested sprite on it
-				if ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1).length - 2)/8 < texture_id){
-					Log.e("reywas","ERROR: tried to bind sprite " + texture_id + " on sheet #" + texture_sheet_to_bind + ", but texture sheet #" + texture_sheet_to_bind + " only has " + ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1).length - 2)/8) + " sprite/s.");
+				if ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1).length - 2)/8 < texture_id){
+					Log.e("reywas","ERROR: tried to bind sprite " + texture_id + " on sheet #" + texture_sheet_to_bind + ", but texture sheet #" + texture_sheet_to_bind + " only has " + ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1).length - 2)/8) + " sprite/s.");
 				}
 			}
 			
 			stride = (8 * (texture_id-1)) + 2;
 			
 			                                                                                                       
-			calc_square_texture_coord_data[0] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[stride]      )/sheet_width);//+
-			calc_square_texture_coord_data[1] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 1)])/sheet_height);//-
-			calc_square_texture_coord_data[2] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 2)])/sheet_width);//-
-			calc_square_texture_coord_data[3] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 3)])/sheet_height);//-
-			calc_square_texture_coord_data[4] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 4)])/sheet_width);//+
-			calc_square_texture_coord_data[5] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 5)])/sheet_height);//+
-			calc_square_texture_coord_data[6] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 6)])/sheet_width);//-
-			calc_square_texture_coord_data[7] = ((ref.g_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 7)])/sheet_height);//+
+			calc_square_texture_coord_data[0] = ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[stride]      )/sheet_width);//+
+			calc_square_texture_coord_data[1] = ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 1)])/sheet_height);//-
+			calc_square_texture_coord_data[2] = ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 2)])/sheet_width);//-
+			calc_square_texture_coord_data[3] = ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 3)])/sheet_height);//-
+			calc_square_texture_coord_data[4] = ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 4)])/sheet_width);//+
+			calc_square_texture_coord_data[5] = ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 5)])/sheet_height);//+
+			calc_square_texture_coord_data[6] = ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 6)])/sheet_width);//-
+			calc_square_texture_coord_data[7] = ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1)[(stride + 7)])/sheet_height);//+
 			
 			ref.floatbuffers.texture_coords_FloatBuffer.put(calc_square_texture_coord_data);
 			GLES20.glVertexAttribPointer(ref.renderer.VS_a_Texture, 2, GLES20.GL_FLOAT, false, 0, ref.floatbuffers.texture_coords_FloatBuffer);

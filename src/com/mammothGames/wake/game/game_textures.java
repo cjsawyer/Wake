@@ -1,12 +1,10 @@
 package com.mammothGames.wake.game;
 
-import com.mammothGames.wake.gameEngine.base_texture;
-
-import android.util.Log;
+import com.mammothGames.wake.game.textures.*;
+import com.mammothGames.wake.gameEngine.loaded_assets;
 
 public final class game_textures {
 
-//	public static final TEX_*
 	public static final int TEX_ERROR = 1;
 	public static final int TEX_FONT1 = 2;
 	
@@ -21,11 +19,12 @@ public final class game_textures {
 	
 	public static final int TEX_STARS = 4;
 	
-	public game_textures() {
-		// TODO: call me from engine_reference!
-		// addTexture(error);
+	public static void addTextures(loaded_assets loaded_textures) {
+		
+		loaded_textures.addTexture(TEX_ERROR, new tex_error());
+		loaded_textures.addTexture(TEX_FONT1, new tex_font1());
+		loaded_textures.addTexture(TEX_SPRITES, new tex_sprites());
+		loaded_textures.addTexture(TEX_STARS, new tex_stars());
+		
 	}
-	
-	
-	
 }

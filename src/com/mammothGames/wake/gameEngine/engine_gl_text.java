@@ -37,7 +37,7 @@ public class engine_gl_text {
 //		public engine_gl_text(engine_reference r, int texture_sheet, int size, String font_name_and_extension){
 		
 		ref = r;
-		numTextures = ref.g_textures.get_numTextures();
+		numTextures = ref.loaded_textures.get_numTextures();
 		
 		p = new Paint();
 		stkPaint = new Paint();
@@ -54,7 +54,6 @@ public class engine_gl_text {
 		font_leading = new float[numTextures];
 	}
 
-	//*
 	private void save_generated_font_atlas(String filename){
 			FileOutputStream out;
 			try {
@@ -68,7 +67,6 @@ public class engine_gl_text {
 				e.printStackTrace();
 			}
 	}
-	//*/
 
 	
 	public void recycleBitmap() {
@@ -81,7 +79,7 @@ public class engine_gl_text {
 			
 			boolean stroke = false;
 //			if (ref.g_textures.font_stroke_color[texture_sheet-1][0] >= 0) // 6 is stride
-			if (ref.g_textures.getStrokeColor(texture_sheet-1)[0] >= 0) // 6 is stride
+			if (ref.loaded_textures.getStrokeColor(texture_sheet-1)[0] >= 0) // 6 is stride
 				stroke = true;
 			
 			generateFontAtlas(texture_sheet, size, stroke, font_name_and_extension);
@@ -153,14 +151,14 @@ public class engine_gl_text {
 		
 		if (stroke) {
 			p.setColor(Color.rgb(
-					(int) (255*ref.g_textures.getStrokeColor(texture_id)[0]),
-					(int) (255*ref.g_textures.getStrokeColor(texture_id)[1]),
-					(int) (255*ref.g_textures.getStrokeColor(texture_id)[2]))
+					(int) (255*ref.loaded_textures.getStrokeColor(texture_id)[0]),
+					(int) (255*ref.loaded_textures.getStrokeColor(texture_id)[1]),
+					(int) (255*ref.loaded_textures.getStrokeColor(texture_id)[2]))
 			);
 			stkPaint.setColor(Color.rgb(
-					(int) (255*ref.g_textures.getStrokeColor(texture_id)[3]),
-					(int) (255*ref.g_textures.getStrokeColor(texture_id)[4]),
-					(int) (255*ref.g_textures.getStrokeColor(texture_id)[5]))
+					(int) (255*ref.loaded_textures.getStrokeColor(texture_id)[3]),
+					(int) (255*ref.loaded_textures.getStrokeColor(texture_id)[4]),
+					(int) (255*ref.loaded_textures.getStrokeColor(texture_id)[5]))
 			);
 		} else {
 			p.setColor(Color.WHITE);
@@ -181,7 +179,7 @@ public class engine_gl_text {
 		font_descent[texture_id] = FloatMath.ceil( Math.abs( fm.descent ) );
 		font_leading[texture_id] = FloatMath.ceil( Math.abs( fm.leading ) );
 		
-		float stroke_width = font_height[texture_id]/10;
+		float stroke_width = ref.loaded_textures.getStrokeSize(texture_id);//font_height[texture_id]/10;
 		font_height[texture_id] += 2*stroke_width;
 		stkPaint.setStrokeWidth(stroke_width);
 		
@@ -213,15 +211,15 @@ public class engine_gl_text {
 //			System.gc();
 		}
 		
-		int bitWidth = cell_width[texture_id]*10;
-		int bitHeight = cell_height[texture_id]*10;
-		int largerOfBitWH = (bitWidth>=bitHeight) ? bitWidth : bitHeight;
-		int leastLargestPow2Size = getLeastPow2GtOrEqTo(largerOfBitWH);
+//		int bitWidth = cell_width[texture_id]*10;
+//		int bitHeight = cell_height[texture_id]*10;
+//		int largerOfBitWH = (bitWidth>=bitHeight) ? bitWidth : bitHeight;
+//		int leastLargestPow2Size = getLeastPow2GtOrEqTo(largerOfBitWH);
 		
-		Log.e("gl_text", "bitWidth: " + bitWidth);
-		Log.e("gl_text", "bitHeight: " + bitHeight);
-		Log.e("gl_text", "largerOfBitHW: " + largerOfBitWH);
-		Log.e("gl_text", "leastLargestPow2Size: " + leastLargestPow2Size);
+//		Log.e("gl_text", "bitWidth: " + bitWidth);
+//		Log.e("gl_text", "bitHeight: " + bitHeight);
+//		Log.e("gl_text", "largerOfBitHW: " + largerOfBitWH);
+//		Log.e("gl_text", "leastLargestPow2Size: " + leastLargestPow2Size);
 		
 //		TODO:b = Bitmap.createBitmap(leastLargestPow2Size, leastLargestPow2Size, Bitmap.Config.ARGB_8888);
 		b = Bitmap.createBitmap((cell_width[texture_id])*10, (cell_height[texture_id])*10, Bitmap.Config.ARGB_8888);
@@ -303,7 +301,7 @@ public class engine_gl_text {
 		String[] texture_coords_split = texture_coords_clean.split(",");
 		int split_length = texture_coords_split.length;
 		
-		int[] temp_texture_locations_arrays = new int[((split_length) + 1)];
+		float[] temp_texture_locations_arrays = new float[((split_length) + 1)];
 //		texture.texture_locations_arrays[3] = new float[(split_length/2) + 1];
 		for(int i=0; i<split_length; i++){
 				temp_texture_locations_arrays[i] = Integer.parseInt(String.valueOf(texture_coords_split[i]));
@@ -313,16 +311,15 @@ public class engine_gl_text {
 			System.out.println(temp_texture_locations_arrays[i]);
 		}*/
 		
-		int length = temp_texture_locations_arrays.length;
-		ref.g_textures.set_texCoords(font_texture_sheet-1, new float[length]);
-//		ref.texture.texture_locations_arrays[font_texture_sheet-1] = new float[length];
-//		ref.texture.texture_locations_arrays[texture_sheet+2] = new float[length];
+//		int length = temp_texture_locations_arrays.length;
+//		ref.loaded_textures.set_texCoords(font_texture_sheet-1, new float[length]);
 		
-		for(int i = 0; i < length; i++){
-//			ref.texture.texture_locations_arrays[texture_sheet+2][i] = temp_texture_locations_arrays[i];
-			ref.g_textures.set_texCoords(font_texture_sheet-1, i, temp_texture_locations_arrays[i]);
-//			ref.texture.texture_locations_arrays[font_texture_sheet-1][i] = temp_texture_locations_arrays[i];
-		}
+		ref.loaded_textures.set_texCoords(font_texture_sheet-1,temp_texture_locations_arrays);
+//		for(int i = 0; i < length; i++){
+////			ref.texture.texture_locations_arrays[texture_sheet+2][i] = temp_texture_locations_arrays[i];
+//			ref.loaded_textures.set_texCoords(font_texture_sheet-1, i, temp_texture_locations_arrays[i]);
+////			ref.texture.texture_locations_arrays[font_texture_sheet-1][i] = temp_texture_locations_arrays[i];
+//		}
 		temp_texture_locations_arrays = null;
 		System.gc();
 //		texture.texture_locations_arrays[3] = temp_texture_locations_arrays;

@@ -75,18 +75,18 @@ public class engine_gl_draw {
 	public float getSubTextureWidth(int subTextureID, int sheetID) {
 		return (
 //				ref.g_textures.texture_locations_arrays[sheetID-1][  (  ( subTextureID ) * 8  ) - 6  + 2  ]
-				ref.g_textures.get_texCoords(sheetID-1)[  (  ( subTextureID ) * 8  ) - 6  + 2  ]
+				ref.loaded_textures.get_texCoords(sheetID-1)[  (  ( subTextureID ) * 8  ) - 6  + 2  ]
 				-
 //				ref.g_textures.texture_locations_arrays[sheetID-1]  [  (( subTextureID ) * 8  ) - 4  + 2  ]
-				ref.g_textures.get_texCoords(sheetID-1)[  (( subTextureID ) * 8  ) - 4  + 2  ]
+				ref.loaded_textures.get_texCoords(sheetID-1)[  (( subTextureID ) * 8  ) - 4  + 2  ]
 			   );
 	}
 	
 	public float getSubTextureHeight(int subTextureID, int sheetID) {
 		return (
-					ref.g_textures.get_texCoords(sheetID-1)[  (  ( subTextureID ) * 8  ) - 5  + 2  ]
+					ref.loaded_textures.get_texCoords(sheetID-1)[  (  ( subTextureID ) * 8  ) - 5  + 2  ]
 					-
-					ref.g_textures.get_texCoords(sheetID-1)[  (( subTextureID ) * 8  ) - 3  + 2  ]
+					ref.loaded_textures.get_texCoords(sheetID-1)[  (( subTextureID ) * 8  ) - 3  + 2  ]
 			   );
 	}
 

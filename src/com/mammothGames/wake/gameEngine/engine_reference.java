@@ -43,10 +43,10 @@ public class engine_reference {
 
 	
 	public engine_reference() {
-		g_textures = new loaded_assets();
+		loaded_textures = new loaded_assets(this);
 	}
 	
-	protected loaded_assets g_textures;
+	public loaded_assets loaded_textures;
 	
 	
 }

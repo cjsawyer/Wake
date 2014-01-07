@@ -38,7 +38,7 @@ public class engine_gl_textureLoader {
 	
 	public engine_gl_textureLoader(engine_reference r){
 		ref = r;
-		number_of_textures = ref.g_textures.get_numTextures();
+		number_of_textures = ref.loaded_textures.get_numTextures();
 		
 		byte_map = new SparseArray<byte[]>();
 		
@@ -53,7 +53,6 @@ public class engine_gl_textureLoader {
 		for(temp_i=0;temp_i<(number_of_textures+1); temp_i++){
 			has_loaded[temp_i] = false;
 		}
-		
 	}
 	
 	
@@ -91,10 +90,10 @@ public class engine_gl_textureLoader {
 		
 		
 		boolean isFontLocal;
-		if ( ref.g_textures.get_fontNameAndExtension(texture_id-1) == null ) {
-			isFontLocal = false;
-		} else {
+		if ( ref.loaded_textures.getIsFont(texture_id-1) ) {
 			isFontLocal = true;
+		} else {
+			isFontLocal = false;
 		}
 		final boolean isFont = isFontLocal;
 		
@@ -116,14 +115,14 @@ public class engine_gl_textureLoader {
 	            	isLoading = true;
 	            	final int id = texture_id-1;
 	    			
-	    			resource_name = ref.g_textures.get_texNameAndExtension(id); 
+	    			resource_name = ref.loaded_textures.get_texNameAndExtension(id); 
 	    					
 	    			// Bitmap bitmap = null;
 	    	
 	    			if (has_loaded[id] == false){
 	    				
 	    				if (isFont) {
-	    					temp_bitmap = ref.text.returnGeneratedFontAtlas(id+1, ref.g_textures.getFontSize(id), ref.g_textures.get_fontNameAndExtension(id));
+	    					temp_bitmap = ref.text.returnGeneratedFontAtlas(id+1, ref.loaded_textures.getFontSize(id), ref.loaded_textures.get_texNameAndExtension(id));
 	    					if (temp_bitmap == null) {
 	    						Log.e("reywas", "Font " + resource_name + " failed to generate!");
 	    					}
@@ -131,11 +130,11 @@ public class engine_gl_textureLoader {
 	    				
 	    				try {
 	    					if (temp_bitmap == null){
-	    						Log.d("reywas", "About to load bitmap from " + "textures/" + resource_name + ".png");
+	    						Log.d("reywas", "About to load bitmap from " + "textures/" + resource_name);
 	    						
-	    						temp_bitmap = BitmapFactory.decodeStream(ref.android.getAssets().open("textures/" + resource_name + ".png"));
+	    						temp_bitmap = BitmapFactory.decodeStream(ref.android.getAssets().open("textures/" + resource_name));
 	    						
-	    						Log.d("reywas", "Loaded " + "textures/" + resource_name + ".png successfully");
+	    						Log.d("reywas", "Loaded " + "textures/" + resource_name + " successfully");
 	    					}else{
 	    						Log.d("reywas", "Loaded " + resource_name + " from memory successfully");
 	    					}
