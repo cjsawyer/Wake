@@ -52,9 +52,6 @@ public class entity_menuMain extends engine_entity {
 		mgr.menuPostGame = new entity_menuPostGame(mgr);
 		ref.main.addEntity(mgr.menuPostGame);
 		
-		mgr.gameHud = new entity_hud(mgr);
-		ref.main.addEntity(mgr.gameHud);
-		
 		ref.main.addEntity(new entity_stars());
 
 		

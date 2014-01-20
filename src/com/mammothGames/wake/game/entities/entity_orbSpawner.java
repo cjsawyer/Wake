@@ -262,7 +262,8 @@ public class entity_orbSpawner extends engine_entity {
 					
 					ref.sound.playSoundSpeedChanged(game_sounds.SND_SPLASH, 0.85f);
 					
-					mgr.gameMain.floor_height += mgr.gameMain.floor_per_miss;
+					if (!game_constants.godmode)
+						mgr.gameMain.floor_height += mgr.gameMain.floor_per_miss;
 					
 					delete_this_one = true;
 				}

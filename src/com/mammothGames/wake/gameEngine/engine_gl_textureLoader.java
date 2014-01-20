@@ -30,7 +30,6 @@ public class engine_gl_textureLoader {
 	volatile int[] widths;
 	volatile int[] heights;
 	
-	volatile byte[] buffer;
 	
 	volatile SparseArray<byte[]> byte_map;
 	
@@ -41,6 +40,7 @@ public class engine_gl_textureLoader {
 		number_of_textures = ref.loaded_textures.get_numTextures();
 		
 		byte_map = new SparseArray<byte[]>();
+		// Sparse array causes crashes?
 		
 		textures = new int[number_of_textures+1];
 		texture_ids = new int[number_of_textures+1];
@@ -70,11 +70,9 @@ public class engine_gl_textureLoader {
 	}
 
 	
-	private volatile boolean isLoading = false;
-	
-	volatile ByteBuffer byteBuffer;
-	
-	private final Object condition = new Object();
+	private static boolean isLoading = false;
+	private static ByteBuffer byteBuffer;
+	private static Object condition = new Object();
 	
 	/**
 	 * Does not report to texture loadHelper.
@@ -150,7 +148,7 @@ public class engine_gl_textureLoader {
 	    			final int temp_height = heights[id];						
 	    			final int temp_width = widths[id];
 	    			
-	    			buffer = new byte[temp_width * temp_height * 4];
+	    			byte[] buffer = new byte[temp_width * temp_height * 4];
 	    			
 	    			if (has_loaded[id] == false){
 	    	

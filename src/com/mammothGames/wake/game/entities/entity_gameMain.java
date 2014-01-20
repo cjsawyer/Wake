@@ -23,13 +23,13 @@ public class entity_gameMain extends engine_entity {
 	private float speed_base;
 	private float speed_max;
 	
-	public final float speed_gain_per_orb = 0.009f; // 0.01
+	public final float speed_gain_per_orb = 0.01f; // 0.01
 	
 	public float time_start_between_orbs = 333;
 	public float time_minimum_between_orbs = 150;
 	public float time_between_orbs = time_start_between_orbs; // in milliseconds
 	public float time_between_orbs_double = time_between_orbs*2; // in milliseconds
-	public final float time_change_per_orb = 0.1f; //2, in ms
+	public final float time_change_per_orb = 0.3f; //2, in ms
 	
 	public int score;
 	int high_score = 0;
@@ -63,7 +63,7 @@ public class entity_gameMain extends engine_entity {
 			high_score = Integer.parseInt(ref.file.load("int_high_score")); 
 		}
 		
-		floor_per_miss = ref.screen_height/15;
+		floor_per_miss = ref.screen_height/9;
 		floor_per_hit = floor_per_miss/7;
 		
 		speed_base = ref.screen_height/3;

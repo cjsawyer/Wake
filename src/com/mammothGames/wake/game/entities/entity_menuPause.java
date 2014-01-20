@@ -20,6 +20,8 @@ public class entity_menuPause extends engine_entity {
 	
 	private boolean gamePaused, gameMuted;
 	
+	private float text_x, text_y, text_size, menu_y;
+	
 	public void restart() {
 		gamePaused = false;
 	}
@@ -28,6 +30,8 @@ public class entity_menuPause extends engine_entity {
 	
 	@Override
 	public void sys_firstStep() {
+		menu_y = 0;
+				
 		button_size = mgr.gameMain.text_size;
 		
 		String muted = ref.file.load("muted");
@@ -43,13 +47,46 @@ public class entity_menuPause extends engine_entity {
 		if (!gameMuted) {
 			ref.sound.playSound(game_sounds.SND_SPLASH);
 		}
+		
+		text_size = mgr.gameMain.text_size;
+		text_x = ref.screen_width/2;
+		text_y = ref.screen_height - text_size/2;
+		
 		//TODO: uncomment this back to play music.
 		//ref.sound.setMusicState(gameMuted, true, true);
 	}
 	
 	@Override
 	public void sys_step() {
+		
+		menu_y = ref.screen_height/8*((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuMain.DEG_TO_RAD / 667f))) - ref.screen_height/16 + button_size*4;
+		
 		if (ref.room.get_current_room() == game_rooms.ROOM_GAME) {
+			
+			// Draw game score
+			if (  (ref.room.get_current_room() == game_rooms.ROOM_GAME) && (!gamePaused)  ){
+				ref.draw.setDrawColor(1, 1, 1, 1);
+				
+				if (!gamePaused) {
+				//Draw score
+					ref.strings.builder.setLength(0);
+					ref.strings.builder.append(  mgr.gameMain.score   );
+					ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+					ref.draw.drawText(text_x, text_y - menu_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, game_constants.layer6_HUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+				}
+				
+				ref.draw.setDrawColor(0, 100, 100, .3f);
+				
+				float base_hud_height = button_size*2;
+				float rectangle_height = base_hud_height + menu_y;
+				ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-rectangle_height/2, ref.screen_width, rectangle_height, 0, 0, 0, game_constants.layer5_underHUD);
+				
+				
+				float small_rec_width = ref.screen_width - button_size*4;
+				ref.draw.setDrawColor(0, 0, 0, .5f);
+				ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size - menu_y, small_rec_width, base_hud_height * 2f/3, 0, 0, 0, game_constants.layer5_underHUD);
+			}
+			
 			
 			// Draw pause menu, if game is paused
 			if (gamePaused) {
@@ -57,8 +94,8 @@ public class entity_menuPause extends engine_entity {
 				ref.draw.drawCapturedDraw();
 				
 				ref.draw.setDrawColor(1, 1, 1, 1);
-				ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "tap to unpause", game_textures.TEX_FONT1);
-				ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2 - (mgr.gameMain.text_size), mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "press back to quit", game_textures.TEX_FONT1);
+				ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2 - menu_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "tap to unpause", game_textures.TEX_FONT1);
+				ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2 - (mgr.gameMain.text_size) - menu_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "press back to quit", game_textures.TEX_FONT1);
 			}
 
 			
@@ -67,7 +104,7 @@ public class entity_menuPause extends engine_entity {
 			} else {
 				ref.draw.setDrawColor(1, 1, 1, 1);
 			}
-			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2, button_size, button_size, -button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_PAUSE, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2 - menu_y, button_size, button_size, -button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_PAUSE, game_textures.TEX_SPRITES);
 			
 
 			// Unpause if the screen is touched
@@ -105,9 +142,9 @@ public class entity_menuPause extends engine_entity {
 		}
 		ref.draw.setDrawColor(1, 1, 1, 1);
 		if (gameMuted) {
-			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTED, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 - menu_y, button_size, button_size, button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTED, game_textures.TEX_SPRITES);
 		} else {
-			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTE, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 - menu_y, button_size, button_size, button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTE, game_textures.TEX_SPRITES);
 		}
 		
 	}

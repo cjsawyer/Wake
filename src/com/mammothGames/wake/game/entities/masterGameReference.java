@@ -3,7 +3,6 @@ package com.mammothGames.wake.game.entities;
 public class masterGameReference {
 	
 	entity_gameMain gameMain;
-	entity_hud gameHud;
 
 	entity_orbSpawner orbSpawner;
 	entity_orbPatternMaker orbPatternMaker;
