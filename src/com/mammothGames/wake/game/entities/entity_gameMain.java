@@ -17,6 +17,9 @@ public class entity_gameMain extends engine_entity {
 	
 	public float text_size;
 	
+	public int score_multiplier = 1;
+	public int streak = 0;
+	
 	public float speed_multiplier = 1; // 1
 	public float speed;
 	
@@ -43,6 +46,9 @@ public class entity_gameMain extends engine_entity {
 	public void restart() {
 		score = 0;
 		new_high_score = false;
+		
+		score_multiplier = 1;
+		streak = 0;
 		
 		floor_height = 0;
 		floor_height_draw = ref.screen_height; // For a nice little intro animation

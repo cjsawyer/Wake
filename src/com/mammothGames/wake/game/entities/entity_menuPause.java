@@ -21,13 +21,15 @@ public class entity_menuPause extends engine_entity {
 	private boolean gamePaused, gameMuted, menu_open;
 	
 	private float text_x, text_y, text_size, button_size, menu_y, menu_target_y;
-	
+	public int hud_x, hud_y;
+
 	public void restart() {
 		gamePaused = false;
 	}
 	
 	@Override
 	public void sys_firstStep() {
+		
 		menu_y = 0;
 		menu_open = false;
 				
@@ -51,18 +53,22 @@ public class entity_menuPause extends engine_entity {
 		text_x = ref.screen_width/2;
 		text_y = ref.screen_height - text_size/2;
 		
+		hud_x = ref.screen_width/2;
+		hud_y = (int) text_y;
+		
 		//TODO: uncomment this back to play music.
 		//ref.sound.setMusicState(gameMuted, true, true);
 	}
 	
 	@Override
 	public void sys_step() {
+		
 		if (menu_open)
 			menu_target_y = ref.screen_height - 2*button_size; //ref.screen_height/8*((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuMain.DEG_TO_RAD / 667f))) - ref.screen_height/16 + button_size*4;
 		else
 			menu_target_y = 0;
 		
-		menu_y += (menu_target_y - menu_y) * 10 * ref.main.time_scale;
+		menu_y += (menu_target_y - menu_y) * 7 * ref.main.time_scale;
 		if (Math.abs(menu_y-menu_target_y) < 2) {
 			menu_y = menu_target_y;
 		}
@@ -83,13 +89,15 @@ public class entity_menuPause extends engine_entity {
 		
 		float small_rec_width = ref.screen_width - button_size*4;
 		ref.draw.setDrawColor(0, 0.1f, 0.1f, 1);//0.5
-		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size, small_rec_width, base_hud_height * 2f/3, 0, 0, 0, game_constants.layer5_underHUD);
+		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size, small_rec_width, base_hud_height * 2f/3, 0, 0, 0, game_constants.layer6_HUD);
 		
+		//
+		float menu_openess_ratio = (menu_y + 2*button_size)/ref.screen_height;
 		
 		// Pause text, above and off the screen when not paused.
-		ref.draw.setDrawColor(1, 1, 1, 1);
-		ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - menu_y - 2*button_size, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, game_constants.layer6_HUD, "tap to unpause", game_textures.TEX_FONT1);
-		ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - menu_y - 2*button_size, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer6_HUD, "press back to quit", game_textures.TEX_FONT1);
+		ref.draw.setDrawColor(1, 1, 1, menu_openess_ratio);
+		ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - menu_y - 2*button_size, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, game_constants.layer5_underHUD, "paused", game_textures.TEX_FONT1);
+		ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - menu_y - 2*button_size, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer5_underHUD, "press back to quit", game_textures.TEX_FONT1);
 		
 		// Draw pause menu, if game is paused
 		if (ref.room.get_current_room() == game_rooms.ROOM_GAME) {
@@ -99,9 +107,11 @@ public class entity_menuPause extends engine_entity {
 			float pause_alpha;
 			if (gamePaused) {
 				pause_alpha = ((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuMain.DEG_TO_RAD / 1666f)));
+				pause_alpha *= menu_openess_ratio; // always fade in even if we catch the clock at a bad time
 			} else {
 				pause_alpha = 1;
 			}
+			
 			//Draw score
 			ref.draw.setDrawColor(1, 1, 1, pause_alpha);
 			ref.strings.builder.setLength(0);

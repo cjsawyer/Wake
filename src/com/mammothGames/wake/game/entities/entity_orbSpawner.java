@@ -26,7 +26,9 @@ public class entity_orbSpawner extends engine_entity {
 	
 	utility_pool<poolObj_orb> greenOrb_pool = new utility_pool<poolObj_orb>(ref, poolObj_orb.class, 20);
 	poolObj_orb temp_orb;
-//	greenOrb_pool = new utility_pool<poolObj_orb>(ref, poolObj_orb.class, 20);
+	
+	utility_pool<poolObj_scoreEffect> scoreEffect_pool = new utility_pool<poolObj_scoreEffect>(ref, poolObj_scoreEffect.class, 16);;
+	poolObj_scoreEffect temp_scoreEffect;
 	
 	int screen_width, screen_height;
     protected int radius, border_size, radius_total;
@@ -174,8 +176,16 @@ public class entity_orbSpawner extends engine_entity {
 							// Tap'd orb
 							delete_this_one = true;
 							
-							mgr.gameMain.score += 1;
+							temp_scoreEffect = (poolObj_scoreEffect) scoreEffect_pool.takeObject();
+							temp_scoreEffect.x = temp_orb.x;
+							temp_scoreEffect.y = temp_orb.y;
+							temp_scoreEffect.worth = mgr.gameMain.score_multiplier;
+							temp_scoreEffect.direction = (float) Math.atan2(mgr.menuPause.hud_y-temp_scoreEffect.y, mgr.menuPause.hud_x-temp_scoreEffect.x);
+							temp_scoreEffect.starting_distance = mgr.menuPause.hud_y-temp_scoreEffect.y;
+							
+							
 							mgr.gameMain.floor_height -= mgr.gameMain.floor_per_hit;
+							mgr.gameMain.streak += 1;
 							
 							number_shards = (int) (rand.nextFloat() * 3) + 6;
 							tShardAngle = 360f / number_shards;
@@ -262,8 +272,10 @@ public class entity_orbSpawner extends engine_entity {
 					
 					ref.sound.playSoundSpeedChanged(game_sounds.SND_SPLASH, 0.85f);
 					
-					if (!game_constants.godmode)
+					if (!game_constants.godmode) {
 						mgr.gameMain.floor_height += mgr.gameMain.floor_per_miss;
+						mgr.gameMain.streak = 0;
+					}
 					
 					delete_this_one = true;
 				}
@@ -288,6 +300,46 @@ public class entity_orbSpawner extends engine_entity {
 					
 				}
 				
+			}
+		}
+		
+		//Draw score effect
+		for(int i = 0; i < scoreEffect_pool.MAX_OBJECTS; i++) {
+			temp_scoreEffect = scoreEffect_pool.getInstance(i);
+			if ((temp_scoreEffect.sys_in_use)) {
+				
+				switch(mgr.gameMain.score_multiplier) {
+					case 1: {
+						ref.draw.setDrawColor(1, 0, 0, 1);
+						break;
+					}
+					case 2: {
+						ref.draw.setDrawColor(0, 1, 0, 1);
+						break;
+					}
+					case 3: {
+						ref.draw.setDrawColor(0, 0, 1, 1);
+						break;
+					}
+				}
+
+				float effect_speed = ref.screen_height/75;
+				
+				float distance_covered = 1-(mgr.menuPause.hud_y-temp_scoreEffect.y)/temp_scoreEffect.starting_distance;
+				
+				temp_scoreEffect.x += effect_speed * Math.cos(temp_scoreEffect.direction);
+				temp_scoreEffect.y += effect_speed * Math.sin(temp_scoreEffect.direction);
+				
+				ref.draw.setDrawColor(0, 0, 1, distance_covered + 0.5f);
+					
+				//temp_scoreEffect
+//				ref.draw.drawTextSingleString(temp_scoreEffect.x, temp_scoreEffect.y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER , ref.draw.Y_ALIGN_CENTER, game_constants.layer4_overGame, "+"+mgr.gameMain.score_multiplier, game_textures.TEX_FONT1);
+				ref.draw.drawTextSingleString(temp_scoreEffect.x, temp_scoreEffect.y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER , ref.draw.Y_ALIGN_CENTER, game_constants.layer4_overGame, "+"+mgr.gameMain.streak, game_textures.TEX_FONT1);
+				
+				if (distance_covered > 0.90f) {
+					mgr.gameMain.score += mgr.gameMain.score_multiplier;
+					scoreEffect_pool.returnObject(temp_scoreEffect.sys_id);
+				}
 			}
 		}
 	}

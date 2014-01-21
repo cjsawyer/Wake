@@ -21,12 +21,19 @@ if (high_score_string.equals("")) {
 
 Object pools:
 
-	utility_pool<poolObj_greenOrb> greenOrb_pool;
+	utility_pool<poolObj_greenOrb> greenOrb_pool = new utility_pool<poolObj_orb>(ref, poolObj_orb.class, 20);;
 	poolObj_greenOrb temp_greenOrb;
 
+	// Use this to get a pool object and set its local vars.
+	temp_scoreEffect = (poolObj_scoreEffect) scoreEffect_pool.takeObject();
+
+	// Update pool logic
 	for(int i_objects = 0; i_objects < greenOrb_pool.MAX_OBJECTS; i_objects++) {
 			temp_greenOrb = greenOrb_pool.getInstance(i_objects);
 			if ((temp_greenOrb.sys_in_use)) {
 				// Do some stuff with the pool objects.
 			}
 	}
+	
+	// 'Delete' the current working pool object, ie return it to the pool
+	scoreEffect_pool.returnObject(temp_scoreEffect.sys_id);
