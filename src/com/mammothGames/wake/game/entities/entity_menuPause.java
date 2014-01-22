@@ -21,7 +21,6 @@ public class entity_menuPause extends engine_entity {
 	private boolean gamePaused, gameMuted, menu_open;
 	
 	private float text_x, text_y, text_size, button_size, menu_y, menu_target_y;
-	public int hud_x, hud_y;
 
 	public void restart() {
 		gamePaused = false;
@@ -53,8 +52,6 @@ public class entity_menuPause extends engine_entity {
 		text_x = ref.screen_width/2;
 		text_y = ref.screen_height - text_size/2;
 		
-		hud_x = ref.screen_width/2;
-		hud_y = (int) text_y;
 		
 		//TODO: uncomment this back to play music.
 		//ref.sound.setMusicState(gameMuted, true, true);
@@ -117,7 +114,7 @@ public class entity_menuPause extends engine_entity {
 			ref.strings.builder.setLength(0);
 			ref.strings.builder.append(  mgr.gameMain.score   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(text_x, text_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, game_constants.layer7_overHUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(text_x, text_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 			
 			ref.draw.setDrawColor(0, 1, 0, 1-pause_alpha);
 			ref.draw.drawTextSingleString(text_x, text_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, "paused", game_textures.TEX_FONT1);

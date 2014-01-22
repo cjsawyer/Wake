@@ -46,12 +46,12 @@ public class entity_adMob_test extends engine_entity {
 		ref.strings.builder.setLength(0);
 		ref.strings.builder.append(  "load"  );
 		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[0], y, size/4, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		ref.draw.drawText(x[0], y, size/4, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 		
 		ref.strings.builder.setLength(0);
 		ref.strings.builder.append(  "unload"  );
 		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[1], y, size/4, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 0, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		ref.draw.drawText(x[1], y, size/4, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 		
 		
 		if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {

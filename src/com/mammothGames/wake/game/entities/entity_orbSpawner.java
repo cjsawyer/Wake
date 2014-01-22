@@ -30,15 +30,16 @@ public class entity_orbSpawner extends engine_entity {
 	utility_pool<poolObj_scoreEffect> scoreEffect_pool = new utility_pool<poolObj_scoreEffect>(ref, poolObj_scoreEffect.class, 16);;
 	poolObj_scoreEffect temp_scoreEffect;
 	
-	int screen_width, screen_height;
     protected int radius, border_size, radius_total;
 
-    private final int TRAIL_SEGMENTS = 6;
-    private float trail_total_height, TRAIL_PERIOD_MS = 333;
 
 	private engine_particleEmitter emitterWhite, emitterColorCircle, emitterWhiteSparks, emitterColorSparks, emitterWhiteShards, emitterExplosion;
 	
-	public void restart() {
+	public void restart(int starting_score) {
+		
+		for(int i=0; i<starting_score; i++)
+			scorePoint1(false);
+		
 		if (!isFirstStart) {
 			emitterWhite.returnAllParticles();
 			greenOrb_pool.resetSystem();
@@ -53,10 +54,6 @@ public class entity_orbSpawner extends engine_entity {
         border_size = radius/10;
         radius_total = radius + border_size;
 
-		screen_width = ref.screen_width;
-		screen_height = ref.screen_height;
-
-        trail_total_height =  radius*3;
 
 
 		emitterWhite = new engine_particleEmitter(ref);
@@ -88,7 +85,7 @@ public class entity_orbSpawner extends engine_entity {
 		ref.main.addEntity(emitterWhiteSparks);
 		emitterWhiteSparks.setDrawAngleDirectionLock(true);
 		emitterWhiteSparks.setLifeTime(1000);
-		emitterWhiteSparks.setGravityAndDirection(screen_height/4 ,270);
+		emitterWhiteSparks.setGravityAndDirection(ref.screen_height/4 ,270);
 		emitterWhiteSparks.setDrawAngleAndChange(0,0,0,0);
 		emitterWhiteSparks.setSizeChange(-1.5f, -1.5f);
 		emitterWhiteSparks.setColor(0,    1,1,1,1);
@@ -99,7 +96,7 @@ public class entity_orbSpawner extends engine_entity {
 		ref.main.addEntity(emitterColorSparks);
 		emitterColorSparks.setDrawAngleDirectionLock(true);
 		emitterColorSparks.setLifeTime(1000);
-		emitterColorSparks.setGravityAndDirection(screen_height/4 ,270);
+		emitterColorSparks.setGravityAndDirection(ref.screen_height/4 ,270);
 		emitterColorSparks.setDrawAngleAndChange(0,0,0,0);
 		emitterColorSparks.setSizeChange(-1.5f, -1.5f);
 		emitterColorSparks.setColor(0,    1,1,1,1);
@@ -110,7 +107,7 @@ public class entity_orbSpawner extends engine_entity {
 		ref.main.addEntity(emitterWhiteShards);
 		emitterWhiteShards.setLifeTime(667);
 //		emitterWhiteShards.setDrawAngleDirectionLock(true);
-		emitterWhiteShards.setGravityAndDirection(screen_height ,270);
+		emitterWhiteShards.setGravityAndDirection(ref.screen_height ,270);
 		emitterWhiteShards.setColor(0,    1,1,1,0.9f);
 		
 		isFirstStart = false;
@@ -138,6 +135,19 @@ public class entity_orbSpawner extends engine_entity {
 	private float tRadius, tExtraV, tHalfTotalV, tBoxY, tShardAngle, tCurrentAngle;
 	private float number_shards;
     private float resettingTimeCounter = 0;
+    
+    private void scorePoint1(boolean report_score) {
+    	if (report_score) {
+    		mgr.gameMain.floor_height -= mgr.gameMain.floor_per_hit;
+    		mgr.gameMain.score += mgr.gameMain.score_multiplier;
+    		mgr.gameMain.streak += 1;
+    		ref.sound.playSoundSpeedChanged(game_sounds.SND_DING, 0.3f);
+    	}
+		mgr.gameMain.speed_multiplier += mgr.gameMain.speed_gain_per_orb;
+		mgr.gameMain.time_between_orbs -= mgr.gameMain.time_change_per_orb;
+    	
+    }
+    
 	@Override
 	public void sys_step(){
 		
@@ -180,12 +190,11 @@ public class entity_orbSpawner extends engine_entity {
 							temp_scoreEffect.x = temp_orb.x;
 							temp_scoreEffect.y = temp_orb.y;
 							temp_scoreEffect.worth = mgr.gameMain.score_multiplier;
-							temp_scoreEffect.direction = (float) Math.atan2(mgr.menuPause.hud_y-temp_scoreEffect.y, mgr.menuPause.hud_x-temp_scoreEffect.x);
-							temp_scoreEffect.starting_distance = mgr.menuPause.hud_y-temp_scoreEffect.y;
+							temp_scoreEffect.start_y = temp_scoreEffect.y;
+							temp_scoreEffect.end_y = temp_scoreEffect.start_y + ref.screen_height/15;
+							temp_scoreEffect.alpha = 0;
 							
-							
-							mgr.gameMain.floor_height -= mgr.gameMain.floor_per_hit;
-							mgr.gameMain.streak += 1;
+							scorePoint1(true);
 							
 							number_shards = (int) (rand.nextFloat() * 3) + 6;
 							tShardAngle = 360f / number_shards;
@@ -194,14 +203,11 @@ public class entity_orbSpawner extends engine_entity {
 							for(int ii=0; ii<number_shards; ii++) {
 								tCurrentAngle = (tShardAngle * ii);
 								emitterWhiteShards.setVelocityAndDirection(temp_orb.speed/5,temp_orb.speed/5,  tCurrentAngle, tCurrentAngle);
+								emitterWhiteShards.setGravityAndDirection(temp_orb.speed, 270);
 								emitterWhiteShards.setDrawAngleAndChange(tCurrentAngle - (tShardAngle)/2f, tCurrentAngle - (tShardAngle)/2f, -180, 180);
 								emitterWhiteShards.addParticle(1);
 							}
 							
-							ref.sound.playSoundSpeedChanged(game_sounds.SND_DING, 0.3f);
-							
-							mgr.gameMain.speed_multiplier += mgr.gameMain.speed_gain_per_orb;
-							mgr.gameMain.time_between_orbs -= mgr.gameMain.time_change_per_orb;
 						}
 					}
 				}
@@ -218,38 +224,6 @@ public class entity_orbSpawner extends engine_entity {
 				ref.draw.setDrawColor(temp_orb.r, temp_orb.g, temp_orb.b, 1);
 				ref.draw.drawCircle(temp_orb.x, temp_orb.y, temp_orb.radius, 0, 0, 360, 0, game_constants.layer3_game);
 
-                // White trail
-                float old_x = temp_orb.x + temp_orb.radius + temp_orb.border_size/2;
-                float old_x_reverse = temp_orb.x - temp_orb.radius - temp_orb.border_size/2;
-                float old_y = temp_orb.y;
-                float degradation = 1;
-                float degradationFactor = 1f/TRAIL_SEGMENTS;
-
-
-                for(int i=0; i<TRAIL_SEGMENTS; i++) {
-
-                	
-                    trail_total_height = temp_orb.speed/5;
-
-                    float new_x;
-                    float new_x_reverse;
-	            	new_x = degradation*temp_orb.radius;
-	            	new_x_reverse = temp_orb.x -new_x;
-	            	new_x += temp_orb.x;
-                    
-                    float new_y = old_y + degradation*trail_total_height/TRAIL_SEGMENTS;
-
-//                    ref.draw.setDrawColor((float)Math.random(),(float)Math.random(),(float)Math.random(),1);
-                    ref.draw.setDrawColor(1, 1, 1, degradation/2f);
-                    ref.draw.drawLine(old_x, old_y, new_x, new_y ,temp_orb.border_size*2, 1);
-                    ref.draw.drawLine(old_x_reverse, old_y, new_x_reverse, new_y ,temp_orb.border_size*2, game_constants.layer2_underGame);
-                    
-                    old_x = new_x;
-                    old_x_reverse = new_x_reverse;
-                    old_y = new_y;
-                    degradation-=degradationFactor;
-                }
-				
 
 				if (temp_orb.y < -temp_orb.radius - temp_orb.border_size + mgr.gameMain.floor_height) {
 					
@@ -323,21 +297,43 @@ public class entity_orbSpawner extends engine_entity {
 					}
 				}
 
-				float effect_speed = ref.screen_height/75;
 				
-				float distance_covered = 1-(mgr.menuPause.hud_y-temp_scoreEffect.y)/temp_scoreEffect.starting_distance;
+				/////////////////////////
+				// Popup score effects //
+				/////////////////////////
+				float distance_covered = 1-(temp_scoreEffect.y-temp_scoreEffect.end_y)/(temp_scoreEffect.start_y-temp_scoreEffect.end_y); // Scalar value
+				float effect_speed = ref.screen_height/100;
+				float delta_alpha = ref.main.time_scale * 7;
 				
-				temp_scoreEffect.x += effect_speed * Math.cos(temp_scoreEffect.direction);
-				temp_scoreEffect.y += effect_speed * Math.sin(temp_scoreEffect.direction);
-				
-				ref.draw.setDrawColor(0, 0, 1, distance_covered + 0.5f);
-					
-				//temp_scoreEffect
-//				ref.draw.drawTextSingleString(temp_scoreEffect.x, temp_scoreEffect.y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER , ref.draw.Y_ALIGN_CENTER, game_constants.layer4_overGame, "+"+mgr.gameMain.score_multiplier, game_textures.TEX_FONT1);
-				ref.draw.drawTextSingleString(temp_scoreEffect.x, temp_scoreEffect.y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER , ref.draw.Y_ALIGN_CENTER, game_constants.layer4_overGame, "+"+mgr.gameMain.streak, game_textures.TEX_FONT1);
-				
+				// If at the top of the movement half of the effect
 				if (distance_covered > 0.90f) {
-					mgr.gameMain.score += mgr.gameMain.score_multiplier;
+					effect_speed = 0;
+					// fade out at end
+					temp_scoreEffect.alpha-=delta_alpha;
+				} else {
+					// fade in at the beginning 
+					temp_scoreEffect.alpha+=delta_alpha*2;
+				}
+				
+				
+				temp_scoreEffect.y += effect_speed;
+				
+				ref.draw.setDrawColor(1, 1, 1, temp_scoreEffect.alpha);
+					
+				
+				mgr.gameMain.score_multiplier = mgr.gameMain.streak / mgr.gameMain.STREAK_PER_LEVEL + 1;
+				// If larger than 4, set to 4
+				mgr.gameMain.score_multiplier = mgr.gameMain.score_multiplier > 4 ? 4 : mgr.gameMain.score_multiplier;
+				
+				
+				ref.strings.builder.setLength(0);
+				ref.strings.builder.append(  "+"  );
+				ref.strings.builder.append(  mgr.gameMain.score_multiplier  );
+				ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+				ref.draw.drawText(temp_scoreEffect.x, temp_scoreEffect.y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER , ref.draw.Y_ALIGN_CENTER, game_constants.layer4_overGame, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+				
+				
+				if (temp_scoreEffect.alpha < 0.05f) {
 					scoreEffect_pool.returnObject(temp_scoreEffect.sys_id);
 				}
 			}

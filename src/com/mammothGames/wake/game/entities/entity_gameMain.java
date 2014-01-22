@@ -15,8 +15,18 @@ public class entity_gameMain extends engine_entity {
 		this.pausable = true;
 	}
 	
+	
+	//TODO: blaance these values
+	public final int DIF_EASY = 0;
+	public final int DIF_MEDIUM = 200;
+	public final int DIF_HARD = 500;
+	public final int DIF_HELL = 1000;
+	public boolean hell_unlocked = false;
+	public int current_diff;
+	
 	public float text_size;
 	
+	public final int STREAK_PER_LEVEL = 20;
 	public int score_multiplier = 1;
 	public int streak = 0;
 	
@@ -29,7 +39,7 @@ public class entity_gameMain extends engine_entity {
 	public final float speed_gain_per_orb = 0.01f; // 0.01
 	
 	public float time_start_between_orbs = 333;
-	public float time_minimum_between_orbs = 150;
+	public float time_minimum_between_orbs = 100;
 	public float time_between_orbs = time_start_between_orbs; // in milliseconds
 	public float time_between_orbs_double = time_between_orbs*2; // in milliseconds
 	public final float time_change_per_orb = 0.3f; //2, in ms
@@ -59,6 +69,9 @@ public class entity_gameMain extends engine_entity {
 	
 	@Override
 	public void sys_firstStep() {
+		
+		//TODO: change this from a menu
+		current_diff = DIF_EASY;
 		
 		// Load high score
 		String high_score_string = ref.file.load("int_high_score");
@@ -125,10 +138,11 @@ public class entity_gameMain extends engine_entity {
 			endGame();
 	}
 	
+	
 	public void restartGame() {
 		ref.main.unPauseEntities();
 		mgr.gameMain.restart();
-		mgr.orbSpawner.restart();
+		mgr.orbSpawner.restart(current_diff);
 		mgr.orbPatternMaker.restart();
 		mgr.menuPause.restart();
 		mgr.menuPostGame.restart();

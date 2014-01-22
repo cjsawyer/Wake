@@ -54,9 +54,9 @@ STRINGS:
 	Copy this to wherever you need to draw a string, and copy the second line as many times as needed to concatenate all parts of the final string:
 
 		ref.strings.builder.setLength(0);
-			ref.strings.builder.append(  your_string_here  );
-			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, draw_angle, depth, ref.strings.stringChars, ref.strings.builder.length(), game_textures.FONT_TEXTURE_NAME);
+		ref.strings.builder.append(  your_string_here  );
+		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+		ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, draw_angle, depth, ref.strings.stringChars, ref.strings.builder.length(), game_textures.FONT_TEXTURE_NAME);
 
 	The other option is to use strings like normal, but only update them when they would contain new values.
 		EXAMPLE:
