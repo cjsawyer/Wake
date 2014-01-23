@@ -92,9 +92,6 @@ public class engine_hud {
 		}
 	}
 	
-	
-
-	
 	void update() {
 		
 		button_back.update();

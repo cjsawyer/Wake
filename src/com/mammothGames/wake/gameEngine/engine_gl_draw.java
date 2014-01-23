@@ -243,7 +243,16 @@ public class engine_gl_draw {
                                 for(int i_char_width=32; i_char_width<126;i_char_width++){
                                         if (((char) i_char_width)  == temp_char){
                                                 
-                                                        addToDrawList(x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x, y + temp_alignment_y, 0, 0, (ref.text.cell_width[texture_sheet-1])*temp_scale, (ref.text.cell_height[texture_sheet-1])*temp_scale, (ref.text.cell_width[texture_sheet-1]/2)*temp_scale, (ref.text.cell_height[texture_sheet-1]/2)*temp_scale, 0, depth, i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
+                                                        addToDrawList(
+                                                        		x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x,
+                                                        		y + temp_alignment_y,
+                                                        		0,
+                                                        		0,
+                                                        		(ref.text.cell_width[texture_sheet-1])*temp_scale,
+                                                        		(ref.text.cell_height[texture_sheet-1])*temp_scale,
+                                                        		-(ref.text.cell_width[texture_sheet-1]/2)*temp_scale,
+                                                        		-(ref.text.cell_height[texture_sheet-1]/2)*temp_scale,
+                                                        		0, depth, i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
                                                 
         //                                        addToDrawList(x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x, y + temp_alignment_y, 0, 0, (ref.text.cell_width[texture_sheet-1])*temp_scale, (ref.text.cell_height[texture_sheet-1])*temp_scale, (ref.text.cell_width[texture_sheet-1]/2)*temp_scale, (ref.text.cell_height[texture_sheet-1]/2)*temp_scale, rotate_angle, depth, temp_i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
                                                 temp_total_width += ((ref.text.char_widths[texture_sheet-1][i_char_width-31]) * temp_scale);

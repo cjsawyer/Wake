@@ -35,7 +35,7 @@ public class entity_menuPostGame extends engine_entity {
 			
 			shade_alpha += ref.main.time_delta/2000f;
 			ref.draw.setDrawColor(0, 0, 0, shade_alpha);
-			ref.draw.drawRectangle(0, 0, ref.screen_width, ref.screen_height, ref.screen_width/2, ref.screen_height/2, 0, game_constants.layer6_HUD);
+			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, game_constants.layer6_HUD);
 
 			if (shade_alpha >= 1) {
 				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
