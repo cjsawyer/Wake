@@ -125,7 +125,7 @@ public class engine_gl_texture {
 			ref.matrix.rotateM(ref.renderer.mModelMatrix, 0, rotate_angle, 0.0f, 0.0f, 1.0f);
 		} else {
 			//if no rotation, just move
-			Matrix.translateM(ref.renderer.mModelMatrix, 0 ,origin_x + x + 0.5f, origin_y + y + 0.5f, 0.0f);
+			Matrix.translateM(ref.renderer.mModelMatrix, 0 ,x - origin_x, y - origin_y, 0.0f);
 		}
     	
 		// then scale

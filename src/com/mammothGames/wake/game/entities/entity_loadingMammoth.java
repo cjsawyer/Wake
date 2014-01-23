@@ -54,7 +54,7 @@ public class entity_loadingMammoth extends engine_entity {
 			logo_alpha += ref.main.time_scale * 2f;
 			
 			ref.draw.setDrawColor(1, 1, 1, logo_alpha);
-			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, tFinalWidth/2, 0, 0, 0, game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, -tFinalWidth/2, 0, 0, 0, game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
 
 			
 			

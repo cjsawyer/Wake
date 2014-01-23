@@ -27,8 +27,8 @@ public class engine_gl_rectangle {
 			Matrix.translateM(ref.renderer.mModelMatrix, 0, -origin_x, -origin_y, 0.0f);
 			ref.matrix.rotateM(ref.renderer.mModelMatrix, 0, rotate_angle, 0.0f, 0.0f, 1.0f);
 		} else {
-			//if no rotation, just move
-			Matrix.translateM(ref.renderer.mModelMatrix, 0 ,origin_x + x, origin_y + y, 0.0f);
+			// if no rotation, just move
+			Matrix.translateM(ref.renderer.mModelMatrix, 0 , x - origin_x, y - origin_y, 0.0f);
 		}
 		
 		// then scale

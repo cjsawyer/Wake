@@ -18,8 +18,8 @@ public class entity_gameMain extends engine_entity {
 	
 	//TODO: blaance these values
 	public final int DIF_EASY = 0;
-	public final int DIF_MEDIUM = 200;
-	public final int DIF_HARD = 500;
+	public final int DIF_MEDIUM = 100;
+	public final int DIF_HARD = 300;
 	public final int DIF_HELL = 1000;
 	public boolean hell_unlocked = false;
 	public int current_diff;
@@ -71,7 +71,7 @@ public class entity_gameMain extends engine_entity {
 	public void sys_firstStep() {
 		
 		//TODO: change this from a menu
-		current_diff = DIF_EASY;
+		current_diff = DIF_MEDIUM;
 		
 		// Load high score
 		String high_score_string = ref.file.load("int_high_score");
@@ -126,7 +126,8 @@ public class entity_gameMain extends engine_entity {
 		floor_height_draw+= (floor_height - floor_height_draw) * 7 * ref.main.time_scale;
 		
 		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 0.8f); // Floor color
-		ref.draw.drawRectangle(0, 0, ref.screen_width, floor_height_draw, ref.screen_width/2, floor_height_draw/2, 0, game_constants.layer4_overGame);
+//		ref.draw.drawRectangle(ref.screen_width/2, floor_height_draw/2, ref.screen_width, floor_height_draw, 0, 0, 0, game_constants.layer4_overGame);
+		ref.draw.drawRectangle(0,0, ref.screen_width, floor_height_draw, -ref.screen_width/2, -floor_height_draw/2, 0, game_constants.layer4_overGame);
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
 		ref.draw.drawLine(ref.screen_width, floor_height_draw, 0, floor_height_draw, ref.screen_width/25, game_constants.layer4_overGame);
@@ -134,7 +135,7 @@ public class entity_gameMain extends engine_entity {
 		if (floor_height < 0)
 			floor_height = 0;
 		
-		if (floor_height >= ref.screen_height)
+		if (floor_height_draw >= ref.screen_height)
 			endGame();
 	}
 	

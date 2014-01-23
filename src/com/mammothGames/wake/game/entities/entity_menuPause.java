@@ -1,6 +1,7 @@
 package com.mammothGames.wake.game.entities;
 
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.mammothGames.wake.game.game_constants;
 import com.mammothGames.wake.game.game_rooms;
@@ -24,6 +25,7 @@ public class entity_menuPause extends engine_entity {
 
 	public void restart() {
 		gamePaused = false;
+		streak_width = 0;
 	}
 	
 	@Override
@@ -57,6 +59,8 @@ public class entity_menuPause extends engine_entity {
 		//ref.sound.setMusicState(gameMuted, true, true);
 	}
 	
+	private float streak_width=0;
+	
 	@Override
 	public void sys_step() {
 		
@@ -72,7 +76,7 @@ public class entity_menuPause extends engine_entity {
 		
 		
 			
-		ref.draw.setDrawColor(0, 100, 100, 0.3f);//0.3
+		ref.draw.setDrawColor(0, 1, 1, 0.3f);//0.3
 		
 		float base_hud_height = button_size*2;
 		float rectangle_height = menu_y;
@@ -84,11 +88,27 @@ public class entity_menuPause extends engine_entity {
 		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-rectangle_height/2 - base_hud_height, ref.screen_width, rectangle_height, 0, 0, 0, game_constants.layer5_underHUD);
 		
 		
+		//Draw inner hud rectangle
 		float small_rec_width = ref.screen_width - button_size*4;
-		ref.draw.setDrawColor(0, 0.1f, 0.1f, 1);//0.5
+//		ref.draw.setDrawColor(0, 0.1f, 0.1f, 1);//0.5
+		ref.draw.setDrawColor(0, 0, 0, 1);//0.5
 		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size, small_rec_width, base_hud_height * 2f/3, 0, 0, 0, game_constants.layer6_HUD);
 		
-		//
+		// Draw progress bar for streak in smaller hud bar. 
+		if (mgr.gameMain.streak!=0) {
+			float current_progress = mgr.gameMain.streak/mgr.gameMain.STREAK_PER_LEVEL;
+			current_progress = (current_progress < 3) ? mgr.gameMain.streak%mgr.gameMain.STREAK_PER_LEVEL : mgr.gameMain.STREAK_PER_LEVEL;
+			
+			float percent_bar = (current_progress)/mgr.gameMain.STREAK_PER_LEVEL;
+			
+			ref.draw.setDrawColor(0, 1, 1, 0.3f);//0.5
+			float full_streak_width = (small_rec_width-text_size/4);
+			float target_streak_width = full_streak_width * percent_bar;
+			streak_width += (target_streak_width - streak_width) * ref.screen_width/(mgr.gameMain.STREAK_PER_LEVEL*4) * ref.main.time_scale;
+			ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size, streak_width, base_hud_height * 2f/3 - text_size/4, -streak_width/2, 0, 0, game_constants.layer6_HUD);
+			
+		}
+
 		float menu_openess_ratio = (menu_y + 2*button_size)/ref.screen_height;
 		
 		// Pause text, above and off the screen when not paused.
@@ -115,12 +135,21 @@ public class entity_menuPause extends engine_entity {
 			ref.strings.builder.append(  mgr.gameMain.score   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
 			ref.draw.drawText(text_x, text_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+
+			//Draw score multiplier
+			ref.draw.setDrawColor(1, 1, 1, 1);
+			ref.strings.builder.setLength(0);
+			ref.strings.builder.append(  "+"   );
+			ref.strings.builder.append(  mgr.gameMain.score_multiplier   );
+			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+			ref.draw.drawText(text_x + small_rec_width/2 - text_size/4 , text_y, text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			
 			
 			ref.draw.setDrawColor(0, 1, 0, 1-pause_alpha);
 			ref.draw.drawTextSingleString(text_x, text_y, text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, "paused", game_textures.TEX_FONT1);
 			
 			ref.draw.setDrawColor(1, 1, 1, 1);
-			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2, button_size, button_size, -button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_PAUSE, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_PAUSE, game_textures.TEX_SPRITES);
 			
 
 			// Unpause if the screen is touched
@@ -158,9 +187,9 @@ public class entity_menuPause extends engine_entity {
 		}
 		ref.draw.setDrawColor(1, 1, 1, 1);
 		if (gameMuted) {
-			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTED, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, -button_size/2, button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTED, game_textures.TEX_SPRITES);
 		} else {
-			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, button_size/2, -button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTE, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2, button_size, button_size, -button_size/2, button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTE, game_textures.TEX_SPRITES);
 		}
 		
 	}
