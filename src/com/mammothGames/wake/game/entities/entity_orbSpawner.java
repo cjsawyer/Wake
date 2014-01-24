@@ -38,7 +38,7 @@ public class entity_orbSpawner extends engine_entity {
 	public void restart(int starting_score) {
 		
 		for(int i=0; i<starting_score; i++)
-			scorePoint1(false);
+			scorePoint(false);
 		
 		if (!isFirstStart) {
 			emitterWhite.returnAllParticles();
@@ -136,7 +136,7 @@ public class entity_orbSpawner extends engine_entity {
 	private float number_shards;
     private float resettingTimeCounter = 0;
     
-    private void scorePoint1(boolean report_score) {
+    private void scorePoint(boolean report_score) {
     	if (report_score) {
     		mgr.gameMain.floor_height -= mgr.gameMain.floor_per_hit;
     		mgr.gameMain.score += mgr.gameMain.score_multiplier;
@@ -191,10 +191,10 @@ public class entity_orbSpawner extends engine_entity {
 							temp_scoreEffect.y = temp_orb.y;
 							temp_scoreEffect.worth = mgr.gameMain.score_multiplier;
 							temp_scoreEffect.start_y = temp_scoreEffect.y;
-							temp_scoreEffect.end_y = temp_scoreEffect.start_y + ref.screen_height/15;
+							temp_scoreEffect.end_y = temp_scoreEffect.start_y + ref.screen_height/10;
 							temp_scoreEffect.alpha = 0;
 							
-							scorePoint1(true);
+							scorePoint(true);
 							
 							number_shards = (int) (rand.nextFloat() * 3) + 6;
 							tShardAngle = 360f / number_shards;

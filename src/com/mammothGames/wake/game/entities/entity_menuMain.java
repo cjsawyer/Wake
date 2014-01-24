@@ -43,8 +43,8 @@ public class entity_menuMain extends engine_entity {
 		mgr.orbPatternMaker = new entity_orbPatternMaker(mgr);
 		ref.main.addEntity(mgr.orbPatternMaker);
 		
-		mgr.menuPause = new entity_menuPause(mgr);
-		ref.main.addEntity(mgr.menuPause);
+		mgr.menuPauseHUD = new entity_menuPauseHUD(mgr);
+		ref.main.addEntity(mgr.menuPauseHUD);
 		
 		mgr.orbSpawner = new entity_orbSpawner(mgr);
 		ref.main.addEntity(mgr.orbSpawner);
@@ -62,9 +62,11 @@ public class entity_menuMain extends engine_entity {
 		
 		if (ref.room.get_current_room() == game_rooms.ROOM_MENU) {
 			
-			screen_cover_alpha -= ref.main.time_scale * 2;
-			ref.draw.setDrawColor(0, 1, 0, screen_cover_alpha);
-			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, game_constants.layer7_overHUD);
+			mgr.gameMain.target_shade_alpha = 0;
+			
+//			screen_cover_alpha -= ref.main.time_scale * 2;
+//			ref.draw.setDrawColor(0, 1, 0, screen_cover_alpha);
+//			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, game_constants.layer7_overHUD);
 			
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			

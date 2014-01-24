@@ -17,27 +17,35 @@ public class entity_menuPostGame extends engine_entity {
 		
 		this.mgr = mgr;
 	}
+	float score_y;
+	float target_score_y;
 	
 	@Override
 	public void sys_firstStep() {
+//		target_score_y = ref.screen_height/2;
+		target_score_y = ref.screen_height/2;
 	}
 	
-	float shade_alpha;
 	public void restart() {
-		shade_alpha = 0;
+		score_y = ref.screen_height - mgr.gameMain.text_size/2;
 	}
 	
 	@Override
 	public void sys_step() {
+		
+		mgr.gameMain.shade_alpha += (mgr.gameMain.target_shade_alpha - mgr.gameMain.shade_alpha) * 5f * ref.main.time_scale;
+		ref.draw.setDrawColor(0, 0, 0, mgr.gameMain.shade_alpha);
+		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, game_constants.layer6_HUD);
+		
 		if (ref.room.get_current_room() == game_rooms.ROOM_POSTGAME) {
 			
 			ref.draw.drawCapturedDraw();
-			
-			shade_alpha += ref.main.time_delta/2000f;
-			ref.draw.setDrawColor(0, 0, 0, shade_alpha);
-			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, game_constants.layer6_HUD);
 
-			if (shade_alpha >= 1) {
+			mgr.gameMain.target_shade_alpha = 1;
+			
+			
+
+			if (mgr.gameMain.shade_alpha > 0.98f) {
 				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
 					// Update the high-score string.
 					ref.room.changeRoom(game_rooms.ROOM_MENU);
@@ -47,18 +55,18 @@ public class entity_menuPostGame extends engine_entity {
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2 + mgr.gameMain.text_size*3/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "SCORE", game_textures.TEX_FONT1);
 			
+			score_y += (target_score_y - score_y) * 5 * ref.main.time_scale; 
 			
 			ref.strings.builder.setLength(0);
 			ref.strings.builder.append(  mgr.gameMain.score   );
 			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(ref.screen_width/2, ref.screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2, score_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 			
 			
 			if (mgr.gameMain.new_high_score) {
 				ref.draw.setDrawColor(0.5f, 0.5f, 1, ((float)Math.sin((float)(SystemClock.uptimeMillis() * mgr.menuMain.DEG_TO_RAD / 500f * 180f))) + 1);
 				ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2 - mgr.gameMain.text_size*3/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "NEW BEST!", game_textures.TEX_FONT1);
 			}
-			
 		}
 	}
 }

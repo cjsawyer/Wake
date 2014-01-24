@@ -15,6 +15,8 @@ public class entity_gameMain extends engine_entity {
 		this.pausable = true;
 	}
 	
+	public float shade_alpha = 0;
+	public float target_shade_alpha = 1;
 	
 	//TODO: blaance these values
 	public final int DIF_EASY = 0;
@@ -54,6 +56,8 @@ public class entity_gameMain extends engine_entity {
 	public boolean new_high_score;
 	
 	public void restart() {
+		target_shade_alpha = 0;
+		
 		score = 0;
 		new_high_score = false;
 		
@@ -74,12 +78,12 @@ public class entity_gameMain extends engine_entity {
 		current_diff = DIF_MEDIUM;
 		
 		// Load high score
-		String high_score_string = ref.file.load("int_high_score");
+		String high_score_string = ref.file.load("high_score");
 		if (high_score_string.equals("")) {
 //		if (high_score_string == null) {
 			high_score = 0;
 		} else {
-			high_score = Integer.parseInt(ref.file.load("int_high_score")); 
+			high_score = Integer.parseInt(ref.file.load("high_score")); 
 		}
 		
 		floor_per_miss = ref.screen_height/9;
@@ -145,7 +149,7 @@ public class entity_gameMain extends engine_entity {
 		mgr.gameMain.restart();
 		mgr.orbSpawner.restart(current_diff);
 		mgr.orbPatternMaker.restart();
-		mgr.menuPause.restart();
+		mgr.menuPauseHUD.restart();
 		mgr.menuPostGame.restart();
 	}
 	
@@ -155,7 +159,7 @@ public class entity_gameMain extends engine_entity {
 		if(score > high_score) {
 			high_score = score;
 			new_high_score = true;
-			ref.file.save("int_high_score", String.valueOf(high_score) );
+			ref.file.save("high_score", String.valueOf(high_score) );
 		}
 		
 		ref.main.pauseEntities();

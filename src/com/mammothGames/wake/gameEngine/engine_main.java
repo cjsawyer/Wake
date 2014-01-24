@@ -95,20 +95,19 @@ public class engine_main {
 					temp_entity.sys_first_step_executed = true;
 				}
 				
-
+				// Main steps, also ticks alarms
+				if ((temp_entity.paused == false)) {
+					temp_entity.sys_step();
+					temp_entity.alarmStep();
+					sys_cleanDeletedEntities();
+				}
+				
 				// Hardware buttons 
 				if (backButton) {
 					temp_entity.backButton();
 				}
 				if (menuButton) {
 					temp_entity.menuButton();
-				}
-				
-				// Main steps, also ticks alarms
-				if ((temp_entity.paused == false)) {
-					temp_entity.sys_step();
-					temp_entity.alarmStep();
-					sys_cleanDeletedEntities();
 				}
 			}
 		}
@@ -314,7 +313,7 @@ public class engine_main {
 	}
 	
 	public void sys_cleanPausableEntities() {
-		// If an entity is changed from unpausable to pausable while the game is paused, it should be unpaused.
+		// If an entity is changed from pausable to unpausable while the game is paused, it should be unpaused.
 		for(int i=0; i<entities_total; i++){
 			temp_entity_pause = null;
 			temp_entity_pause = entity_list[i];

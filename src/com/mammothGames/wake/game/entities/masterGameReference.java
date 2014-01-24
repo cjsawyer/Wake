@@ -8,7 +8,7 @@ public class masterGameReference {
 	entity_orbPatternMaker orbPatternMaker;
 
 	entity_menuMain menuMain;
-	entity_menuPause menuPause;
+	entity_menuPauseHUD menuPauseHUD;
 	entity_menuPostGame menuPostGame;
 	
 //	entity_stars stars;
