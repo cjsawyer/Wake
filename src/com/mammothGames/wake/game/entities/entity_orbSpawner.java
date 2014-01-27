@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.mammothGames.wake.game.game_constants;
+import com.mammothGames.wake.game.game_rooms;
 import com.mammothGames.wake.game.game_sounds;
 import com.mammothGames.wake.game.game_textures;
 import com.mammothGames.wake.gameEngine.*;
@@ -138,7 +139,7 @@ public class entity_orbSpawner extends engine_entity {
     
     private void scorePoint(boolean report_score) {
     	if (report_score) {
-    		mgr.gameMain.floor_height -= mgr.gameMain.floor_per_hit;
+    		mgr.gameMain.floor_height_target -= mgr.gameMain.floor_per_hit;
     		mgr.gameMain.score += mgr.gameMain.score_multiplier;
     		mgr.gameMain.streak += 1;
     		ref.sound.playSoundSpeedChanged(game_sounds.SND_DING, 0.3f);
@@ -155,125 +156,127 @@ public class entity_orbSpawner extends engine_entity {
 //			greenOrb_pool.takeObject();
 //		}
 
-        //TODO: test to see if this crashes!
-        resettingTimeCounter += ref.main.time_delta;
-        if (resettingTimeCounter > Integer.MAX_VALUE/2) {
-            if (resettingTimeCounter%1000 == 0)
-                resettingTimeCounter =0;
-        }
-		
-		for(int i_objects = 0; i_objects < greenOrb_pool.MAX_OBJECTS; i_objects++) {
-			temp_orb = greenOrb_pool.getInstance(i_objects);
-//			temp_greenOrb = (poolObj_orb) greenOrb_pool.objects[i_objects];
+		if (ref.room.get_current_room() == game_rooms.ROOM_GAME) {
+			resettingTimeCounter += ref.main.time_delta;
+	        if (resettingTimeCounter > Integer.MAX_VALUE/2) {
+	            if (resettingTimeCounter%1000 == 0)
+	                resettingTimeCounter =0;
+	        }
 			
-			boolean delete_this_one = false;
-			
-			if ((temp_orb.sys_in_use)) {
-
-                float dy = temp_orb.speed * ref.main.time_scale;
-				temp_orb.y -= dy;
+			for(int i_objects = 0; i_objects < greenOrb_pool.MAX_OBJECTS; i_objects++) {
+				temp_orb = greenOrb_pool.getInstance(i_objects);
+	//			temp_greenOrb = (poolObj_orb) greenOrb_pool.objects[i_objects];
 				
-				tRadius = (temp_orb.radius + temp_orb.border_size);
-				tExtraV = 7 * ref.main.time_scale * temp_orb.speed;
-				tHalfTotalV = ( (2 * tRadius) + tExtraV )/2f;
-				tBoxY = (temp_orb.y - tRadius) + tHalfTotalV;
+				boolean delete_this_one = false;
 				
-				
-				for(int i_finger = 0; i_finger<2; i_finger++) {
-					if (ref.input.get_touch_state(i_finger) == ref.input.TOUCH_DOWN) {
-						if (ref.collision.point_AABB(tRadius*2, tRadius*2 + tExtraV, temp_orb.x, tBoxY,  ref.input.get_touch_x(i_finger), ref.input.get_touch_y(i_finger))) {
-							
-							// Tap'd orb
-							delete_this_one = true;
-							
-							temp_scoreEffect = (poolObj_scoreEffect) scoreEffect_pool.takeObject();
-							temp_scoreEffect.x = temp_orb.x;
-							temp_scoreEffect.y = temp_orb.y;
-							temp_scoreEffect.worth = mgr.gameMain.score_multiplier;
-							temp_scoreEffect.start_y = temp_scoreEffect.y;
-							temp_scoreEffect.end_y = temp_scoreEffect.start_y + ref.screen_height/10;
-							temp_scoreEffect.alpha = 0;
-							
-							scorePoint(true);
-							
-							number_shards = (int) (rand.nextFloat() * 3) + 6;
-							tShardAngle = 360f / number_shards;
-							emitterWhiteShards.setXY((int)(temp_orb.x),(int)(temp_orb.y));
-							emitterWhiteShards.setDrawTypeToCircle(temp_orb.radius, tShardAngle, game_constants.layer2_underGame);
-							for(int ii=0; ii<number_shards; ii++) {
-								tCurrentAngle = (tShardAngle * ii);
-								emitterWhiteShards.setVelocityAndDirection(temp_orb.speed/5,temp_orb.speed/5,  tCurrentAngle, tCurrentAngle);
-								emitterWhiteShards.setGravityAndDirection(temp_orb.speed, 270);
-								emitterWhiteShards.setDrawAngleAndChange(tCurrentAngle - (tShardAngle)/2f, tCurrentAngle - (tShardAngle)/2f, -180, 180);
-								emitterWhiteShards.addParticle(1);
+				if ((temp_orb.sys_in_use)) {
+	
+	                float dy = temp_orb.speed * ref.main.time_scale;
+					temp_orb.y -= dy;
+					
+					tRadius = (temp_orb.radius + temp_orb.border_size);
+					tExtraV = 7 * ref.main.time_scale * temp_orb.speed;
+					tHalfTotalV = ( (2 * tRadius) + tExtraV )/2f;
+					tBoxY = (temp_orb.y - tRadius) + tHalfTotalV;
+					
+					
+					for(int i_finger = 0; i_finger<2; i_finger++) {
+						if (ref.input.get_touch_state(i_finger) == ref.input.TOUCH_DOWN) {
+							if (ref.collision.point_AABB(tRadius*2, tRadius*2 + tExtraV, temp_orb.x, tBoxY,  ref.input.get_touch_x(i_finger), ref.input.get_touch_y(i_finger))) {
+								
+								// Tap'd orb
+								delete_this_one = true;
+								
+								temp_scoreEffect = (poolObj_scoreEffect) scoreEffect_pool.takeObject();
+								temp_scoreEffect.x = temp_orb.x;
+								temp_scoreEffect.y = temp_orb.y;
+								temp_scoreEffect.worth = mgr.gameMain.score_multiplier;
+								temp_scoreEffect.start_y = temp_scoreEffect.y;
+								temp_scoreEffect.end_y = temp_scoreEffect.start_y + ref.screen_height/10;
+								temp_scoreEffect.alpha = 0;
+								
+								scorePoint(true);
+								
+								number_shards = (int) (rand.nextFloat() * 3) + 6;
+								tShardAngle = 360f / number_shards;
+								emitterWhiteShards.setXY((int)(temp_orb.x),(int)(temp_orb.y));
+								emitterWhiteShards.setDrawTypeToCircle(temp_orb.radius, tShardAngle, game_constants.layer2_underGame);
+								for(int ii=0; ii<number_shards; ii++) {
+									tCurrentAngle = (tShardAngle * ii);
+									emitterWhiteShards.setVelocityAndDirection(temp_orb.speed/5,temp_orb.speed/5,  tCurrentAngle, tCurrentAngle);
+									emitterWhiteShards.setGravityAndDirection(temp_orb.speed, 270);
+									emitterWhiteShards.setDrawAngleAndChange(tCurrentAngle - (tShardAngle)/2f, tCurrentAngle - (tShardAngle)/2f, -180, 180);
+									emitterWhiteShards.addParticle(1);
+								}
+								
 							}
-							
 						}
 					}
-				}
-				//ref.collision.point_AABB(tRadius*2, tRadius*2 + tExtraV, temp_greenOrb.x, tBoxY, -1,-1);
-				
-				
-				
-				// White outline
-				ref.draw.setDrawColor(1, 1, 1, 1);
-				ref.draw.drawCircle(temp_orb.x, temp_orb.y, temp_orb.radius + temp_orb.border_size, 0, 0, 360, 0, game_constants.layer3_game);
-				
-				
-				//Green interior
-				ref.draw.setDrawColor(temp_orb.r, temp_orb.g, temp_orb.b, 1);
-				ref.draw.drawCircle(temp_orb.x, temp_orb.y, temp_orb.radius, 0, 0, 360, 0, game_constants.layer3_game);
-
-
-				if (temp_orb.y < -temp_orb.radius - temp_orb.border_size + mgr.gameMain.floor_height) {
+					//ref.collision.point_AABB(tRadius*2, tRadius*2 + tExtraV, temp_greenOrb.x, tBoxY, -1,-1);
 					
-					// particle boxes shooting up
-					emitterWhiteSparks.setVelocityAndDirection(temp_orb.speed/1.5f,temp_orb.speed,  120,60);
-					emitterWhiteSparks.setXY((int)(temp_orb.x),(int)(temp_orb.y + tRadius));
-					emitterWhiteSparks.setDrawTypeToRectangle(temp_orb.radius/2, temp_orb.radius/2, game_constants.layer2_underGame);
-					emitterWhiteSparks.addParticle(10);
 					
-					emitterColorSparks.setColor(0,    temp_orb.r, temp_orb.g, temp_orb.b, 1);
-					emitterColorSparks.setVelocityAndDirection(temp_orb.speed/1.5f,temp_orb.speed,  120,60);
-					emitterColorSparks.setXY((int)(temp_orb.x),(int)(temp_orb.y + tRadius));
-					emitterColorSparks.setDrawTypeToRectangle(temp_orb.radius/2, temp_orb.radius/2, game_constants.layer2_underGame);
-					emitterColorSparks.addParticle(7);
 					
-					emitterExplosion.setColor(0,    temp_orb.r, temp_orb.g, temp_orb.b, 0.8f);
-					emitterExplosion.setXY((int)(temp_orb.x),(int)(temp_orb.y));
-					emitterExplosion.setDrawTypeToCircle(temp_orb.radius, 360, game_constants.layer4_overGame);
-					emitterExplosion.addParticle(1);
+					// White outline
+					ref.draw.setDrawColor(1, 1, 1, 1);
+					ref.draw.drawCircle(temp_orb.x, temp_orb.y, temp_orb.radius + temp_orb.border_size, 0, 0, 360, 0, game_constants.layer3_game);
 					
-					ref.sound.playSoundSpeedChanged(game_sounds.SND_SPLASH, 0.85f);
 					
-					if (!game_constants.godmode) {
-						mgr.gameMain.floor_height += mgr.gameMain.floor_per_miss;
-						mgr.gameMain.streak = 0;
+					//Green interior
+					ref.draw.setDrawColor(temp_orb.r, temp_orb.g, temp_orb.b, 1);
+					ref.draw.drawCircle(temp_orb.x, temp_orb.y, temp_orb.radius, 0, 0, 360, 0, game_constants.layer3_game);
+	
+	
+					// Orb hits water-line
+					if (temp_orb.y < -temp_orb.radius - temp_orb.border_size + mgr.gameMain.floor_height_target) {
+						
+						// particle boxes shooting up
+						emitterWhiteSparks.setVelocityAndDirection(temp_orb.speed/1.5f,temp_orb.speed,  120,60);
+						emitterWhiteSparks.setXY((int)(temp_orb.x),(int)(temp_orb.y + tRadius));
+						emitterWhiteSparks.setDrawTypeToRectangle(temp_orb.radius/2, temp_orb.radius/2, game_constants.layer2_underGame);
+						emitterWhiteSparks.addParticle(10);
+						
+						emitterColorSparks.setColor(0,    temp_orb.r, temp_orb.g, temp_orb.b, 1);
+						emitterColorSparks.setVelocityAndDirection(temp_orb.speed/1.5f,temp_orb.speed,  120,60);
+						emitterColorSparks.setXY((int)(temp_orb.x),(int)(temp_orb.y + tRadius));
+						emitterColorSparks.setDrawTypeToRectangle(temp_orb.radius/2, temp_orb.radius/2, game_constants.layer2_underGame);
+						emitterColorSparks.addParticle(7);
+						
+						emitterExplosion.setColor(0,    temp_orb.r, temp_orb.g, temp_orb.b, 0.8f);
+						emitterExplosion.setXY((int)(temp_orb.x),(int)(temp_orb.y));
+						emitterExplosion.setDrawTypeToCircle(temp_orb.radius, 360, game_constants.layer4_overGame);
+						emitterExplosion.addParticle(1);
+						
+						ref.sound.playSoundSpeedChanged(game_sounds.SND_SPLASH, 0.85f);
+						
+						if (!game_constants.godmode) {
+							mgr.gameMain.floor_height_target += mgr.gameMain.floor_per_miss;
+							mgr.gameMain.streak = 0;
+						}
+						
+						delete_this_one = true;
+					}
+					if (delete_this_one) {
+	//					ref.draw.setDrawColor(1, 1, 1, 1);
+	//					ref.draw.drawCircle(temp_greenOrb.x, temp_greenOrb.y, temp_greenOrb.radius*3/2, 0, 0, 360, 0, 0);
+						
+						emitterWhite.setXY((int)(temp_orb.x),(int)(temp_orb.y));
+						emitterWhite.setDrawTypeToSprite(game_textures.TEX_SPRITES, game_textures.SUB_PARTICLE, temp_orb.radius*2, temp_orb.radius*2, game_constants.layer2_underGame);
+						emitterWhite.addParticle(1);
+						
+						emitterColorCircle.setXY((int)(temp_orb.x),(int)(temp_orb.y));
+						emitterColorCircle.setColor(0,    temp_orb.r, temp_orb.g, temp_orb.b, 1);
+						emitterColorCircle.setDrawTypeToCircle(temp_orb.radius, 360, game_constants.layer3_game);
+	//					emitterGreen.setDrawTypeToSprite(game_textures.TEX_PARTICLE, 1, temp_greenOrb.radius*2, temp_greenOrb.radius*2, 2);
+						emitterColorCircle.addParticle(1);
+						
+						
+	//					ref.sound.playSound(game_sounds.SND_OINK);
+						
+						greenOrb_pool.returnObject(temp_orb.sys_id);
+						
 					}
 					
-					delete_this_one = true;
 				}
-				if (delete_this_one) {
-//					ref.draw.setDrawColor(1, 1, 1, 1);
-//					ref.draw.drawCircle(temp_greenOrb.x, temp_greenOrb.y, temp_greenOrb.radius*3/2, 0, 0, 360, 0, 0);
-					
-					emitterWhite.setXY((int)(temp_orb.x),(int)(temp_orb.y));
-					emitterWhite.setDrawTypeToSprite(game_textures.TEX_SPRITES, game_textures.SUB_PARTICLE, temp_orb.radius*2, temp_orb.radius*2, game_constants.layer2_underGame);
-					emitterWhite.addParticle(1);
-					
-					emitterColorCircle.setXY((int)(temp_orb.x),(int)(temp_orb.y));
-					emitterColorCircle.setColor(0,    temp_orb.r, temp_orb.g, temp_orb.b, 1);
-					emitterColorCircle.setDrawTypeToCircle(temp_orb.radius, 360, game_constants.layer3_game);
-//					emitterGreen.setDrawTypeToSprite(game_textures.TEX_PARTICLE, 1, temp_greenOrb.radius*2, temp_greenOrb.radius*2, 2);
-					emitterColorCircle.addParticle(1);
-					
-					
-//					ref.sound.playSound(game_sounds.SND_OINK);
-					
-					greenOrb_pool.returnObject(temp_orb.sys_id);
-					
-				}
-				
 			}
 		}
 		

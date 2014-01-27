@@ -12,11 +12,11 @@ public class entity_gameMain extends engine_entity {
 	public entity_gameMain(masterGameReference mgr) {
 		this.mgr = mgr;
 		this.persistent = true;
-		this.pausable = true;
+		this.pausable = false;
 	}
 	
 	public float shade_alpha = 0;
-	public float target_shade_alpha = 1;
+	public float shade_alpha_target = 1;
 	
 	//TODO: blaance these values
 	public final int DIF_EASY = 0;
@@ -48,15 +48,15 @@ public class entity_gameMain extends engine_entity {
 	
 	public int score;
 	int high_score = 0;
-	float floor_height;
+	float floor_height_target;
 	float floor_per_miss; 
 	float floor_per_hit; 
-	float floor_height_draw;
+	float floor_height;
 	
 	public boolean new_high_score;
 	
 	public void restart() {
-		target_shade_alpha = 0;
+//		target_shade_alpha = 0;
 		
 		score = 0;
 		new_high_score = false;
@@ -64,8 +64,8 @@ public class entity_gameMain extends engine_entity {
 		score_multiplier = 1;
 		streak = 0;
 		
+		floor_height_target = 0;
 		floor_height = 0;
-		floor_height_draw = ref.screen_height; // For a nice little intro animation
 		time_between_orbs = time_start_between_orbs;
 		time_between_orbs_double = time_between_orbs*2;	
 		speed_multiplier = 1;
@@ -73,6 +73,8 @@ public class entity_gameMain extends engine_entity {
 	
 	@Override
 	public void sys_firstStep() {
+		shade_alpha = -4;
+		shade_alpha_target = 1;
 		
 		//TODO: change this from a menu
 		current_diff = DIF_MEDIUM;
@@ -100,6 +102,14 @@ public class entity_gameMain extends engine_entity {
 	@Override
 	public void sys_step(){
 		
+		// She shade alpha towards it's target; and if we're in the menu room only slide if the water height is at the bottom
+		if (ref.room.get_current_room() == game_rooms.ROOM_MENU) {
+			if ( (mgr.gameMain.floor_height < 2) && (mgr.stars.stars_alpha > 0.98f) )
+				mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * 5f * ref.main.time_scale;
+		}
+		else
+			mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * 5f * ref.main.time_scale;
+		
 		speed = speed_base * speed_multiplier;
 		if (speed > speed_max) {
 			speed = speed_max;
@@ -111,7 +121,7 @@ public class entity_gameMain extends engine_entity {
 		time_between_orbs_double = time_between_orbs*2;
 		
 		
-		if (mgr.orbPatternMaker.state_finished) {
+		if ( (mgr.orbPatternMaker.state_finished) && (ref.room.get_current_room() == game_rooms.ROOM_GAME) ) {
 			
 			if ((float)Math.random() > CHANCE_OF_LAST_STATE) {
 				// Set a random one.
@@ -119,27 +129,23 @@ public class entity_gameMain extends engine_entity {
 			}
 			mgr.orbPatternMaker.setState(state);
 			
-			// For testing custom ones
-//			mgr.orbPatternMaker.setState(mgr.orbPatternMaker.STATE_2TIER_Z);
-			
-			
-			
 		}
 		
 		// Ease the floor line up
-		floor_height_draw+= (floor_height - floor_height_draw) * 7 * ref.main.time_scale;
-		
+		floor_height+= (floor_height_target - floor_height) * 7 * ref.main.time_scale;
+
+		// Draw floor/water line
 		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 0.8f); // Floor color
-//		ref.draw.drawRectangle(ref.screen_width/2, floor_height_draw/2, ref.screen_width, floor_height_draw, 0, 0, 0, game_constants.layer4_overGame);
-		ref.draw.drawRectangle(0,0, ref.screen_width, floor_height_draw, -ref.screen_width/2, -floor_height_draw/2, 0, game_constants.layer4_overGame);
+		ref.draw.drawRectangle(0,0, ref.screen_width, floor_height, -ref.screen_width/2, -floor_height/2, 0, game_constants.layer4_overGame);
+		
+		if (floor_height_target < 0)
+			floor_height_target = 0;
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
-		ref.draw.drawLine(ref.screen_width, floor_height_draw, 0, floor_height_draw, ref.screen_width/25, game_constants.layer4_overGame);
+		ref.draw.drawLine(ref.screen_width, floor_height, 0, floor_height, ref.screen_width/25, game_constants.layer4_overGame);
 		
-		if (floor_height < 0)
-			floor_height = 0;
 		
-		if (floor_height_draw >= ref.screen_height)
+		if ( (floor_height >= ref.screen_height) && (ref.room.get_current_room() == game_rooms.ROOM_GAME) )
 			endGame();
 	}
 	
@@ -154,7 +160,7 @@ public class entity_gameMain extends engine_entity {
 	}
 	
 	public void endGame() {
-		ref.draw.captureDraw();
+//		ref.draw.captureDraw();
 		
 		if(score > high_score) {
 			high_score = score;
@@ -162,7 +168,12 @@ public class entity_gameMain extends engine_entity {
 			ref.file.save("high_score", String.valueOf(high_score) );
 		}
 		
-		ref.main.pauseEntities();
+//		floor_height_target = 0; // make floor sink
+		mgr.gameMain.shade_alpha = -2; // so there's an offset before you can start to see it while fading in
+		mgr.gameMain.shade_alpha_target = 1; // fade in post game text
+		mgr.menuPauseHUD.HUD_y_target = mgr.menuPauseHUD.base_hud_height*2; // slide HUD back up
+		
+//		ref.main.pauseEntities();
 		ref.room.changeRoom(game_rooms.ROOM_POSTGAME);
 	}
 	

@@ -21,6 +21,8 @@ public class entity_loadingMammoth extends engine_entity {
 	float start_time, current_time;
 	float logo_alpha = 0;
 	
+	boolean fade_out = false;
+	
 	@Override
 	public void sys_firstStep(){
 		
@@ -51,7 +53,10 @@ public class entity_loadingMammoth extends engine_entity {
 			float tLogoX = (ref.screen_width - tFinalWidth) / 2f;
 			float tLogoY = ref.screen_height/2;
 			
-			logo_alpha += ref.main.time_scale * 2f;
+			if (fade_out)
+				logo_alpha -= ref.main.time_scale * 2f;
+			else
+				logo_alpha += ref.main.time_scale * 3f;
 			
 			ref.draw.setDrawColor(1, 1, 1, logo_alpha);
 			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, -tFinalWidth/2, 0, 0, 0, game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
@@ -59,9 +64,11 @@ public class entity_loadingMammoth extends engine_entity {
 			
 			
 			if (ref.loadHelper.checkFinished()) {
-				// if it's been longer than 5 seconds.
-//				Log.e("asd", "diff " + (current_time-start_time));
-				if (current_time-start_time > 1000) {
+				fade_out = true;
+			}
+			// if it's been longer than 3/4 of a second.
+			if (current_time-start_time > 750) {
+				if ( (fade_out) && (logo_alpha < 0.2) ) {
 					// Go to the room that initializes the menu.
 					ref.room.changeRoom(1);
 				}

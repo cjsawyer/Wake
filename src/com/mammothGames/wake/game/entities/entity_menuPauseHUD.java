@@ -20,7 +20,16 @@ public class entity_menuPauseHUD extends engine_entity {
 	
 	private boolean gamePaused, gameMuted, menu_open;
 	
-	private float text_x, text_y, button_size, base_hud_height, menu_y, menu_target_y, HUD_y, HUD_y_target;
+	private float text_x, text_y, button_size;
+
+	float base_hud_height;
+
+	private float pause_menu_y;
+
+	private float pause_menu_y_target;
+
+	float HUD_y;
+	float HUD_y_target;
 
 	public void restart() {
 		gamePaused = false;
@@ -33,7 +42,7 @@ public class entity_menuPauseHUD extends engine_entity {
 	@Override
 	public void sys_firstStep() {
 		
-		menu_y = 0;
+		pause_menu_y = 0;
 		menu_open = false;
 				
 		button_size = mgr.gameMain.text_size;
@@ -65,25 +74,27 @@ public class entity_menuPauseHUD extends engine_entity {
 	
 	@Override
 	public void sys_step() {
-		if (ref.room.get_current_room() == game_rooms.ROOM_GAME) {
+		if ( (ref.room.get_current_room() == game_rooms.ROOM_GAME) ||  (ref.room.get_current_room() == game_rooms.ROOM_POSTGAME) ){
 			
-			HUD_y += (HUD_y_target - HUD_y) * 7 * ref.main.time_scale;
+			// The 'if' is so the menu doesn't slide up immediately in the post-game screen
+			if (mgr.gameMain.shade_alpha > 0.98f)
+				HUD_y += (HUD_y_target - HUD_y) * 5 * ref.main.time_scale;
 			
 			if (menu_open)
-				menu_target_y = ref.screen_height - 2*button_size; //ref.screen_height/8*((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuMain.DEG_TO_RAD / 667f))) - ref.screen_height/16 + button_size*4;
+				pause_menu_y_target = ref.screen_height - 2*button_size; //ref.screen_height/8*((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuMain.DEG_TO_RAD / 667f))) - ref.screen_height/16 + button_size*4;
 			else
-				menu_target_y = 0;
+				pause_menu_y_target = 0;
 			
-			menu_y += (menu_target_y - menu_y) * 7 * ref.main.time_scale;
-			if (Math.abs(menu_y-menu_target_y) < 2) {
-				menu_y = menu_target_y;
+			pause_menu_y += (pause_menu_y_target - pause_menu_y) * 7 * ref.main.time_scale;
+			if (Math.abs(pause_menu_y-pause_menu_y_target) < 2) {
+				pause_menu_y = pause_menu_y_target;
 			}
 			
 			
 				
 			ref.draw.setDrawColor(0, 1, 1, 0.3f);//0.3
 			
-			float rectangle_height = menu_y;
+			float rectangle_height = pause_menu_y;
 			
 			//The top rectangle hud
 			if (!gamePaused)
@@ -112,12 +123,12 @@ public class entity_menuPauseHUD extends engine_entity {
 				ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size + HUD_y, streak_width, base_hud_height * 2f/3 - mgr.gameMain.text_size/4, -streak_width/2, 0, 0, game_constants.layer6_HUD);
 			}
 	
-			float menu_openess_ratio = (menu_y + 2*button_size)/ref.screen_height;
+			float menu_openess_ratio = (pause_menu_y + 2*button_size)/ref.screen_height;
 			
 			// Pause text, above and off the screen when not paused.
 			ref.draw.setDrawColor(1, 1, 1, menu_openess_ratio);
-			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, game_constants.layer5_underHUD, "paused", game_textures.TEX_FONT1);
-			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer5_underHUD, "press back to quit", game_textures.TEX_FONT1);
+			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, game_constants.layer5_underHUD, "paused", game_textures.TEX_FONT1);
+			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer5_underHUD, "press back to quit", game_textures.TEX_FONT1);
 			
 			if (gamePaused)
 				ref.draw.drawCapturedDraw();
@@ -198,7 +209,7 @@ public class entity_menuPauseHUD extends engine_entity {
 	private void switchPause() {
 		
 		// If the menu isn't still sliding
-		if (Math.abs(menu_y-menu_target_y) < 2) {
+		if ( (Math.abs(pause_menu_y-pause_menu_y_target) < 2) && (Math.abs(HUD_y-HUD_y_target) < 2) ) {
 			
 			if (!gamePaused) {
 				gamePaused = true;

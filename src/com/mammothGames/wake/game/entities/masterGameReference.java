@@ -11,6 +11,8 @@ public class masterGameReference {
 	entity_menuPauseHUD menuPauseHUD;
 	entity_menuPostGame menuPostGame;
 	
+	entity_stars stars;
+	
 //	entity_stars stars;
 
 }
