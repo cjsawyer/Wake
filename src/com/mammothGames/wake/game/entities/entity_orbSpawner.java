@@ -209,6 +209,8 @@ public class entity_orbSpawner extends engine_entity {
 									emitterWhiteShards.addParticle(1);
 								}
 								
+								mgr.menuPauseHUD.streak_bar_alpha = (mgr.gameMain.score_multiplier+1)/4f;
+								
 							}
 						}
 					}

@@ -45,7 +45,7 @@ public class entity_menuPostGame extends engine_entity {
 				mgr.gameMain.shade_alpha_target = 1;
 			
 			
-			if (mgr.gameMain.shade_alpha > 0.98f) {
+			if ( (mgr.gameMain.shade_alpha > 0.98f) && (mgr.menuPauseHUD.HUD_y-mgr.menuPauseHUD.HUD_y_target<2) ) {
 				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
 					fade_out = true;
 				}

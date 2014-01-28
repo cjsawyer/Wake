@@ -123,9 +123,7 @@ public class entity_menuMain extends engine_entity {
 			// When fully faded back out, start the game
 			if ( (fade_out == true) && (mgr.gameMain.shade_alpha < 0.02f) ) {
 				fade_out = false;
-				mgr.gameMain.shade_alpha = 1;
-				mgr.gameMain.shade_alpha_target = 1;
-				ref.room.changeRoom(game_rooms.ROOM_DIFFICULTY);
+				mgr.menuDifficulty.startMenuDifficulty();
 			}
 		}
 	}

@@ -101,7 +101,7 @@ public class entity_gameMain extends engine_entity {
 	@Override
 	public void sys_step(){
 		
-		// She shade alpha towards it's target; and if we're in the menu room only slide if the water height is at the bottom
+		// The shade alpha towards it's target; and if we're in the menu room only slide if the water height is at the bottom
 		if (ref.room.get_current_room() == game_rooms.ROOM_MENU) {
 			if ( (mgr.gameMain.floor_height < 2) && (mgr.stars.stars_alpha > 0.98f) )
 				mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * 5f * ref.main.time_scale;
@@ -146,6 +146,8 @@ public class entity_gameMain extends engine_entity {
 		
 		if ( (floor_height >= ref.screen_height) && (ref.room.get_current_room() == game_rooms.ROOM_GAME) )
 			endGame();
+		
+		
 	}
 	
 	public void setDifficulty(int diff) {
