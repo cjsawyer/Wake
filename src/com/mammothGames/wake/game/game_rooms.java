@@ -21,9 +21,12 @@ public class game_rooms {
 
 */
 	
-	public static int ROOM_MENU = 2;
-	public static int ROOM_GAME = 3;
-	public static int ROOM_POSTGAME = 4;
+	public final static int ROOM_LOAD = 0;
+	public final static int ROOM_LOAD_MENU = 1;
+	public final static int ROOM_MENU = 2;
+	public final static int ROOM_DIFFICULTY = 3;
+	public final static int ROOM_GAME = 4;
+	public final static int ROOM_POSTGAME = 5;
 
 	public boolean sys_startRoom(int index){
 		tHasMovedRoom = true;
@@ -55,11 +58,16 @@ public class game_rooms {
 			}
 			
 			case 3: {
-				current_room_name = "Flux";
+				current_room_name = "Difficulty";
 				break;
 			}
 			
 			case 4: {
+				current_room_name = "Flux";
+				break;
+			}
+			
+			case 5: {
 				current_room_name = "Post";
 				break;
 			}

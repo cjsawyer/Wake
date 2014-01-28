@@ -206,10 +206,13 @@ public class entity_menuPauseHUD extends engine_entity {
 		
 	}
 	
-	private void switchPause() {
+	public void switchPause() {
 		
 		// If the menu isn't still sliding
 		if ( (Math.abs(pause_menu_y-pause_menu_y_target) < 2) && (Math.abs(HUD_y-HUD_y_target) < 2) ) {
+			
+			// Snap the menu down so there's no gap if we happen to be in the bottom 2 pixels of the slide
+			pause_menu_y = pause_menu_y_target;
 			
 			if (!gamePaused) {
 				gamePaused = true;
@@ -230,12 +233,6 @@ public class entity_menuPauseHUD extends engine_entity {
 		ref.room.changeRoom(game_rooms.ROOM_MENU);
 	}
 	
-	@Override
-	public void backButton() {
-		if (ref.room.get_current_room() == game_rooms.ROOM_GAME) {
-			switchPause();
-		}
-	}
 	
 	@Override
 	public void onScreenSleep() {

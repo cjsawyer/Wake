@@ -53,11 +53,7 @@ public class entity_menuPostGame extends engine_entity {
 
 			// Done fading out, so go to the main menu
 			if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_out ) {
-				mgr.gameMain.floor_height_target = 0; // Make the water go back down
-				
-				mgr.gameMain.shade_alpha = -1;
-				mgr.gameMain.shade_alpha_target = 1;
-				ref.room.changeRoom(game_rooms.ROOM_MENU);
+				mgr.menuMain.goToMainMenu();
 			}
 			
 			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);

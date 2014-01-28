@@ -66,9 +66,9 @@ public class entity_loadingMammoth extends engine_entity {
 			if (ref.loadHelper.checkFinished()) {
 				fade_out = true;
 			}
-			// if it's been longer than 3/4 of a second.
-			if (current_time-start_time > 750) {
-				if ( (fade_out) && (logo_alpha < 0.2) ) {
+			// if it's been longer than a second.
+			if (current_time-start_time > 1000) {
+				if ( (fade_out) && (logo_alpha < 0.02f) ) {
 					// Go to the room that initializes the menu.
 					ref.room.changeRoom(1);
 				}

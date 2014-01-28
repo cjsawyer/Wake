@@ -8,7 +8,6 @@ import com.mammothGames.wake.gameEngine.*;
 public class entity_gameMain extends engine_entity {
 
 	masterGameReference mgr;
-	
 	public entity_gameMain(masterGameReference mgr) {
 		this.mgr = mgr;
 		this.persistent = true;
@@ -149,8 +148,12 @@ public class entity_gameMain extends engine_entity {
 			endGame();
 	}
 	
+	public void setDifficulty(int diff) {
+		current_diff = diff;
+	}
 	
-	public void restartGame() {
+	public void startGame() {
+		ref.room.changeRoom(game_rooms.ROOM_GAME);
 		ref.main.unPauseEntities();
 		mgr.gameMain.restart();
 		mgr.orbSpawner.restart(current_diff);

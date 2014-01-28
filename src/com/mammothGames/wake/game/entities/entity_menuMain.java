@@ -58,6 +58,12 @@ public class entity_menuMain extends engine_entity {
 		
 		mgr.stars = new entity_stars();
 		ref.main.addEntity(mgr.stars);
+		
+		mgr.backButton = new entity_backButton(mgr);
+		ref.main.addEntity(mgr.backButton);
+		
+		mgr.menuDifficulty = new entity_menuDifficulty(mgr);
+		ref.main.addEntity(mgr.menuDifficulty);
 
 		
 	}
@@ -116,24 +122,21 @@ public class entity_menuMain extends engine_entity {
 			
 			// When fully faded back out, start the game
 			if ( (fade_out == true) && (mgr.gameMain.shade_alpha < 0.02f) ) {
-					fade_out = false;
-					mgr.gameMain.shade_alpha = 1;
-					mgr.gameMain.shade_alpha_target = 1;
-					ref.room.changeRoom(game_rooms.ROOM_GAME);
-					mgr.gameMain.restartGame();
+				fade_out = false;
+				mgr.gameMain.shade_alpha = 1;
+				mgr.gameMain.shade_alpha_target = 1;
+				ref.room.changeRoom(game_rooms.ROOM_DIFFICULTY);
 			}
 		}
 	}
 	
-
-	
-	@Override
-	public void backButton() {
-		if (ref.room.get_current_room() == game_rooms.ROOM_POSTGAME) {
-			ref.room.changeRoom(game_rooms.ROOM_MENU);
-		}
-		if (ref.room.get_current_room() == game_rooms.ROOM_MENU) {
-			ref.android.finish();
-		}
+	public void goToMainMenu() {
+		mgr.gameMain.floor_height_target = 0; // Make the water go back down
+		
+		mgr.gameMain.shade_alpha = -1; // prepare fade in effect
+		mgr.gameMain.shade_alpha_target = 1;
+		
+		ref.room.changeRoom(game_rooms.ROOM_MENU);
 	}
+
 }
