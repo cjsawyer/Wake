@@ -1,0 +1,68 @@
+///// This Commit /////
+
+
+//////// TODO /////////
+
+think of better names for g_textures and loaded_assets...
+
+change back button behavior in game:
+	BB in game -> pause
+	BB in menu -> are you sure that you want to quit?
+	BB in quit screen quits
+
+Balance Easy/Medium/Hard/HELL
+	flash LOCKED if tapped
+	
+ingame stats
+	score
+	streak
+	best streak
+	high score
+	total cumulative score
+	best streak ever
+	
+post game
+	show stats + save them
+	
+options screen
+	reset stats
+	mute
+	about -> cjsdev.com
+
+change sound effects
+find music
+make music speed scale with game speed
+
+
+
+
+
+
+
+
+//////// DONE ////////
+
+finished difficulty menu
+added flash on streak bar
+
+added entity_backButton
+added entity_menuDifficulty
+added simple buttons in difficulty menu
+
+BUG: when drawing a square/texture with a nonzero angle, the x/y offset goes the wrong way
+
+xMULIPLIER in right of score bar
+
+Change score effect to FF version
+remove speed trails
+
+add stroke size loading
+
+Up next: dynamically generating the texture attribute arrays in game_textures.
+Also, move all of those methods somewhere else.
+
+need to go through every draw call and use the depths in game_constants
+
+Idea to restructure textures/sounds/fonts/other assets:
+	Instead of a big static array of attributes, have a array of texture/sound objects that hold one of these attributes each.
+Still use a constant to reference the position in the array. This would allow dynamic loading!
