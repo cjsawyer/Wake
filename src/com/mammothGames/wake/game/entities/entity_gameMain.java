@@ -19,9 +19,9 @@ public class entity_gameMain extends engine_entity {
 	
 	//TODO: blaance these values
 	public final int DIF_EASY = 0;
-	public final int DIF_MEDIUM = 100;
-	public final int DIF_HARD = 300;
-	public final int DIF_HELL = 1000;
+	public final int DIF_MEDIUM = 500;
+	public final int DIF_HARD = 1000;
+	public final int DIF_HELL = 1500;
 	public boolean hell_unlocked = false;
 	public int current_diff;
 	
@@ -37,13 +37,12 @@ public class entity_gameMain extends engine_entity {
 	private float speed_base;
 	private float speed_max;
 	
-	public final float speed_gain_per_orb = 0.01f; // 0.01
+	public float speed_gain_per_orb;//0.01
 	
-	public float time_start_between_orbs = 333;
-	public float time_minimum_between_orbs = 100;
-	public float time_between_orbs = time_start_between_orbs; // in milliseconds
-	public float time_between_orbs_double = time_between_orbs*2; // in milliseconds
-	public final float time_change_per_orb = 0.3f; //2, in ms
+	public float time_start_between_orbs = 500;//333
+	public float time_minimum_between_orbs = 85;//100
+	public float time_between_orbs; // in milliseconds
+	public float time_change_per_orb; //0.3, in ms
 	
 	public int score;
 	int high_score = 0;
@@ -66,7 +65,6 @@ public class entity_gameMain extends engine_entity {
 		floor_height_target = 0;
 		floor_height = 0;
 		time_between_orbs = time_start_between_orbs;
-		time_between_orbs_double = time_between_orbs*2;	
 		speed_multiplier = 1;
 	}
 	
@@ -90,13 +88,18 @@ public class entity_gameMain extends engine_entity {
 		floor_per_miss = ref.screen_height/9;
 		floor_per_hit = floor_per_miss/7;
 		
-		speed_base = ref.screen_height/3;
-		speed_max = ref.screen_height/1.05f;
+		speed_base = ref.screen_height/3.5f;
+		speed_max = ref.screen_height/0.75f;
+		speed_gain_per_orb = ref.screen_height * 0.000001f;
+		
+		time_change_per_orb = -(time_minimum_between_orbs-time_start_between_orbs)/DIF_HELL; 
+				
 		text_size = ref.screen_width/12;
 	}
 	
 	private int state;
 	private final float CHANCE_OF_LAST_STATE = 0.25f;
+	private final float CHANCE_OF_SISTER_STATE = 0.5f;
 	
 	@Override
 	public void sys_step(){
@@ -117,14 +120,18 @@ public class entity_gameMain extends engine_entity {
 		if (time_between_orbs < time_minimum_between_orbs) {
 			time_between_orbs = time_minimum_between_orbs;
 		}
-		time_between_orbs_double = time_between_orbs*2;
 		
 		
 		if ( (mgr.orbPatternMaker.state_finished) && (ref.room.get_current_room() == game_rooms.ROOM_GAME) ) {
 			
 			if ((float)Math.random() > CHANCE_OF_LAST_STATE) {
-				// Set a random one.
-				state = (int) Math.round( Math.random() * (mgr.orbPatternMaker.num_states-1) );
+
+				state = mgr.orbPatternMaker.getRandomState();
+				
+			} else if ((float)Math.random() > CHANCE_OF_SISTER_STATE) {
+				
+				state = mgr.orbPatternMaker.getSisterState(state);
+				
 			}
 			mgr.orbPatternMaker.setState(state);
 			

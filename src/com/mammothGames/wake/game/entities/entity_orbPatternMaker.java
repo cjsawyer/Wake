@@ -1,5 +1,7 @@
 package com.mammothGames.wake.game.entities;
 
+import android.util.Log;
+
 import com.mammothGames.wake.gameEngine.*;
 
 
@@ -8,7 +10,7 @@ public class entity_orbPatternMaker extends engine_entity {
 	//TODO TODO TODO TODO TODO TODO TODO//
 	//////////////////////////////////////
 	//edit this when adding a new state!//
-	public int num_states = 5;
+	public int num_states = 7;
 	//////////////////////////////////////
 	//TODO TODO TODO TODO TODO TODO TODO//
 
@@ -29,6 +31,9 @@ public class entity_orbPatternMaker extends engine_entity {
 	
 	public static final int STATE_2TIER_S = 3;
 	public static final int STATE_2TIER_Z = 4;
+
+	public static final int STATE_WIDE_Z = 5;
+	public static final int STATE_WIDE_S = 6;
 	
 	private int current_position;
 	private int number_positions = 4;
@@ -161,7 +166,71 @@ public class entity_orbPatternMaker extends engine_entity {
 				}
 				break;
 			}
-			
+//			
+			case STATE_WIDE_Z: {
+				if (spawn_orb) {
+					spawn_orb = false;
+					
+					int fake_position;
+					
+					switch(current_position){
+						case 1:
+							fake_position = 3;
+							break;
+						case 2:
+							fake_position = 2;
+							break;
+						case 3:
+							fake_position = 4;
+							break;
+						case 4:
+							fake_position = 1;
+							break;
+						default:
+							fake_position = 0;
+							
+					}
+					mgr.orbSpawner.spawnOrb(
+							(fake_position-1)*oneWidth + oneWidth/2,
+							ref.screen_height + mgr.orbSpawner.radius_total,
+							mgr.gameMain.speed,
+							mgr.orbSpawner.radius,
+							mgr.orbSpawner.border_size);
+				}
+				break;
+			}
+			case STATE_WIDE_S: {
+				if (spawn_orb) {
+					spawn_orb = false;
+					
+					int fake_position;
+					
+					switch(current_position){
+						case 1:
+							fake_position = 2;
+							break;
+						case 2:
+							fake_position = 3;
+							break;
+						case 3:
+							fake_position = 1;
+							break;
+						case 4:
+							fake_position = 4;
+							break;
+						default:
+							fake_position = 0;
+							
+					}
+					mgr.orbSpawner.spawnOrb(
+							(fake_position-1)*oneWidth + oneWidth/2,
+							ref.screen_height + mgr.orbSpawner.radius_total,
+							mgr.gameMain.speed,
+							mgr.orbSpawner.radius,
+							mgr.orbSpawner.border_size);
+				}
+				break;
+			}
 		}
 	}
 	
@@ -196,6 +265,16 @@ public class entity_orbPatternMaker extends engine_entity {
 				four_step_pattern = false;
 				break;
 			}
+			case(STATE_WIDE_Z): {
+				use_double_spawn_time = false;
+				four_step_pattern = true;
+				break;
+			}
+			case(STATE_WIDE_S): {
+				use_double_spawn_time = false;
+				four_step_pattern = true;
+				break;
+			}
 		}
 		
 		alarm[0] = mgr.gameMain.time_between_orbs;
@@ -219,7 +298,7 @@ public class entity_orbPatternMaker extends engine_entity {
 			spawn_orb = true;
 			
 			if ( (use_double_spawn_time) && (current_position != number_positions) ) {
-				alarm[0] = mgr.gameMain.time_between_orbs_double;
+				alarm[0] = mgr.gameMain.time_between_orbs*2;
 			} else {
 				alarm[0] = mgr.gameMain.time_between_orbs;
 			}
@@ -228,4 +307,38 @@ public class entity_orbPatternMaker extends engine_entity {
 //		Log.e("eaedsd", STRIPE_position + " " + alarm[0]);
 		
 	}
+	
+	public int getSisterState(int state) {
+		
+		switch(state) {
+			case STATE_STRIPE_RIGHT:
+				return STATE_STRIPE_LEFT;
+				
+			case STATE_STRIPE_LEFT :
+				return STATE_STRIPE_RIGHT;
+				
+			case STATE_STRIPE_HELIX:
+				return getRandomState();
+				
+			case STATE_2TIER_S     :
+				return STATE_2TIER_Z;
+				
+			case STATE_2TIER_Z     :
+				return STATE_2TIER_S;
+				
+			case STATE_WIDE_Z      :
+				return STATE_WIDE_S;
+				
+			case STATE_WIDE_S      :
+				return STATE_WIDE_Z;
+				
+			default:
+				return 1;
+			}
+	}
+	
+	public int getRandomState() {
+		return (int) Math.round( Math.random() * (mgr.orbPatternMaker.num_states-1) );
+	}
+	
 }

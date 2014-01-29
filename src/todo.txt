@@ -42,6 +42,10 @@ make music speed scale with game speed
 
 //////// DONE ////////
 
+Balanced difficulty modes
+Added 2 new orb patterns, wide_z and wide_s.
+Added a chance of getting the current pattern's sister state to the orb spawning system.
+
 finished difficulty menu
 added flash on streak bar
 
