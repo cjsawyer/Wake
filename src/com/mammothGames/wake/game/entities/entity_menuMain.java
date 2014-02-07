@@ -65,6 +65,18 @@ public class entity_menuMain extends engine_entity {
 		mgr.menuDifficulty = new entity_menuDifficulty(mgr);
 		ref.main.addEntity(mgr.menuDifficulty);
 
+		mgr.menuTop = new entity_menuTop(mgr);
+		ref.main.addEntity(mgr.menuTop);
+		
+		mgr.menuRecords = new entity_menuRecords(mgr);
+		ref.main.addEntity(mgr.menuRecords);
+		
+		mgr.menuOptions = new entity_menuOptions(mgr);
+		ref.main.addEntity(mgr.menuOptions);
+		
+		mgr.menuAbout = new entity_menuAbout(mgr);
+		ref.main.addEntity(mgr.menuAbout);
+		
 		
 	}
 
@@ -123,14 +135,12 @@ public class entity_menuMain extends engine_entity {
 			// When fully faded back out, start the game
 			if ( (fade_out == true) && (mgr.gameMain.shade_alpha < 0.02f) ) {
 				fade_out = false;
-				mgr.menuDifficulty.startMenuDifficulty();
+				mgr.menuTop.start();
 			}
 		}
 	}
 	
-	public void goToMainMenu() {
-		mgr.gameMain.floor_height_target = 0; // Make the water go back down
-		
+	public void start() {
 		mgr.gameMain.shade_alpha = -1; // prepare fade in effect
 		mgr.gameMain.shade_alpha_target = 1;
 		

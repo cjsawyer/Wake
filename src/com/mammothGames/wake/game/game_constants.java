@@ -4,7 +4,7 @@ public class game_constants {
 	
 	// To rename the package, right click the project > Android Tools > Rename Application Package
 	
-	public static boolean devmode = false;
+	public static boolean devmode = true;
 	public static boolean debug = true;
 	public static boolean godmode = false;
 

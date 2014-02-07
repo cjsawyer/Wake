@@ -118,7 +118,7 @@ public class entity_orbSpawner extends engine_entity {
 	private static float SATURATION=1f, VALUE=0.6f;
 	public void spawnOrb(float x, float y, float speed, int radius, int border_size) {
 		if (greenOrb_pool != null) {
-			temp_orb = (poolObj_orb) greenOrb_pool.takeObject();
+			temp_orb = greenOrb_pool.takeObject();
 			temp_orb.x = x;
 			temp_orb.y = y;
 			temp_orb.speed = speed;

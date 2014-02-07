@@ -97,7 +97,7 @@ public class utility_pool <T extends utility_poolObject> {
 		return MAX_OBJECTS - objects_current;
 	}
 	
-	public utility_poolObject takeObject() {
+	public T takeObject() {
 		for(temp_i=0;temp_i<MAX_OBJECTS;temp_i++) {
 			
 			temp_object = objects[temp_i];
@@ -110,14 +110,14 @@ public class utility_pool <T extends utility_poolObject> {
 				
 				objects_current++;
 				
-				return temp_object;
+				return (T) temp_object;
 			}
 		}
 		
 		//We got through the whole array without finding an open space, so we can't return anything logical. So we just return the last one in the list.
 		//It's probably so old that it won't be noticed.
 		temp_object.sys_in_use = true;
-		return temp_object;
+		return (T) temp_object;
 	}
 	
 	public void returnObject(int id) {

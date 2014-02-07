@@ -1,34 +1,112 @@
 ///// This Commit /////
 
+added menuTop
+improved usability of entity pools slightly
+added menuRecords, menuOptions, menuAbout. These are just empty rooms, but they have working menuTop buttons and backButton behavior.
+added exitApp() in engine_main
 
 //////// TODO /////////
 
+Add rooms:
+
+	menuHUD
+		build pause menu
+			return
+			restart -> are you sure?
+			options
+			exit 
+	menuTop
+		play -> menuDifficulty
+		records -> records
+		feedback -> feedback
+		options -> options
+		backButton: menuMain
+
+	menuDifficulty:
+		gray out HARD and HELL if not unlocked
+			-Add save vars:
+				bool HEL/HAR_unlocked
+			-unlock HARD and HELL at 1000 of the lesser
+			-flash LOCKED if you tap HELL or HARD without unlocking
+	
+		add local var and setter with constants for going to either the game room or the records screen
+			don't forget to change back button behavior too!
+		
+	gamePost
+		TRY AGAIN button
+		Difficulty:
+		Score:
+		High Score:
+		Streak:
+		Best Streak:
+		Hit O O O O Missed
+			hit is green, missed red
+			4 colored circles
+				green for most hit
+				greenish for second most hit
+				redish for third most missed
+				red for least hit
+				
+		Add save vars:
+			EAS/MED/HIG/HEL
+			*_highScore
+			*_bestStreak
+			*_1Hits
+			*_2Hits
+			*_3Hits
+			*_4Hits
+		
+		back: menuTop
+		
+	records
+		high score
+		best streak
+		Hits
+		Misses
+		backButton: options
+		
+	options
+		checkbox music 
+		checkbox soundFX
+		clear records -> menuCheck
+		about -> about
+		backButton: menuTop
+		
+	feedback
+		"Do you like the game?"
+		yes -> feedbackPos
+		no -> feedbackNeg
+		backButton: options
+		
+	feedbackPos
+		email us -> email feedback@cjsdev.com
+			add feature to engine to open email service
+		donate -> google play link to paid version
+			add feature to do google play links
+		rate -> google play link to rate this version 
+		backButton: options
+		
+	feedbackNeg
+		email us ->  email feedback@cjsdev.com
+		backButton: options
+		 
+	menuCheck
+		"are you sure you want to _____ ?"
+		yes -> do action as defined by a local var
+		no -> go back to previous screen, options or game
+		back: same as "no"
+		 
+	about
+		cjsdev.com -> website
+			Add linking to webpage feature in engine
+		backButton: options
+	
+
 think of better names for g_textures and loaded_assets...
 
-change back button behavior in game:
-	BB in game -> pause
-	BB in menu -> are you sure that you want to quit?
-	BB in quit screen quits
-
 Balance Easy/Medium/Hard/HELL
-	flash LOCKED if tapped
 	
-ingame stats
-	score
-	streak
-	best streak
-	high score
-	total cumulative score
-	best streak ever
 	
-post game
-	show stats + save them
-	
-options screen
-	reset stats
-	mute
-	about -> cjsdev.com
-
 change sound effects
 find music
 make music speed scale with game speed

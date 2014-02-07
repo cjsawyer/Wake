@@ -391,5 +391,9 @@ public class engine_main {
 	public float randomRange(float min, float max){
 		return ( random.nextFloat() * (max-min) ) + min;
 	}
+	
+	public void exitApp() {
+		ref.android.finish();
+	}
 
 }

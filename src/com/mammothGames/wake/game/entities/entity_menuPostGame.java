@@ -53,7 +53,7 @@ public class entity_menuPostGame extends engine_entity {
 
 			// Done fading out, so go to the main menu
 			if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_out ) {
-				mgr.menuMain.goToMainMenu();
+				mgr.menuTop.start();
 			}
 			
 			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);

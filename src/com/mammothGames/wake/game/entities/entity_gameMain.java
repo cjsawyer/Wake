@@ -14,6 +14,8 @@ public class entity_gameMain extends engine_entity {
 		this.pausable = false;
 	}
 	
+	float padding_x, padding_y;
+	
 	public float shade_alpha = 0;
 	public float shade_alpha_target = 1;
 	
@@ -70,6 +72,10 @@ public class entity_gameMain extends engine_entity {
 	
 	@Override
 	public void sys_firstStep() {
+		
+		padding_x = ref.screen_width/10;
+		padding_y = padding_x * 3;
+		
 		shade_alpha = -4;
 		shade_alpha_target = 1;
 		

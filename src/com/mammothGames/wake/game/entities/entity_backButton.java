@@ -25,25 +25,34 @@ public class entity_backButton extends engine_entity {
 		int room = ref.room.get_current_room();
 		
 		switch(room) {
-			case game_rooms.ROOM_GAME: {
-				
+			case game_rooms.ROOM_GAME:
 				mgr.menuPauseHUD.switchPause();
 				break;
-			}
-			case game_rooms.ROOM_POSTGAME: {
+			case game_rooms.ROOM_POSTGAME:
+				mgr.menuMain.start();
+				break;
+			case game_rooms.ROOM_MENU:
+				// Quit the game
+				ref.main.exitApp();
+				break;
+			case game_rooms.ROOM_DIFFICULTY:
+				mgr.menuDifficulty.prepLeave(mgr.menuDifficulty.PREP_menuTop);
+				break;
+			case game_rooms.ROOM_MENUTOP:
+				mgr.menuTop.prepLeave(mgr.menuTop.PREP_menuMain);
+				break;
+
+			case game_rooms.ROOM_MENURECORDS:
+				mgr.menuRecords.prepLeave(mgr.menuRecords.PREP_menuTop);
+				break;
 				
-				mgr.menuMain.goToMainMenu();
+			case game_rooms.ROOM_MENUOPTIONS:
+				mgr.menuOptions.prepLeave(mgr.menuOptions.PREP_menuTop);
 				break;
-			}
-			case game_rooms.ROOM_MENU: {
 				
-				ref.android.finish();
+			case game_rooms.ROOM_MENUABOUT:
+				mgr.menuAbout.prepLeave(mgr.menuAbout.PREP_menuTop);
 				break;
-			}
-			case game_rooms.ROOM_DIFFICULTY: {
-				mgr.menuDifficulty.goToMainMenu();
-				break;
-			}
 		}
 		
 	}

@@ -60,12 +60,13 @@ public class entity_menuPauseHUD extends engine_entity {
 		text_x = ref.screen_width/2;
 		text_y = ref.screen_height - mgr.gameMain.text_size/2;
 		
-		
+		streak_bar_padding = mgr.gameMain.text_size/4;
 		//TODO: uncomment this back to play music.
 		//ref.sound.setMusicState(gameMuted, true, true);
 	}
 	
 	private float streak_width=0;
+	private static float streak_bar_padding;
 	
 	@Override
 	public void sys_step() {
@@ -104,22 +105,36 @@ public class entity_menuPauseHUD extends engine_entity {
 			
 			//Draw inner hud rectangle
 			float small_rec_width = ref.screen_width - button_size*4;
+			float small_rec_height = base_hud_height * 2f/3;
 	//		ref.draw.setDrawColor(0, 0.1f, 0.1f, 1);//0.5
 			ref.draw.setDrawColor(0, 0, 0, 1);//0.5
-			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size + HUD_y, small_rec_width, base_hud_height * 2f/3, 0, 0, 0, game_constants.layer6_HUD);
+			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size + HUD_y, small_rec_width, small_rec_height, 0, 0, 0, game_constants.layer6_HUD);
 			
 			// Draw progress bar for streak in smaller hud bar. 
 //			if (mgr.gameMain.streak!=0) {
 				float current_progress = mgr.gameMain.streak/mgr.gameMain.STREAK_PER_LEVEL;
+				
+				float extra_x = 0;
+				float extra_y = 0;
+				
+				float streak_bar_height = small_rec_height - streak_bar_padding;
+				if (current_progress >= 3) {
+					// if we're at max streak of 4
+					extra_x = streak_bar_alpha * streak_bar_padding/2;
+					extra_y = streak_bar_alpha * (small_rec_height - streak_bar_height)/2 ;
+				}
+				
 				current_progress = (current_progress < 3) ? mgr.gameMain.streak%mgr.gameMain.STREAK_PER_LEVEL : mgr.gameMain.STREAK_PER_LEVEL;
 				
 				float percent_bar = (current_progress)/mgr.gameMain.STREAK_PER_LEVEL;
 				
+				
+				// Draw streak bar
 				ref.draw.setDrawColor(0, 1, 1, 0.3f + streak_bar_alpha);//0.5
-				float full_streak_width = (small_rec_width-mgr.gameMain.text_size/4);
+				float full_streak_width = (small_rec_width-streak_bar_padding);
 				float target_streak_width = full_streak_width * percent_bar;
 				streak_width += (target_streak_width - streak_width) * ref.screen_width/(mgr.gameMain.STREAK_PER_LEVEL*4) * ref.main.time_scale;
-				ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size + HUD_y, streak_width, base_hud_height * 2f/3 - mgr.gameMain.text_size/4, -streak_width/2, 0, 0, game_constants.layer6_HUD);
+				ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size + HUD_y, streak_width + extra_x, streak_bar_height + extra_y, -streak_width/2, 0, 0, game_constants.layer6_HUD);
 //			}
 	
 			float menu_openess_ratio = (pause_menu_y + 2*button_size)/ref.screen_height;
