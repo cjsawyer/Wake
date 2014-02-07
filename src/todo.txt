@@ -1,13 +1,18 @@
 ///// This Commit /////
 
-added menuTop
-improved usability of entity pools slightly
-added menuRecords, menuOptions, menuAbout. These are just empty rooms, but they have working menuTop buttons and backButton behavior.
-added exitApp() in engine_main
+
 
 //////// TODO /////////
 
 Add rooms:
+
+	game's pause menu
+		score
+		streak
+		OPTIONS button
+			About button in options room?
+		RECORDS button
+		
 
 	menuHUD
 		build pause menu
@@ -103,9 +108,6 @@ Add rooms:
 	
 
 think of better names for g_textures and loaded_assets...
-
-Balance Easy/Medium/Hard/HELL
-	
 	
 change sound effects
 find music
@@ -119,6 +121,11 @@ make music speed scale with game speed
 
 
 //////// DONE ////////
+
+added menuTop
+improved usability of entity pools slightly
+added menuRecords, menuOptions, menuAbout. These are just empty rooms, but they have working menuTop buttons and backButton behavior.
+added exitApp() in engine_main
 
 Balanced difficulty modes
 Added 2 new orb patterns, wide_z and wide_s.

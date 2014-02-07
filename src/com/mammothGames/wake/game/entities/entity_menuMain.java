@@ -77,6 +77,9 @@ public class entity_menuMain extends engine_entity {
 		mgr.menuAbout = new entity_menuAbout(mgr);
 		ref.main.addEntity(mgr.menuAbout);
 		
+		mgr.areYouSure = new entity_areYouSure(mgr);
+		ref.main.addEntity(mgr.areYouSure);
+		
 		
 	}
 
