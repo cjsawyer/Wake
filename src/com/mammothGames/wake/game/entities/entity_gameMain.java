@@ -110,13 +110,14 @@ public class entity_gameMain extends engine_entity {
 	@Override
 	public void sys_step(){
 		
+		float ANIMATION_SCALE = 6f;
 		// The shade alpha towards it's target; and if we're in the menu room only slide if the water height is at the bottom
 		if (ref.room.get_current_room() == game_rooms.ROOM_MENU) {
 			if ( (mgr.gameMain.floor_height < 2) && (mgr.stars.stars_alpha > 0.98f) )
-				mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * 5f * ref.main.time_scale;
+				mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * ANIMATION_SCALE * ref.main.time_scale;
 		}
 		else
-			mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * 5f * ref.main.time_scale;
+			mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * ANIMATION_SCALE * ref.main.time_scale;
 		
 		speed = speed_base * speed_multiplier;
 		if (speed > speed_max) {
@@ -144,7 +145,8 @@ public class entity_gameMain extends engine_entity {
 		}
 		
 		// Ease the floor line up
-		floor_height+= (floor_height_target - floor_height) * 7 * ref.main.time_scale;
+		if (!mgr.menuPauseHUD.getPause())
+			floor_height+= (floor_height_target - floor_height) * 7 * ref.main.time_scale;
 
 		// Draw floor/water line
 		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 0.8f); // Floor color
@@ -191,7 +193,7 @@ public class entity_gameMain extends engine_entity {
 		mgr.gameMain.shade_alpha_target = 1; // fade in post game text
 		mgr.menuPauseHUD.HUD_y_target = mgr.menuPauseHUD.base_hud_height*2; // slide HUD back up
 		
-//		ref.main.pauseEntities();
+		mgr.menuPauseHUD.setPause(true);
 		ref.room.changeRoom(game_rooms.ROOM_POSTGAME);
 	}
 	

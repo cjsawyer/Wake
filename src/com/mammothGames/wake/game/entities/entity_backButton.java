@@ -26,7 +26,18 @@ public class entity_backButton extends engine_entity {
 		
 		switch(room) {
 			case game_rooms.ROOM_GAME:
-				mgr.menuPauseHUD.switchPause();
+				if (mgr.menuPauseHUD.getPause()) {
+					
+					if ( ! mgr.areYouSure.getPopupState() ) {
+						mgr.areYouSure.setPopupAction(mgr.areYouSure.STATE_ABANDON);
+						mgr.areYouSure.setPopupOpenness(true);
+					} else {
+						mgr.areYouSure.buttonAction(false);
+					}
+					
+				} else {
+					mgr.menuPauseHUD.setPause(true);
+				}
 				break;
 			case game_rooms.ROOM_POSTGAME:
 				mgr.menuMain.start();

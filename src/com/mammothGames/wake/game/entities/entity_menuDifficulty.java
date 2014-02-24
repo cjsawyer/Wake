@@ -21,6 +21,9 @@ public class entity_menuDifficulty extends engine_entity {
 	private boolean fade_main, fade_secondary;
 	private int non_fading_button;
 	
+	//Public so the "Are You Sure?" pop-up can have the same border size.
+	public float button_border_size=0;
+	
 	@Override
 	public void sys_firstStep() {
 	}
@@ -83,7 +86,7 @@ public class entity_menuDifficulty extends engine_entity {
 				ref.draw.drawRectangle(draw_x, draw_y, draw_width, draw_height, 0, 0, 0, game_constants.layer6_HUD);
 				
 				// draw inner black rectangle
-				float button_border_size = draw_height/6;
+				button_border_size = draw_height/6;
 				ref.draw.setDrawColor(0, 0, 0, 0.9f * button_alpha);
 				ref.draw.drawRectangle(draw_x, draw_y, draw_width-button_border_size, draw_height-button_border_size, 0, 0, 0, game_constants.layer6_HUD);
 				
@@ -145,6 +148,7 @@ public class entity_menuDifficulty extends engine_entity {
 					// start secondary fade
 					fade_main = false;
 					fade_secondary = true;
+					//TODO: remove this so there's no 'jump' when you press the button?
 					mgr.gameMain.shade_alpha = 1;
 					mgr.gameMain.shade_alpha_target = 0;
 					

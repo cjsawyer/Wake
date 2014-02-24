@@ -18,7 +18,7 @@ public class entity_menuPauseHUD extends engine_entity {
 		this.mgr = mgr;
 	}
 	
-	private boolean gamePaused, gameMuted, menu_open;
+	private boolean game_paused, gameMuted, menu_open;
 	private float text_x, text_y, button_size;
 	float base_hud_height;
 	private float pause_menu_y, pause_menu_y_target;
@@ -27,7 +27,7 @@ public class entity_menuPauseHUD extends engine_entity {
 	public float streak_bar_alpha=0;
 
 	public void restart() {
-		gamePaused = false;
+		game_paused = false;
 		streak_width = 0;
 		
 		HUD_y = base_hud_height*2;
@@ -66,7 +66,7 @@ public class entity_menuPauseHUD extends engine_entity {
 	}
 	
 	private float streak_width=0;
-	private static float streak_bar_padding;
+	public float streak_bar_padding;
 	
 	@Override
 	public void sys_step() {
@@ -97,7 +97,7 @@ public class entity_menuPauseHUD extends engine_entity {
 			float rectangle_height = pause_menu_y;
 			
 			//The top rectangle hud
-			if (!gamePaused)
+			if (!game_paused)
 				ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-base_hud_height/2 + HUD_y, ref.screen_width, base_hud_height, 0, 0, 0, game_constants.layer5_underHUD);
 			
 			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-rectangle_height/2 - base_hud_height + HUD_y, ref.screen_width, rectangle_height, 0, 0, 0, game_constants.layer5_underHUD);
@@ -107,8 +107,6 @@ public class entity_menuPauseHUD extends engine_entity {
 			float small_rec_width = ref.screen_width - button_size*4;
 			float small_rec_height = base_hud_height * 2f/3;
 	//		ref.draw.setDrawColor(0, 0.1f, 0.1f, 1);//0.5
-			ref.draw.setDrawColor(0, 0, 0, 1);//0.5
-			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size + HUD_y, small_rec_width, small_rec_height, 0, 0, 0, game_constants.layer6_HUD);
 			
 			// Draw progress bar for streak in smaller hud bar. 
 //			if (mgr.gameMain.streak!=0) {
@@ -123,6 +121,11 @@ public class entity_menuPauseHUD extends engine_entity {
 					extra_x = streak_bar_alpha * streak_bar_padding/2;
 					extra_y = streak_bar_alpha * (small_rec_height - streak_bar_height)/2 ;
 				}
+				
+				//Draw back border rectangle for streak bar
+				ref.draw.setDrawColor(0, 0, 0, 1);//0.5
+				ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size + HUD_y, small_rec_width + extra_x, small_rec_height + extra_y, 0, 0, 0, game_constants.layer6_HUD);
+				
 				
 				current_progress = (current_progress < 3) ? mgr.gameMain.streak%mgr.gameMain.STREAK_PER_LEVEL : mgr.gameMain.STREAK_PER_LEVEL;
 				
@@ -144,11 +147,11 @@ public class entity_menuPauseHUD extends engine_entity {
 			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, game_constants.layer5_underHUD, "paused", game_textures.TEX_FONT1);
 			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer5_underHUD, "press back to quit", game_textures.TEX_FONT1);
 			
-			if (gamePaused)
+			if (game_paused)
 				ref.draw.drawCapturedDraw();
 
 			float pause_alpha;
-			if (gamePaused) {
+			if (game_paused) {
 				pause_alpha = ((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuMain.DEG_TO_RAD / 1666f)));
 				pause_alpha *= menu_openess_ratio; // always fade in even if we catch the clock at a bad time
 			} else {
@@ -182,10 +185,11 @@ public class entity_menuPauseHUD extends engine_entity {
 			if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
 				
 				
-				if (gamePaused) {
+				if (game_paused) {
 					// unpause if we touch the middle 1/3 of the screen
 					if ( (ref.input.get_touch_y(0) > ref.screen_height/3) && (ref.input.get_touch_y(0) < ref.screen_height/3 * 2) ) {
-						switchPause();
+						if (!mgr.areYouSure.getPopupState())
+							switchPause();
 					}
 				}
 				
@@ -229,40 +233,39 @@ public class entity_menuPauseHUD extends engine_entity {
 		}
 	}
 	
-	public void switchPause() {
-		
-		// If the menu isn't still sliding
+	public void setPause(boolean pause) {
 		if ( (Math.abs(pause_menu_y-pause_menu_y_target) < 2) && (Math.abs(HUD_y-HUD_y_target) < 2) ) {
 			
 			// Snap the menu down so there's no gap if we happen to be in the bottom 2 pixels of the slide
 			pause_menu_y = pause_menu_y_target;
 			
-			if (!gamePaused) {
-				gamePaused = true;
+			if(pause) {
+				game_paused = true;
 				ref.draw.captureDraw();
 				ref.main.pauseEntities();
+				menu_open = true;
 			} else {
-				gamePaused = false;
+				game_paused = false;
 				ref.main.unPauseEntities();
+				menu_open = false;
 			}
-			menu_open = !menu_open;
-			
 		}
 	}
+	public void switchPause() {
+		setPause(!game_paused);
+	}
 	
-	private void quitGame() {
-		menu_open = false;
-		ref.main.pauseEntities();
-		ref.room.changeRoom(game_rooms.ROOM_MENU);
+	public boolean getPause() {
+		return game_paused;
 	}
 	
 	
 	@Override
 	public void onScreenSleep() {
 		if (ref.room.get_current_room() == game_rooms.ROOM_GAME) {
-			if (!gamePaused) {
+			if (!game_paused) {
 				// if not paused, pause
-				gamePaused = true;
+				game_paused = true;
 				ref.draw.captureDraw();
 				ref.main.pauseEntities();
 			}
