@@ -7,11 +7,11 @@ public class masterGameReference {
 	entity_orbSpawner orbSpawner;
 	entity_orbPatternMaker orbPatternMaker;
 
-	entity_menuMain menuMain;
+	entity_menuFirst menuFirst;
 	entity_menuPauseHUD menuPauseHUD;
 	entity_menuPostGame menuPostGame;
 	entity_menuDifficulty menuDifficulty;
-	entity_menuTop menuTop;
+	entity_menuMain menuMain;
 	entity_menuRecords menuRecords;
 	entity_menuOptions menuOptions;
 	entity_menuAbout menuAbout;

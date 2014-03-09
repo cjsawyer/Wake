@@ -1,7 +1,5 @@
 package com.mammothGames.wake.game.entities;
 
-import android.util.Log;
-
 import com.mammothGames.wake.game.game_constants;
 import com.mammothGames.wake.game.game_rooms;
 import com.mammothGames.wake.game.game_textures;
@@ -9,6 +7,10 @@ import com.mammothGames.wake.gameEngine.*;
 
 
 public class entity_menuDifficulty extends engine_entity {
+	
+	int num_buttons = 4;
+	private boolean fade_main, fade_secondary;
+	private int non_fading_button;
 
 	masterGameReference mgr;
 	public entity_menuDifficulty(masterGameReference mgr) {
@@ -17,43 +19,44 @@ public class entity_menuDifficulty extends engine_entity {
 		this.pausable = false;
 	}
 	
-	int num_buttons = 4;
-	private boolean fade_main, fade_secondary;
-	private int non_fading_button;
-	
 	//Public so the "Are You Sure?" pop-up can have the same border size.
 	public float button_border_size=0;
 	
+	float box_w, box_h, button_gap, button_height, button_height_gap,realative_y, draw_x, draw_y, draw_width, draw_height;
+	
+	
 	@Override
 	public void sys_firstStep() {
+		
+		box_w = ref.screen_width - 2*mgr.gameMain.padding_x;
+		box_h = ref.screen_height - 2*mgr.gameMain.padding_y;
+		
+		button_gap = 3; // so 1/3 gap vs 1 button height
+		button_height = box_h/( num_buttons + (num_buttons-1)/button_gap);
+		button_height_gap = button_height / button_gap;
+		
+		draw_x = ref.screen_width/2;
+		draw_width = box_w;
+		draw_height = button_height;
+		
+		button_border_size = draw_height/6;
 	}
 	
 	@Override
 	public void sys_step() {
 		
-		
 		if (ref.room.get_current_room() == game_rooms.ROOM_DIFFICULTY) {
 
-			float box_w = ref.screen_width - 2*mgr.gameMain.padding_x;
-			float box_h = ref.screen_height - 2*mgr.gameMain.padding_y;
-			
-			float button_gap = 3; // so 1/3 gap vs 1 button height
-			float button_height = box_h/( num_buttons + (num_buttons-1)/button_gap);
-			float button_height_gap = button_height / button_gap;
-			float realative_y = ref.screen_height - mgr.gameMain.padding_y;
-//			Log.e("error", "" + realative_y);
-
 			int pressed_button = -1;
+			realative_y = ref.screen_height - mgr.gameMain.padding_y;
+			
 			
 			// Draw the 4 buttons
 			for(int i=0; i<num_buttons; i++) {
 				if(i!=0)
 					realative_y -= button_height_gap;
 				
-				float draw_x = ref.screen_width/2;
-				float draw_y = realative_y - button_height/2;
-				float draw_width = box_w;
-				float draw_height = button_height;
+				draw_y = realative_y - button_height/2;
 				
 				float button_alpha = mgr.gameMain.shade_alpha;
 				
@@ -86,7 +89,6 @@ public class entity_menuDifficulty extends engine_entity {
 				ref.draw.drawRectangle(draw_x, draw_y, draw_width, draw_height, 0, 0, 0, game_constants.layer6_HUD);
 				
 				// draw inner black rectangle
-				button_border_size = draw_height/6;
 				ref.draw.setDrawColor(0, 0, 0, 0.9f * button_alpha);
 				ref.draw.drawRectangle(draw_x, draw_y, draw_width-button_border_size, draw_height-button_border_size, 0, 0, 0, game_constants.layer6_HUD);
 				
@@ -180,7 +182,7 @@ public class entity_menuDifficulty extends engine_entity {
 		switch(room_to_leave_to) {
 		
 			case PREP_menuTop:
-				mgr.menuTop.start();
+				mgr.menuMain.start();
 				break;
 			case PREP_game:
 				mgr.gameMain.startGame();

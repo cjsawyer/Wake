@@ -61,7 +61,7 @@ public class entity_menuRecords extends engine_entity {
 	private void leave() {
 		switch(room_to_leave_to) {
 			case PREP_menuTop:
-				mgr.menuTop.start();
+				mgr.menuMain.start();
 				break;
 			}
 	}

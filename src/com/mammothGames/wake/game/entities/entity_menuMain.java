@@ -1,7 +1,5 @@
 package com.mammothGames.wake.game.entities;
 
-import android.os.SystemClock;
-
 import com.mammothGames.wake.game.game_constants;
 import com.mammothGames.wake.game.game_rooms;
 import com.mammothGames.wake.game.game_textures;
@@ -10,144 +8,177 @@ import com.mammothGames.wake.gameEngine.*;
 
 public class entity_menuMain extends engine_entity {
 
+	int num_buttons = 4;
+	private boolean fade_main, fade_secondary;
+	private int non_fading_button;
+	float logo_y, logo_y_target=0;
+	
 	masterGameReference mgr;
-	public entity_menuMain() {
-		this.persistent = true;
-		this.pausable = false;
-
-		mgr = new masterGameReference();
+	public entity_menuMain(masterGameReference mgr) {
+		this.mgr = mgr;
+		persistent = true;
+		pausable = false;
 	}
 	
-	final float DEG_TO_RAD = (float)(Math.PI/180f);
-	
-	float screen_cover_alpha = 1;
-	
-	boolean fade_out;
-
-	@Override
-	public void sys_firstStep() {
-		
-		fade_out = false;
-		
-		ref.ad.loadAd(ref.ad.H_CENTER, ref.ad.V_BOTTOM);
-
-		ref.main.pauseEntities();
-		
-		mgr.menuMain = this;
-		
-		mgr.gameMain = new entity_gameMain(mgr);
-		ref.main.addEntity(mgr.gameMain);
-
-        mgr.orbSpawner = new entity_orbSpawner(mgr);
-        ref.main.addEntity(mgr.orbSpawner);
-
-		mgr.orbPatternMaker = new entity_orbPatternMaker(mgr);
-		ref.main.addEntity(mgr.orbPatternMaker);
-		
-		mgr.orbPatternMaker = new entity_orbPatternMaker(mgr);
-		ref.main.addEntity(mgr.orbPatternMaker);
-		
-		mgr.menuPauseHUD = new entity_menuPauseHUD(mgr);
-		ref.main.addEntity(mgr.menuPauseHUD);
-		
-		mgr.orbSpawner = new entity_orbSpawner(mgr);
-		ref.main.addEntity(mgr.orbSpawner);
-		
-		mgr.menuPostGame = new entity_menuPostGame(mgr);
-		ref.main.addEntity(mgr.menuPostGame);
-		
-		mgr.stars = new entity_stars();
-		ref.main.addEntity(mgr.stars);
-		
-		mgr.backButton = new entity_backButton(mgr);
-		ref.main.addEntity(mgr.backButton);
-		
-		mgr.menuDifficulty = new entity_menuDifficulty(mgr);
-		ref.main.addEntity(mgr.menuDifficulty);
-
-		mgr.menuTop = new entity_menuTop(mgr);
-		ref.main.addEntity(mgr.menuTop);
-		
-		mgr.menuRecords = new entity_menuRecords(mgr);
-		ref.main.addEntity(mgr.menuRecords);
-		
-		mgr.menuOptions = new entity_menuOptions(mgr);
-		ref.main.addEntity(mgr.menuOptions);
-		
-		mgr.menuAbout = new entity_menuAbout(mgr);
-		ref.main.addEntity(mgr.menuAbout);
-		
-		mgr.areYouSure = new entity_areYouSure(mgr);
-		ref.main.addEntity(mgr.areYouSure);
-		
-		
-	}
-
 	@Override
 	public void sys_step() {
-		
-		if (ref.room.get_current_room() == game_rooms.ROOM_MENU) {
+		if (ref.room.get_current_room() == game_rooms.ROOM_MENUMAIN) {
+
+			float box_w = ref.screen_width - 2*mgr.gameMain.padding_x;
+			float box_h = ref.screen_height - 2*mgr.gameMain.padding_y;
 			
-//			mgr.gameMain.target_shade_alpha = 0;
+			float button_gap = 3; // so 1/3 gap vs 1 button height
+			float button_height = box_h/( num_buttons + (num_buttons-1)/button_gap);
+			float button_height_gap = button_height / button_gap;
+			float realative_y = ref.screen_height - mgr.gameMain.padding_y;
+
+			int pressed_button = -1;
 			
-//			screen_cover_alpha -= ref.main.time_scale * 2;
-//			ref.draw.setDrawColor(0, 1, 0, screen_cover_alpha);
-//			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, game_constants.layer7_overHUD);
-			
-			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
-			
-			// Figures out the details of drawing the logo at 3/2 the width of the screen, properly scaling both width and height
-			float tWidth = ref.draw.getSubTextureWidth(game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
-			float tHeight = ref.draw.getSubTextureHeight(game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
-			float tFinalWidth = ref.screen_width*2f/3f;
-			float tWidthHeightRatio = tFinalWidth/tWidth;
-			float tFinalHeight = tHeight * tWidthHeightRatio;
-			float tLogoX = (ref.screen_width - tFinalWidth) / 2f;
-			
-			float tTextY = ( (ref.screen_height*3f/4f) - tFinalHeight/2f) / 2;
-			
-			//3/4th of the way up the screen, down 1/4th of the texture to match the middle of the word.
-			float tLogoY = ref.screen_height*3f/4f - tFinalHeight/2;
-			
-			
-			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, -tFinalWidth/2, 0, 0, game_constants.layer6_HUD, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
-			
-			ref.draw.setDrawColor(1, 1, 1, (((float)Math.sin((float)(SystemClock.uptimeMillis() * DEG_TO_RAD / 1000f * 180f))) + 1) * mgr.gameMain.shade_alpha);
-			ref.draw.drawTextSingleString(ref.screen_width/2, tTextY, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "-tap to play-", game_textures.TEX_FONT1);
-			
-			// Draw high-score
-			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
-//			
-			ref.strings.builder.setLength(0);
-			ref.strings.builder.append(  "BEST: "  );
-			ref.strings.builder.append(  mgr.gameMain.high_score  );
-			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(ref.screen_width/2, ref.screen_height - mgr.gameMain.text_size/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
-//			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height - mgr.gameMain.text_size/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, 0, _scoreToDraw, game_textures.TEX_FONT1);
-			
-			// If fully faded in
-			if (mgr.gameMain.shade_alpha > 0.98f) {
-				// If you tap in the middle of the screen
-				if (  (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (ref.input.get_touch_y(0) < (ref.screen_height - (ref.screen_height - tLogoY)) )  ) {
-					// Start fading out
-					fade_out = true;
+			// Draw the 2 buttons
+			for(int i=0; i<num_buttons; i++) {
+				if(i!=0)
+					realative_y -= button_height_gap;
+				
+				float draw_x = ref.screen_width/2;
+				float draw_y = realative_y - button_height/2;
+				float draw_width = box_w;
+				float draw_height = button_height;
+				
+				float button_alpha = 0;
+				if (logo_y - logo_y_target < 2)
+					button_alpha = mgr.gameMain.shade_alpha;
+				
+				// Slide in/out the buttons based on the shade alpha
+				if ( i==non_fading_button ) {
+					if (fade_main)
+						button_alpha = 1;
+					if (fade_secondary)
+						button_alpha = mgr.gameMain.shade_alpha;
+				} else {
+					
+					if (fade_main)
+						button_alpha =  mgr.gameMain.shade_alpha;
+					if (fade_secondary)
+						button_alpha = 0;
+					
+				}
+				
+				// hack to avoid rewriting the whole menu. Skips drawing the first two buttons
+				if(i<=1) {
+					button_alpha = 0;
+				}
+				
+				//draw back, blue rectangle
+				ref.draw.setDrawColor(0, 1, 1, 0.3f * button_alpha );
+				ref.draw.drawRectangle(draw_x, draw_y, draw_width, draw_height, 0, 0, 0, game_constants.layer6_HUD);
+				
+				// draw inner black rectangle
+				float button_border_size = draw_height/6;
+				ref.draw.setDrawColor(0, 0, 0, 0.9f * button_alpha);
+				ref.draw.drawRectangle(draw_x, draw_y, draw_width-button_border_size, draw_height-button_border_size, 0, 0, 0, game_constants.layer6_HUD);
+				
+				
+				ref.draw.setDrawColor(1, 1, 1, 1 * button_alpha);
+				switch (i) {
+					case 2:
+						ref.draw.drawTextSingleString(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, button0, game_textures.TEX_FONT1);
+						break;
+					case 3:
+						ref.draw.drawTextSingleString(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, button1, game_textures.TEX_FONT1);
+						break;
+				}
+
+				// If the AYSYWTQ? popup isn't open
+				if (!mgr.menuPauseHUD.getPause())
+					// Check if a button is pressed.
+					if ( (!fade_main) && (!fade_secondary) && (mgr.gameMain.shade_alpha > 0.98f) ) // only if we haven't already pressed one, and we're already transitioned into the room
+						if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN)
+							if (ref.collision.point_AABB(draw_width, draw_height, draw_x, draw_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
+								pressed_button = i;
+							}
+				
+				if (i==2) {
+					logo_y_target = (ref.screen_height + realative_y)/2 - mgr.menuFirst.logo_h/4;
+				}
+				
+				realative_y -= button_height;
+				
+				if (pressed_button != -1)
+					non_fading_button = pressed_button;
+				
+				switch (pressed_button) {
+					case 2:
+						prepLeave(PREP_menuDifficulty);
+						break;
+					case 3:
+						prepLeave(PREP_menuRecords);
+						break;
+				}
+				
+				// Update vars for fade in/out effect
+				if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_main) {
+					// start secondary fade
+					fade_main = false;
+					fade_secondary = true;
+					mgr.gameMain.shade_alpha = 1;
 					mgr.gameMain.shade_alpha_target = 0;
 				}
+				if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_secondary )
+					leave();
 			}
 			
-			// When fully faded back out, start the game
-			if ( (fade_out == true) && (mgr.gameMain.shade_alpha < 0.02f) ) {
-				fade_out = false;
-				mgr.menuTop.start();
-			}
+			logo_y += (logo_y_target - logo_y) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
+			ref.draw.setDrawColor(1, 1, 1, mgr.menuFirst.logo_alpha);
+			ref.draw.drawTexture(ref.screen_width/2, logo_y, mgr.menuFirst.logo_w, mgr.menuFirst.logo_h, 0, 0, 0, game_constants.layer6_HUD, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
 		}
 	}
 	
-	public void start() {
-		mgr.gameMain.shade_alpha = -1; // prepare fade in effect
-		mgr.gameMain.shade_alpha_target = 1;
-		
-		ref.room.changeRoom(game_rooms.ROOM_MENU);
+	
+	public final int PREP_menuDifficulty = 0;
+	public final int PREP_menuRecords = 1;
+	public final int PREP_menuMain = 4;
+	
+	public void prepLeave(int destination) {
+		if (mgr.gameMain.shade_alpha > 0.98f) {
+			room_to_leave_to = destination;
+			fade_main = true;
+			mgr.gameMain.shade_alpha = 1;
+			mgr.gameMain.shade_alpha_target = 0;
+			mgr.menuFirst.logo_alpha = 1;
+			mgr.menuFirst.logo_alpha_target = 0;
+		}
+	}
+	
+	
+	private final String button0 = "PLAY";
+	private final String button1 = "RECORDS";
+	
+	private int room_to_leave_to = -1;
+	
+	private void leave() {
+		switch(room_to_leave_to) {
+			case PREP_menuDifficulty:
+				mgr.menuDifficulty.start();
+				break;
+			case PREP_menuRecords:
+				mgr.menuRecords.start();
+				break;
+			case PREP_menuMain:
+				mgr.menuFirst.start();
+				break;
+		}
 	}
 
+	
+	public void start() {
+		mgr.gameMain.floor_height_target = 0; // Make the water go back down
+		fade_main = false;
+		fade_secondary = false;
+		non_fading_button = -1;
+		mgr.gameMain.shade_alpha = 0;
+		mgr.gameMain.shade_alpha_target = 1;
+		mgr.menuFirst.logo_alpha_target = 1;
+		ref.room.changeRoom(game_rooms.ROOM_MENUMAIN);
+	}
+	
 }

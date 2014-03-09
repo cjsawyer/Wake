@@ -3,7 +3,7 @@ package com.mammothGames.wake.game;
 import android.util.Log;
 
 import com.mammothGames.wake.game.entities.entity_loadingMammoth;
-import com.mammothGames.wake.game.entities.entity_menuMain;
+import com.mammothGames.wake.game.entities.entity_menuFirst;
 import com.mammothGames.wake.gameEngine.engine_reference;
 
 public class game_rooms {
@@ -23,11 +23,11 @@ public class game_rooms {
 	
 	public final static int ROOM_LOAD = 0;
 	public final static int ROOM_LOAD_MENU = 1;
-	public final static int ROOM_MENU = 2;
+	public final static int ROOM_MENUFIRST = 2;
 	public final static int ROOM_DIFFICULTY = 3;
 	public final static int ROOM_GAME = 4;
 	public final static int ROOM_POSTGAME = 5;
-	public final static int ROOM_MENUTOP = 6;
+	public final static int ROOM_MENUMAIN = 6;
 	public final static int ROOM_MENURECORDS = 7;
 	public final static int ROOM_MENUOPTIONS = 8;
 	public final static int ROOM_MENUABOUT = 9;
@@ -50,13 +50,13 @@ public class game_rooms {
 			case ROOM_LOAD_MENU: {
 				current_room_name = "Menu loader";
 
-				ref.main.addEntity(new entity_menuMain());
+				ref.main.addEntity(new entity_menuFirst());
 				
 				ref.room.changeRoom(2);
 				break;
 			}
 			
-			case ROOM_MENU: {
+			case ROOM_MENUFIRST: {
 				current_room_name = "Menu";
 				break;
 			}
@@ -76,7 +76,7 @@ public class game_rooms {
 				break;
 			}
 			
-			case ROOM_MENUTOP: {
+			case ROOM_MENUMAIN: {
 				current_room_name = "menuTop";
 				break;
 			}

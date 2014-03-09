@@ -152,7 +152,7 @@ public class entity_menuPauseHUD extends engine_entity {
 
 			float pause_alpha;
 			if (game_paused) {
-				pause_alpha = ((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuMain.DEG_TO_RAD / 1666f)));
+				pause_alpha = ((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuFirst.DEG_TO_RAD / 1666f)));
 				pause_alpha *= menu_openess_ratio; // always fade in even if we catch the clock at a bad time
 			} else {
 				pause_alpha = 1;
@@ -188,7 +188,7 @@ public class entity_menuPauseHUD extends engine_entity {
 				if (game_paused) {
 					// unpause if we touch the middle 1/3 of the screen
 					if ( (ref.input.get_touch_y(0) > ref.screen_height/3) && (ref.input.get_touch_y(0) < ref.screen_height/3 * 2) ) {
-						if (!mgr.areYouSure.getPopupState())
+						if (!mgr.areYouSure.getPopupOpenness())
 							switchPause();
 					}
 				}

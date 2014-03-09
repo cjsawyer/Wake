@@ -18,6 +18,7 @@ public class entity_gameMain extends engine_entity {
 	
 	public float shade_alpha = 0;
 	public float shade_alpha_target = 1;
+	float ANIMATION_SCALE = 6f;
 	
 	//TODO: blaance these values
 	public final int DIF_EASY = 0;
@@ -110,9 +111,8 @@ public class entity_gameMain extends engine_entity {
 	@Override
 	public void sys_step(){
 		
-		float ANIMATION_SCALE = 6f;
 		// The shade alpha towards it's target; and if we're in the menu room only slide if the water height is at the bottom
-		if (ref.room.get_current_room() == game_rooms.ROOM_MENU) {
+		if (ref.room.get_current_room() == game_rooms.ROOM_MENUFIRST) {
 			if ( (mgr.gameMain.floor_height < 2) && (mgr.stars.stars_alpha > 0.98f) )
 				mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * ANIMATION_SCALE * ref.main.time_scale;
 		}
@@ -167,6 +167,12 @@ public class entity_gameMain extends engine_entity {
 	
 	public void setDifficulty(int diff) {
 		current_diff = diff;
+		
+		if(diff == DIF_HELL)
+			mgr.stars.red_alpha_target = 0.8f;
+		else
+			mgr.stars.red_alpha_target = 0;
+		
 	}
 	
 	public void startGame() {
@@ -194,7 +200,7 @@ public class entity_gameMain extends engine_entity {
 		mgr.menuPauseHUD.HUD_y_target = mgr.menuPauseHUD.base_hud_height*2; // slide HUD back up
 		
 		mgr.menuPauseHUD.setPause(true);
-		ref.room.changeRoom(game_rooms.ROOM_POSTGAME);
+		mgr.menuPostGame.start();
 	}
 	
 }

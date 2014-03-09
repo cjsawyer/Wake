@@ -1,8 +1,23 @@
 ///// This Commit /////
 
-Added entity_areYouSure pop-up box and "abandon game" state
+redid main menu
+renamed entity_menuMain to entity_menuFirst and entity_menuTop to entity_menuMain
+added back button functionality for main menu
+started on post screen
 
 //////// TODO /////////
+
+
+
+// Draw high-score
+			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
+			ref.strings.builder.setLength(0);
+			ref.strings.builder.append(  "BEST: "  );
+			ref.strings.builder.append(  mgr.gameMain.high_score  );
+			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
+			ref.draw.drawText(ref.screen_width/2, ref.screen_height - mgr.gameMain.text_size/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+
+
 
 Add rooms:
 
@@ -121,6 +136,8 @@ switch argument order for collisionAABB, make x,y come before x,y,w,h
 
 
 //////// DONE ////////
+
+Added entity_areYouSure pop-up box and "abandon game" state
 
 added menuTop
 improved usability of entity pools slightly

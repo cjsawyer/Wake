@@ -17,6 +17,15 @@ public class entity_stars extends engine_entity {
 	float small_angle = 0, tall_angle = 0;
 	float stars_alpha = 0;
 	
+	float red_alpha=0, red_alpha_target=0;
+	
+	masterGameReference mgr;
+	public entity_stars(masterGameReference mgr) {
+		this.mgr = mgr;
+		this.persistent = true;
+		this.pausable = false;
+	}
+	
 	@Override
 	public void sys_firstStep() {
 		
@@ -41,6 +50,8 @@ public class entity_stars extends engine_entity {
 	@Override
 	public void sys_step() {
 		
+		red_alpha += (red_alpha_target - red_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
+		
 		stars_alpha += 2 * ref.main.time_scale;
 		if (stars_alpha > 1)
 			stars_alpha = 1;
@@ -48,12 +59,10 @@ public class entity_stars extends engine_entity {
 		small_angle += ref.main.time_scale/3; // Rotate 1/2 degree per second
 		tall_angle -= ref.main.time_scale/4;
 		
-//		if ((ref.room.get_current_room() == game_rooms.ROOM_GAME) || (ref.room.get_current_room() == game_rooms.ROOM_MENU)) {
-		ref.draw.setDrawColor(1, 1, 1, 1 * stars_alpha);
+		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 1 * stars_alpha);
 		ref.draw.drawTexture(ref.screen_width/2, 0, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, game_constants.layer0_backgroundSquares, 1, game_textures.TEX_STARS);
-		ref.draw.setDrawColor(1, 1, 1, 0.9f * stars_alpha);
+		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 0.9f * stars_alpha);
 		ref.draw.drawTexture(ref.screen_width/2, 0, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, game_constants.layer0_backgroundSquares, 1, game_textures.TEX_STARS);
-//		}
 
 	}
 	
