@@ -61,7 +61,7 @@ public class entity_areYouSure extends engine_entity {
 	@Override
 	public void sys_step() {
 		
-		popup_alpha += (popup_alpha_target - popup_alpha) * 6f * ref.main.time_scale;
+		popup_alpha += (popup_alpha_target - popup_alpha) * 8f * ref.main.time_scale;
 		
 		float border_draw_width = ref.screen_width*4/5; 
 		float draw_width = border_draw_width - mgr.menuDifficulty.button_border_size;
@@ -99,10 +99,15 @@ public class entity_areYouSure extends engine_entity {
 		
 		// Popup text
 		ref.draw.setDrawColor(1, 1, 1, 0.8f * popup_alpha);
-		ref.draw.drawTextSingleString(draw_x, black_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer7_overHUD, state_text[action], game_textures.TEX_FONT1);
+		ref.draw.text.append(state_text[action]);
+		ref.draw.drawText(draw_x, black_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer7_overHUD, game_textures.TEX_FONT1);
 		
-		ref.draw.drawTextSingleString(draw_x-button_x, draw_y+button_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer7_overHUD, "YES", game_textures.TEX_FONT1);
-		ref.draw.drawTextSingleString(draw_x+button_x, draw_y+button_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer7_overHUD, "NO", game_textures.TEX_FONT1);
+		
+		ref.draw.text.append("YES");
+		ref.draw.drawText(draw_x-button_x, draw_y+button_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer7_overHUD, game_textures.TEX_FONT1);
+		
+		ref.draw.text.append("NO");
+		ref.draw.drawText(draw_x+button_x, draw_y+button_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer7_overHUD, game_textures.TEX_FONT1);
 		
 		if(popup_open) {
 			
@@ -147,6 +152,35 @@ public class entity_areYouSure extends engine_entity {
 	public boolean getPopupOpenness() {
 		return popup_open;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

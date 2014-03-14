@@ -36,7 +36,7 @@ public class engine_main {
 		entity_list = new engine_entity[entity_list_length];
 
 		ref.room = new engine_room(ref);
-		ref.strings = new engine_strings(ref);
+//		ref.strings = new engine_strings(ref);
 		ref.partPool = new engine_particlePool(ref);
 		ref.input = new engine_input(ref);
 		ref.hud = new engine_hud(ref);

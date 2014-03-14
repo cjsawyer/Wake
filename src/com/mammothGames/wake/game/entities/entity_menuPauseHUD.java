@@ -144,8 +144,10 @@ public class entity_menuPauseHUD extends engine_entity {
 			
 			// Pause text, above and off the screen when not paused.
 			ref.draw.setDrawColor(1, 1, 1, menu_openess_ratio);
-			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, game_constants.layer5_underHUD, "paused", game_textures.TEX_FONT1);
-			ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer5_underHUD, "press back to quit", game_textures.TEX_FONT1);
+			ref.draw.text.append("paused");
+			ref.draw.drawText(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, game_constants.layer5_underHUD, game_textures.TEX_FONT1);
+			ref.draw.text.append("press back to quit");
+			ref.draw.drawText(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer5_underHUD, game_textures.TEX_FONT1);
 			
 			if (game_paused)
 				ref.draw.drawCapturedDraw();
@@ -160,22 +162,19 @@ public class entity_menuPauseHUD extends engine_entity {
 			
 			//Draw score
 			ref.draw.setDrawColor(1, 1, 1, pause_alpha);
-			ref.strings.builder.setLength(0);
-			ref.strings.builder.append(  mgr.gameMain.score   );
-			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.text.append(  mgr.gameMain.score   );
+			ref.draw.drawText(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, game_textures.TEX_FONT1);
 
 			//Draw score multiplier
 			ref.draw.setDrawColor(1, 1, 1, 1);
-			ref.strings.builder.setLength(0);
-			ref.strings.builder.append(  "+"   );
-			ref.strings.builder.append(  mgr.gameMain.score_multiplier   );
-			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(text_x + small_rec_width/2 - mgr.gameMain.text_size/4 , text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD,  ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+			ref.draw.text.append(  "+"   );
+			ref.draw.text.append(  mgr.gameMain.score_multiplier   );
+			ref.draw.drawText(text_x + small_rec_width/2 - mgr.gameMain.text_size/4 , text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, game_textures.TEX_FONT1);
 			
 			
 			ref.draw.setDrawColor(0, 1, 0, 1-pause_alpha);
-			ref.draw.drawTextSingleString(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, "paused", game_textures.TEX_FONT1);
+			ref.draw.text.append("paused");
+			ref.draw.drawText(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, game_textures.TEX_FONT1);
 			
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, button_size/2, button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_PAUSE, game_textures.TEX_SPRITES);

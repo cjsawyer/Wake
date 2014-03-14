@@ -25,7 +25,9 @@ public class entity_menuRecords extends engine_entity {
 
 			
 				ref.draw.setDrawColor(1, 1, 1, 0.9f * mgr.gameMain.shade_alpha);
-				ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "records menu here", game_textures.TEX_FONT1);
+				
+				ref.draw.text.append("records menu here");
+				ref.draw.drawText(ref.screen_width/2, ref.screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 				
 				
 				
@@ -67,6 +69,8 @@ public class entity_menuRecords extends engine_entity {
 	}
 	
 	public void start() {
+		ref.main.unPauseEntities();
+		mgr.gameMain.floor_height_target = 0;
 		fade_main = false;
 		fade_secondary = false;
 		non_fading_button = -1;

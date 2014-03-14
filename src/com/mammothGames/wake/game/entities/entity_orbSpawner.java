@@ -28,7 +28,7 @@ public class entity_orbSpawner extends engine_entity {
 	utility_pool<poolObj_orb> greenOrb_pool = new utility_pool<poolObj_orb>(ref, poolObj_orb.class, 20);
 	poolObj_orb temp_orb;
 	
-	utility_pool<poolObj_scoreEffect> scoreEffect_pool = new utility_pool<poolObj_scoreEffect>(ref, poolObj_scoreEffect.class, 16);;
+	utility_pool<poolObj_scoreEffect> scoreEffect_pool = new utility_pool<poolObj_scoreEffect>(ref, poolObj_scoreEffect.class, 16);
 	poolObj_scoreEffect temp_scoreEffect;
 	
     protected int radius, border_size, radius_total;
@@ -142,6 +142,7 @@ public class entity_orbSpawner extends engine_entity {
     		mgr.gameMain.floor_height_target -= mgr.gameMain.floor_per_hit;
     		mgr.gameMain.score += mgr.gameMain.score_multiplier;
     		mgr.gameMain.streak += 1;
+    		mgr.gameMain.points_streak += mgr.gameMain.score_multiplier;
     		ref.sound.playSoundSpeedChanged(game_sounds.SND_DING, 0.3f);
     	}
 		mgr.gameMain.speed_multiplier += mgr.gameMain.speed_gain_per_orb;
@@ -331,11 +332,9 @@ public class entity_orbSpawner extends engine_entity {
 				mgr.gameMain.score_multiplier = mgr.gameMain.score_multiplier > 4 ? 4 : mgr.gameMain.score_multiplier;
 				
 				
-				ref.strings.builder.setLength(0);
-				ref.strings.builder.append(  "+"  );
-				ref.strings.builder.append(  mgr.gameMain.score_multiplier  );
-				ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-				ref.draw.drawText(temp_scoreEffect.x, temp_scoreEffect.y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER , ref.draw.Y_ALIGN_CENTER, game_constants.layer4_overGame, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+				ref.draw.text.append(  "+"  );
+				ref.draw.text.append(  mgr.gameMain.score_multiplier  );
+				ref.draw.drawText(temp_scoreEffect.x, temp_scoreEffect.y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER , ref.draw.Y_ALIGN_CENTER, game_constants.layer4_overGame, game_textures.TEX_FONT1);
 				
 				
 				if (temp_scoreEffect.alpha < 0.05f) {

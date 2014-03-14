@@ -1,5 +1,7 @@
 package com.mammothGames.wake.game.entities;
 
+import android.hardware.Camera.Area;
+
 import com.mammothGames.wake.game.game_constants;
 import com.mammothGames.wake.game.game_rooms;
 import com.mammothGames.wake.game.game_textures;
@@ -8,6 +10,8 @@ import com.mammothGames.wake.gameEngine.*;
 
 public class entity_menuMain extends engine_entity {
 
+	//This whole thing is hack-y and copied from entity_menuDifficulty. It's clean there! :)
+	
 	int num_buttons = 4;
 	private boolean fade_main, fade_secondary;
 	private int non_fading_button;
@@ -81,15 +85,17 @@ public class entity_menuMain extends engine_entity {
 				ref.draw.setDrawColor(1, 1, 1, 1 * button_alpha);
 				switch (i) {
 					case 2:
-						ref.draw.drawTextSingleString(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, button0, game_textures.TEX_FONT1);
+						ref.draw.text.append(button0);
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 						break;
 					case 3:
-						ref.draw.drawTextSingleString(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, button1, game_textures.TEX_FONT1);
+						ref.draw.text.append(button1);
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 						break;
 				}
 
 				// If the AYSYWTQ? popup isn't open
-				if (!mgr.menuPauseHUD.getPause())
+				if (!mgr.areYouSure.getPopupOpenness())
 					// Check if a button is pressed.
 					if ( (!fade_main) && (!fade_secondary) && (mgr.gameMain.shade_alpha > 0.98f) ) // only if we haven't already pressed one, and we're already transitioned into the room
 						if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN)

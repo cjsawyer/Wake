@@ -38,39 +38,34 @@ public class entity_saveTest extends engine_entity {
 		}
 		
 		ref.draw.setDrawColor(0, 1, 0, 1);
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "down"  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[0], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 		
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "up"  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[1], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		ref.draw.text.append(  "down"  );
+		ref.draw.drawText(x[0], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
 		
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "save"  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[2], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
 		
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "load"  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[3], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		ref.draw.text.append(  "up"  );
+		ref.draw.drawText(x[1], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		
+		
+		ref.draw.text.append(  "save"  );
+		ref.draw.drawText(x[2], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		
+		
+		ref.draw.text.append(  "load"  );
+		ref.draw.drawText(x[3], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
 		
 		
 		ref.draw.setDrawColor(0, 0, 0, 1);
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "local: "  );
-		ref.strings.builder.append(  local  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[number_buttons/2]-(size*3/4), y+size, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		
+		ref.draw.text.append(  "local: "  );
+		ref.draw.text.append(  local  );
+		ref.draw.drawText(x[number_buttons/2]-(size*3/4), y+size, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
 
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "external: "  );
-		ref.strings.builder.append(  external  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[number_buttons/2]-(size*3/4), y-size, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		
+		ref.draw.text.append(  "external: "  );
+		ref.draw.text.append(  external  );
+		
+		ref.draw.drawText(x[number_buttons/2]-(size*3/4), y-size, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
 
 		
 

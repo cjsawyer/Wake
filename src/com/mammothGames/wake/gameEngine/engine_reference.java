@@ -13,7 +13,6 @@ public class engine_reference {
 	public engine_gl_textureLoader textureLoader;
 	public engine_room room;
 	public engine_input input; 
-	public engine_strings strings;
 	public engine_gl_text text;
 	public engine_collision collision;
 	public engine_sound sound;

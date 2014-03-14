@@ -25,7 +25,8 @@ public class entity_menuAbout extends engine_entity {
 
 			
 				ref.draw.setDrawColor(1, 1, 1, 0.9f * mgr.gameMain.shade_alpha);
-				ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "about screen here", game_textures.TEX_FONT1);
+				ref.draw.text.append("about screen here");
+				ref.draw.drawText(ref.screen_width/2, ref.screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 				
 				
 				

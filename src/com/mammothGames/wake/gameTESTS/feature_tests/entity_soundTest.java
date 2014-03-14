@@ -44,25 +44,17 @@ public class entity_soundTest extends engine_entity {
 		
 		
 		ref.draw.setDrawColor(0, 1, 0, 1);
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "effect"  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[0], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		ref.draw.text.append(  "effect"  );
+		ref.draw.drawText(x[0], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
 		
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "play"  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[1], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		ref.draw.text.append(  "play"  );
+		ref.draw.drawText(x[1], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
 		
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "pause"  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[2], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		ref.draw.text.append(  "pause"  );
+		ref.draw.drawText(x[2], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
 		
-		ref.strings.builder.setLength(0);
-		ref.strings.builder.append(  "stop"  );
-		ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-		ref.draw.drawText(x[3], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
+		ref.draw.text.append(  "stop"  );
+		ref.draw.drawText(x[3], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
 		
 		
 		if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {

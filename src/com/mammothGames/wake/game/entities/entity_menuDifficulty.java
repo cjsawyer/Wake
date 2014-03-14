@@ -20,9 +20,9 @@ public class entity_menuDifficulty extends engine_entity {
 	}
 	
 	//Public so the "Are You Sure?" pop-up can have the same border size.
-	public float button_border_size=0;
+	public float button_border_size=0, draw_width, draw_height;
 	
-	float box_w, box_h, button_gap, button_height, button_height_gap,realative_y, draw_x, draw_y, draw_width, draw_height;
+	float box_w, box_h, button_gap, button_height, button_height_gap,realative_y, draw_x, draw_y;
 	
 	
 	@Override
@@ -96,13 +96,16 @@ public class entity_menuDifficulty extends engine_entity {
 				ref.draw.setDrawColor(1, 1, 1, 1 * button_alpha);
 				switch (i) {
 					case 0:
-						ref.draw.drawTextSingleString(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "EASY", game_textures.TEX_FONT1);
+						ref.draw.text.append("EASY");
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 						break;
 					case 1:
-						ref.draw.drawTextSingleString(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "MEDIUM", game_textures.TEX_FONT1);
+						ref.draw.text.append("MEDIUM");
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 						break;
 					case 2:
-						ref.draw.drawTextSingleString(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "HARD", game_textures.TEX_FONT1);
+						ref.draw.text.append("HARD");
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 						break;
 					case 3:
 						
@@ -110,7 +113,8 @@ public class entity_menuDifficulty extends engine_entity {
 						float dx = ref.main.randomRange(-shake_range, shake_range);
 						float dy = ref.main.randomRange(-shake_range, shake_range);
 						ref.draw.setDrawColor(1, 0, 0, 1 * button_alpha);
-						ref.draw.drawTextSingleString(draw_x+dx, draw_y+dy, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "HELL", game_textures.TEX_FONT1);
+						ref.draw.text.append("HELL");
+						ref.draw.drawText(draw_x+dx, draw_y+dy, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 						break;
 				}
 				

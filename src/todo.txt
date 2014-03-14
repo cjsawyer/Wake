@@ -1,141 +1,55 @@
 ///// This Commit /////
 
-redid main menu
-renamed entity_menuMain to entity_menuFirst and entity_menuTop to entity_menuMain
-added back button functionality for main menu
-started on post screen
+added functional post-game screen
+removed drawTextSingleString, simplified drawText
+deleted engine_strings, moved the StringBuilder into draw.text
+switched ref.draw.X_ALIGN_LEFT and ref.draw.X_ALIGN_RIGHT. RIGHT now draws the text to the right of the X coordinate, as it should have originally. 
 
 //////// TODO /////////
 
+make it so mashing the back button will exit the game.
+	ie make the menu AYSYQTQ dialogue exit with back button.
 
-
-// Draw high-score
-			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
-			ref.strings.builder.setLength(0);
-			ref.strings.builder.append(  "BEST: "  );
-			ref.strings.builder.append(  mgr.gameMain.high_score  );
-			ref.strings.builder.getChars(0, ref.strings.builder.length(), ref.strings.stringChars, 0);
-			ref.draw.drawText(ref.screen_width/2, ref.screen_height - mgr.gameMain.text_size/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer7_overHUD, ref.strings.stringChars, ref.strings.builder.length(), game_textures.TEX_FONT1);
-
-
-
-Add rooms:
-
-	game's pause menu
-		score
-		streak
-		OPTIONS button
-			About button in options room?
-		RECORDS button
-		
-
-	menuHUD
-		build pause menu
-			return
-			restart -> are you sure?
-			options
-			exit 
-	DONE - menuTop
-		play -> menuDifficulty
-		records -> records
-		feedback -> feedback
-		options -> options
-		backButton: menuMain
-
-	menuDifficulty:
-		gray out HARD and HELL if not unlocked
-			-Add save vars:
-				bool HEL/HAR_unlocked
-			-unlock HARD and HELL at 1000 of the lesser
-			-flash LOCKED if you tap HELL or HARD without unlocking
-	
-		add local var and setter with constants for going to either the game room or the records screen
-			don't forget to change back button behavior too!
-		
-	gamePost
-		TRY AGAIN button
-		Difficulty:
-		Score:
-		High Score:
-		Streak:
-		Best Streak:
-		Hit O O O O Missed
-			hit is green, missed red
-			4 colored circles
-				green for most hit
-				greenish for second most hit
-				redish for third most missed
-				red for least hit
-				
-		Add save vars:
-			EAS/MED/HIG/HEL
-			*_highScore
-			*_bestStreak
-			*_1Hits
-			*_2Hits
-			*_3Hits
-			*_4Hits
-		
-		back: menuTop
-		
-	records
-		high score
-		best streak
-		Hits
-		Misses
-		backButton: options
-		
-	options
-		checkbox music 
-		checkbox soundFX
-		clear records -> menuCheck
-		about -> about
-		backButton: menuTop
-		
-	feedback
-		"Do you like the game?"
-		yes -> feedbackPos
-		no -> feedbackNeg
-		backButton: options
-		
-	feedbackPos
-		email us -> email feedback@cjsdev.com
-			add feature to engine to open email service
-		donate -> google play link to paid version
-			add feature to do google play links
-		rate -> google play link to rate this version 
-		backButton: options
-		
-	feedbackNeg
-		email us ->  email feedback@cjsdev.com
-		backButton: options
-		 
-	menuCheck
-		"are you sure you want to _____ ?"
-		yes -> do action as defined by a local var
-		no -> go back to previous screen, options or game
-		back: same as "no"
-		 
-	about
-		cjsdev.com -> website
-			Add linking to webpage feature in engine
-		backButton: options
-	
+add high score/best streak for each difficulty in their own saves.
+	Add save vars:
+				EAS/MED/HIG/HEL
+				*_highScore
+				*_bestStreak
+				*_1Hits
+				*_2Hits
+				*_3Hits
+				*_4Hits
 
 think of better names for g_textures and loaded_assets...
 	
 change sound effects
 find music
-make music speed scale with game speed
+make music speed scale with game speed?
 
 
-switch argument order for collisionAABB, make x,y come before x,y,w,h
+switch argument order for collisionAABB, make x,y come before: x,y,w,h
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 //////// DONE ////////
+
+redid main menu
+renamed entity_menuMain to entity_menuFirst and entity_menuTop to entity_menuMain
+added back button functionality for main menu
+started on post screen
 
 Added entity_areYouSure pop-up box and "abandon game" state
 
