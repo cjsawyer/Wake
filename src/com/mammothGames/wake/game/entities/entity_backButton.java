@@ -26,8 +26,9 @@ public class entity_backButton extends engine_entity {
 		
 		switch(room) {
 			case game_rooms.ROOM_LOAD:
-			case game_rooms.ROOM_MENUFIRST:
 				// Quit the game if we're in the loading sequence
+				ref.main.exitApp();
+			case game_rooms.ROOM_MENUFIRST:
 				ref.main.exitApp();
 				break;
 			case game_rooms.ROOM_GAME:
@@ -37,7 +38,7 @@ public class entity_backButton extends engine_entity {
 						mgr.areYouSure.setPopupAction(mgr.areYouSure.STATE_ABANDON);
 						mgr.areYouSure.setPopupOpenness(true);
 					} else {
-						mgr.areYouSure.buttonAction(false);
+						mgr.areYouSure.buttonAction(true);
 					}
 					
 				} else {
@@ -55,7 +56,7 @@ public class entity_backButton extends engine_entity {
 					mgr.areYouSure.setPopupAction(mgr.areYouSure.STATE_QUIT);
 					mgr.areYouSure.setPopupOpenness(true);
 				} else {
-					mgr.areYouSure.buttonAction(false);
+					mgr.areYouSure.buttonAction(true);
 				}
 //				mgr.menuMain.prepLeave(mgr.menuMain.PREP_menuMain);
 				break;

@@ -254,6 +254,7 @@ public class entity_orbSpawner extends engine_entity {
 						if (!game_constants.godmode) {
 							mgr.gameMain.floor_height_target += mgr.gameMain.floor_per_miss;
 							mgr.gameMain.streak = 0;
+							mgr.gameMain.points_streak = 0;
 						}
 						
 						delete_this_one = true;

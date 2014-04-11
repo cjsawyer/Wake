@@ -18,7 +18,7 @@ public class entity_gameMain extends engine_entity {
 	
 	public float shade_alpha = 0;
 	public float shade_alpha_target = 1;
-	float ANIMATION_SCALE = 6f;
+	float ANIMATION_SCALE = 7f;
 	
 	public static int DIF_EASY = 0;
 	public static int DIF_MEDIUM = 500;
@@ -29,6 +29,8 @@ public class entity_gameMain extends engine_entity {
 	
 	public float text_size;
 	
+	// streak is in internal var for number of orbs tapped in a row for the score multiplier
+	// points_streak is number of points scored in a row, and what the "streak" score counter tracks.
 	public final int STREAK_PER_LEVEL = 20;
 	public int score_multiplier = 1;
 	public int streak = 0;
@@ -68,6 +70,7 @@ public class entity_gameMain extends engine_entity {
 		score_multiplier = 1;
 		streak = 0;
 		best_points_streak_this_game = 0;
+		points_streak = 0;
 		
 		floor_height_target = 0;
 		floor_height = 0;
@@ -83,20 +86,6 @@ public class entity_gameMain extends engine_entity {
 		
 		shade_alpha = -4;
 		shade_alpha_target = 1;
-		
-		// Load high scores
-		String high_score_string = ref.file.load("high_score");
-		if (high_score_string.equals("")) {
-			high_score = 0;
-		} else {
-			high_score = Integer.parseInt(ref.file.load("high_score")); 
-		}
-		String best_streak_string = ref.file.load("best_streak");
-		if (best_streak_string.equals("")) {
-			best_points_streak = 0;
-		} else {
-			best_points_streak = Integer.parseInt(ref.file.load("best_streak")); 
-		}
 		
 		
 		floor_per_miss = ref.screen_height/9;
@@ -176,21 +165,59 @@ public class entity_gameMain extends engine_entity {
 		
 	}
 	
+	final String SCO_E = "SCO_E";
+	final String SCO_M = "SCO_M";
+	final String SCO_H = "SCO_H";
+	final String SCO_HE = "SCO_HE";
+	
+	final String STR_E = "SCO_E";
+	final String STR_M = "SCO_M";
+	final String STR_H = "SCO_H";
+	final String STR_HE = "SCO_HE";
+	private String STR, SCO;
+	
 	public void setDifficulty(int diff) {
 		current_diff = diff;
+
 		
-		if(diff == DIF_EASY)
+		if(diff == DIF_EASY) {
 			current_diff_string = "EASY";
-		if(diff == DIF_MEDIUM)
+			SCO  = SCO_E;
+			STR  = STR_E;
+		}
+		if(diff == DIF_MEDIUM) {
 			current_diff_string = "MEDIUM";
-		if(diff == DIF_HARD)
+			SCO  = SCO_M;
+			STR  = STR_M;
+		}
+		if(diff == DIF_HARD) {
 			current_diff_string = "HARD";
+			SCO  = SCO_H;
+			STR  = STR_H;
+		}
 		if(diff == DIF_HELL) {
 			current_diff_string = "HELL";
 			mgr.stars.red_alpha_target = 0.8f;
+			SCO  = SCO_HE;
+			STR  = STR_HE;
 		}
 		else
 			mgr.stars.red_alpha_target = 0;
+		
+		
+		// Load high scores
+		String high_score_string = ref.file.load(SCO);
+		if (high_score_string.equals("")) {
+			high_score = 0;
+		} else {
+			high_score = Integer.parseInt(ref.file.load(SCO)); 
+		}
+		String best_streak_string = ref.file.load(STR);
+		if (best_streak_string.equals("")) {
+			best_points_streak = 0;
+		} else {
+			best_points_streak = Integer.parseInt(ref.file.load(STR)); 
+		}
 		
 	}
 	
@@ -210,12 +237,12 @@ public class entity_gameMain extends engine_entity {
 		if(score > high_score) {
 			high_score = score;
 			new_high_score = true;
-			ref.file.save("high_score", String.valueOf(high_score) );
+			ref.file.save(SCO, String.valueOf(high_score) );
 		}
 		if(best_points_streak_this_game > best_points_streak) {
 			best_points_streak = best_points_streak_this_game;
 			new_best_streak = true;
-			ref.file.save("best_streak", String.valueOf(best_points_streak) );
+			ref.file.save(STR, String.valueOf(best_points_streak) );
 		}
 		
 //		floor_height_target = 0; // make floor sink

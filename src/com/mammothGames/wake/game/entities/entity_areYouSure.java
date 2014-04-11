@@ -63,7 +63,7 @@ public class entity_areYouSure extends engine_entity {
 		
 		popup_alpha += (popup_alpha_target - popup_alpha) * 8f * ref.main.time_scale;
 		
-		float border_draw_width = ref.screen_width*4/5; 
+		float border_draw_width = ref.screen_width*3.5f/5; 
 		float draw_width = border_draw_width - mgr.menuDifficulty.button_border_size;
 		float draw_x = ref.screen_width/2;
 		float draw_y = ref.screen_height/2;

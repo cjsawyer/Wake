@@ -52,21 +52,21 @@ public class entity_menuMain extends engine_entity {
 				if (logo_y - logo_y_target < 2)
 					button_alpha = mgr.gameMain.shade_alpha;
 				
-				// Slide in/out the buttons based on the shade alpha
-				if ( i==non_fading_button ) {
-					if (fade_main)
-						button_alpha = 1;
-					if (fade_secondary)
-						button_alpha = mgr.gameMain.shade_alpha;
-				} else {
-					
+				// fade in/out the buttons based on the shade alpha
+//				if ( i==non_fading_button ) {
+//					if (fade_main)
+//						button_alpha = 1;
+//					if (fade_secondary)
+//						button_alpha = mgr.gameMain.shade_alpha;
+//				} else {
+//					
 					if (fade_main)
 						button_alpha =  mgr.gameMain.shade_alpha;
 					if (fade_secondary)
 						button_alpha = 0;
-					
-				}
-				
+//					
+//				}
+//				
 				// hack to avoid rewriting the whole menu. Skips drawing the first two buttons
 				if(i<=1) {
 					button_alpha = 0;
@@ -123,17 +123,18 @@ public class entity_menuMain extends engine_entity {
 				
 				// Update vars for fade in/out effect
 				if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_main) {
-					// start secondary fade
-					fade_main = false;
-					fade_secondary = true;
-					mgr.gameMain.shade_alpha = 1;
-					mgr.gameMain.shade_alpha_target = 0;
-				}
-				if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_secondary )
 					leave();
+					// start secondary fade
+//					fade_main = false;
+//					fade_secondary = true;
+//					mgr.gameMain.shade_alpha = 1;
+//					mgr.gameMain.shade_alpha_target = 0;
+				}
+//				if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_secondary )
+//					leave();
 			}
 			
-			logo_y += (logo_y_target - logo_y) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
+			logo_y += (logo_y_target - logo_y) * 1.2f * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
 			ref.draw.setDrawColor(1, 1, 1, mgr.menuFirst.logo_alpha);
 			ref.draw.drawTexture(ref.screen_width/2, logo_y, mgr.menuFirst.logo_w, mgr.menuFirst.logo_h, 0, 0, 0, game_constants.layer6_HUD, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
 		}

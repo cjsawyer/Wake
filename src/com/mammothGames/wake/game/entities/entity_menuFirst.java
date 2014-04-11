@@ -90,7 +90,7 @@ public class entity_menuFirst extends engine_entity {
 	@Override
 	public void sys_step() {
 		
-		logo_alpha += (logo_alpha_target - logo_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
+		logo_alpha += (logo_alpha_target - logo_alpha) * 2 * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
 		
 		if (ref.room.get_current_room() == game_rooms.ROOM_MENUFIRST) {
 			

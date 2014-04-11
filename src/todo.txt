@@ -1,35 +1,38 @@
 ///// This Commit /////
 
-added functional post-game screen
-removed drawTextSingleString, simplified drawText
-deleted engine_strings, moved the StringBuilder into draw.text
-switched ref.draw.X_ALIGN_LEFT and ref.draw.X_ALIGN_RIGHT. RIGHT now draws the text to the right of the X coordinate, as it should have originally. 
+Finished score saving. Polished lots of small things.
 
 //////// TODO /////////
 
-make it so mashing the back button will exit the game.
-	ie make the menu AYSYQTQ dialogue exit with back button.
+------------
+| 0 = easy |
+| 1 = hard |
+------------
 
-add high score/best streak for each difficulty in their own saves.
-	Add save vars:
-				EAS/MED/HIG/HEL
-				*_highScore
-				*_bestStreak
-				*_1Hits
-				*_2Hits
-				*_3Hits
-				*_4Hits
+[X] 0 - make mammoth longer
+[X] 0 - remove intro wake movement
+[X] 0 - remove main menu button fade
+[X] 0 - change back button behavior in game to back>are you sure?>back>menu
+[X] 0 - change back button behavior in menu to back>are you sure?>back>exit
+[X] 0 - resize the popup a little smaller
+[X] 0 - make post game screen streak/high score gap the same height as the button padding
+[X] 0 - change score flashing color to match button borders
+[ ] 1 - add stats to pause menu
+[ ] 1 - add better sound effects
+[ ] 1 - add music
+[ ] 1 - build records
+[X] 1 - add real stats to post screen
+[ ] 1 - [later] add about screen from records menu, link to website.
+[ ] 1 - [later] add per-difficulty heatmaps
+
+
+//////// ENGINE /////////
 
 think of better names for g_textures and loaded_assets...
 	
-change sound effects
-find music
-make music speed scale with game speed?
-
-
 switch argument order for collisionAABB, make x,y come before: x,y,w,h
 
-
+rename game_constnats/whatever to just whatever
 
 
 
@@ -45,6 +48,11 @@ switch argument order for collisionAABB, make x,y come before: x,y,w,h
 
 
 //////// DONE ////////
+
+added functional post-game screen
+removed drawTextSingleString, simplified drawText
+deleted engine_strings, moved the StringBuilder into draw.text
+switched ref.draw.X_ALIGN_LEFT and ref.draw.X_ALIGN_RIGHT. RIGHT now draws the text to the right of the X coordinate, as it should have originally. 
 
 redid main menu
 renamed entity_menuMain to entity_menuFirst and entity_menuTop to entity_menuMain

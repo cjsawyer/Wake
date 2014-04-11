@@ -53,10 +53,10 @@ public class entity_loadingMammoth extends engine_entity {
 			float tLogoX = (ref.screen_width - tFinalWidth) / 2f;
 			float tLogoY = ref.screen_height/2;
 			
-			if (fade_out)
-				logo_alpha -= ref.main.time_scale * 2f;
-			else
-				logo_alpha += ref.main.time_scale * 3f;
+			if (!fade_out)
+				logo_alpha += ref.main.time_scale * 8f;
+			else if (current_time-start_time > 1750)
+				logo_alpha -= ref.main.time_scale * 8f;
 			
 			ref.draw.setDrawColor(1, 1, 1, logo_alpha);
 			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, -tFinalWidth/2, 0, 0, 0, game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
@@ -67,12 +67,12 @@ public class entity_loadingMammoth extends engine_entity {
 				fade_out = true;
 			}
 			// if it's been longer than a second.
-			if (current_time-start_time > 1000) {
+//			if (current_time-start_time > 1500) {
 				if ( (fade_out) && (logo_alpha < 0.02f) ) {
 					// Go to the room that initializes the menu.
 					ref.room.changeRoom(1);
 				}
-			}
+//			}
 		}
 		
 		
