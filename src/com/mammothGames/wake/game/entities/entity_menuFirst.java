@@ -18,8 +18,7 @@ public class entity_menuFirst extends engine_entity {
 		mgr = new masterGameReference();
 	}
 	
-	float logo_y, logo_w, logo_h, logo_alpha=-1, logo_alpha_target=1;
-	boolean first_fade_in_finished = false;
+	float logo_w, logo_h;
 	float wait_time = 1000; 
 	
 	final float DEG_TO_RAD = (float)(Math.PI/180f);
@@ -90,17 +89,17 @@ public class entity_menuFirst extends engine_entity {
 	@Override
 	public void sys_step() {
 		
-		logo_alpha += (logo_alpha_target - logo_alpha) * 2 * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
+		//logo_alpha += (logo_alpha_target - logo_alpha) * 2 * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
 		
 		if (ref.room.get_current_room() == game_rooms.ROOM_MENUFIRST) {
 			
 			wait_time -= ref.main.time_delta;
 			
 			
-			if (first_fade_in_finished)
-				ref.draw.setDrawColor(1, 1, 1, logo_alpha);
-			else
-				ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
+//			if (first_fade_in_finished)
+//				ref.draw.setDrawColor(1, 1, 1, logo_alpha);
+//			else
+//				ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
 			
 			// Figures out the details of drawing the logo at 3/2 the width of the screen, properly scaling both width and height
 			float tWidth = ref.draw.getSubTextureWidth(game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
@@ -109,15 +108,14 @@ public class entity_menuFirst extends engine_entity {
 			float tWidthHeightRatio = logo_w/tWidth;
 			logo_h = tHeight * tWidthHeightRatio;
 			
-			logo_y = ref.screen_height/2;
 			
-			ref.draw.drawTexture(ref.screen_width/2, logo_y, logo_w, logo_h, 0, 0, 0, game_constants.layer6_HUD, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
+//			ref.draw.drawTexture(ref.screen_width/2, ref.screen_height/2, logo_w, logo_h, 0, 0, 0, game_constants.layer6_HUD, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
 
 			
 			// If fully faded in
-			if (mgr.gameMain.shade_alpha > 0.98f) {
+//			if (mgr.gameMain.shade_alpha > 0.98f) {
 				
-				first_fade_in_finished = true;
+//				first_fade_in_finished = true;
 				
 				// If you tap the screen
 				if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) || (wait_time<0)) {
@@ -125,22 +123,21 @@ public class entity_menuFirst extends engine_entity {
 					fade_out = true;
 					mgr.gameMain.shade_alpha_target = 0;
 				}
-			}
+//			}
 			
 			// When fully faded back out, start the game
-			if ( (fade_out == true) && (mgr.gameMain.shade_alpha < 0.02f) ) {
-				fade_out = false;
-				mgr.menuMain.logo_y = logo_y;
+//			if ( (fade_out == true) && (mgr.gameMain.shade_alpha < 0.02f) ) {
+//				fade_out = false;
 				mgr.menuMain.start();
-			}
+//			}
 		}
 	}
 	
 	public void start() {
 		mgr.gameMain.shade_alpha = -1; // prepare fade in effect
 		mgr.gameMain.shade_alpha_target = 1;
-		logo_alpha = -1;
-		logo_alpha_target = 1;
+//		logo_alpha = -1;
+//		logo_alpha_target = 1;
 		
 		ref.room.changeRoom(game_rooms.ROOM_MENUFIRST);
 	}

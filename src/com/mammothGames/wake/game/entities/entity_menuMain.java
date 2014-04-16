@@ -15,7 +15,6 @@ public class entity_menuMain extends engine_entity {
 	int num_buttons = 4;
 	private boolean fade_main, fade_secondary;
 	private int non_fading_button;
-	float logo_y, logo_y_target=0;
 	
 	masterGameReference mgr;
 	public entity_menuMain(masterGameReference mgr) {
@@ -49,8 +48,7 @@ public class entity_menuMain extends engine_entity {
 				float draw_height = button_height;
 				
 				float button_alpha = 0;
-				if (logo_y - logo_y_target < 2)
-					button_alpha = mgr.gameMain.shade_alpha;
+				button_alpha = mgr.gameMain.shade_alpha;
 				
 				// fade in/out the buttons based on the shade alpha
 //				if ( i==non_fading_button ) {
@@ -60,10 +58,10 @@ public class entity_menuMain extends engine_entity {
 //						button_alpha = mgr.gameMain.shade_alpha;
 //				} else {
 //					
-					if (fade_main)
-						button_alpha =  mgr.gameMain.shade_alpha;
-					if (fade_secondary)
-						button_alpha = 0;
+				if (fade_main)
+					button_alpha =  mgr.gameMain.shade_alpha;
+				if (fade_secondary)
+					button_alpha = 0;
 //					
 //				}
 //				
@@ -103,9 +101,9 @@ public class entity_menuMain extends engine_entity {
 								pressed_button = i;
 							}
 				
-				if (i==2) {
-					logo_y_target = (ref.screen_height + realative_y)/2 - mgr.menuFirst.logo_h/4;
-				}
+//				if (i==2) {
+//					logo_y_target = (ref.screen_height + realative_y)/2 - mgr.menuFirst.logo_h/4;
+//				}
 				
 				realative_y -= button_height;
 				
@@ -134,9 +132,19 @@ public class entity_menuMain extends engine_entity {
 //					leave();
 			}
 			
-			logo_y += (logo_y_target - logo_y) * 1.2f * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
-			ref.draw.setDrawColor(1, 1, 1, mgr.menuFirst.logo_alpha);
-			ref.draw.drawTexture(ref.screen_width/2, logo_y, mgr.menuFirst.logo_w, mgr.menuFirst.logo_h, 0, 0, 0, game_constants.layer6_HUD, game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
+			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
+			ref.draw.drawTexture(
+				ref.screen_width/2,
+//				ref.screen_height - mgr.gameMain.padding_y/2 - mgr.menuFirst.logo_h/4,
+				ref.screen_height - mgr.gameMain.padding_y/2 - button_height,
+				mgr.menuFirst.logo_w, mgr.menuFirst.logo_h,
+				0,
+				mgr.menuFirst.logo_h/2f,
+				0,
+				game_constants.layer6_HUD,
+				game_textures.SUB_LOGO,
+				game_textures.TEX_SPRITES
+			);
 		}
 	}
 	
@@ -151,8 +159,8 @@ public class entity_menuMain extends engine_entity {
 			fade_main = true;
 			mgr.gameMain.shade_alpha = 1;
 			mgr.gameMain.shade_alpha_target = 0;
-			mgr.menuFirst.logo_alpha = 1;
-			mgr.menuFirst.logo_alpha_target = 0;
+//			mgr.menuFirst.logo_alpha = 1;
+//			mgr.menuFirst.logo_alpha_target = 0;
 		}
 	}
 	
@@ -184,7 +192,7 @@ public class entity_menuMain extends engine_entity {
 		non_fading_button = -1;
 		mgr.gameMain.shade_alpha = 0;
 		mgr.gameMain.shade_alpha_target = 1;
-		mgr.menuFirst.logo_alpha_target = 1;
+//		mgr.menuFirst.logo_alpha_target = 1;
 		ref.room.changeRoom(game_rooms.ROOM_MENUMAIN);
 	}
 	

@@ -1,6 +1,6 @@
 ///// This Commit /////
 
-Finished score saving. Polished lots of small things.
+
 
 //////// TODO /////////
 
@@ -17,11 +17,15 @@ Finished score saving. Polished lots of small things.
 [X] 0 - resize the popup a little smaller
 [X] 0 - make post game screen streak/high score gap the same height as the button padding
 [X] 0 - change score flashing color to match button borders
+[ ] 0 - move postgame difficulty down into score box
 [ ] 1 - add stats to pause menu
 [ ] 1 - add better sound effects
 [ ] 1 - add music
 [ ] 1 - build records
 [X] 1 - add real stats to post screen
+[ ] 1 - add Google analytics tracking
+[ ] 1 - redo icon
+[ ] 1 - about screen which slides in from the right side of the screen and accompanying menu button
 [ ] 1 - [later] add about screen from records menu, link to website.
 [ ] 1 - [later] add per-difficulty heatmaps
 
@@ -32,7 +36,15 @@ think of better names for g_textures and loaded_assets...
 	
 switch argument order for collisionAABB, make x,y come before: x,y,w,h
 
-rename game_constnats/whatever to just whatever
+rename game_constnats/whatever to just whatever. shorten the names.
+
+add Unicode support
+
+texture compression
+
+
+
+
 
 
 

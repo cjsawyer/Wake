@@ -36,17 +36,7 @@ public class entity_menuPostGame extends engine_entity {
 			if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_out ) {
 				leave();
 			}
-			
-			
 		
-//			if (mgr.gameMain.new_high_score) {
-//				ref.draw.setDrawColor(0.5f, 0.5f, 1, ((float)Math.sin((float)(SystemClock.uptimeMillis() * mgr.menuFirst.DEG_TO_RAD / 500f * 180f))) + 1);
-//				ref.draw.drawTextSingleString(ref.screen_width/2, ref.screen_height/2 - mgr.gameMain.text_size*3/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, "NEW BEST!", game_textures.TEX_FONT1);
-//			}
-			
-			
-			
-			
 			
 			float box_width = ref.screen_width - mgr.gameMain.padding_x;
 			float box_height = ref.screen_height - mgr.gameMain.padding_y;
