@@ -218,8 +218,16 @@ public class engine_sound {
 		}
 	}
 	public void pauseMusic() {
-		music_playing = false;
-		mPlayer.pause();
+		if (music_playing) {
+			music_playing = false;
+			mPlayer.pause();
+		}
+	}
+	public void pauseMusicHARD() {
+		if (music_playing) {
+//			music_playing = false;
+			mPlayer.pause();
+		}
 	}
 	public void stopMusic() {
 		if (mPlayer.isPlaying()) {

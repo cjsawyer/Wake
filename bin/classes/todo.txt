@@ -1,12 +1,8 @@
 ///// This Commit /////
 
-Wake Version 1.0
-
-added Google Analytics
-added music
-redid icon
-removed sound effects
-added pro constant
+Wake Version 1.1
+Removed fancy pause menu.
+Made music restart after re-opening app.
 
 //////// TODO /////////
 
@@ -54,6 +50,14 @@ UA-50122948-1
 
 
 //////// DONE ////////
+
+Wake Version 1.0
+added Google Analytics
+added music
+redid icon
+removed sound effects
+added pro constant
+
 
 finished records screen.
 touched up pause screen.

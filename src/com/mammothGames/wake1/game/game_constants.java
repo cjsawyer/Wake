@@ -7,12 +7,13 @@ public class game_constants {
 	public static boolean devmode = false;
 	public static boolean debug = false;
 	public static boolean godmode = false;
-	public static boolean pro = false;
+	public static boolean pro = true;
 
 	public static boolean is_landscape = false;
 	
 	// Leave null for no ads.
-	public static String adMob_publisher_id = "ca-app-pub-6028924870146472/5120597547";
+//	public static String adMob_publisher_id = "ca-app-pub-6028924870146472/5120597547"; old wake
+	public static String adMob_publisher_id = "ca-app-pub-6028924870146472/6330592345";
 	public static String google_analytics_id = "UA-50122948-1";
 	
 	public static int max_particles = 200;

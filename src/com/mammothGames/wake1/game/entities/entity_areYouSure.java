@@ -36,7 +36,7 @@ public class entity_areYouSure extends engine_entity {
 			case STATE_ABANDON:
 				if (yes_or_no_action) {
 					setPopupOpenness(false);
-					mgr.menuPauseHUD.setPauseHARD(false);
+					mgr.menuPauseHUD.setPause(false);
 					mgr.gameMain.floor_height_target = 0;
 					mgr.gameMain.endGame();
 				} else {

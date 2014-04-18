@@ -3,7 +3,7 @@ package com.mammothGames.wake1.gameEngine;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import com.mammothGames.wake1free.R;
+import com.mammothGames.wake1.R;
 import com.mammothGames.wake1.game.game_constants;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -138,7 +138,6 @@ public class engine_android extends Activity {
 		
 		super.onResume();
 		open_gl_surface_view.onResume();
-		
 //		ref.main.onLoad();
 
 		//do other unpause stuff here
@@ -151,7 +150,7 @@ public class engine_android extends Activity {
 		Log.e("reywas","onPause");
 		open_gl_surface_view.onPause();
 		ref.renderer.assets_loaded = false;
-		ref.sound.pauseMusic();
+		ref.sound.pauseMusicHARD();
 		ref.main.onScreenSleep();
 //		System.gc();
 		super.onPause();

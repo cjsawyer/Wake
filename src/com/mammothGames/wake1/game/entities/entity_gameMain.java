@@ -274,8 +274,8 @@ public class entity_gameMain extends engine_entity {
 		mgr.gameMain.shade_alpha = -2; // so there's an offset before you can start to see it while fading in
 		mgr.gameMain.shade_alpha_target = 1; // fade in post game text
 		mgr.menuPauseHUD.HUD_y_target = mgr.menuPauseHUD.base_hud_height*2; // slide HUD back up
+		mgr.menuPauseHUD.setPause(false);
 		
-		mgr.menuPauseHUD.setPause(true);
 		mgr.menuPostGame.start();
 	}
 	
