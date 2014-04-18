@@ -1,6 +1,7 @@
 ///// This Commit /////
 
-
+finished records screen.
+touched up pause screen.
 
 //////// TODO /////////
 
@@ -9,20 +10,11 @@
 | 1 = hard |
 ------------
 
-[X] 0 - make mammoth longer
-[X] 0 - remove intro wake movement
-[X] 0 - remove main menu button fade
-[X] 0 - change back button behavior in game to back>are you sure?>back>menu
-[X] 0 - change back button behavior in menu to back>are you sure?>back>exit
-[X] 0 - resize the popup a little smaller
-[X] 0 - make post game screen streak/high score gap the same height as the button padding
-[X] 0 - change score flashing color to match button borders
 [ ] 0 - move postgame difficulty down into score box
 [ ] 1 - add stats to pause menu
 [ ] 1 - add better sound effects
 [ ] 1 - add music
-[ ] 1 - build records
-[X] 1 - add real stats to post screen
+[X] 1 - build records
 [ ] 1 - add Google analytics tracking
 [ ] 1 - redo icon
 [ ] 1 - about screen which slides in from the right side of the screen and accompanying menu button
@@ -60,6 +52,16 @@ texture compression
 
 
 //////// DONE ////////
+
+[X] 0 - make mammoth longer
+[X] 0 - remove intro wake movement
+[X] 0 - remove main menu button fade
+[X] 0 - change back button behavior in game to back>are you sure?>back>menu
+[X] 0 - change back button behavior in menu to back>are you sure?>back>exit
+[X] 0 - resize the popup a little smaller
+[X] 0 - make post game screen streak/high score gap the same height as the button padding
+[X] 0 - change score flashing color to match button borders
+[X] 1 - add real stats to post screen
 
 added functional post-game screen
 removed drawTextSingleString, simplified drawText

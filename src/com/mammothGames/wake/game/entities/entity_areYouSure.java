@@ -24,9 +24,11 @@ public class entity_areYouSure extends engine_entity {
 	
 	public final int STATE_ABANDON = 0;
 	public final int STATE_QUIT = 1;
+	public final int STATE_ERASE = 2;
 	private final String[] state_text = {
 		"Abandon game?",
-		"Quit game?"
+		"Quit game?",
+		"Erase records?"
 	};
 	public void buttonAction(boolean yes_or_no_action) {
 		switch (action) {
@@ -45,6 +47,31 @@ public class entity_areYouSure extends engine_entity {
 			case STATE_QUIT:
 				if (yes_or_no_action) {
 					ref.main.exitApp();
+				} else {
+					mgr.areYouSure.setPopupOpenness(false);
+				}
+				break;
+				
+			case STATE_ERASE:
+				if (yes_or_no_action) {
+					ref.file.save("SCO_E", String.valueOf(0) );
+					ref.file.save("STR_E", String.valueOf(0) );
+					ref.file.save("PLY_E", String.valueOf(0) );
+					
+					ref.file.save("SCO_M", String.valueOf(0) );
+					ref.file.save("STR_M", String.valueOf(0) );
+					ref.file.save("PLY_M", String.valueOf(0) );
+					
+					ref.file.save("SCO_H", String.valueOf(0) );
+					ref.file.save("STR_H", String.valueOf(0) );
+					ref.file.save("PLY_H", String.valueOf(0) );
+					
+					ref.file.save("SCO_HE", String.valueOf(0) );
+					ref.file.save("STR_HE", String.valueOf(0) );
+					ref.file.save("PLY_HE", String.valueOf(0) );
+					
+					mgr.menuRecords.loadScores();
+					mgr.areYouSure.setPopupOpenness(false);
 				} else {
 					mgr.areYouSure.setPopupOpenness(false);
 				}

@@ -176,7 +176,7 @@ public class entity_menuMain extends engine_entity {
 				mgr.menuDifficulty.start();
 				break;
 			case PREP_menuRecords:
-				mgr.menuRecords.start();
+				mgr.menuRecords.start(0);
 				break;
 			case PREP_menuMain:
 				mgr.menuFirst.start();

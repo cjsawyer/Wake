@@ -170,11 +170,17 @@ public class entity_gameMain extends engine_entity {
 	final String SCO_H = "SCO_H";
 	final String SCO_HE = "SCO_HE";
 	
-	final String STR_E = "SCO_E";
-	final String STR_M = "SCO_M";
-	final String STR_H = "SCO_H";
-	final String STR_HE = "SCO_HE";
-	private String STR, SCO;
+	final String STR_E = "STR_E";
+	final String STR_M = "STR_M";
+	final String STR_H = "STR_H";
+	final String STR_HE = "STR_HE";
+	
+	final String PLY_E = "PLY_E";
+	final String PLY_M = "PLY_M";
+	final String PLY_H = "PLY_H";
+	final String PLY_HE = "PLY_HE";
+	
+	private String STR, SCO, PLY;
 	
 	public void setDifficulty(int diff) {
 		current_diff = diff;
@@ -184,22 +190,26 @@ public class entity_gameMain extends engine_entity {
 			current_diff_string = "EASY";
 			SCO  = SCO_E;
 			STR  = STR_E;
+			PLY = PLY_E;
 		}
 		if(diff == DIF_MEDIUM) {
 			current_diff_string = "MEDIUM";
 			SCO  = SCO_M;
 			STR  = STR_M;
+			PLY = PLY_M;
 		}
 		if(diff == DIF_HARD) {
 			current_diff_string = "HARD";
 			SCO  = SCO_H;
 			STR  = STR_H;
+			PLY = PLY_H;
 		}
 		if(diff == DIF_HELL) {
 			current_diff_string = "HELL";
 			mgr.stars.red_alpha_target = 0.8f;
 			SCO  = SCO_HE;
 			STR  = STR_HE;
+			PLY = PLY_HE;
 		}
 		else
 			mgr.stars.red_alpha_target = 0;
@@ -218,6 +228,8 @@ public class entity_gameMain extends engine_entity {
 		} else {
 			best_points_streak = Integer.parseInt(ref.file.load(STR)); 
 		}
+		
+		
 		
 	}
 	
@@ -244,6 +256,18 @@ public class entity_gameMain extends engine_entity {
 			new_best_streak = true;
 			ref.file.save(STR, String.valueOf(best_points_streak) );
 		}
+		
+		
+		int games;
+		String games_string = ref.file.load(PLY);
+		if (games_string.equals("")) {
+			games = 0;
+		} else {
+			games = Integer.parseInt(ref.file.load(PLY)); 
+		}
+		ref.file.save(PLY, String.valueOf(games+1) );
+		
+		
 		
 //		floor_height_target = 0; // make floor sink
 		mgr.gameMain.shade_alpha = -2; // so there's an offset before you can start to see it while fading in

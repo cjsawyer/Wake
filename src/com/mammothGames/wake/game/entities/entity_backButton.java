@@ -62,7 +62,11 @@ public class entity_backButton extends engine_entity {
 				break;
 
 			case game_rooms.ROOM_MENURECORDS:
-				mgr.menuRecords.prepLeave(mgr.menuRecords.PREP_menuTop);
+				if ( mgr.areYouSure.getPopupOpenness() )
+					mgr.areYouSure.setPopupOpenness(false);
+				else 
+					mgr.menuRecords.prepLeave(mgr.menuRecords.PREP_menuTop);
+				
 				break;
 				
 			case game_rooms.ROOM_MENUOPTIONS:

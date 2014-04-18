@@ -54,7 +54,7 @@ public class entity_menuPostGame extends engine_entity {
 			float dx=0;
 			float dy=0;
 			if(mgr.gameMain.current_diff==mgr.gameMain.DIF_HELL) {
-				// Do the shaky text for hall mode
+				// Do the shaky text for hell mode
 				float shake_range = mgr.gameMain.text_size/20;
 				dx = ref.main.randomRange(-shake_range, shake_range);
 				dy = ref.main.randomRange(-shake_range, shake_range);
@@ -152,7 +152,7 @@ public class entity_menuPostGame extends engine_entity {
 			ref.draw.text.append("RECORDS");
 			ref.draw.drawText(ref.screen_width/2, draw_y-box_partition/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 			
-			if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN)
+			if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) )
 				if (ref.collision.point_AABB( mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, ref.screen_width/2, draw_y-box_partition/2, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
 					prepLeave(room_records);
 				}
@@ -177,7 +177,7 @@ public class entity_menuPostGame extends engine_entity {
 			ref.draw.text.append("AGAIN");
 			ref.draw.drawText(l_button_x, draw_y-box_partition/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 			
-			if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN)
+			if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) )
 				if (ref.collision.point_AABB(lr_width, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, l_button_x, draw_y-box_partition/2, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
 					prepLeave(room_game);
 				}
@@ -195,7 +195,7 @@ public class entity_menuPostGame extends engine_entity {
 			ref.draw.text.append("QUIT");
 			ref.draw.drawText(r_button_x, draw_y-box_partition/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
 			
-			if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN)
+			if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) )
 				if (ref.collision.point_AABB( lr_width, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, r_button_x, draw_y-box_partition/2, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
 					prepLeave(room_menu);
 				}
@@ -229,7 +229,7 @@ public class entity_menuPostGame extends engine_entity {
 			mgr.gameMain.startGame();
 			break;
 		case room_records:
-			mgr.menuRecords.start();
+			mgr.menuRecords.start(mgr.menuDifficulty.tab);
 			break;
 		case room_menu:
 			mgr.menuMain.start();

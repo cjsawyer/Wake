@@ -219,7 +219,8 @@ public class engine_gl_textureLoader {
 //	    	    			ref.android.open_gl_surface_view.requestRender();//CHanged this post release 1
 //	    	    			ref.android.open_gl_surface_view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	    	    			
-	    	    			byteBuffer.clear();
+	    	    			if (byteBuffer != null)
+	    	    				byteBuffer.clear();
 	    	    			byteBuffer = null;
 	    	    			//System.gc();
 	    	    			

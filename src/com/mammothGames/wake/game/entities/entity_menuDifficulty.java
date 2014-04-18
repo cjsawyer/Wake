@@ -42,6 +42,9 @@ public class entity_menuDifficulty extends engine_entity {
 		button_border_size = draw_height/6;
 	}
 	
+	
+	int tab = 0;
+	
 	@Override
 	public void sys_step() {
 		
@@ -123,6 +126,7 @@ public class entity_menuDifficulty extends engine_entity {
 					if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN)
 						if (ref.collision.point_AABB(draw_width, draw_height, draw_x, draw_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
 							pressed_button = i;
+							tab = i;
 						}
 				
 				realative_y -= button_height;

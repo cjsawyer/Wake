@@ -144,7 +144,7 @@ public class entity_menuPauseHUD extends engine_entity {
 			
 			// Pause text, above and off the screen when not paused.
 			ref.draw.setDrawColor(1, 1, 1, menu_openess_ratio);
-			ref.draw.text.append("paused");
+			ref.draw.text.append("tap to play");
 			ref.draw.drawText(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, game_constants.layer5_underHUD, game_textures.TEX_FONT1);
 			ref.draw.text.append("press back to quit");
 			ref.draw.drawText(ref.screen_width/2, ref.screen_height*3/2 - pause_menu_y - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, game_constants.layer5_underHUD, game_textures.TEX_FONT1);
