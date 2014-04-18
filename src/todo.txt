@@ -1,7 +1,12 @@
 ///// This Commit /////
 
-finished records screen.
-touched up pause screen.
+Wake Version 1.0
+
+added Google Analytics
+added music
+redid icon
+removed sound effects
+added pro constant
 
 //////// TODO /////////
 
@@ -12,14 +17,10 @@ touched up pause screen.
 
 [ ] 0 - move postgame difficulty down into score box
 [ ] 1 - add stats to pause menu
-[ ] 1 - add better sound effects
-[ ] 1 - add music
-[X] 1 - build records
-[ ] 1 - add Google analytics tracking
-[ ] 1 - redo icon
 [ ] 1 - about screen which slides in from the right side of the screen and accompanying menu button
 [ ] 1 - [later] add about screen from records menu, link to website.
 [ ] 1 - [later] add per-difficulty heatmaps
+[ ] 0 - clean up log usage
 
 
 //////// ENGINE /////////
@@ -35,6 +36,7 @@ add Unicode support
 texture compression
 
 
+UA-50122948-1
 
 
 
@@ -52,6 +54,10 @@ texture compression
 
 
 //////// DONE ////////
+
+finished records screen.
+touched up pause screen.
+[X] 1 - build records
 
 [X] 0 - make mammoth longer
 [X] 0 - remove intro wake movement

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mammothGames.wake"
-    android:versionCode="2"
-    android:versionName="1.1" >
+    package="com.mammothGames.wake1free"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
     <uses-sdk android:targetSdkVersion="17" android:minSdkVersion="9"/>
     
@@ -25,7 +25,7 @@
         
         <activity
             android:immersive="true"
-            android:name="com.mammothGames.wake.gameEngine.engine_android"
+            android:name="com.mammothGames.wake1.gameEngine.engine_android"
             android:label="@string/app_name"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 			
