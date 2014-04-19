@@ -11,6 +11,7 @@ Made music restart after re-opening app.
 | 1 = hard |
 ------------
 
+[ ] 0 - make music restart at same point when restarting app
 [ ] 0 - move postgame difficulty down into score box
 [ ] 1 - add stats to pause menu
 [ ] 1 - about screen which slides in from the right side of the screen and accompanying menu button
