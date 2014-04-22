@@ -86,7 +86,7 @@ public class engine_gl_circle {
     	
 		GLES20.glEnableVertexAttribArray(ref.renderer.VS_a_Position);
 		GLES20.glEnableVertexAttribArray(ref.renderer.VS_a_Color);
-//		GLES20.glEnableVertexAttribArray(ref.renderer.VS_a_Texture);
+		GLES20.glEnableVertexAttribArray(ref.renderer.VS_a_Texture);
 	
 		
 		Matrix.multiplyMM(ref.renderer.mMVPMatrix, 0, ref.renderer.mViewMatrix, 0, ref.renderer.mModelMatrix, 0);

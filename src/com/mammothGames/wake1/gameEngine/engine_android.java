@@ -23,12 +23,16 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.GAServiceManager;
 
@@ -79,6 +83,9 @@ public class engine_android extends Activity {
 	    
 	    
 	    ref.renderer = new engine_gl_renderer(ref);
+	    //TODO TODO TODO TODO
+	    open_gl_surface_view.setEGLConfigChooser(5, 6, 5, 0, 0, 0);
+	    //TODO TODO TODO TODO
 		open_gl_surface_view.setRenderer(ref.renderer);
 		open_gl_surface_view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
@@ -189,29 +196,22 @@ public class engine_android extends Activity {
 			if (!game_constants.pro) {
 				RelativeLayout rl = (RelativeLayout)findViewById(R.id.adHolder);
 		
-				av = new AdView(this, AdSize.BANNER, game_constants.adMob_publisher_id);
-		//		av.setId(adId);
 				
+				av = new AdView(this, AdSize.BANNER, game_constants.adMob_publisher_id);
 				
 				RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-				
 				relativeParams.addRule(h_align);
 				relativeParams.addRule(v_align);
 				
-		//		relativeParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 				
 				rl.addView(av, relativeParams);
 		
-				
 				AdRequest adRequest = new AdRequest();
-				
-				// TODO: un comment these next two lines for testing without loading ads.
-				//adRequest.addTestDevice("812B50DC0B03B057E9783D3F94E83456"); // Samsung G 7.0 Plus
-				//adRequest.addTestDevice("D6E4059EE90468FF200FCF0E0BC23480"); // Samsung GS3
 		
 				av.setEnabled(true);
 		        av.setVisibility(View.VISIBLE);
 				av.loadAd(adRequest);
+				
 			}
 		}
 	}
@@ -330,6 +330,9 @@ public class engine_android extends Activity {
 //    public boolean onTouchEvent(MotionEvent event) {
     @Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
+    	
+    	super.dispatchTouchEvent(event);
+    	
 		temp_motion_event_action = event.getActionMasked();//getActionMasked
 		
 		switch (temp_motion_event_action) {

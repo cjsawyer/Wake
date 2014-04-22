@@ -18,24 +18,13 @@
         android:layout_height="fill_parent" />
         
         
-        
-		<!-- <com.google.ads.AdView android:id="@+id/adView"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:layout_centerHorizontal="true"
-		ads:adUnitId="a151aabb635fc6e"
-		ads:adSize="BANNER"
-		ads:loadAdOnCreate="false"
-		>
-	    </com.google.ads.AdView> -->
-
 		<RelativeLayout
         	android:id="@+id/adHolder"
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
 		    android:orientation="vertical" >
 		</RelativeLayout>
+        
     
     </RelativeLayout>
 

@@ -44,7 +44,7 @@ public class engine_gl_texture {
 	float sheet_height;
 	
 	protected int number_times_binded_this_frame = 0;
-	private void setTextureCoordsAndSheet(int texture_id, int texture_sheet_to_bind){
+	void setTextureCoordsAndSheet(int texture_id, int texture_sheet_to_bind){
 		
 		if ((ref.current_texture_id != texture_id) | (ref.current_texture_sheet != texture_sheet_to_bind)){
 		

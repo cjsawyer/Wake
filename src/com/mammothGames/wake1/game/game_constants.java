@@ -7,7 +7,7 @@ public class game_constants {
 	public static boolean devmode = false;
 	public static boolean debug = false;
 	public static boolean godmode = false;
-	public static boolean pro = true;
+	public static boolean pro = false;
 
 	public static boolean is_landscape = false;
 	

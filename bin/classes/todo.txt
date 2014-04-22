@@ -1,8 +1,6 @@
 ///// This Commit /////
 
-Wake Version 1.1
-Removed fancy pause menu.
-Made music restart after re-opening app.
+Fixed unclickable ads
 
 //////// TODO /////////
 
@@ -11,7 +9,17 @@ Made music restart after re-opening app.
 | 1 = hard |
 ------------
 
-[ ] 0 - make music restart at same point when restarting app
+// Next release
+[ ] 2 - make music restart at same point when restarting app
+[ ] 1 - rename Wake Free to Wake and rename Wake to Wake Pro
+[ ] 1 - extend ad refresh rate to 60s
+[ ] 2 - make free users wait for the poastgame score to spin up to full, pro still has the animation, but doesn't need to wait.
+[ ] 1 - tablet screenshot
+
+[ ] 1 - look into Splort fullscreen
+
+[ ] 3 - DOGE DROP
+
 [ ] 0 - move postgame difficulty down into score box
 [ ] 1 - add stats to pause menu
 [ ] 1 - about screen which slides in from the right side of the screen and accompanying menu button
@@ -21,6 +29,13 @@ Made music restart after re-opening app.
 
 
 //////// ENGINE /////////
+
+GLES20.gl___DISABLE___VertexAttribArray(ref.renderer.VS_a_Color);
+http://stackoverflow.com/questions/21112743/android-strange-error-in-opengles-2-0-calling-gluniformmatrix4fvumatrixlocatio
+
+VVV LOOK INTO THIS VVV
+setEGLConfigChooser(5, 6, 5, 0, 0, 0);
+http://stackoverflow.com/questions/13183121/android-opengl-es-2-not-working-on-all-devices
 
 think of better names for g_textures and loaded_assets...
 	
@@ -51,6 +66,10 @@ UA-50122948-1
 
 
 //////// DONE ////////
+
+Wake Version 1.1
+Removed fancy pause menu.
+Made music restart after re-opening app.
 
 Wake Version 1.0
 added Google Analytics
