@@ -176,7 +176,6 @@ public class entity_menuPauseHUD extends engine_entity {
 			// Unpause if the screen is touched
 			if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
 				
-				
 				//right corner
 				if (ref.room.get_current_room() == game_rooms.ROOM_GAME)
 					if ( (ref.input.get_touch_x(0) >= ref.screen_width - button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
@@ -184,12 +183,10 @@ public class entity_menuPauseHUD extends engine_entity {
 							switchPause();
 					}
 				
-				
-				
 			}
 			
 			// mute/unmute button
-			if (ref.room.get_current_room() == game_rooms.ROOM_GAME) {
+			if (ref.room.get_current_room() == game_rooms.ROOM_GAME)  {
 				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
 					// Left corner
 					if (  (ref.input.get_touch_x(0) <= button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
@@ -199,6 +196,10 @@ public class entity_menuPauseHUD extends engine_entity {
 						ref.sound.setMusicState(gameMuted, true, true);
 					}
 				}
+			}	
+			
+			//draw button
+			if ( (ref.room.get_current_room() == game_rooms.ROOM_GAME) || (ref.room.get_current_room() == game_rooms.ROOM_POSTGAME) )  {
 				ref.draw.setDrawColor(1, 1, 1, 1);
 				if (gameMuted) {
 					ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, -button_size/2, button_size/2, 0, game_constants.layer6_HUD, game_textures.SUB_MUTED, game_textures.TEX_SPRITES);

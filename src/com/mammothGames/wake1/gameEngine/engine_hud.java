@@ -126,7 +126,7 @@ public class engine_hud {
 			ref.draw.setDrawColor(1, 0, 0, 1);
 			
 			ref.draw.text.append(  adjusted_FPS   );
-			ref.draw.drawText(0, ref.screen_height, debug_hud_text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_TOP, 500, game_textures.TEX_FONT1);
+			ref.draw.drawText(0, ref.screen_height, debug_hud_text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, 500, game_textures.TEX_FONT1);
 			
 		} else {
 			button_next.draw = true;

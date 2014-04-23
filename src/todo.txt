@@ -1,6 +1,6 @@
 ///// This Commit /////
 
-Fixed unclickable ads
+Fixed the mute button disappearing at the end of games
 
 //////// TODO /////////
 
@@ -63,9 +63,9 @@ UA-50122948-1
 
 
 
-
-
 //////// DONE ////////
+
+Fixed unclickable ads
 
 Wake Version 1.1
 Removed fancy pause menu.

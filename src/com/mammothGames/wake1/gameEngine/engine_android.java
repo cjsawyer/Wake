@@ -3,7 +3,7 @@ package com.mammothGames.wake1.gameEngine;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import com.mammothGames.wake1.R;
+import com.mammothGames.wake1free.R;
 import com.mammothGames.wake1.game.game_constants;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -90,33 +90,9 @@ public class engine_android extends Activity {
 		open_gl_surface_view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
 		ref.floatbuffers = new engine_gl_floatbuffers(ref);
-
-		
-		
-//		FrameLayout Game = new FrameLayout(this);
-//		
-//		LinearLayout ad = new LinearLayout (this);
-//		
-//		TextView text = new TextView(this);
-//		text.setText("hello there :)");
-//		ad.setMinimumWidth(100);
-//		ad.setMinimumHeight(200);
-//		ad.addView(text);
-//		
-//		setContentView(Game);
-//		
-//		Game.addView(ad);
-//		Game.addView(open_gl_surface_view);
-		
-//		setContentView(open_gl_surface_view);
-		
-		
-//		open_gl_surface_view.setLongClickable(true);
 		
 		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-		
-		//loadAd();
-		
+			
 		
 		//Touch stuff
 		initate_touch_points();
