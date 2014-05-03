@@ -95,6 +95,12 @@ public class entity_popup extends engine_entity {
 		float border_draw_width = ref.draw.getTextWidth(mgr.gameMain.text_size, textures.TEX_FONT1) + 4 * mgr.menuDifficulty.button_border_size;
 		
 		
+//		float title_h, text_h, button_h;
+//		text_h = ;
+//		title_h = ;
+//		button_h = mgr.menuDifficulty.button_height - mgr.menuDifficulty.button_border_size;
+		
+		
 		
 		float draw_width = border_draw_width - mgr.menuDifficulty.button_border_size;
 		float draw_x = ref.screen_width/2;

@@ -13,6 +13,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.graphics.PointF;
 import android.media.AudioManager;
 import android.opengl.GLES20;
@@ -81,13 +82,16 @@ public class engine_android extends Activity {
 	    audio = (AudioManager) getSystemService(this.AUDIO_SERVICE);
 	    
 	    
-//	    open_gl_surface_view.setZOrderOnTop(true);
-	    
-	    
 	    ref.renderer = new engine_gl_renderer(ref);
-	    //TODO TODO TODO TODO
-	    open_gl_surface_view.setEGLConfigChooser(5, 6, 5, 0, 0, 0);
-	    //TODO TODO TODO TODO
+	    
+	    // TODO: uncomment this if older phones are crashign again. The getHolder line should make 8888 work.
+	    // open_gl_surface_view.setEGLConfigChooser(5, 6, 5, 0, 0, 0);
+	    open_gl_surface_view.setEGLConfigChooser(8, 8, 8, 8, 0, 0); 
+	    open_gl_surface_view.getHolder().setFormat(PixelFormat.RGBA_8888);
+	    
+	    // Turn on error-checking and logging
+	    // open_gl_surface_view.setDebugFlags(GLSurfaceView.DEBUG_CHECK_GL_ERROR | GLSurfaceView.DEBUG_LOG_GL_CALLS);
+	    
 		open_gl_surface_view.setRenderer(ref.renderer);
 		open_gl_surface_view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 

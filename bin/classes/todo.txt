@@ -1,8 +1,6 @@
 ///// This Commit /////
 
-added immersive full-screen mode
-added draw.getTextWidth
-started menu re-arranging
+
 
 //////// TODO /////////
 
@@ -11,17 +9,21 @@ started menu re-arranging
 | 1 = hard |
 ------------
 
+fancy pause popup
+popup transitions
+fix menu buttons
+
+
 // Next release
 [ ] 2 - make music restart at same point when restarting app
 [ ] 2 - make free users wait for the poastgame score to spin up to full, pro still has the animation, but doesn't need to wait.
 [ ] 1 - tablet screenshot
 
-[ ] 1 - look into Splort fullscreen
 
 [ ] 3 - DOGE DROP
 
-[ ] 0 - move postgame difficulty down into score box
-[ ] 1 - add stats to pause menu
+[ ] 1 - redo postgame screen
+[ ] 1 - add pause menu with settings/
 [ ] 1 - about screen which slides in from the right side of the screen and accompanying menu button
 [ ] 1 - [later] add about screen from records menu, link to website.
 [ ] 1 - [later] add per-difficulty heatmaps
@@ -40,13 +42,6 @@ make bar flash red when a combo is broken
 
 
 //////// ENGINE /////////
-
-GLES20.gl___DISABLE___VertexAttribArray(ref.renderer.VS_a_Color);
-http://stackoverflow.com/questions/21112743/android-strange-error-in-opengles-2-0-calling-gluniformmatrix4fvumatrixlocatio
-
-VVV LOOK INTO THIS VVV
-setEGLConfigChooser(5, 6, 5, 0, 0, 0);
-http://stackoverflow.com/questions/13183121/android-opengl-es-2-not-working-on-all-devices
 
 think of better names for g_textures and loaded_assets...
 	
@@ -69,6 +64,10 @@ vector image rendering
 
 
 //////// DONE ////////
+
+added immersive full-screen mode
+added draw.getTextWidth
+started menu re-arranging
 
 Fixed the mute button disappearing at the end of games
 renamed Wake Free to Wake and renamed Wake to Wake Pro
