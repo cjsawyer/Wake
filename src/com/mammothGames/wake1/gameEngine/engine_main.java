@@ -232,7 +232,7 @@ public class engine_main {
 				System.arraycopy(entity_list, 0, new_list, 0, entity_list_length);
 				entity_list = new_list;
 				entity_list_length = entity_list_length + entity_list_length/2;
-				if(game_constants.devmode) {
+				if(constants.devmode) {
 					Log.e("reywas","Expanded entity_list to length of: " + entity_list_length);
 				}
 				new_list = null;
@@ -351,7 +351,7 @@ public class engine_main {
 			is_first_step = false;
 		}
 		
-		if (game_constants.devmode){
+		if (constants.devmode){
 			ref.hud.update();
 		}
 		

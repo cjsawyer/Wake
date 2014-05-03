@@ -1,6 +1,6 @@
 package com.mammothGames.wake1.gameTESTS.feature_tests;
 
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 

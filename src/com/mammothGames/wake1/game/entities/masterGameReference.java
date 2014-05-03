@@ -16,7 +16,7 @@ public class masterGameReference {
 	entity_menuOptions menuOptions;
 	entity_menuAbout menuAbout;
 	
-	entity_areYouSure areYouSure;
+	entity_popup areYouSure;
 	
 	entity_stars stars;
 	

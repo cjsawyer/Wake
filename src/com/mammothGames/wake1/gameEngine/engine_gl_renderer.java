@@ -9,8 +9,8 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import com.mammothGames.wake1free.R;
-import com.mammothGames.wake1.game.game_constants;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.textures;
 //import com.reywas.testGameName.*;
 
 import android.content.Context;
@@ -197,7 +197,7 @@ public class engine_gl_renderer implements GLSurfaceView.Renderer {
 		if (assets_loaded == false){
 			
 			//Load the error texture before anything else.
-			ref.textureLoader.sys_loadTexture(game_textures.TEX_ERROR);
+			ref.textureLoader.sys_loadTexture(textures.TEX_ERROR);
 			// Reload previously loaded textures
 			ref.textureLoader.reloadLoadedTextues();
 			

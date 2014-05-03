@@ -3,9 +3,9 @@ package com.mammothGames.wake1.game.entities;
 import android.util.FloatMath;
 import android.util.Log;
 
-import com.mammothGames.wake1.game.game_constants;
-import com.mammothGames.wake1.game.game_rooms;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -60,15 +60,15 @@ public class entity_stars extends engine_entity {
 		tall_angle -= ref.main.time_scale/4;
 		
 		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 1 * stars_alpha);
-		ref.draw.drawTexture(ref.screen_width/2, 0, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, game_constants.layer0_backgroundSquares, 1, game_textures.TEX_STARS);
+		ref.draw.drawTexture(ref.screen_width/2, 0, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
 		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 0.9f * stars_alpha);
-		ref.draw.drawTexture(ref.screen_width/2, 0, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, game_constants.layer0_backgroundSquares, 1, game_textures.TEX_STARS);
+		ref.draw.drawTexture(ref.screen_width/2, 0, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
 
 	}
 	
 	@Override
 	public void onRoomLoad() {
-		if (ref.room.get_current_room() == game_rooms.ROOM_GAME)
+		if (ref.room.get_current_room() == rooms.ROOM_GAME)
 			pausable = true;
 		else
 			pausable = false;

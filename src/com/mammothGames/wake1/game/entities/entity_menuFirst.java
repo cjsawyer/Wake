@@ -2,9 +2,9 @@ package com.mammothGames.wake1.game.entities;
 
 import android.os.SystemClock;
 
-import com.mammothGames.wake1.game.game_constants;
-import com.mammothGames.wake1.game.game_rooms;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -80,7 +80,7 @@ public class entity_menuFirst extends engine_entity {
 		mgr.menuAbout = new entity_menuAbout(mgr);
 		ref.main.addEntity(mgr.menuAbout);
 		
-		mgr.areYouSure = new entity_areYouSure(mgr);
+		mgr.areYouSure = new entity_popup(mgr);
 		ref.main.addEntity(mgr.areYouSure);
 		
 		
@@ -91,7 +91,7 @@ public class entity_menuFirst extends engine_entity {
 		
 		//logo_alpha += (logo_alpha_target - logo_alpha) * 2 * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
 		
-		if (ref.room.get_current_room() == game_rooms.ROOM_MENUFIRST) {
+		if (ref.room.get_current_room() == rooms.ROOM_MENUFIRST) {
 			
 			wait_time -= ref.main.time_delta;
 			
@@ -102,8 +102,8 @@ public class entity_menuFirst extends engine_entity {
 //				ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
 			
 			// Figures out the details of drawing the logo at 3/2 the width of the screen, properly scaling both width and height
-			float tWidth = ref.draw.getSubTextureWidth(game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
-			float tHeight = ref.draw.getSubTextureHeight(game_textures.SUB_LOGO, game_textures.TEX_SPRITES);
+			float tWidth = ref.draw.getSubTextureWidth(textures.SUB_LOGO, textures.TEX_SPRITES);
+			float tHeight = ref.draw.getSubTextureHeight(textures.SUB_LOGO, textures.TEX_SPRITES);
 			logo_w = ref.screen_width*2f/3f;
 			float tWidthHeightRatio = logo_w/tWidth;
 			logo_h = tHeight * tWidthHeightRatio;
@@ -139,7 +139,7 @@ public class entity_menuFirst extends engine_entity {
 //		logo_alpha = -1;
 //		logo_alpha_target = 1;
 		
-		ref.room.changeRoom(game_rooms.ROOM_MENUFIRST);
+		ref.room.changeRoom(rooms.ROOM_MENUFIRST);
 	}
 
 }

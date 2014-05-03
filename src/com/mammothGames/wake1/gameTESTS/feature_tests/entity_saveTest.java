@@ -1,6 +1,6 @@
 package com.mammothGames.wake1.gameTESTS.feature_tests;
 
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -40,32 +40,32 @@ public class entity_saveTest extends engine_entity {
 		ref.draw.setDrawColor(0, 1, 0, 1);
 		
 		ref.draw.text.append(  "down"  );
-		ref.draw.drawText(x[0], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[0], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 		
 		
 		ref.draw.text.append(  "up"  );
-		ref.draw.drawText(x[1], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[1], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 		
 		
 		ref.draw.text.append(  "save"  );
-		ref.draw.drawText(x[2], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[2], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 		
 		
 		ref.draw.text.append(  "load"  );
-		ref.draw.drawText(x[3], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[3], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 		
 		
 		ref.draw.setDrawColor(0, 0, 0, 1);
 		
 		ref.draw.text.append(  "local: "  );
 		ref.draw.text.append(  local  );
-		ref.draw.drawText(x[number_buttons/2]-(size*3/4), y+size, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[number_buttons/2]-(size*3/4), y+size, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 
 		
 		ref.draw.text.append(  "external: "  );
 		ref.draw.text.append(  external  );
 		
-		ref.draw.drawText(x[number_buttons/2]-(size*3/4), y-size, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[number_buttons/2]-(size*3/4), y-size, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 
 		
 

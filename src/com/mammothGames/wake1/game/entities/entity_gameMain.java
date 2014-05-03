@@ -1,7 +1,7 @@
 package com.mammothGames.wake1.game.entities;
 
-import com.mammothGames.wake1.game.game_constants;
-import com.mammothGames.wake1.game.game_rooms;
+import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -20,8 +20,8 @@ public class entity_gameMain extends engine_entity {
 	public float shade_alpha_target = 1;
 	float ANIMATION_SCALE = 7f;
 	
-	public static int DIF_EASY = 0;
-	public static int DIF_MEDIUM = 500;
+	public static int DIF_EASY = 250;
+	public static int DIF_MEDIUM = 625;
 	public static int DIF_HARD = 1000;
 	public static int DIF_HELL = 1500;
 	public int current_diff;
@@ -109,7 +109,7 @@ public class entity_gameMain extends engine_entity {
 	public void sys_step(){
 		
 		// The shade alpha towards it's target; and if we're in the menu room only slide if the water height is at the bottom
-		if (ref.room.get_current_room() == game_rooms.ROOM_MENUFIRST) {
+		if (ref.room.get_current_room() == rooms.ROOM_MENUFIRST) {
 			if ( (mgr.gameMain.floor_height < 2) && (mgr.stars.stars_alpha > 0.98f) )
 				mgr.gameMain.shade_alpha += (mgr.gameMain.shade_alpha_target - mgr.gameMain.shade_alpha) * ANIMATION_SCALE * ref.main.time_scale;
 		}
@@ -130,7 +130,7 @@ public class entity_gameMain extends engine_entity {
 		}
 		
 		
-		if ( (mgr.orbPatternMaker.state_finished) && (ref.room.get_current_room() == game_rooms.ROOM_GAME) ) {
+		if ( (mgr.orbPatternMaker.state_finished) && (ref.room.get_current_room() == rooms.ROOM_GAME) ) {
 			
 			if ((float)Math.random() > CHANCE_OF_LAST_STATE) {
 
@@ -151,16 +151,16 @@ public class entity_gameMain extends engine_entity {
 
 		// Draw floor/water line
 		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 0.8f); // Floor color
-		ref.draw.drawRectangle(0,0, ref.screen_width, floor_height, -ref.screen_width/2, -floor_height/2, 0, game_constants.layer4_overGame);
+		ref.draw.drawRectangle(0,0, ref.screen_width, floor_height, -ref.screen_width/2, -floor_height/2, 0, constants.layer4_overGame);
 		
 		if (floor_height_target < 0)
 			floor_height_target = 0;
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
-		ref.draw.drawLine(ref.screen_width, floor_height, 0, floor_height, ref.screen_width/25, game_constants.layer4_overGame);
+		ref.draw.drawLine(ref.screen_width, floor_height, 0, floor_height, ref.screen_width/25, constants.layer4_overGame);
 		
 		
-		if ( (floor_height >= ref.screen_height) && (ref.room.get_current_room() == game_rooms.ROOM_GAME) )
+		if ( (floor_height >= ref.screen_height) && (ref.room.get_current_room() == rooms.ROOM_GAME) )
 			endGame();
 		
 		
@@ -235,7 +235,7 @@ public class entity_gameMain extends engine_entity {
 	}
 	
 	public void startGame() {
-		ref.room.changeRoom(game_rooms.ROOM_GAME);
+		ref.room.changeRoom(rooms.ROOM_GAME);
 		ref.main.unPauseEntities();
 		mgr.gameMain.restart();
 		mgr.orbSpawner.restart(current_diff);

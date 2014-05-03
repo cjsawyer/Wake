@@ -3,9 +3,9 @@ package com.mammothGames.wake1.game.entities;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.mammothGames.wake1.game.game_constants;
-import com.mammothGames.wake1.game.game_rooms;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -54,7 +54,7 @@ public class entity_menuRecords extends engine_entity {
 	
 	@Override
 	public void sys_step() {
-		if (ref.room.get_current_room() == game_rooms.ROOM_MENURECORDS) {
+		if (ref.room.get_current_room() == rooms.ROOM_MENURECORDS) {
 			
 				offset = ref.screen_width * (mgr.gameMain.shade_alpha - 1);
 
@@ -95,7 +95,7 @@ public class entity_menuRecords extends engine_entity {
 						ref.draw.setDrawColor(1, 1, 1, 0.4f * mgr.gameMain.shade_alpha);
 					}
 					
-					ref.draw.drawRectangle(draw_x, draw_y, tab_w, tab_h, 0, 0, 0, game_constants.layer5_underHUD);
+					ref.draw.drawRectangle(draw_x, draw_y, tab_w, tab_h, 0, 0, 0, constants.layer5_underHUD);
 					
 					
 					
@@ -113,7 +113,7 @@ public class entity_menuRecords extends engine_entity {
 							0,
 							black_offset,
 							0,
-							game_constants.layer5_underHUD
+							constants.layer5_underHUD
 					);
 					
 					// draw difficulty letter on tab
@@ -139,7 +139,7 @@ public class entity_menuRecords extends engine_entity {
 							
 							break;
 					}
-					ref.draw.drawText(draw_x + dx, draw_y + dy, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer5_underHUD, game_textures.TEX_FONT1);
+					ref.draw.drawText(draw_x + dx, draw_y + dy, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer5_underHUD, textures.TEX_FONT1);
 					
 				}
 				
@@ -150,9 +150,9 @@ public class entity_menuRecords extends engine_entity {
 						
 				//draw horizontal blue rectangles
 				ref.draw.setDrawColor(0, 1, 1, 0.9f * mgr.gameMain.shade_alpha);
-				ref.draw.drawRectangle(bluex2, ref.screen_height - tab_h, w, h,  -w/2, h/2, 0, game_constants.layer5_underHUD);
+				ref.draw.drawRectangle(bluex2, ref.screen_height - tab_h, w, h,  -w/2, h/2, 0, constants.layer5_underHUD);
 				w = bluex;
-				ref.draw.drawRectangle(0, ref.screen_height - tab_h, w, h,  -w/2, h/2, 0, game_constants.layer5_underHUD);
+				ref.draw.drawRectangle(0, ref.screen_height - tab_h, w, h,  -w/2, h/2, 0, constants.layer5_underHUD);
 				
 				// draw black background for content
 				tab_base_y = ref.screen_height - tab_h - mgr.menuDifficulty.button_border_size/2;
@@ -165,7 +165,7 @@ public class entity_menuRecords extends engine_entity {
 						0,
 						0,
 						0,
-						game_constants.layer5_underHUD
+						constants.layer5_underHUD
 				);
 				
 				// Update vars for fade in/out effect
@@ -202,43 +202,43 @@ public class entity_menuRecords extends engine_entity {
 					break;
 				}
 				
-				ref.draw.drawText(ref.screen_width/2+dx + offset, text_y+dy, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2+dx + offset, text_y+dy, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				
 				ref.draw.setDrawColor(1, 1, 1, 1 * mgr.gameMain.shade_alpha);
 				text_y -= 1.5*mgr.gameMain.text_size;
 				ref.draw.text.append("High Score");
-				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				ref.draw.text.append(high_score);
-				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				
 				text_y -= 1.5*mgr.gameMain.text_size;
 				ref.draw.text.append("BEST STREAK");
-				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				ref.draw.text.append(high_streak);
-				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				text_y -= 1.5*mgr.gameMain.text_size;
 				ref.draw.text.append("GAMES PLAYED");
-				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				ref.draw.text.append(games_played);
-				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				
 				//RESET BUTTON
-				text_y -= mgr.gameMain.text_size + mgr.menuDifficulty.draw_height/2;
+				text_y -= 1.25f*mgr.gameMain.text_size + mgr.menuDifficulty.draw_height/2;
 				//draw back, blue rectangle
 				ref.draw.setDrawColor(0, 1, 1, 0.3f * mgr.gameMain.shade_alpha );
-				ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width, mgr.menuDifficulty.draw_height, 0, 0, 0, game_constants.layer6_HUD);
+				ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width, mgr.menuDifficulty.draw_height, 0, 0, 0, constants.layer6_HUD);
 				
 				// draw inner black rectangle
 				ref.draw.setDrawColor(0, 0, 0, 0.9f * mgr.gameMain.shade_alpha);
-				ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, 0, 0, 0, game_constants.layer6_HUD);			
+				ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, 0, 0, 0, constants.layer6_HUD);			
 				
 				ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
 				ref.draw.text.append("ERASE ALL");
-				ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.areYouSure.getPopupOpenness()) )
 					if (ref.collision.point_AABB( mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, ref.screen_width/2, text_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
@@ -247,19 +247,19 @@ public class entity_menuRecords extends engine_entity {
 					}
 				
 				//DONATE LINK BUTTON
-				if (!game_constants.pro) {
+				if (!constants.pro) {
 					text_y -= .5f*mgr.gameMain.text_size + mgr.menuDifficulty.draw_height;
 					//draw back, blue rectangle
 					ref.draw.setDrawColor(0, 1, 1, 0.3f * mgr.gameMain.shade_alpha );
-					ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width, mgr.menuDifficulty.draw_height, 0, 0, 0, game_constants.layer6_HUD);
+					ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width, mgr.menuDifficulty.draw_height, 0, 0, 0, constants.layer6_HUD);
 					
 					// draw inner black rectangle
 					ref.draw.setDrawColor(0, 0, 0, 0.9f * mgr.gameMain.shade_alpha);
-					ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, 0, 0, 0, game_constants.layer6_HUD);			
+					ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, 0, 0, 0, constants.layer6_HUD);			
 					
 					ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
 					ref.draw.text.append("AD FREE VERSION");
-					ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+					ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 					
 					if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.areYouSure.getPopupOpenness()) )
 						if (ref.collision.point_AABB( mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, ref.screen_width/2, text_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
@@ -274,19 +274,19 @@ public class entity_menuRecords extends engine_entity {
 						}
 				}
 				
-				//RATE LINK BUTTON
+				//RATE BUTTON
 				text_y -= .5f*mgr.gameMain.text_size + mgr.menuDifficulty.draw_height;
 				//draw back, blue rectangle
 				ref.draw.setDrawColor(0, 1, 1, 0.3f * mgr.gameMain.shade_alpha );
-				ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width, mgr.menuDifficulty.draw_height, 0, 0, 0, game_constants.layer6_HUD);
+				ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width, mgr.menuDifficulty.draw_height, 0, 0, 0, constants.layer6_HUD);
 				
 				// draw inner black rectangle
 				ref.draw.setDrawColor(0, 0, 0, 0.9f * mgr.gameMain.shade_alpha);
-				ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, 0, 0, 0, game_constants.layer6_HUD);			
+				ref.draw.drawRectangle(ref.screen_width/2 + offset, text_y, mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, 0, 0, 0, constants.layer6_HUD);			
 				
 				ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
 				ref.draw.text.append("RATE");
-				ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.areYouSure.getPopupOpenness()) )
 					if (ref.collision.point_AABB( mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, ref.screen_width/2, text_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
@@ -378,7 +378,7 @@ public class entity_menuRecords extends engine_entity {
 		fade_main = false;
 		mgr.gameMain.shade_alpha = 0;
 		mgr.gameMain.shade_alpha_target = 1;
-		ref.room.changeRoom(game_rooms.ROOM_MENURECORDS);
+		ref.room.changeRoom(rooms.ROOM_MENURECORDS);
 		loadScores();
 	}
 	

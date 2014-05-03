@@ -1,6 +1,8 @@
 ///// This Commit /////
 
-Fixed the mute button disappearing at the end of games
+added immersive full-screen mode
+added draw.getTextWidth
+started menu re-arranging
 
 //////// TODO /////////
 
@@ -11,8 +13,6 @@ Fixed the mute button disappearing at the end of games
 
 // Next release
 [ ] 2 - make music restart at same point when restarting app
-[ ] 1 - rename Wake Free to Wake and rename Wake to Wake Pro
-[ ] 1 - extend ad refresh rate to 60s
 [ ] 2 - make free users wait for the poastgame score to spin up to full, pro still has the animation, but doesn't need to wait.
 [ ] 1 - tablet screenshot
 
@@ -26,6 +26,17 @@ Fixed the mute button disappearing at the end of games
 [ ] 1 - [later] add about screen from records menu, link to website.
 [ ] 1 - [later] add per-difficulty heatmaps
 [ ] 0 - clean up log usage
+
+Wake 1.2 FEEDBACK----------------------------
+
+easy is too easy
+exit button is confusing
+don't like background
+pause music when paused
+change font
+make bar flash red when a combo is broken
+
+---------------------------------------------
 
 
 //////// ENGINE /////////
@@ -43,19 +54,13 @@ switch argument order for collisionAABB, make x,y come before: x,y,w,h
 
 rename game_constnats/whatever to just whatever. shorten the names.
 
+--Long Term------------------
+accelerometer
 add Unicode support
-
 texture compression
-
-
-UA-50122948-1
-
-
-
-
-
-
-
+texture sheet generator
+vector image rendering
+-----------------------------
 
 
 
@@ -64,6 +69,9 @@ UA-50122948-1
 
 
 //////// DONE ////////
+
+Fixed the mute button disappearing at the end of games
+renamed Wake Free to Wake and renamed Wake to Wake Pro
 
 Fixed unclickable ads
 

@@ -3,7 +3,7 @@ package com.mammothGames.wake1.gameEngine;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
-import com.mammothGames.wake1.game.game_constants;
+import com.mammothGames.wake1.game.constants;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -42,7 +42,7 @@ public class engine_adMob {
 			case H_RIGHT: break;
 			case H_CENTER: break;
 			default:
-				if(game_constants.devmode)
+				if(constants.devmode)
 					Log.e("reywas", "Invalid horizontal ad alignment argument! Use the constants in ref.ad");
 		}
 		
@@ -51,7 +51,7 @@ public class engine_adMob {
 			case V_BOTTOM: break;
 			case V_CENTER: break;
 			default:
-				if(game_constants.devmode)
+				if(constants.devmode)
 					Log.e("reywas", "Invalid vertical ad alignment argument! Use the constants in ref.ad");
 		}
 		

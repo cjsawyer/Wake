@@ -5,7 +5,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
-import com.mammothGames.wake1.game.game_constants;
+import com.mammothGames.wake1.game.constants;
 
 import android.graphics.Bitmap;
 import android.opengl.GLES20;
@@ -62,7 +62,7 @@ public class engine_gl_texture {
 			}
 			
 			
-			if(game_constants.devmode) {
+			if(constants.devmode) {
 				// Check if the sheet has the requested sprite on it
 				if ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1).length - 2)/8 < texture_id){
 					Log.e("reywas","ERROR: tried to bind sprite " + texture_id + " on sheet #" + texture_sheet_to_bind + ", but texture sheet #" + texture_sheet_to_bind + " only has " + ((ref.loaded_textures.get_texCoords(texture_sheet_to_bind - 1).length - 2)/8) + " sprite/s.");
@@ -103,7 +103,7 @@ public class engine_gl_texture {
 		
 		Matrix.setIdentityM(ref.renderer.mModelMatrix, 0);
 		
-		if(game_constants.devmode) {
+		if(constants.devmode) {
 			if ((depth > 500) | (depth < 0)){
 				Log.e("reywas", "When passing depth to a draw call, use an int in the range[0, 500]. 0 is the back, 500 the front." );
 			}

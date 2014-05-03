@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.textures;
 
 public class loaded_assets {
 	engine_reference ref;
@@ -28,7 +28,7 @@ public class loaded_assets {
 		stokeSize.add(0, 0);
 		stokeColor.add(0, tmp);
 		
-		game_textures.addTextures(this);
+		textures.addTextures(this);
 	}
 	
 	public void addTexture(int id, base_texture tex) {

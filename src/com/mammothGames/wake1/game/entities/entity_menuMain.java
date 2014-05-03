@@ -2,9 +2,9 @@ package com.mammothGames.wake1.game.entities;
 
 import android.hardware.Camera.Area;
 
-import com.mammothGames.wake1.game.game_constants;
-import com.mammothGames.wake1.game.game_rooms;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -25,13 +25,14 @@ public class entity_menuMain extends engine_entity {
 	
 	@Override
 	public void sys_step() {
-		if (ref.room.get_current_room() == game_rooms.ROOM_MENUMAIN) {
+		if (ref.room.get_current_room() == rooms.ROOM_MENUMAIN) {
 
 			float box_w = ref.screen_width - 2*mgr.gameMain.padding_x;
 			float box_h = ref.screen_height - 2*mgr.gameMain.padding_y;
 			
 			float button_gap = 3; // so 1/3 gap vs 1 button height
-			float button_height = box_h/( num_buttons + (num_buttons-1)/button_gap);
+//			float button_height = box_h/( num_buttons + (num_buttons-1)/button_gap);
+			float button_height = mgr.gameMain.text_size*2;
 			float button_height_gap = button_height / button_gap;
 			float realative_y = ref.screen_height - mgr.gameMain.padding_y;
 
@@ -72,23 +73,23 @@ public class entity_menuMain extends engine_entity {
 				
 				//draw back, blue rectangle
 				ref.draw.setDrawColor(0, 1, 1, 0.3f * button_alpha );
-				ref.draw.drawRectangle(draw_x, draw_y, draw_width, draw_height, 0, 0, 0, game_constants.layer6_HUD);
+				ref.draw.drawRectangle(draw_x, draw_y, draw_width, draw_height, 0, 0, 0, constants.layer6_HUD);
 				
 				// draw inner black rectangle
 				float button_border_size = draw_height/6;
 				ref.draw.setDrawColor(0, 0, 0, 0.9f * button_alpha);
-				ref.draw.drawRectangle(draw_x, draw_y, draw_width-button_border_size, draw_height-button_border_size, 0, 0, 0, game_constants.layer6_HUD);
+				ref.draw.drawRectangle(draw_x, draw_y, draw_width-button_border_size, draw_height-button_border_size, 0, 0, 0, constants.layer6_HUD);
 				
 				
 				ref.draw.setDrawColor(1, 1, 1, 1 * button_alpha);
 				switch (i) {
 					case 2:
 						ref.draw.text.append(button0);
-						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 						break;
 					case 3:
 						ref.draw.text.append(button1);
-						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 						break;
 				}
 
@@ -141,9 +142,9 @@ public class entity_menuMain extends engine_entity {
 				0,
 				mgr.menuFirst.logo_h/2f,
 				0,
-				game_constants.layer6_HUD,
-				game_textures.SUB_LOGO,
-				game_textures.TEX_SPRITES
+				constants.layer6_HUD,
+				textures.SUB_LOGO,
+				textures.TEX_SPRITES
 			);
 		}
 	}
@@ -193,7 +194,7 @@ public class entity_menuMain extends engine_entity {
 		mgr.gameMain.shade_alpha = 0;
 		mgr.gameMain.shade_alpha_target = 1;
 //		mgr.menuFirst.logo_alpha_target = 1;
-		ref.room.changeRoom(game_rooms.ROOM_MENUMAIN);
+		ref.room.changeRoom(rooms.ROOM_MENUMAIN);
 	}
 	
 }

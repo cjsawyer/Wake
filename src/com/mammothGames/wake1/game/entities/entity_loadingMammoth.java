@@ -3,9 +3,9 @@ package com.mammothGames.wake1.game.entities;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.mammothGames.wake1.game.game_rooms;
-import com.mammothGames.wake1.game.game_sounds;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.rooms;
+import com.mammothGames.wake1.game.sounds;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -27,7 +27,7 @@ public class entity_loadingMammoth extends engine_entity {
 	public void sys_firstStep(){
 		
 		ref.loadHelper.setNumberToLoad(1);
-		ref.textureLoader.loadTexture(game_textures.TEX_SPRITES);
+		ref.textureLoader.loadTexture(textures.TEX_SPRITES);
 	}
 	
 	@Override
@@ -43,8 +43,8 @@ public class entity_loadingMammoth extends engine_entity {
 			}
 		} else {
 			
-			float tWidth = ref.draw.getSubTextureWidth(game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
-			float tHeight = ref.draw.getSubTextureHeight(game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
+			float tWidth = ref.draw.getSubTextureWidth(textures.SUB_MAMMOTH, textures.TEX_SPRITES);
+			float tHeight = ref.draw.getSubTextureHeight(textures.SUB_MAMMOTH, textures.TEX_SPRITES);
 			float tFinalWidth = ref.screen_width*2f/3f;
 			float tWidthHeightRatio = tFinalWidth/tWidth;
 			float tFinalHeight = tHeight * tWidthHeightRatio;
@@ -62,7 +62,7 @@ public class entity_loadingMammoth extends engine_entity {
 				logo_alpha = 1;
 			
 			ref.draw.setDrawColor(1, 1, 1, logo_alpha);
-			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, -tFinalWidth/2, 0, 0, 0, game_textures.SUB_MAMMOTH, game_textures.TEX_SPRITES);
+			ref.draw.drawTexture(tLogoX, tLogoY, tFinalWidth, tFinalHeight, -tFinalWidth/2, 0, 0, 0, textures.SUB_MAMMOTH, textures.TEX_SPRITES);
 
 			
 			
@@ -87,11 +87,11 @@ public class entity_loadingMammoth extends engine_entity {
 		ref.loadHelper.reset();
 		ref.loadHelper.setNumberToLoad(3);
 //		ref.textureLoader.loadTexture(game_textures.TEX_SPRITES);
-		ref.textureLoader.loadTexture(game_textures.TEX_FONT1);
-		ref.textureLoader.loadTexture(game_textures.TEX_STARS);
+		ref.textureLoader.loadTexture(textures.TEX_FONT1);
+		ref.textureLoader.loadTexture(textures.TEX_STARS);
 //		ref.sound.loadMusic(game_sounds.MSC_CEPHALOPOD);
 //		ref.sound.loadSound(game_sounds.SND_SPLASH);
 //		ref.sound.loadSound(game_sounds.SND_DING);
-		ref.sound.loadMusic(game_sounds.MSC_SINE);
+		ref.sound.loadMusic(sounds.MSC_SINE);
 	}
 }

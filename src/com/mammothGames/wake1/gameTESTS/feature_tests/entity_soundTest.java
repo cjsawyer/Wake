@@ -1,7 +1,7 @@
 package com.mammothGames.wake1.gameTESTS.feature_tests;
 
-import com.mammothGames.wake1.game.game_sounds;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.sounds;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -45,16 +45,16 @@ public class entity_soundTest extends engine_entity {
 		
 		ref.draw.setDrawColor(0, 1, 0, 1);
 		ref.draw.text.append(  "effect"  );
-		ref.draw.drawText(x[0], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[0], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 		
 		ref.draw.text.append(  "play"  );
-		ref.draw.drawText(x[1], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[1], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 		
 		ref.draw.text.append(  "pause"  );
-		ref.draw.drawText(x[2], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[2], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 		
 		ref.draw.text.append(  "stop"  );
-		ref.draw.drawText(x[3], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, game_textures.TEX_FONT1);
+		ref.draw.drawText(x[3], y, size/3, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 10, textures.TEX_FONT1);
 		
 		
 		if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {

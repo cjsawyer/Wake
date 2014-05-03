@@ -1,8 +1,8 @@
 package com.mammothGames.wake1.game.entities;
 
-import com.mammothGames.wake1.game.game_constants;
-import com.mammothGames.wake1.game.game_rooms;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -21,12 +21,12 @@ public class entity_menuAbout extends engine_entity {
 	
 	@Override
 	public void sys_step() {
-		if (ref.room.get_current_room() == game_rooms.ROOM_MENUABOUT) {
+		if (ref.room.get_current_room() == rooms.ROOM_MENUABOUT) {
 
 			
 				ref.draw.setDrawColor(1, 1, 1, 0.9f * mgr.gameMain.shade_alpha);
 				ref.draw.text.append("about screen here");
-				ref.draw.drawText(ref.screen_width/2, ref.screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2, ref.screen_height/2, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				
 				
@@ -73,7 +73,7 @@ public class entity_menuAbout extends engine_entity {
 		non_fading_button = -1;
 		mgr.gameMain.shade_alpha = 0;
 		mgr.gameMain.shade_alpha_target = 1;
-		ref.room.changeRoom(game_rooms.ROOM_MENUABOUT);
+		ref.room.changeRoom(rooms.ROOM_MENUABOUT);
 	}
 	
 	

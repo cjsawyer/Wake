@@ -1,8 +1,8 @@
 package com.mammothGames.wake1.game.entities;
 
-import com.mammothGames.wake1.game.game_constants;
-import com.mammothGames.wake1.game.game_rooms;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -32,7 +32,8 @@ public class entity_menuDifficulty extends engine_entity {
 		box_h = ref.screen_height - 2*mgr.gameMain.padding_y;
 		
 		button_gap = 3; // so 1/3 gap vs 1 button height
-		button_height = box_h/( num_buttons + (num_buttons-1)/button_gap);
+//		button_height = box_h/( num_buttons + (num_buttons-1)/button_gap);
+		button_height = mgr.gameMain.text_size*2;
 		button_height_gap = button_height / button_gap;
 		
 		draw_x = ref.screen_width/2;
@@ -48,7 +49,7 @@ public class entity_menuDifficulty extends engine_entity {
 	@Override
 	public void sys_step() {
 		
-		if (ref.room.get_current_room() == game_rooms.ROOM_DIFFICULTY) {
+		if (ref.room.get_current_room() == rooms.ROOM_DIFFICULTY) {
 
 			int pressed_button = -1;
 			realative_y = ref.screen_height - mgr.gameMain.padding_y;
@@ -89,26 +90,26 @@ public class entity_menuDifficulty extends engine_entity {
 				
 				//draw back, blue rectangle
 				ref.draw.setDrawColor(0, 1, 1, 0.3f * button_alpha );
-				ref.draw.drawRectangle(draw_x, draw_y, draw_width, draw_height, 0, 0, 0, game_constants.layer6_HUD);
+				ref.draw.drawRectangle(draw_x, draw_y, draw_width, draw_height, 0, 0, 0, constants.layer6_HUD);
 				
 				// draw inner black rectangle
 				ref.draw.setDrawColor(0, 0, 0, 0.9f * button_alpha);
-				ref.draw.drawRectangle(draw_x, draw_y, draw_width-button_border_size, draw_height-button_border_size, 0, 0, 0, game_constants.layer6_HUD);
+				ref.draw.drawRectangle(draw_x, draw_y, draw_width-button_border_size, draw_height-button_border_size, 0, 0, 0, constants.layer6_HUD);
 				
 				
 				ref.draw.setDrawColor(1, 1, 1, 1 * button_alpha);
 				switch (i) {
 					case 0:
 						ref.draw.text.append("EASY");
-						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 						break;
 					case 1:
 						ref.draw.text.append("MEDIUM");
-						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 						break;
 					case 2:
 						ref.draw.text.append("HARD");
-						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 						break;
 					case 3:
 						
@@ -117,7 +118,7 @@ public class entity_menuDifficulty extends engine_entity {
 						float dy = ref.main.randomRange(-shake_range, shake_range);
 						ref.draw.setDrawColor(1, 0, 0, 1 * button_alpha);
 						ref.draw.text.append("HELL");
-						ref.draw.drawText(draw_x+dx, draw_y+dy, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, game_constants.layer6_HUD, game_textures.TEX_FONT1);
+						ref.draw.drawText(draw_x+dx, draw_y+dy, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 						break;
 				}
 				
@@ -205,7 +206,7 @@ public class entity_menuDifficulty extends engine_entity {
 		non_fading_button = -1;
 		mgr.gameMain.shade_alpha = 0;
 		mgr.gameMain.shade_alpha_target = 1;
-		ref.room.changeRoom(game_rooms.ROOM_DIFFICULTY);
+		ref.room.changeRoom(rooms.ROOM_DIFFICULTY);
 	}
 	
 	

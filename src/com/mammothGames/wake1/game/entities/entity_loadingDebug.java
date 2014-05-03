@@ -2,8 +2,8 @@ package com.mammothGames.wake1.game.entities;
 
 import android.util.Log;
 
-import com.mammothGames.wake1.game.game_sounds;
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.sounds;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -42,11 +42,11 @@ public class entity_loadingDebug extends engine_entity {
 	public void loadAll() {
 		
 		ref.loadHelper.setNumberToLoad(2);//7
-		ref.textureLoader.loadTexture(game_textures.TEX_SPRITES);
+		ref.textureLoader.loadTexture(textures.TEX_SPRITES);
 //		ref.textureLoader.loadTexture(game_textures.TEX_PARTICLE);
 //		ref.textureLoader.loadTexture(game_textures.TEX_MENU_BUTTONS);
 //		ref.textureLoader.loadTexture(game_textures.TEX_MAMMOTH_LOGO);
-		ref.textureLoader.loadTexture(game_textures.TEX_FONT1);
+		ref.textureLoader.loadTexture(textures.TEX_FONT1);
 		// error might be here vvvvvv
 //		ref.sound.loadMusic(game_sounds.MSC_CEPHALOPOD);
 //		ref.sound.loadSound(game_sounds.SND_SPLASH);

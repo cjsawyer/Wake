@@ -2,7 +2,7 @@ package com.mammothGames.wake1.gameTESTS.feature_tests;
 
 import android.util.Log;
 
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
 
@@ -23,7 +23,7 @@ public class entity_particleComparison extends engine_entity {
 		emitter1.setGravityAndDirection(0 ,270);
 		emitter1.setVelocityAndDirection(0,0,  0,0);
 		emitter1.setDrawAngleAndChange(0,0,0,0);
-		emitter1.setDrawTypeToSprite(game_textures.TEX_ERROR, 1, 50, 50, 0);
+		emitter1.setDrawTypeToSprite(textures.TEX_ERROR, 1, 50, 50, 0);
 //		emitter1.setSpriteSizeChange(.5f, .5f);
 		emitter1.setColor(0,    0,0,1, 1);
 		

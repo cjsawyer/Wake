@@ -3,7 +3,7 @@ package com.mammothGames.wake1.gameEngine;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.mammothGames.wake1.game.game_sounds;
+import com.mammothGames.wake1.game.sounds;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
@@ -39,7 +39,7 @@ public class engine_sound {
 	
 	public engine_sound(engine_reference ref) {
 	
-		sound_was_loaded = new boolean[game_sounds.sound_array.length];
+		sound_was_loaded = new boolean[sounds.sound_array.length];
 		for(int i=0; i<sound_was_loaded.length; i++) {
 			sound_was_loaded[i] = false;
 		}
@@ -64,7 +64,7 @@ public class engine_sound {
 //		mSoundPoolMap.put(index, mSoundPool.load(mContext, SoundID, 1));
 //	}
 	public void loadSound(int index) {
-		String name_and_extesion = game_sounds.sound_array[index];
+		String name_and_extesion = sounds.sound_array[index];
 		int mySoundId = 0;
 		try {
 		    mySoundId = mSoundPool.load(assets.openFd("sounds/" + name_and_extesion), 1);
@@ -119,7 +119,7 @@ public class engine_sound {
 		this.mute= mute;   
 		if (mute) {
 			// Mute everything
-			for(int i=0; i<game_sounds.sound_array.length; i++) {
+			for(int i=0; i<sounds.sound_array.length; i++) {
 				mSoundPool.setVolume(i, 0, 0);
 			}
 			
@@ -131,7 +131,7 @@ public class engine_sound {
 			float streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 			streamVolume = streamVolume / mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 			
-			for(int i=0; i<game_sounds.sound_array.length; i++) {
+			for(int i=0; i<sounds.sound_array.length; i++) {
 				mSoundPool.setVolume(i, 1, 1);
 			}
 			if (mPlayer != null) {
@@ -153,7 +153,7 @@ public class engine_sound {
 		
 		releaseMusic();
 		
-		String name_and_extesion = game_sounds.music_array[index];
+		String name_and_extesion = sounds.music_array[index];
 		
 		try {
 			AssetFileDescriptor afd = assets.openFd("music/" + name_and_extesion);
@@ -179,7 +179,7 @@ public class engine_sound {
 		
 		releaseMusic();
 		
-		String name_and_extesion = game_sounds.music_array[index];
+		String name_and_extesion = sounds.music_array[index];
 		
 		try {
 			AssetFileDescriptor afd = assets.openFd("music/" + name_and_extesion);

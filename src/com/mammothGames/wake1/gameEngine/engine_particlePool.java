@@ -2,7 +2,7 @@ package com.mammothGames.wake1.gameEngine;
 
 import java.util.Random;
 
-import com.mammothGames.wake1.game.game_constants;
+import com.mammothGames.wake1.game.constants;
 
 import android.util.Log;
 
@@ -11,7 +11,7 @@ public class engine_particlePool {
 	private engine_reference ref;
 	
 	protected engine_particle particles[];
-	protected final int MAX_PARTICLES = game_constants.max_particles;//200;
+	protected final int MAX_PARTICLES = constants.max_particles;//200;
 	private int ids = 0;
 	
 	protected engine_particle temp_particle;

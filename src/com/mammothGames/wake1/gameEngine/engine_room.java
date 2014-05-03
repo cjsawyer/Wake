@@ -1,18 +1,18 @@
 package com.mammothGames.wake1.gameEngine;
 
-import com.mammothGames.wake1.game.game_rooms;
+import com.mammothGames.wake1.game.rooms;
 
 public class engine_room {
 	
 	engine_reference ref;
-	game_rooms rooms;
+	rooms rooms;
 	public engine_room(engine_reference r){
 		ref = r;
 		// By setting the new room to 0, something other than current_room's -1, room 0 will be started automatically. 
 		current_room = -1;
 		new_room = 0;
 		
-		rooms = new game_rooms(ref);
+		rooms = new rooms(ref);
 	}
 
 	private int current_room;

@@ -1,6 +1,6 @@
 package com.mammothGames.wake1.gameEngine;
 
-import com.mammothGames.wake1.game.game_textures;
+import com.mammothGames.wake1.game.textures;
 
 import android.util.Log;
 
@@ -113,7 +113,7 @@ public class engine_gl_draw {
                         addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, textureID, texture_sheet, DRAW_TYPE_TEXTURE);
                 } else {
                         setDrawColor(1,1,1,1);
-                        addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 1, game_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+                        addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 1, textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
                 }
         }
         
@@ -194,7 +194,15 @@ public class engine_gl_draw {
          * @param texture_sheet
          * @return
          */      
-        public float drawText(float x, float y, float size, int x_align, int y_align, int depth, int texture_sheet){
+        public void drawText(float x, float y, float size, int x_align, int y_align, int depth, int texture_sheet){
+        	sys_drawText(x, y, size, x_align, y_align, depth, texture_sheet, true);
+        }
+        
+        public float getTextWidth(float size, int texture_sheet){
+        	return sys_drawText(0, 0, size, 0, 0, 0, texture_sheet, false);
+        }
+        
+    	private float sys_drawText(float x, float y, float size, int x_align, int y_align, int depth, int texture_sheet, boolean draw_characters){
             if (ref.textureLoader.has_loaded[texture_sheet-1]) {
             	
 //            	char[] charArray = ;
@@ -254,17 +262,17 @@ public class engine_gl_draw {
     
                             for(int i_char_width=32; i_char_width<126;i_char_width++){
                                     if (((char) i_char_width)  == temp_char){
-                                            
-                                                    addToDrawList(
-                                                    		x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x,
-                                                    		y + temp_alignment_y,
-                                                    		0,
-                                                    		0,
-                                                    		(ref.text.cell_width[texture_sheet-1])*temp_scale,
-                                                    		(ref.text.cell_height[texture_sheet-1])*temp_scale,
-                                                    		-(ref.text.cell_width[texture_sheet-1]/2)*temp_scale,
-                                                    		-(ref.text.cell_height[texture_sheet-1]/2)*temp_scale,
-                                                    		0, depth, i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
+                                        	if (draw_characters)
+                                                addToDrawList(
+                                                		x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x,
+                                                		y + temp_alignment_y,
+                                                		0,
+                                                		0,
+                                                		(ref.text.cell_width[texture_sheet-1])*temp_scale,
+                                                		(ref.text.cell_height[texture_sheet-1])*temp_scale,
+                                                		-(ref.text.cell_width[texture_sheet-1]/2)*temp_scale,
+                                                		-(ref.text.cell_height[texture_sheet-1]/2)*temp_scale,
+                                                		0, depth, i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
                                             
     //                                        addToDrawList(x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x, y + temp_alignment_y, 0, 0, (ref.text.cell_width[texture_sheet-1])*temp_scale, (ref.text.cell_height[texture_sheet-1])*temp_scale, (ref.text.cell_width[texture_sheet-1]/2)*temp_scale, (ref.text.cell_height[texture_sheet-1]/2)*temp_scale, rotate_angle, depth, temp_i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
                                             temp_total_width += ((ref.text.char_widths[texture_sheet-1][i_char_width-31]) * temp_scale);
@@ -303,8 +311,10 @@ public class engine_gl_draw {
                     }
                     
                     temp_alignment_x=0;
-                    ref.draw.setDrawColor(1, 1, 1, 1);
-                    addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, 0, depth, 1, game_textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+                    if (draw_characters) {
+                    	ref.draw.setDrawColor(1, 1, 1, 1);
+                    	addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, 0, depth, 1, textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+                    }
             }
             
             text.setLength(0);

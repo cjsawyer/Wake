@@ -4,11 +4,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.mammothGames.wake1free.R;
-import com.mammothGames.wake1.game.game_constants;
+import com.mammothGames.wake1.game.constants;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.graphics.PointF;
 import android.media.AudioManager;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -98,6 +100,18 @@ public class engine_android extends Activity {
 		initate_touch_points();
 	}
 	
+	@TargetApi(Build.VERSION_CODES.KITKAT) // Minimum API level for SYSTEM_UI_FLAG_IMMERSIVE
+	@Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+		getWindow().getDecorView().setSystemUiVisibility(
+		          View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+		        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+		        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+		        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+		        | View.SYSTEM_UI_FLAG_FULLSCREEN
+		        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+	
 	@Override
 	public Object onRetainNonConfigurationInstance() {
 		
@@ -113,7 +127,7 @@ public class engine_android extends Activity {
 		Log.e("reywas","onResume");
 		
 		// Set the orientation.
-		if(game_constants.is_landscape) {
+		if(constants.is_landscape) {
 	    	ref.android.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		} else {
 			ref.android.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -143,7 +157,7 @@ public class engine_android extends Activity {
 	  public void onStart() {
 	    super.onStart();
 //	    EasyTracker.getInstance(this).set("ga_trackingId", "UA-50122948-1");
-	    EasyTracker.getInstance(this).set("&tid", game_constants.google_analytics_id);
+	    EasyTracker.getInstance(this).set("&tid", constants.google_analytics_id);
 	    
 //	    EasyTracker tracker = EasyTracker.getInstance(this);
 //	    tracker.set("&tid", "UA-XXXX-2");
@@ -169,11 +183,11 @@ public class engine_android extends Activity {
 	protected void loadAd(int h_align, int v_align) {
 		
 		if (av == null) {
-			if (!game_constants.pro) {
+			if (!constants.pro) {
 				RelativeLayout rl = (RelativeLayout)findViewById(R.id.adHolder);
 		
 				
-				av = new AdView(this, AdSize.BANNER, game_constants.adMob_publisher_id);
+				av = new AdView(this, AdSize.BANNER, constants.adMob_publisher_id);
 				
 				RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 				relativeParams.addRule(h_align);
@@ -307,7 +321,6 @@ public class engine_android extends Activity {
     @Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
     	
-    	super.dispatchTouchEvent(event);
     	
 		temp_motion_event_action = event.getActionMasked();//getActionMasked
 		
@@ -328,7 +341,8 @@ public class engine_android extends Activity {
 			}
 		}
 		
-		
+		//TODO TODO TODO
+		super.dispatchTouchEvent(event);
 		
 		
 //		try {
@@ -377,7 +391,14 @@ public class engine_android extends Activity {
 		
 //		Log.e("esat","" + temp_length);
 			for (temp_i = 0; temp_i < temp_length; temp_i++) {
-				temp_id = event.getPointerId(temp_i);
+				
+					try {
+						temp_id = event.getPointerId(temp_i);
+					} catch (Exception e) {
+						Log.e("EAndroid TOUCHMOVES", "that touch glitch");
+						e.printStackTrace();
+					}
+					
 				if (temp_id < NUMBER_OF_TOUCH_POINTS-1){
 					try {
 						touch_points_array[temp_id].set(event.getX(temp_i), event.getY(temp_i));

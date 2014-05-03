@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 
 import android.util.Log;
 
-import com.mammothGames.wake1.game.game_constants;
+import com.mammothGames.wake1.game.constants;
 
 public class utility_pool <T extends utility_poolObject> {
 
