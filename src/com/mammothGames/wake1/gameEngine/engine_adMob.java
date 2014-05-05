@@ -37,30 +37,34 @@ public class engine_adMob {
 	
 	public void loadAd(final int h_align, final int v_align) {
 		
-		switch(h_align) {
-			case H_LEFT: break;
-			case H_RIGHT: break;
-			case H_CENTER: break;
-			default:
-				if(constants.devmode)
-					Log.e("reywas", "Invalid horizontal ad alignment argument! Use the constants in ref.ad");
+		if (!constants.devmode) {
+			
+			switch(h_align) {
+				case H_LEFT: break;
+				case H_RIGHT: break;
+				case H_CENTER: break;
+				default:
+					if(constants.devmode)
+						Log.e("reywas", "Invalid horizontal ad alignment argument! Use the constants in ref.ad");
+			}
+			
+			switch(v_align) {
+				case V_TOP: break;
+				case V_BOTTOM: break;
+				case V_CENTER: break;
+				default:
+					if(constants.devmode)
+						Log.e("reywas", "Invalid vertical ad alignment argument! Use the constants in ref.ad");
+			}
+			
+			
+			ref.android.runOnUiThread(new Runnable() {
+				  public void run() {
+				    ref.android.loadAd(h_align,v_align);
+				  }
+			});
 		}
 		
-		switch(v_align) {
-			case V_TOP: break;
-			case V_BOTTOM: break;
-			case V_CENTER: break;
-			default:
-				if(constants.devmode)
-					Log.e("reywas", "Invalid vertical ad alignment argument! Use the constants in ref.ad");
-		}
-		
-		
-		ref.android.runOnUiThread(new Runnable() {
-			  public void run() {
-			    ref.android.loadAd(h_align,v_align);
-			  }
-		});
 	}
 	public void unLoadAd() {
 		ref.android.runOnUiThread(new Runnable() {

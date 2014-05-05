@@ -161,12 +161,14 @@ public class engine_android extends Activity {
 	  public void onStart() {
 	    super.onStart();
 //	    EasyTracker.getInstance(this).set("ga_trackingId", "UA-50122948-1");
-	    EasyTracker.getInstance(this).set("&tid", constants.google_analytics_id);
+	    if (!constants.devmode) {
+	    	EasyTracker.getInstance(this).set("&tid", constants.google_analytics_id);
+	    	EasyTracker.getInstance(this).activityStart(this);
+	    }
 	    
 //	    EasyTracker tracker = EasyTracker.getInstance(this);
 //	    tracker.set("&tid", "UA-XXXX-2");
 //	    tracker.set("&tid", game_constants.google_analytics_id);
-	    EasyTracker.getInstance(this).activityStart(this);
 	  }
 	
 	@Override

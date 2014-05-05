@@ -4,8 +4,7 @@ public class constants {
 	
 	// To rename the package, right click the project > Android Tools > Rename Application Package
 	
-	public static boolean devmode = false;
-	public static boolean debug = false;
+	public static boolean devmode = true;
 	public static boolean godmode = false;
 	public static boolean pro = false;
 

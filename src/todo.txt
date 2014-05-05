@@ -1,6 +1,6 @@
 ///// This Commit /////
 
-
+added basic element-based GUI for pop-up
 
 //////// TODO /////////
 
@@ -28,6 +28,8 @@ fix menu buttons
 [ ] 1 - [later] add about screen from records menu, link to website.
 [ ] 1 - [later] add per-difficulty heatmaps
 [ ] 0 - clean up log usage
+
+redo X/Y_ALIGN_CENTER -> ALIGN_CENTER/TOP/BOTTOM/BASELINE/LEFT/RIGHT
 
 Wake 1.2 FEEDBACK----------------------------
 
