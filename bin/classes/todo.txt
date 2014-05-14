@@ -1,6 +1,8 @@
 ///// This Commit /////
 
-added basic element-based GUI for pop-up
+added basis of advanced GUI
+added guiText
+changed draw.X_ALIGN_R&L around so they make more intuitive sense.
 
 //////// TODO /////////
 
@@ -14,22 +16,22 @@ popup transitions
 fix menu buttons
 
 
-// Next release
-[ ] 2 - make music restart at same point when restarting app
-[ ] 2 - make free users wait for the poastgame score to spin up to full, pro still has the animation, but doesn't need to wait.
-[ ] 1 - tablet screenshot
+Wake ----------------------------------------
+
+make music restart at same point when restarting app
+make free users wait for the poastgame score to spin up to full, pro still has the animation, but doesn't need to wait.
+tablet screenshot
+
+DOGE DROP
+
+redo postgame screen
+add pause menu with settings/
+about screen which slides in from the right side of the screen and accompanying menu button
+[later] add about screen from records menu, link to website.
+[later] add per-difficulty heatmaps
 
 
-[ ] 3 - DOGE DROP
 
-[ ] 1 - redo postgame screen
-[ ] 1 - add pause menu with settings/
-[ ] 1 - about screen which slides in from the right side of the screen and accompanying menu button
-[ ] 1 - [later] add about screen from records menu, link to website.
-[ ] 1 - [later] add per-difficulty heatmaps
-[ ] 0 - clean up log usage
-
-redo X/Y_ALIGN_CENTER -> ALIGN_CENTER/TOP/BOTTOM/BASELINE/LEFT/RIGHT
 
 Wake 1.2 FEEDBACK----------------------------
 
@@ -45,11 +47,13 @@ make bar flash red when a combo is broken
 
 //////// ENGINE /////////
 
-think of better names for g_textures and loaded_assets...
-	
+add accelerometer and phone vibrator input/control
+clean up log usage
+redo X/Y_ALIGN_CENTER -> ALIGN_CENTER/TOP/BOTTOM/BASELINE/LEFT/RIGHT
+think of better names for g_textures and loaded_assets...	
 switch argument order for collisionAABB, make x,y come before: x,y,w,h
-
 rename game_constnats/whatever to just whatever. shorten the names.
+make extra, shorter drawing functions for simple drawing cases
 
 --Long Term------------------
 accelerometer

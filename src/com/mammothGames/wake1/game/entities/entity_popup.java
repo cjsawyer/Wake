@@ -5,6 +5,8 @@ import android.util.Log;
 import com.mammothGames.wake1.game.constants;
 import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
+import com.mammothGames.wake1.gameTESTS.game_constants;
+import com.mammothGames.wake1.gameTESTS.game_textures;
 
 
 public class entity_popup extends engine_entity {
@@ -12,12 +14,15 @@ public class entity_popup extends engine_entity {
 	private boolean popup_open = false;
 	private float popup_alpha = 0, popup_alpha_target = 0;
 	
+	PopupGUI pause_gui;
+	
 	masterGameReference mgr;
 	public entity_popup(masterGameReference mgr) {
 		this.persistent = true;
 		this.pausable = false;
 
 		this.mgr = mgr;
+		
 	}
 
 	
@@ -44,131 +49,44 @@ public class entity_popup extends engine_entity {
 	public final int ACT_YES = 2;
 	public final int ACT_SETTINGS = 2;
 	
+/*	
 	private final int[][][] ui = {
-			// UI type, action
-			{{1,1,UI_TEXT}, {NULL}},
-			{{1,1,UI_TEXT}, {NULL}},
-			{{1,1,UI_TEXT}, {NULL}},
+	        // UI type, action
+	        {{1,1,UI_TEXT}, {NULL}},
+	        {{1,1,UI_TEXT}, {NULL}},
+	        {{1,1,UI_TEXT}, {NULL}},
 
-			{
-				{ 
-					// horizontal, vertical number of GUI elements
-					3,6
-				}, {
-					// Type of GUI element
-					NULL,		UI_TITLE,	NULL,
-					UI_TEXT,	NULL,		UI_TEXT,
-					UI_CHECKBOX,NULL,		UI_TEXT,
-					UI_TEXT,	NULL,		UI_TEXT,
-					NULL,		UI_BUTTON,	NULL,
-					UI_BUTTON,	NULL,		UI_BUTTON
-				}, {
-					// Actions when that element is clicked
-					NULL,		NULL,			NULL,
-					NULL,		NULL,			NULL,
-					NULL,		NULL,			NULL,
-					NULL,		NULL,			NULL,
-					NULL,		ACT_SETTINGS,	NULL,
-					ACT_YES,	NULL,			ACT_NO
-				}
+	        {
+	           , , {
+	                // TODO: move this into element object method
+	                // Actions when that element is clicked
+	                NULL,		NULL,			NULL,
+	                NULL,		NULL,			NULL,
+	                NULL,		NULL,			NULL,
+	                NULL,		NULL,			NULL,
+	                NULL,		ACT_SETTINGS,	NULL,
+	                ACT_YES,	NULL,			ACT_NO
+	            }
 
-			},
+	        },
 
 	};
+*/
 	
-	private void drawUI(float ui_x, float ui_y, float ui_w, float ui_h) {
-		
-		// Number of elements
-		int elements_x = ui[action][0][0];
-		int elements_y = ui[action][0][1];
-		
-		float[] row_weight = new float[elements_x];
-		int[] row_type = new int[elements_x];
-		int[] row_action = new int[elements_x];
-		int row_i = 0;
-		
-		float[] element_x = new float[elements_x*elements_y];
-		float[] element_y = new float[elements_x*elements_y];
-		float[] element_w = new float[elements_x*elements_y];
-		float[] element_h = new float[elements_x*elements_y];
-		int[] element_type = new int[elements_x*elements_y];
-		int[] element_action = new int[elements_x*elements_y];
-		int element_i = 0;
-		
-		int ui_i = 0;
-		
-		for (int iy=0; iy<elements_y; iy++) {
-			
-			float y = ui_y+ui_h/2 - (iy+0.5f)*(ui_h/((float)elements_y) );
-			
-			row_i = 0;
-			for (int ix=0; ix<elements_x; ix++) {
-				
-				int type = ui[action][1][ui_i]; 
-				
-				if (type != NULL) {
-					row_weight[row_i] = 1;
-					row_type[row_i] = type;
-					row_action[row_i] = ui[action][2][ui_i];
-					row_i++;
-				}
-				
-				ui_i++;
-				
-			}
-			
-			//sum row weights
-			float total_row_weight = 0;
-			for (int i=0; i<row_i; i++) {
-				total_row_weight += row_weight[i];
-			}
+	/*
 
-			//fill element data
-			float placed_width = 0;
-			for (int i=0; i<row_i; i++) {
-				
-				element_w[element_i] = ui_w * (row_weight[i]/total_row_weight);
-				
-				element_h[element_i] = ui_h/(elements_y);
-				element_y[element_i] = ui_y+ui_h/2 - iy*element_h[element_i] - element_h[element_i]/2f;
-				
-				
-				element_x[element_i] = ui_x-ui_w/2 + placed_width + element_w[element_i]/2f;
-				placed_width += element_w[element_i];
-				
-				element_type[element_i] = row_type[i];
-				element_action[element_i] = row_action[i];
-				element_i++;
-				
-			}
-			
-		}
-		
-		
-		//Draw elements
-		for (int i=0;i<element_i;i++) {
-			ref.draw.setDrawColor(ref.main.randomRange(0, 1), ref.main.randomRange(0, 1), ref.main.randomRange(0, 1), popup_alpha);
-			ref.draw.drawRectangle(element_x[i], element_y[i], element_w[i], element_h[i], 0, 0, 0, 100);
-			
-			switch(element_type[i]) {
-				case UI_TITLE:
-					ref.draw.text.append("TITLE");
-					break;
-				case UI_TEXT:
-					ref.draw.text.append("TEXT");
-					break;
-				case UI_BUTTON:
-					ref.draw.text.append("BUTTON");
-					break;
-				case UI_CHECKBOX:
-					ref.draw.text.append("CHECK");
-					break;
-			}
-			ref.draw.setDrawColor(1, 1, 1, popup_alpha);
-			ref.draw.drawText(element_x[i], element_y[i], mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, 200, textures.TEX_FONT1);
-			
-		}
-	}
+	}, {
+        // Type of GUI element
+        NULL,       UI_TITLE,   NULL,
+        UI_TEXT,    UI_TEXT,    UI_TEXT,
+        UI_CHECKBOX,NULL,       UI_TEXT,
+        UI_TEXT,    NULL,       UI_TEXT,
+        NULL,       UI_BUTTON,  NULL,
+        UI_BUTTON,  NULL,       UI_BUTTON
+    }, {
+	
+	*/
+	
 	
 //	float x = x-ui_w/2 + (ix+0.5f)*(ui_w/((float)elements_x) );
 //	int action = ui[action][1][ui_i];
@@ -256,86 +174,42 @@ public class entity_popup extends engine_entity {
 	
 	
 	
-	@Override
-	public void sys_firstStep() {}
+   @Override
+   public void sys_firstStep() {
+        
+        float draw_size = ref.screen_width*3.5f/5;
+        float draw_x = ref.screen_width/2;
+        float draw_y = ref.screen_height/2;
+        
+        pause_gui = new PopupGUI(ref);
+        pause_gui.setPosition(draw_x, draw_y);
+        pause_gui.setSize(draw_size, draw_size);
+        pause_gui.populate();
+        pause_gui.setDepth(constants.layer7_overHUD);
+        pause_gui.setActive(true);
+        
+        
+    }
+	
+	
 	
 	@Override
 	public void sys_step() {
 		
 		popup_alpha += (popup_alpha_target - popup_alpha) * 8f * ref.main.time_scale;
+		pause_gui.setAlpha(1);//popup_alpha);
 		
-//		float border_draw_width = ref.screen_width*3.5f/5;
-		ref.draw.text.append(state_text[action][0]);
-		float border_draw_width = ref.draw.getTextWidth(mgr.gameMain.text_size, textures.TEX_FONT1) + 4 * mgr.menuDifficulty.button_border_size;
+//		if (ref.input.get_touch_state(0) == ref.input.TOUCH_HELD) {
+//		    pause_gui.setPosition(ref.input.get_touch_x(0), ref.input.get_touch_y(0));
+//		}
 		
-		
-		float title_h, text_h, button_h;
-		text_h = 4*mgr.gameMain.text_size;
-		title_h = 2*mgr.gameMain.text_size;
-		button_h = mgr.menuDifficulty.button_height - mgr.menuDifficulty.button_border_size;
-		
-		
-		float draw_width = border_draw_width - mgr.menuDifficulty.button_border_size;
-		float draw_x = ref.screen_width/2;
-		float draw_y = ref.screen_height/2;
-		
-//		float black_height = ;//draw_width - mgr.menuDifficulty.button_border_size/2 - button_height;
-//		float black_y = ;//draw_y + draw_width/2 - black_height/2;
-		
-		// relative to the above vars
-		float small_button_width = draw_width/2 - mgr.menuDifficulty.button_border_size/4;
-		float small_button_x = draw_width/4 + mgr.menuDifficulty.button_border_size/8; //offset from center, so it can be used for both buttons in the 2 button wide row 
-		float button_y = 0;//-draw_width/2 + button_height/2;
-		
+//		r
 		// black veil covering everything under popup
 		ref.draw.setDrawColor(0,0,0, 0.7f * popup_alpha);
 		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD);
 		
-		/*
-		// Blue border rectangle
-		ref.draw.setDrawColor(0, 1, 1, 0.3f * popup_alpha);
-		ref.draw.drawRectangle(draw_x, draw_y, border_draw_width, border_draw_width, 0, 0, 0, constants.layer7_overHUD);
 		
-		// Black inner rectangle
-		ref.draw.setDrawColor(0, 0, 0, popup_alpha);
-		ref.draw.drawRectangle(draw_x, black_y, draw_width, black_height, 0, 0, 0, constants.layer7_overHUD);
-		
-		// Yes Button rectangle
-		ref.draw.setDrawColor(0, 0.4f, 0, popup_alpha);
-		ref.draw.drawRectangle(draw_x-button_x, draw_y+button_y, button_width, button_height, 0, 0, 0, constants.layer7_overHUD);
-		
-		// No button rectangle
-		ref.draw.setDrawColor(0.4f, 0, 0, popup_alpha);
-		ref.draw.drawRectangle(draw_x+button_x, draw_y+button_y, button_width, button_height, 0, 0, 0, constants.layer7_overHUD);
-		*/
-		
-//		// Popup text
-//		ref.draw.setDrawColor(1, 1, 1, 0.8f * popup_alpha);
-//		ref.draw.text.append(state_text[action][0]);
-//		ref.draw.drawText(draw_x, black_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer7_overHUD, textures.TEX_FONT1);
-		
-		
-		ref.draw.setDrawColor(1, 1, 1, 0.8f * popup_alpha);
-		ref.draw.text.append("YES");
-		ref.draw.drawText(draw_x-small_button_x, draw_y+button_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer7_overHUD, textures.TEX_FONT1);
-		
-		ref.draw.text.append("NO");
-		ref.draw.drawText(draw_x+small_button_x, draw_y+button_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer7_overHUD, textures.TEX_FONT1);
-		
-		drawUI(ref.screen_width/2, ref.screen_height/2, ref.screen_width*2/3, ref.screen_width*2/3);
-		
-//		if(popup_open) {
-//			
-//			if (popup_alpha > 0.8f) {
-//				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
-//					if (ref.collision.point_AABB(button_width, button_height, draw_x-button_x, draw_y+button_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
-//						buttonAction(true);
-//					} else if (ref.collision.point_AABB(button_width, button_height, draw_x+button_x, draw_y+button_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
-//						buttonAction(false);
-//					}
-//				}
-//			}
-//		}
+		pause_gui.draw();
 		
 	}
 	
@@ -368,35 +242,65 @@ public class entity_popup extends engine_entity {
 		return popup_open;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+}
+
+class PopupGUI extends engine_gui {
+    
+    private final int idTitle = 0;
+    private final int idScore = 1;
+    private final int idScoreNumber = 2;
+    private final int idStreak = 3;
+    private final int idStreakNumber = 4;
+    private final int idSettingsButton = 5;
+    private final int idBackButton = 6;
+    private final int idQuitButton = 7;
+    
+    final int[][] layout1 = {
+        { 
+            // horizontal, vertical number of GUI elements
+            3,5
+        }, {
+            // GUI element ID's
+            NULL,         idTitle,          NULL,
+            idScore,      NULL,             idScoreNumber,
+            idStreak,     NULL,             idStreakNumber,
+            NULL,         idSettingsButton, NULL,
+            idBackButton, NULL,             idQuitButton
+        }
+    };
+    
+    public PopupGUI(engine_reference ref) {
+        super(ref);
+    }
+    
+    public void populate() {
+        setLayout(layout1);
+        
+        engine_guiText title = new engine_guiText(this, idTitle);
+        title.setText("PAUSED");
+        title.setTextureSheet(game_textures.TEX_FONT1);
+        
+        engine_guiText score = new engine_guiText(this, idScore);
+        score.setText("Score");
+        score.setTextureSheet(game_textures.TEX_FONT1);
+        score.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
+        
+        //TODO make guiNumber to replace this hack and the setText(int) method
+        engine_guiText scoreNumber = new engine_guiText(this, idScoreNumber);
+        scoreNumber.setText(123);
+        scoreNumber.setTextureSheet(game_textures.TEX_FONT1);
+        scoreNumber.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
+        
+        addElement(title);
+        addElement(score);
+        addElement(scoreNumber);
+        addElement(new engine_guiElement(this, idStreak));
+        addElement(new engine_guiElement(this, idStreakNumber));
+        addElement(new engine_guiElement(this, idSettingsButton));
+        addElement(new engine_guiElement(this, idBackButton));
+        addElement(new engine_guiElement(this, idQuitButton));
+        
+        build();
+    }
+
 }

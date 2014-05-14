@@ -171,14 +171,14 @@ public class engine_gl_draw {
         private float temp_alignment_y;
         private float temp_alignment_x;
 
-        final public int X_ALIGN_RIGHT = 0;
-        final public int X_ALIGN_CENTER = 1; 
-        final public int X_ALIGN_LEFT = 2; 
+        final public static int X_ALIGN_LEFT = 0;
+        final public static int X_ALIGN_CENTER = 1; 
+        final public static int X_ALIGN_RIGHT = 2; 
         
-        final public int Y_ALIGN_TEXT_BASELINE = 0; 
-        final public int Y_ALIGN_BOTTOM = 1; 
-        final public int Y_ALIGN_CENTER = 2; 
-        final public int Y_ALIGN_TOP = 3;
+        final public static int Y_ALIGN_TEXT_BASELINE = 0; 
+        final public static int Y_ALIGN_BOTTOM = 1; 
+        final public static int Y_ALIGN_CENTER = 2; 
+        final public static int Y_ALIGN_TOP = 3;
 
         /**
          * 
@@ -243,13 +243,13 @@ public class engine_gl_draw {
                     }
                     
                     switch(x_align){
-                            case X_ALIGN_LEFT:
+                            case X_ALIGN_RIGHT:
                                     temp_alignment_x = -(temp_total_width);
                                     break;
                             case X_ALIGN_CENTER:                                
                                     temp_alignment_x = -(temp_total_width/2);
                                     break;
-                            case X_ALIGN_RIGHT:                                
+                            case X_ALIGN_LEFT:                                
                                     temp_alignment_x = 0;
                                     break;
                     }
@@ -286,13 +286,13 @@ public class engine_gl_draw {
                     temp_total_width = size * 3/4 * text.length();
                     
                     switch(x_align){
-                            case X_ALIGN_LEFT:
+                            case X_ALIGN_RIGHT:
                                     temp_alignment_x = -(temp_total_width);
                                     break;
                             case X_ALIGN_CENTER:                                
                                     temp_alignment_x = (temp_total_width/2);
                                     break;
-                            case X_ALIGN_RIGHT:                                
+                            case X_ALIGN_LEFT:                                
                                     temp_alignment_x = (temp_total_width);
                                     break;
                     }

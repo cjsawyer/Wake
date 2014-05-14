@@ -208,22 +208,22 @@ public class entity_menuRecords extends engine_entity {
 				ref.draw.setDrawColor(1, 1, 1, 1 * mgr.gameMain.shade_alpha);
 				text_y -= 1.5*mgr.gameMain.text_size;
 				ref.draw.text.append("High Score");
-				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				ref.draw.text.append(high_score);
-				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				
 				text_y -= 1.5*mgr.gameMain.text_size;
 				ref.draw.text.append("BEST STREAK");
-				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				ref.draw.text.append(high_streak);
-				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				text_y -= 1.5*mgr.gameMain.text_size;
 				ref.draw.text.append("GAMES PLAYED");
-				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 - text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				ref.draw.text.append(games_played);
-				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+				ref.draw.drawText(ref.screen_width/2 + text_x + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
 				
 				//RESET BUTTON

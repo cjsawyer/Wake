@@ -156,7 +156,7 @@ public class entity_menuPauseHUD extends engine_entity {
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			ref.draw.text.append(  "+"   );
 			ref.draw.text.append(  mgr.gameMain.score_multiplier   );
-			ref.draw.drawText(text_x + small_rec_width/2 - mgr.gameMain.text_size/4 , text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
+			ref.draw.drawText(text_x + small_rec_width/2 - mgr.gameMain.text_size/4 , text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
 			
 			float pause_alpha;
 			if (game_paused) {

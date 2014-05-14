@@ -91,19 +91,19 @@ public class entity_menuPostGame extends engine_entity {
 			text_y = draw_y - box_partition/2 + (box_inner_padding+mgr.gameMain.text_size)/2;
 			
 			ref.draw.text.append("Score");
-			ref.draw.drawText(ref.screen_width/2 - text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2 - text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 			
 			ref.draw.text.append(mgr.gameMain.score);
-			ref.draw.drawText(ref.screen_width/2 + text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2 + text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 			////////
 			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
 			text_y = draw_y - box_partition/2 - (box_inner_padding+mgr.gameMain.text_size)/2;
 			
 			ref.draw.text.append("Streak");
-			ref.draw.drawText(ref.screen_width/2 - text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2 - text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 			
 			ref.draw.text.append(mgr.gameMain.best_points_streak_this_game);
-			ref.draw.drawText(ref.screen_width/2 + text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2 + text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 			//^^^^^^
 			
 //			draw_y -= 2*mgr.gameMain.text_size+box_inner_padding;
@@ -119,10 +119,10 @@ public class entity_menuPostGame extends engine_entity {
 			
 			
 			ref.draw.text.append("High Score");
-			ref.draw.drawText(ref.screen_width/2 - text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2 - text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 			
 			ref.draw.text.append(mgr.gameMain.high_score);
-			ref.draw.drawText(ref.screen_width/2 + text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2 + text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 			////////
 			ref.draw.setDrawColor(1, 1, 1, mgr.gameMain.shade_alpha);
 			if (mgr.gameMain.new_best_streak)
@@ -131,10 +131,10 @@ public class entity_menuPostGame extends engine_entity {
 			text_y = draw_y - box_partition/2 - (box_inner_padding+mgr.gameMain.text_size)/2;
 			
 			ref.draw.text.append("Best Streak");
-			ref.draw.drawText(ref.screen_width/2 - text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2 - text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 			
 			ref.draw.text.append(mgr.gameMain.best_points_streak);
-			ref.draw.drawText(ref.screen_width/2 + text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2 + text_h,  text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 			//^^^^^^
 			
 			draw_y -=  mgr.menuDifficulty.draw_height/2+box_partition/2+box_inner_padding;
