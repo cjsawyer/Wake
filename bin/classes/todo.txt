@@ -1,8 +1,8 @@
 ///// This Commit /////
 
-added basis of advanced GUI
-added guiText
-changed draw.X_ALIGN_R&L around so they make more intuitive sense.
+Finished base GUI. margin/border/padding support.
+Added guiTextElement, guiText, guiNumber, and guiButton
+Built Pause popup GUI
 
 //////// TODO /////////
 
@@ -70,6 +70,12 @@ vector image rendering
 
 
 //////// DONE ////////
+
+added basis of advanced GUI
+added guiText
+changed draw.X_ALIGN_R&L around so they make more intuitive sense.
+
+added basic element-based GUI for pop-up
 
 added immersive full-screen mode
 added draw.getTextWidth
