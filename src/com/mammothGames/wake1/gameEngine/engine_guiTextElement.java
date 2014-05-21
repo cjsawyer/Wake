@@ -6,8 +6,8 @@ public class engine_guiTextElement extends engine_guiElement{
     
     protected String text = "";
     protected float size;
-    protected int x_align = gui.ref.draw.X_ALIGN_CENTER; 
-    protected int y_align = gui.ref.draw.Y_ALIGN_CENTER;
+    protected int x_align = -1;
+    protected int y_align = -1;
     protected int texture_sheet;
     protected float text_x = 0, text_y = 0;
     
@@ -17,7 +17,7 @@ public class engine_guiTextElement extends engine_guiElement{
     protected int DEFAULT_SIZE = -1;
     
     public engine_guiTextElement(engine_gui gui, int id) {
-        super(gui, id);
+        super(gui,id);
     }
     
     public void setTextSize(float size) {
@@ -47,6 +47,13 @@ public class engine_guiTextElement extends engine_guiElement{
     void computeSizesAndCenters() {
         
         super.computeSizesAndCenters();
+        
+        if (x_align == -1){
+            x_align = gui.ref.draw.X_ALIGN_CENTER;
+        }
+        if (y_align == -1){
+            y_align = gui.ref.draw.Y_ALIGN_CENTER;
+        }
         
         switch (x_align) {
             case engine_gl_draw.X_ALIGN_RIGHT:

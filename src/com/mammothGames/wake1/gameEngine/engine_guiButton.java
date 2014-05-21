@@ -27,7 +27,8 @@ public class engine_guiButton extends engine_guiTextElement {
         
         if (gui.ref.input.get_touch_state(0) == gui.ref.input.TOUCH_DOWN) {
             if (gui.ref.collision.point_AABB(w, h, x, y, gui.ref.input.get_touch_x(0), gui.ref.input.get_touch_y(0))) {
-                action();
+                if (gui.active)
+                    action();
             }
         }
         

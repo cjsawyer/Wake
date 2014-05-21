@@ -7,7 +7,7 @@ public class engine_guiNumber extends engine_guiTextElement {
     private boolean use_double = false;
     
     public engine_guiNumber(engine_gui gui, int id) {
-        super(gui, id);
+        super( gui, id);
     }
     
     public void setNumber(int number) {

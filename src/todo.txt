@@ -1,8 +1,7 @@
 ///// This Commit /////
 
-Finished base GUI. margin/border/padding support.
-Added guiTextElement, guiText, guiNumber, and guiButton
-Built Pause popup GUI
+added horizontal and vertical weighting to GUI elements 
+added feature so if you tap outside of the popup gui, it closes. Not sure if I like it.
 
 //////// TODO /////////
 
@@ -11,7 +10,15 @@ Built Pause popup GUI
 | 1 = hard |
 ------------
 
-fancy pause popup
+GUI:
+implement all of the functions backwards so we can wrap the content size.
+add vertical weights
+
+possibly split the build funtion into 4 functions, (wrapH, wrapV)*(weightX, weightY)
+
+rename things so "view" replaces "component"
+
+
 popup transitions
 fix menu buttons
 
@@ -70,6 +77,10 @@ vector image rendering
 
 
 //////// DONE ////////
+
+Finished base GUI. margin/border/padding support.
+Added guiTextElement, guiText, guiNumber, and guiButton
+Built Pause popup GUI
 
 added basis of advanced GUI
 added guiText

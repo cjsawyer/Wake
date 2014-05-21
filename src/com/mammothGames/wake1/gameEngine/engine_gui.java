@@ -20,12 +20,12 @@ public class engine_gui {
     int elements_x;
     int elements_y;
     int num_elements = 0;
-    engine_guiElement[] elemments;
+    engine_guiElement[] elements;
     engine_guiElement tmp_element;
 
     public engine_reference ref;
-    public engine_gui(engine_reference r) {
-        ref = r;
+    public engine_gui(engine_reference ref) {
+        this.ref = ref;
     }
     
     public void setLayout(int[][] layout) {
@@ -35,37 +35,36 @@ public class engine_gui {
         elements_y = layout[0][1];
         num_elements = elements_x * elements_y;
         
-        elemments = new engine_guiElement[num_elements];
+        elements = new engine_guiElement[num_elements];
     }
     
     public void build() {
 
         float[] row_weight = new float[elements_x];
+        float[] column_weight = new float[elements_x];
+        boolean[] last_in_row = new boolean[num_elements];
+        
         int[] row_ids = new int[elements_x];
-        int[] row_action = new int[elements_x];
         int row_i = 0;
         
-        float[] element_x = new float[elements_x*elements_y];
-        float[] element_y = new float[elements_x*elements_y];
-        float[] element_w = new float[elements_x*elements_y];
-        float[] element_h = new float[elements_x*elements_y];
-        int[] element_type = new int[elements_x*elements_y];
-        int[] element_action = new int[elements_x*elements_y];
         int element_i = 0;
         
         int ui_i = 0;
         
+        float total_column_weight = 0;
+        
         for (int iy=0; iy<elements_y; iy++) {
             
-//            float y = this.y+h/2 - (iy+0.5f)*(h/((float)elements_y) );
-            
             row_i = 0;
+            
             for (int ix=0; ix<elements_x; ix++) {
                 
-                int id = layout[1][ui_i];//TODO TYPE
+                int id = layout[1][ui_i];
                 
+                // if this isn't an empty cell
                 if (id != -1) {
-                    row_weight[row_i] = 1;//TODO weights
+                    row_weight[row_i] = elements[element_i+row_i].weightH;
+                    column_weight[row_i] = elements[element_i+row_i].weightV;
                     row_ids[row_i] = id;
                     row_i++;
                 }
@@ -74,50 +73,76 @@ public class engine_gui {
                 
             }
             
-            //sum row weight
+            //sum weight in row
             float total_row_weight = 0;
             for (int i=0; i<row_i; i++) {
                 total_row_weight += row_weight[i];
             }
+            
+            //find max weightV in row
+            float max_column_weight = 0;
+            for (int i=0; i<row_i; i++) {
+                if (column_weight[i] > max_column_weight)
+                    max_column_weight = column_weight[i];
+            }
+            total_column_weight += max_column_weight;
 
             //fill element data
             float placed_width = 0;
             for (int i=0; i<row_i; i++) {
                 
                 float width = w * (row_weight[i]/total_row_weight);
-                float height = h/(elements_y);
                 
-//                Log.e("popup", "i" + element_i);
-//                Log.e("popup", "type" + row_ids[i]);
-//                Log.e("popup", "w" + width);
-//                Log.e("popup", "h" + height);
-                
-                elemments[element_i].setSize(width, height);
-                
+                // the second arg is to avoid making another array
+                // it stores the vertical weight of the current element  
+                elements[element_i].setSize(width, column_weight[i]);
                 float X = -w/2 + placed_width + width/2f;
-                float Y = h/2 - iy*height - height/2f;
-                
-                elemments[element_i].setPosition(X, Y);
+                elements[element_i].setPosition(X, 0);
                 
                 placed_width += width;
                 
+                if (i==row_i-1)
+                    last_in_row[element_i] = true;
+                else
+                    last_in_row[element_i] = false;
                 
-                //element_type[element_i] = row_type[i];
-                //element_action[element_i] = row_action[i];
                 element_i++;
                 
             }
             
         }
         
-        computePositions();
+        float placed_height = 0;
+        element_i =0;
         
+        // Set component Ys and heights
+        for (int i=0;i<num_elements;i++) {
+            
+            tmp_element = elements[i];
+                
+            if (tmp_element != null) {
+                
+                float height = h * (tmp_element.h/total_column_weight);
+                float Y = h/2 - placed_height - height/2f;
+                
+                float width = tmp_element.w;
+                float X = tmp_element.rx;
+                
+                tmp_element.setPosition(X, Y);
+                tmp_element.setSize(width, height);
+                
+                if (last_in_row[i])
+                    placed_height += height;
+            }
+    
+            computePositions();
+        }
     }
     
     private void computePositions() {
         for (int i=0;i<num_elements;i++) {
             
-            tmp_element = elemments[i];
+            tmp_element = elements[i];
             
             if (tmp_element != null) {
                 tmp_element.computeSizesAndCenters();
@@ -127,21 +152,17 @@ public class engine_gui {
             
     
     public void addElement(engine_guiElement element) {
-        elemments[element.getID()] = element;
-        element.computeSizesAndCenters();
+        elements[element.getID()] = element;
     }
 
-    public void draw() {
+    public void update() {
         
-        if (active) {
-            //Draw elements
-            for (int i=0;i<num_elements;i++) {
-                
-                tmp_element = elemments[i];
-                
-                if (tmp_element != null) {
-                    tmp_element.update();
-                }
+        for (int i=0;i<num_elements;i++) {
+            
+            tmp_element = elements[i];
+            
+            if (tmp_element != null) {
+                tmp_element.update();
             }
         }
             
@@ -189,4 +210,16 @@ public class engine_gui {
         this.depth = depth;
     }
     
+    public float getX() {
+        return x;
+    }
+    public float getY() {
+        return y;
+    }
+    public float getH() {
+        return h;
+    }
+    public float getW() {
+        return w;
+    }
 }

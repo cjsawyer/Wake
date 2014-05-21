@@ -56,9 +56,7 @@ public class entity_backButton extends engine_entity {
 			case rooms.ROOM_MENUMAIN:
 				if ( ! mgr.areYouSure.getPopupOpenness() ) {
 					
-					mgr.areYouSure.setPopupAction(mgr.areYouSure.STATE_TEST);
-//	TODO: put this back				
-//					mgr.areYouSure.setPopupAction(mgr.areYouSure.STATE_QUIT);
+					mgr.areYouSure.setPopupAction(mgr.areYouSure.STATE_QUIT);
 					mgr.areYouSure.setPopupOpenness(true);
 				} else {
 					mgr.areYouSure.buttonAction(true);
