@@ -18,7 +18,7 @@ public class entity_menuPauseHUD extends engine_entity {
 		this.mgr = mgr;
 	}
 	
-	private boolean game_paused, gameMuted, menu_open;
+	private boolean game_paused, menu_open;
 	private float text_x, text_y, button_size;
 	float base_hud_height;
 	float HUD_y;
@@ -40,20 +40,6 @@ public class entity_menuPauseHUD extends engine_entity {
 				
 		button_size = mgr.gameMain.text_size;
 		base_hud_height = button_size*2;
-		
-		String muted = ref.file.load("muted");
-		// If first boot, save "not muted"
-		if (muted.equals("")) {
-			gameMuted = false;
-			ref.file.save("muted", "" + gameMuted);
-		} else {
-			gameMuted = Boolean.parseBoolean(muted);
-		}
-		ref.sound.setMusicState(gameMuted, true, true);
-		
-		if (!gameMuted) {
-//			ref.sound.playSound(game_sounds.SND_SPLASH);
-		}
 		
 		text_x = ref.screen_width/2;
 		text_y = ref.screen_height - mgr.gameMain.text_size/2;
@@ -158,17 +144,12 @@ public class entity_menuPauseHUD extends engine_entity {
 			ref.draw.text.append(  mgr.gameMain.score_multiplier   );
 			ref.draw.drawText(text_x + small_rec_width/2 - mgr.gameMain.text_size/4 , text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
 			
+			// draw blinking pause button
 			float pause_alpha;
-			if (game_paused) {
+			if (game_paused)
 				pause_alpha = ((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuFirst.DEG_TO_RAD / 530f)));
-				ref.draw.setDrawColor(0, 1, 0, 1);
-			} else {
-				ref.draw.setDrawColor(0, 1, 0, 0);
+			else
 				pause_alpha = 0;
-			}
-			ref.draw.text.append("paused");
-			ref.draw.drawText(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
-			
 			ref.draw.setDrawColor(1-pause_alpha, 1, 1-pause_alpha, 1);
 			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, button_size/2, button_size/2, 0, constants.layer6_HUD, textures.SUB_PAUSE, textures.TEX_SPRITES);
 			
@@ -179,34 +160,34 @@ public class entity_menuPauseHUD extends engine_entity {
 				//right corner
 				if (ref.room.get_current_room() == rooms.ROOM_GAME)
 					if ( (ref.input.get_touch_x(0) >= ref.screen_width - button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
-						if (!mgr.areYouSure.getPopupOpenness())
-							switchPause();
+						if (!mgr.popup.getPopupOpenness() && (game_paused == false))
+							setPause(true);
 					}
 				
 			}
 			
 			// mute/unmute button
-			if (ref.room.get_current_room() == rooms.ROOM_GAME)  {
-				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
-					// Left corner
-					if (  (ref.input.get_touch_x(0) <= button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
-						gameMuted = !gameMuted;
-						ref.file.save("muted", "" + gameMuted);
-						// Play music.
-						ref.sound.setMusicState(gameMuted, true, true);
-					}
-				}
-			}	
+//			if (ref.room.get_current_room() == rooms.ROOM_GAME)  {
+//				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
+//					// Left corner
+//					if (  (ref.input.get_touch_x(0) <= button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
+//						gameMuted = !gameMuted;
+//						ref.file.save("muted", "" + gameMuted);
+//						// Play music.
+//						ref.sound.setMusicState(gameMuted, true, true);
+//					}
+//				}
+//			}	
 			
 			//draw button
-			if ( (ref.room.get_current_room() == rooms.ROOM_GAME) || (ref.room.get_current_room() == rooms.ROOM_POSTGAME) )  {
-				ref.draw.setDrawColor(1, 1, 1, 1);
-				if (gameMuted) {
-					ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, -button_size/2, button_size/2, 0, constants.layer6_HUD, textures.SUB_MUTED, textures.TEX_SPRITES);
-				} else {
-					ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, -button_size/2, button_size/2, 0, constants.layer6_HUD, textures.SUB_MUTE, textures.TEX_SPRITES);
-				}
-			}
+//			if ( (ref.room.get_current_room() == rooms.ROOM_GAME) || (ref.room.get_current_room() == rooms.ROOM_POSTGAME) )  {
+//				ref.draw.setDrawColor(1, 1, 1, 1);
+//				if (gameMuted) {
+//					ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, -button_size/2, button_size/2, 0, constants.layer6_HUD, textures.SUB_MUTED, textures.TEX_SPRITES);
+//				} else {
+//					ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, -button_size/2, button_size/2, 0, constants.layer6_HUD, textures.SUB_MUTE, textures.TEX_SPRITES);
+//				}
+//			}
 		}
 
 		doPause(newPause);
@@ -236,6 +217,8 @@ public class entity_menuPauseHUD extends engine_entity {
 				ref.draw.captureDraw();
 				ref.main.pauseEntities();
 				menu_open = true;
+				mgr.popup.setPopupState(mgr.popup.STATE_PAUSED);
+				mgr.popup.setPopupOpenness(true);
 			} else {
 				game_paused = false;
 				ref.main.unPauseEntities();

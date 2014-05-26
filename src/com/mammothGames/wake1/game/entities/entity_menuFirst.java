@@ -80,8 +80,8 @@ public class entity_menuFirst extends engine_entity {
 		mgr.menuAbout = new entity_menuAbout(mgr);
 		ref.main.addEntity(mgr.menuAbout);
 		
-		mgr.areYouSure = new entity_popup(mgr);
-		ref.main.addEntity(mgr.areYouSure);
+		mgr.popup = new entity_popup(mgr);
+		ref.main.addEntity(mgr.popup);
 		
 		
 	}

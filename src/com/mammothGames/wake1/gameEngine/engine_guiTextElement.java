@@ -5,6 +5,7 @@ import android.util.Log;
 public class engine_guiTextElement extends engine_guiElement{
     
     protected String text = "";
+    protected float text_width = 0;
     protected float size;
     protected int x_align = -1;
     protected int y_align = -1;
@@ -82,8 +83,15 @@ public class engine_guiTextElement extends engine_guiElement{
         }
         
         if (default_size) {
-            size = contentH;//TODO make full content height, check if too wide, if so; set smaller until it fits. fancy resizing.
+            size = h/3;//TODO make full content height, check if too wide, if so; set smaller until it fits. fancy resizing.
         }
+        
+        if (wrapX) {
+            gui.ref.draw.text.append(text);
+            text_width = gui.ref.draw.getTextWidth(size, texture_sheet);
+        }
+        setContentSize(text_width, size);
+            
     }
     
     @Override

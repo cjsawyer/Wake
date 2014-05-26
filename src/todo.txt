@@ -1,7 +1,8 @@
 ///// This Commit /////
 
-added horizontal and vertical weighting to GUI elements 
-added feature so if you tap outside of the popup gui, it closes. Not sure if I like it.
+Finished popup GUIs
+Fixed minimum ApiLevel compatibility with onWindowFocusChanged in engine_android
+Fixed vertical weighting in GUIs so all elements in the weighted row are resized to the max height.
 
 //////// TODO /////////
 
@@ -10,23 +11,13 @@ added feature so if you tap outside of the popup gui, it closes. Not sure if I l
 | 1 = hard |
 ------------
 
-GUI:
-implement all of the functions backwards so we can wrap the content size.
-add vertical weights
-
-possibly split the build funtion into 4 functions, (wrapH, wrapV)*(weightX, weightY)
-
-rename things so "view" replaces "component"
-
-
-popup transitions
-fix menu buttons
-
 
 Wake ----------------------------------------
 
+make diff curve seem higher by doubling the internal "points per tap", halving the difficulty multipliers
+double points for combo taps
 make music restart at same point when restarting app
-make free users wait for the poastgame score to spin up to full, pro still has the animation, but doesn't need to wait.
+have poastgame score spin up to full number
 tablet screenshot
 
 DOGE DROP
@@ -54,7 +45,9 @@ make bar flash red when a combo is broken
 
 //////// ENGINE /////////
 
-add accelerometer and phone vibrator input/control
+
+GUI: wrapModeX/Y in element
+figure out why text won't center vertically
 clean up log usage
 redo X/Y_ALIGN_CENTER -> ALIGN_CENTER/TOP/BOTTOM/BASELINE/LEFT/RIGHT
 think of better names for g_textures and loaded_assets...	
@@ -64,6 +57,8 @@ make extra, shorter drawing functions for simple drawing cases
 
 --Long Term------------------
 accelerometer
+phone vibration
+rewrite font loader
 add Unicode support
 texture compression
 texture sheet generator
@@ -76,7 +71,10 @@ vector image rendering
 
 
 
-//////// DONE ////////
+//////// HISTORY ////////
+
+added horizontal and vertical weighting to GUI elements 
+added feature so if you tap outside of the popup gui, it closes. Not sure if I like it.
 
 Finished base GUI. margin/border/padding support.
 Added guiTextElement, guiText, guiNumber, and guiButton

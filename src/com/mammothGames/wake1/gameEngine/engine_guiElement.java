@@ -25,61 +25,66 @@ public class engine_guiElement {
     protected float br = 1, bg = 1, bb = 1, ba = 1; // border color
     protected float pr = 1, pg = 1, pb = 1, pa = 1; // padding color
     
-    boolean wrapH = false, wrapV = false;
+    protected boolean wrapX = false, wrapY = false;
     //vv maybe vv
     //margin between B and A  =  padding(A) + padding(B) + max(margin(A), margin(B))
     
+    
+    
     void computeSizesAndCenters() {
         
+        if (wrapX)
+            computeWrapX();
+        else
+            computeFillX();
+        
+        if (wrapY)
+            computeWrapY();
+        else
+            computeFillY();
+        
+    }
+    
+    private void computeWrapX() {
+        // TODO: computeWrapX
+    }
+    private void computeWrapY() {
+        // TODO: computeWrapY
+    }
+    private void computeFillX() {
         x = rx + gui.x;
-        y = ry + gui.y;
-        
         borderW = w - marginL - marginR;
-        borderH = h - marginT - marginB;
         borderX = x - w/2 + marginL + borderW/2f;
-        borderY = y - h/2 + marginB + borderH/2f;
-        
-        // Left border segment rectangle 
         borderLW = borderL;
-        borderLH = borderH - borderT - borderB;
-        
         borderLX = borderX - borderW/2 + borderL/2;
-        borderLY = borderY + (borderB - borderT)/2;
-        
-        // Right border segment rectangle 
         borderRX = borderX + borderW/2 - borderR/2;
-        borderRY = borderY + (borderB - borderT)/2;
         borderRW = borderR;
-        borderRH = borderH - borderT - borderB;
-        
-        // Top border segment rectangle 
         borderTX = borderX;
-        borderTY = borderY + borderH/2 - borderT/2;
         borderTW = borderW;
-        borderTH = borderT;
-        
-        // Bottom border segment rectangle 
         borderBX = borderX;
-        borderBY = borderY - borderH/2 + borderB/2;
         borderBW = borderW;
-        borderBH = borderB;
-        
-        
-        
         paddingW = borderW - borderL - borderR;
-        paddingH = borderH - borderT - borderB;
         paddingX = borderX - borderW/2 + borderL + paddingW/2f;
-        paddingY = borderY - borderH/2 + borderB + paddingH/2f;
-        
-        
         contentW = paddingW - paddingL - paddingR;
-        contentH = paddingH - paddingT - paddingB;
         contentX = paddingX - paddingW/2 + paddingL + contentW/2f;
+
+    }
+    private void computeFillY() {
+        y = ry + gui.y;
+        borderH = h - marginT - marginB;
+        borderY = y - h/2 + marginB + borderH/2f;
+        borderLH = borderH - borderT - borderB; // Left border segment rectangle 
+        borderLY = borderY + (borderB - borderT)/2;
+        borderRY = borderY + (borderB - borderT)/2;
+        borderRH = borderH - borderT - borderB;
+        borderTY = borderY + borderH/2 - borderT/2;
+        borderTH = borderT;
+        borderBY = borderY - borderH/2 + borderB/2;
+        borderBH = borderB;
+        paddingH = borderH - borderT - borderB;
+        paddingY = borderY - borderH/2 + borderB + paddingH/2f;
+        contentH = paddingH - paddingT - paddingB;
         contentY = paddingY - paddingH/2 + paddingB + contentH/2f;
-        
-        
-        
-        
     }
     
     public engine_guiElement(engine_gui gui, int id) {
@@ -160,10 +165,12 @@ public class engine_guiElement {
         return id;
     }
     
+    /*
     public void setWrapMode(boolean horizontal, boolean vertical) {
-        wrapH = horizontal;
-        wrapV = vertical;
+        wrapX = horizontal;
+        wrapY = vertical;
     }
+    */
     
     public void setContentSize(float w, float h) {
         this.contentW = w;
@@ -171,14 +178,15 @@ public class engine_guiElement {
     }
     
     protected void drawDefaultBackground() {
-        gui.ref.draw.setDrawColor(br, bg, bb, ba*gui.alpha);
-        gui.ref.draw.drawRectangle(borderTX, borderTY, borderTW, borderTH, 0, 0, 0, gui.depth);
-        gui.ref.draw.drawRectangle(borderBX, borderBY, borderBW, borderBH, 0, 0, 0, gui.depth);
-        gui.ref.draw.drawRectangle(borderLX, borderLY, borderLW, borderLH, 0, 0, 0, gui.depth);
-        gui.ref.draw.drawRectangle(borderRX, borderRY, borderRW, borderRH, 0, 0, 0, gui.depth);
         
-        gui.ref.draw.setDrawColor(pr, pg, pb, pa*gui.alpha);
-        gui.ref.draw.drawRectangle(paddingX, paddingY, paddingW, paddingH, 0, 0, 0, gui.depth);
+    gui.ref.draw.setDrawColor(br, bg, bb, ba*gui.alpha);
+    gui.ref.draw.drawRectangle(borderTX, borderTY, borderTW, borderTH, 0, 0, 0, gui.depth);
+    gui.ref.draw.drawRectangle(borderBX, borderBY, borderBW, borderBH, 0, 0, 0, gui.depth);
+    gui.ref.draw.drawRectangle(borderLX, borderLY, borderLW, borderLH, 0, 0, 0, gui.depth);
+    gui.ref.draw.drawRectangle(borderRX, borderRY, borderRW, borderRH, 0, 0, 0, gui.depth);
+    
+    gui.ref.draw.setDrawColor(pr, pg, pb, pa*gui.alpha);
+    gui.ref.draw.drawRectangle(paddingX, paddingY, paddingW, paddingH, 0, 0, 0, gui.depth);
     }
     
     public void update() {

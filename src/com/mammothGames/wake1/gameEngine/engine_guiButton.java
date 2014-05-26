@@ -4,16 +4,14 @@ import android.util.Log;
 
 public class engine_guiButton extends engine_guiTextElement {
 
+    private boolean clicked = false, rtn;
+    
     public engine_guiButton(engine_gui gui, int id) {
         super(gui, id);
     }
     
     public void setText(String text) {
         this.text = text;
-    }
-    
-    public void action() {
-        Log.e("MAGE", "@Override action() in your guiButton!");
     }
     
     @Override
@@ -27,10 +25,15 @@ public class engine_guiButton extends engine_guiTextElement {
         
         if (gui.ref.input.get_touch_state(0) == gui.ref.input.TOUCH_DOWN) {
             if (gui.ref.collision.point_AABB(w, h, x, y, gui.ref.input.get_touch_x(0), gui.ref.input.get_touch_y(0))) {
-                if (gui.active)
-                    action();
+                clicked = true;
             }
         }
         
+    }
+    
+    public boolean getClicked() {
+        rtn = clicked;
+        clicked = false;
+        return rtn;
     }
 }

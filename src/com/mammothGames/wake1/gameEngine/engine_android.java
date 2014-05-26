@@ -104,16 +104,18 @@ public class engine_android extends Activity {
 		initate_touch_points();
 	}
 	
-	@TargetApi(Build.VERSION_CODES.KITKAT) // Minimum API level for SYSTEM_UI_FLAG_IMMERSIVE
-	@Override
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-		getWindow().getDecorView().setSystemUiVisibility(
-		          View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-		        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-		        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-		        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-		        | View.SYSTEM_UI_FLAG_FULLSCREEN
-		        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+	    if (Integer.valueOf(android.os.Build.VERSION.SDK) >= Build.VERSION_CODES.JELLY_BEAN) {
+	        getWindow().getDecorView().setSystemUiVisibility(
+	                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+	                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+	                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+	                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+	                | View.SYSTEM_UI_FLAG_FULLSCREEN
+	                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+	    }
     }
 	
 	@Override

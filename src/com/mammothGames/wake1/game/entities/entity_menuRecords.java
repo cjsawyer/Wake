@@ -240,10 +240,10 @@ public class entity_menuRecords extends engine_entity {
 				ref.draw.text.append("ERASE ALL");
 				ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
-				if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.areYouSure.getPopupOpenness()) )
+				if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.popup.getPopupOpenness()) )
 					if (ref.collision.point_AABB( mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, ref.screen_width/2, text_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
-						mgr.areYouSure.setPopupAction(mgr.areYouSure.STATE_ERASE);
-						mgr.areYouSure.setPopupOpenness(true);
+						mgr.popup.setPopupState(mgr.popup.STATE_ERASE);
+						mgr.popup.setPopupOpenness(true);
 					}
 				
 				//DONATE LINK BUTTON
@@ -261,7 +261,7 @@ public class entity_menuRecords extends engine_entity {
 					ref.draw.text.append("AD FREE VERSION");
 					ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 					
-					if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.areYouSure.getPopupOpenness()) )
+					if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.popup.getPopupOpenness()) )
 						if (ref.collision.point_AABB( mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, ref.screen_width/2, text_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
 							
 							final String appPackageName = "com.mammothGames.wake1"; // getPackageName() from Context or Activity object
@@ -288,7 +288,7 @@ public class entity_menuRecords extends engine_entity {
 				ref.draw.text.append("RATE");
 				ref.draw.drawText(ref.screen_width/2 + offset, text_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 				
-				if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.areYouSure.getPopupOpenness()) )
+				if ( (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) && (mgr.gameMain.shade_alpha > 0.9f) && (!mgr.popup.getPopupOpenness()) )
 					if (ref.collision.point_AABB( mgr.menuDifficulty.draw_width-mgr.menuDifficulty.button_border_size, mgr.menuDifficulty.draw_height-mgr.menuDifficulty.button_border_size, ref.screen_width/2, text_y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
 						
 						final String appPackageName = ref.android.getPackageName(); // getPackageName() from Context or Activity object

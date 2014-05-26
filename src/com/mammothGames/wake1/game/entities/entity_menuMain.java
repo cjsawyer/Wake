@@ -94,7 +94,7 @@ public class entity_menuMain extends engine_entity {
 				}
 
 				// If the AYSYWTQ? popup isn't open
-				if (!mgr.areYouSure.getPopupOpenness())
+				if (!mgr.popup.getPopupOpenness())
 					// Check if a button is pressed.
 					if ( (!fade_main) && (!fade_secondary) && (mgr.gameMain.shade_alpha > 0.98f) ) // only if we haven't already pressed one, and we're already transitioned into the room
 						if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN)

@@ -43,12 +43,10 @@ public class engine_gui {
         float[] row_weight = new float[elements_x];
         float[] column_weight = new float[elements_x];
         boolean[] last_in_row = new boolean[num_elements];
-        
         int[] row_ids = new int[elements_x];
+        
         int row_i = 0;
-        
         int element_i = 0;
-        
         int ui_i = 0;
         
         float total_column_weight = 0;
@@ -79,12 +77,14 @@ public class engine_gui {
                 total_row_weight += row_weight[i];
             }
             
-            //find max weightV in row
+            //find max column weight in this row
             float max_column_weight = 0;
             for (int i=0; i<row_i; i++) {
-                if (column_weight[i] > max_column_weight)
+                if (column_weight[i] > max_column_weight) {
                     max_column_weight = column_weight[i];
+                }
             }
+            
             total_column_weight += max_column_weight;
 
             //fill element data
@@ -95,7 +95,7 @@ public class engine_gui {
                 
                 // the second arg is to avoid making another array
                 // it stores the vertical weight of the current element  
-                elements[element_i].setSize(width, column_weight[i]);
+                elements[element_i].setSize(width, max_column_weight);
                 float X = -w/2 + placed_width + width/2f;
                 elements[element_i].setPosition(X, 0);
                 
@@ -133,38 +133,36 @@ public class engine_gui {
                 
                 if (last_in_row[i])
                     placed_height += height;
+                
             }
     
-            computePositions();
         }
-    }
-    
-    private void computePositions() {
+        
+        
+        // Compute all sizes/positions
         for (int i=0;i<num_elements;i++) {
-            
             tmp_element = elements[i];
-            
             if (tmp_element != null) {
                 tmp_element.computeSizesAndCenters();
             }
         }
+        
     }
-            
     
     public void addElement(engine_guiElement element) {
+        //TODO: change this if I ever implement dynamic GUI's. It wouldn't work if we're adding and removing
         elements[element.getID()] = element;
     }
 
     public void update() {
-        
-        for (int i=0;i<num_elements;i++) {
-            
-            tmp_element = elements[i];
-            
-            if (tmp_element != null) {
-                tmp_element.update();
+        if (active)
+            for (int i=0;i<num_elements;i++) {
+                tmp_element = elements[i];
+                
+                if (tmp_element != null) {
+                    tmp_element.update();
+                }
             }
-        }
             
             /*
             ref.draw.setDrawColor(ref.main.randomRange(0, 1), ref.main.randomRange(0, 1), ref.main.randomRange(0, 1), popup_alpha);
