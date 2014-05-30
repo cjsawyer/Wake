@@ -41,7 +41,7 @@ public class entity_menuPauseHUD extends engine_entity {
 		button_size = mgr.gameMain.text_size;
 		base_hud_height = button_size*2;
 		
-		text_x = ref.screen_width/2;
+		text_x = ref.screen_width - button_size;
 		text_y = ref.screen_height - mgr.gameMain.text_size/2;
 		
 		streak_bar_padding = mgr.gameMain.text_size/4;
@@ -123,35 +123,32 @@ public class entity_menuPauseHUD extends engine_entity {
 				ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size + HUD_y, streak_width + extra_x, streak_bar_height + extra_y, -streak_width/2, 0, 0, constants.layer6_HUD);
 //			}
 	
-			
-			// Pause text, above and off the screen when not paused.
-			ref.draw.setDrawColor(1, 1, 1, 1);
-			ref.draw.text.append("tap to play");
-			ref.draw.drawText(ref.screen_width/2, ref.screen_height*3/2 - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_BOTTOM, constants.layer5_underHUD, textures.TEX_FONT1);
-			ref.draw.text.append("press back to quit");
-			ref.draw.drawText(ref.screen_width/2, ref.screen_height*3/2 - 2*button_size + HUD_y, mgr.gameMain.mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer5_underHUD, textures.TEX_FONT1);
-			
 
 			
 			//Draw score
 			ref.draw.setDrawColor(1, 1, 1, 1);
-			ref.draw.text.append(  mgr.gameMain.score   );
-			ref.draw.drawText(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
+			ref.draw.text.append(  mgr.gameMain.score  );
+			ref.draw.drawText(ref.screen_width/2, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
+			
 
 			//Draw score multiplier
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			ref.draw.text.append(  "+"   );
 			ref.draw.text.append(  mgr.gameMain.score_multiplier   );
-			ref.draw.drawText(text_x + small_rec_width/2 - mgr.gameMain.text_size/4 , text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
+			ref.draw.drawText(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
 			
-			// draw blinking pause button
-			float pause_alpha;
-			if (game_paused)
-				pause_alpha = ((float)Math.sin((float)(SystemClock.uptimeMillis() * 180f * mgr.menuFirst.DEG_TO_RAD / 530f)));
-			else
-				pause_alpha = 0;
-			ref.draw.setDrawColor(1-pause_alpha, 1, 1-pause_alpha, 1);
-			ref.draw.drawTexture(ref.screen_width - button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, button_size/2, button_size/2, 0, constants.layer6_HUD, textures.SUB_PAUSE, textures.TEX_SPRITES);
+			ref.draw.setDrawColor(1, 1, 1, 1);
+			ref.draw.drawTexture(
+			        button_size/2,
+			        ref.screen_height - button_size/2 + HUD_y,
+			        button_size,
+			        button_size,
+			        -button_size/2,
+			        button_size/2,
+			        0,
+			        constants.layer6_HUD,
+			        textures.SUB_PAUSE,
+			        textures.TEX_SPRITES);
 			
 
 			// Unpause if the screen is touched
@@ -159,10 +156,11 @@ public class entity_menuPauseHUD extends engine_entity {
 				
 				//right corner
 				if (ref.room.get_current_room() == rooms.ROOM_GAME)
-					if ( (ref.input.get_touch_x(0) >= ref.screen_width - button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
+					if (  (ref.input.get_touch_x(0) <= button_size*2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
 						if (!mgr.popup.getPopupOpenness() && (game_paused == false))
 							setPause(true);
 					}
+//					if ( (ref.input.get_touch_x(0) >= ref.screen_width - button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
 				
 			}
 			
@@ -217,8 +215,8 @@ public class entity_menuPauseHUD extends engine_entity {
 				ref.draw.captureDraw();
 				ref.main.pauseEntities();
 				menu_open = true;
-				mgr.popup.setPopupState(mgr.popup.STATE_PAUSED);
-				mgr.popup.setPopupOpenness(true);
+				// this is in an alarm so the just-starting-to-fade-in popup won't be captured with the pause image
+				alarm[0] = ref.main.time_delta*2;
 			} else {
 				game_paused = false;
 				ref.main.unPauseEntities();
@@ -227,6 +225,11 @@ public class entity_menuPauseHUD extends engine_entity {
 		}
 	}
 	
+	@Override
+	public void alarm0() {
+	    mgr.popup.setPopupState(mgr.popup.STATE_PAUSED);
+        mgr.popup.setPopupOpenness(true);
+	}
 
 	public void switchPause() {
 		setPause(!game_paused);

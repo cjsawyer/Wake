@@ -3,9 +3,11 @@ package com.mammothGames.wake1.game.entities;
 import android.util.Log;
 
 import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
 import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 import com.mammothGames.wake1.gameTESTS.game_constants;
+import com.mammothGames.wake1.gameTESTS.game_rooms;
 import com.mammothGames.wake1.gameTESTS.game_textures;
 
 
@@ -178,12 +180,14 @@ public class entity_popup extends engine_entity {
                 pause_gui.setActive(popup_open);
                 pause_gui.setAlpha(popup_alpha);
                 
+                pause_gui.title.setText(mgr.gameMain.current_diff_string);
                 pause_gui.scoreNumber.setNumber(mgr.gameMain.score);
                 pause_gui.streakNumber.setNumber(mgr.gameMain.streak);
                 
                 if (pause_gui.play.getClicked()) {
-                    setPopupOpenness(false);
-                    mgr.menuPauseHUD.setPause(false);
+                    setPopupOpennessHard(false);
+                    mgr.countdown.startUnpauseCountdown();
+                    //mgr.menuPauseHUD.setPause(false);
                 }
                 if (pause_gui.leave.getClicked()) {
                     setPopupState(STATE_ABANDON);
@@ -232,8 +236,9 @@ public class entity_popup extends engine_entity {
 		
         
 		// black veil covering everything under popup
-//		ref.draw.setDrawColor(0,0,0, 0.7f * popup_alpha);
-//		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD);
+        // duplicated in countdown
+		ref.draw.setDrawColor(0,0,0, 0.7f * popup_alpha);
+		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD);
 		
 		pause_gui.update();
 		bool_gui.update();
@@ -253,7 +258,11 @@ public class entity_popup extends engine_entity {
 	
 	@Override
 	public void onScreenSleep() {
-		setPopupOpennessHard(false);
+	    
+	    if(ref.room.get_current_room() == rooms.ROOM_GAME) {
+	        setPopupState(STATE_PAUSED);
+		    setPopupOpennessHard(true);
+	    }
 	}
 	
 	private int action = 0;
@@ -317,6 +326,7 @@ class PauseGUI extends engine_gui {
     
     engine_guiNumber scoreNumber, streakNumber;
     engine_guiButton settings, play, leave;
+    engine_guiText title;
     
     
     public void populate() {
@@ -324,7 +334,7 @@ class PauseGUI extends engine_gui {
         
         float border = mgr.menuDifficulty.button_border_size/2;
         
-        engine_guiText title = new engine_guiText(this, idTitle);
+        title = new engine_guiText(this, idTitle);
         title.setText("PAUSED");
         title.setTextureSheet(game_textures.TEX_FONT1);
         title.setTextSize(mgr.gameMain.text_size);

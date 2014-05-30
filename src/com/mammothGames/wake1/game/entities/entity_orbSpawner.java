@@ -138,15 +138,21 @@ public class entity_orbSpawner extends engine_entity {
     private float resettingTimeCounter = 0;
     
     private void scorePoint(boolean report_score) {
+        float scale = 1;
+        
     	if (report_score) {
+    	    
+    	    scale = mgr.gameMain.SCORE_BALANCE;
+    	    
     		mgr.gameMain.floor_height_target -= mgr.gameMain.floor_per_hit;
     		mgr.gameMain.score += mgr.gameMain.score_multiplier;
     		mgr.gameMain.streak += 1;
     		mgr.gameMain.points_streak += mgr.gameMain.score_multiplier;
 //    		ref.sound.playSoundSpeedChanged(game_sounds.SND_DING, 0.3f);
     	}
-		mgr.gameMain.speed_multiplier += mgr.gameMain.speed_gain_per_orb;
-		mgr.gameMain.time_between_orbs -= mgr.gameMain.time_change_per_orb;
+    	
+		mgr.gameMain.speed_multiplier += mgr.gameMain.speed_gain_per_orb*scale;
+		mgr.gameMain.time_between_orbs -= mgr.gameMain.time_change_per_orb*scale;
     	
     }
     

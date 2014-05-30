@@ -34,7 +34,7 @@ public class engine_entity {
 	}
 	
 	/////////////////ALARMS/////////////////
-	public double[] alarm = new double[13];
+	public float[] alarm = new float[13];
 	protected void sys_initAlarms(){
 		alarm[0] = -1;
 		alarm[1] = -1;

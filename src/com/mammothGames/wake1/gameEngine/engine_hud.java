@@ -110,11 +110,11 @@ public class engine_hud {
 		button_next.touched = false;
 		
 		
-		if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
-			if ((ref.input.get_touch_x(0) < 100)&&(ref.input.get_touch_y(0) > ref.screen_height - 100)) {
-				hidden = !hidden;
-			}
-		}
+//		if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
+//			if ((ref.input.get_touch_x(0) < 100)&&(ref.input.get_touch_y(0) > ref.screen_height - 100)) {
+//				hidden = !hidden;
+//			}
+//		}
 
 		
 		

@@ -83,6 +83,9 @@ public class entity_menuFirst extends engine_entity {
 		mgr.popup = new entity_popup(mgr);
 		ref.main.addEntity(mgr.popup);
 		
+		mgr.countdown = new entity_countdown(mgr);
+        ref.main.addEntity(mgr.countdown);
+		
 		
 	}
 

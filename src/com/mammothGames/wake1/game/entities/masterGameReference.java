@@ -22,6 +22,8 @@ public class masterGameReference {
 	
 	entity_backButton backButton;
 	
+	entity_countdown countdown;
+	
 //	entity_stars stars;
 
 }

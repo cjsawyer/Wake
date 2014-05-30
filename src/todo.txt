@@ -1,8 +1,9 @@
 ///// This Commit /////
 
-Finished popup GUIs
-Fixed minimum ApiLevel compatibility with onWindowFocusChanged in engine_android
-Fixed vertical weighting in GUIs so all elements in the weighted row are resized to the max height.
+made game speed up earlier
+added pause continuation countdown
+fixed popup behavior when turning off the screen
+
 
 //////// TODO /////////
 
@@ -14,8 +15,8 @@ Fixed vertical weighting in GUIs so all elements in the weighted row are resized
 
 Wake ----------------------------------------
 
-make diff curve seem higher by doubling the internal "points per tap", halving the difficulty multipliers
 double points for combo taps
+
 make music restart at same point when restarting app
 have poastgame score spin up to full number
 tablet screenshot
@@ -23,7 +24,6 @@ tablet screenshot
 DOGE DROP
 
 redo postgame screen
-add pause menu with settings/
 about screen which slides in from the right side of the screen and accompanying menu button
 [later] add about screen from records menu, link to website.
 [later] add per-difficulty heatmaps
@@ -45,7 +45,7 @@ make bar flash red when a combo is broken
 
 //////// ENGINE /////////
 
-
+get rid of HUD
 GUI: wrapModeX/Y in element
 figure out why text won't center vertically
 clean up log usage
@@ -72,6 +72,10 @@ vector image rendering
 
 
 //////// HISTORY ////////
+
+Finished popup GUIs
+Fixed minimum ApiLevel compatibility with onWindowFocusChanged in engine_android
+Fixed vertical weighting in GUIs so all elements in the weighted row are resized to the max height.
 
 added horizontal and vertical weighting to GUI elements 
 added feature so if you tap outside of the popup gui, it closes. Not sure if I like it.

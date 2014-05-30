@@ -58,6 +58,8 @@ public class entity_gameMain extends engine_entity {
 	float floor_per_hit; 
 	float floor_height;
 	
+	final int SCORE_BALANCE = 2;
+	
 	public boolean new_high_score, new_best_streak;
 	
 	public void restart() {
