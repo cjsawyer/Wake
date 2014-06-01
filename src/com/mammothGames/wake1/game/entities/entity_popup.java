@@ -2,13 +2,8 @@ package com.mammothGames.wake1.game.entities;
 
 import android.util.Log;
 
-import com.mammothGames.wake1.game.constants;
-import com.mammothGames.wake1.game.rooms;
-import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
-import com.mammothGames.wake1.gameTESTS.game_constants;
-import com.mammothGames.wake1.gameTESTS.game_rooms;
-import com.mammothGames.wake1.gameTESTS.game_textures;
+import com.mammothGames.wake1.game.*;
 
 
 public class entity_popup extends engine_entity {
@@ -16,11 +11,11 @@ public class entity_popup extends engine_entity {
 	private boolean popup_open = false;
 	private float popup_alpha = 0, popup_alpha_target = 0;
 	private boolean game_muted;
-	
+
 	PauseGUI pause_gui;
 	BooleanGUI bool_gui;
 	SettingsGUI settings_gui;
-	
+
 	masterGameReference mgr;
 	public entity_popup(masterGameReference mgr) {
 		this.persistent = true;
@@ -28,18 +23,18 @@ public class entity_popup extends engine_entity {
 		this.mgr = mgr;
 	}
 
-	
-	
+
+
 	public final int STATE_ABANDON = 0;
 	public final int STATE_QUIT = 1;
 	public final int STATE_ERASE = 2;
 	public final int STATE_PAUSED = 3;
 	public final int STATE_SETTINGS = 4;
-	
-	
-	
-	
-	
+
+
+
+
+
    @Override
    public void sys_firstStep() {
         
@@ -89,25 +84,25 @@ public class entity_popup extends engine_entity {
         
         
     }
-	
-	
-	
+
+
+
 	@Override
 	public void sys_step() {
-	    
+
 	    //Close popup if a touch is outside of the GUI
 //	    if (ref.input.get_touch_state(0) == ref.input.TOUCH_HELD) {
 //	        if (!ref.collision.point_AABB(pause_gui.getW(), pause_gui.getH(), pause_gui.getX(), pause_gui.getY(), ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
 //	            setPopupOpenness(false);
 //            }
 //	    }
-		
+
 		popup_alpha += (popup_alpha_target - popup_alpha) * 8f * ref.main.time_scale;
-		
+
 		pause_gui.setActive(false);
 		bool_gui.setActive(false);
 		settings_gui.setActive(false);
-		
+
         switch (action) {
         
                 
@@ -227,25 +222,25 @@ public class entity_popup extends engine_entity {
                 break;
                 
         }
-		
-		
-	    
+
+
+
 //		if (ref.input.get_touch_state(0) == ref.input.TOUCH_HELD) {
 //		    pause_gui.setPosition(ref.input.get_touch_x(0), ref.input.get_touch_y(0));
 //		}
-		
+
         
 		// black veil covering everything under popup
         // duplicated in countdown
 		ref.draw.setDrawColor(0,0,0, 0.7f * popup_alpha);
 		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD);
-		
+
 		pause_gui.update();
 		bool_gui.update();
 		settings_gui.update();
-		
+
 	}
-	
+
 	public void quitGame() {
 	    ref.main.exitApp();
 	}
@@ -255,16 +250,16 @@ public class entity_popup extends engine_entity {
         mgr.gameMain.floor_height_target = 0;
         mgr.gameMain.endGame();
 	}
-	
+
 	@Override
 	public void onScreenSleep() {
-	    
+
 	    if(ref.room.get_current_room() == rooms.ROOM_GAME) {
 	        setPopupState(STATE_PAUSED);
 		    setPopupOpennessHard(true);
 	    }
 	}
-	
+
 	private int action = 0;
 
 	public void setPopupState(int action) {
@@ -273,7 +268,7 @@ public class entity_popup extends engine_entity {
 	public int getPopupState() {
 	    return action;
 	}
-	
+
 	public void setPopupOpenness(boolean open) {
 		if (Math.abs(popup_alpha-popup_alpha_target) < 0.2f) {
 			popup_open = open;
@@ -285,12 +280,12 @@ public class entity_popup extends engine_entity {
 		popup_open = open;
 		popup_alpha_target = open ? 1 : 0;
 		popup_alpha = popup_alpha_target;
-		
+
 	}
 	public boolean getPopupOpenness() {
 		return popup_open;
 	}
-	
+
 }
 
 class PauseGUI extends engine_gui {
@@ -336,7 +331,7 @@ class PauseGUI extends engine_gui {
         
         title = new engine_guiText(this, idTitle);
         title.setText("PAUSED");
-        title.setTextureSheet(game_textures.TEX_FONT1);
+        title.setTextureSheet(textures.TEX_FONT1);
         title.setTextSize(mgr.gameMain.text_size);
         title.setTextColor(0,1,0,1);
         title.setBorder(border,border,border,border);
@@ -346,7 +341,7 @@ class PauseGUI extends engine_gui {
         
         engine_guiText score = new engine_guiText(this, idScore);
         score.setText("Score");
-        score.setTextureSheet(game_textures.TEX_FONT1);
+        score.setTextureSheet(textures.TEX_FONT1);
         score.setTextSize(mgr.gameMain.text_size);
         score.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
         score.setBorder(0,0,border,0);
@@ -356,7 +351,7 @@ class PauseGUI extends engine_gui {
         
         scoreNumber = new engine_guiNumber(this, idScoreNumber);
         scoreNumber.setNumber(12345);
-        scoreNumber.setTextureSheet(game_textures.TEX_FONT1);
+        scoreNumber.setTextureSheet(textures.TEX_FONT1);
         scoreNumber.setTextSize(mgr.gameMain.text_size);
         scoreNumber.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         scoreNumber.setBorder(0,0,0,border);
@@ -367,7 +362,7 @@ class PauseGUI extends engine_gui {
         
         engine_guiText streak = new engine_guiText(this, idStreak);
         streak.setText("Streak");
-        streak.setTextureSheet(game_textures.TEX_FONT1);
+        streak.setTextureSheet(textures.TEX_FONT1);
         streak.setTextSize(mgr.gameMain.text_size);
         streak.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
         streak.setBorder(0,0,border,0);
@@ -377,7 +372,7 @@ class PauseGUI extends engine_gui {
         
         streakNumber = new engine_guiNumber(this, idStreakNumber);
         streakNumber.setNumber(3210);
-        streakNumber.setTextureSheet(game_textures.TEX_FONT1);
+        streakNumber.setTextureSheet(textures.TEX_FONT1);
         streakNumber.setTextSize(mgr.gameMain.text_size);
         streakNumber.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         streakNumber.setBorder(0,0,0,border);
@@ -387,7 +382,7 @@ class PauseGUI extends engine_gui {
         
         settings = new engine_guiButton(this, idSettingsButton);
         settings.setText("Settings");
-        settings.setTextureSheet(game_textures.TEX_FONT1);
+        settings.setTextureSheet(textures.TEX_FONT1);
         settings.setTextSize(mgr.gameMain.text_size);
         settings.setBorder(border,border,border,border);
         settings.setBorderColor(0,1,1,0.3f);
@@ -396,7 +391,7 @@ class PauseGUI extends engine_gui {
         
         play = new engine_guiButton(this, idAgainButton);
         play.setText("play");
-        play.setTextureSheet(game_textures.TEX_FONT1);
+        play.setTextureSheet(textures.TEX_FONT1);
         play.setTextSize(mgr.gameMain.text_size);
         play.setBorder(0,border,border,border/2);
         play.setBorderColor(0,1,1,0.3f);
@@ -405,7 +400,7 @@ class PauseGUI extends engine_gui {
         
         leave = new engine_guiButton(this, idLeaveButton);
         leave.setText("leave");
-        leave.setTextureSheet(game_textures.TEX_FONT1);
+        leave.setTextureSheet(textures.TEX_FONT1);
         leave.setTextSize(mgr.gameMain.text_size);
         leave.setBorder(0,border,border/2,border);
         leave.setBorderColor(0,1,1,0.3f);
@@ -461,7 +456,7 @@ class BooleanGUI extends engine_gui {
         
         text = new engine_guiText(this, idText);
         text.setText("PAUSED");
-        text.setTextureSheet(game_textures.TEX_FONT1);
+        text.setTextureSheet(textures.TEX_FONT1);
         text.setTextSize(mgr.gameMain.text_size);
         text.setTextColor(1,1,1,1);
         text.setBorder(border,border,border,border);
@@ -472,7 +467,7 @@ class BooleanGUI extends engine_gui {
 
         yes = new engine_guiButton(this, idYesButton);
         yes.setText("again");
-        yes.setTextureSheet(game_textures.TEX_FONT1);
+        yes.setTextureSheet(textures.TEX_FONT1);
         yes.setTextSize(mgr.gameMain.text_size);
         yes.setBorder(0,border,border,border/2);
         yes.setBorderColor(0,1,1,0.3f);
@@ -481,7 +476,7 @@ class BooleanGUI extends engine_gui {
         
         no = new engine_guiButton(this, idNoButton);
         no.setText("leave");
-        no.setTextureSheet(game_textures.TEX_FONT1);
+        no.setTextureSheet(textures.TEX_FONT1);
         no.setTextSize(mgr.gameMain.text_size);
         no.setBorder(0,border,border/2,border);
         no.setBorderColor(0,1,1,0.3f);
@@ -532,7 +527,7 @@ class SettingsGUI extends engine_gui {
         
         engine_guiText title = new engine_guiText(this, idTitle);
         title.setText("SETTINGS");
-        title.setTextureSheet(game_textures.TEX_FONT1);
+        title.setTextureSheet(textures.TEX_FONT1);
         title.setTextSize(mgr.gameMain.text_size);
         title.setTextColor(0,1,0,1);
         title.setBorder(border,border,border,border);
@@ -542,7 +537,7 @@ class SettingsGUI extends engine_gui {
         
         engine_guiText music = new engine_guiText(this, idMusic);
         music.setText("Music");
-        music.setTextureSheet(game_textures.TEX_FONT1);
+        music.setTextureSheet(textures.TEX_FONT1);
         music.setTextSize(mgr.gameMain.text_size);
         music.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         music.setBorder(0,0,border,0);
@@ -552,7 +547,7 @@ class SettingsGUI extends engine_gui {
         music.setWeight(1, 2);
         
         check = new engine_guiButton(this, idCheckbox);
-        check.setTextureSheet(game_textures.TEX_FONT1);
+        check.setTextureSheet(textures.TEX_FONT1);
         check.setTextSize(mgr.gameMain.text_size);
         check.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
         check.setBorder(0,0,0,border);
@@ -562,7 +557,7 @@ class SettingsGUI extends engine_gui {
         
         back = new engine_guiButton(this, idBackButton);
         back.setText("back");
-        back.setTextureSheet(game_textures.TEX_FONT1);
+        back.setTextureSheet(textures.TEX_FONT1);
         back.setTextSize(mgr.gameMain.text_size);
         back.setBorder(border,border,border,border);
         back.setBorderColor(0,1,1,0.3f);

@@ -1,6 +1,6 @@
 ///// This Commit /////
 
-Redid postgame screen with the a GUI
+
 
 //////// TODO /////////
 
@@ -72,6 +72,8 @@ vector image rendering
 
 
 //////// HISTORY ////////
+
+Redid postgame screen with the a GUI
 
 made game speed up earlier
 added pause continuation countdown

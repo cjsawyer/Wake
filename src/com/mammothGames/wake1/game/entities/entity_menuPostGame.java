@@ -6,7 +6,7 @@ import com.mammothGames.wake1.game.constants;
 import com.mammothGames.wake1.game.rooms;
 import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
-import com.mammothGames.wake1.gameTESTS.game_textures;
+import com.mammothGames.wake1.game.textures;
 
 
 public class entity_menuPostGame extends engine_entity {
@@ -60,6 +60,27 @@ public class entity_menuPostGame extends engine_entity {
 					prepLeave(room_records);
 				}
 				
+			}
+			
+			// For blinking high score text
+			float blink_alpha = ((float)Math.sin((float)(SystemClock.uptimeMillis() * mgr.menuFirst.DEG_TO_RAD / 500f * 180f))) + 1;
+			blink_alpha = blink_alpha > 1 ? 1:blink_alpha;
+			blink_alpha *= mgr.gameMain.shade_alpha;
+			
+			if (mgr.gameMain.new_high_score) {
+				post_gui.scoreNumber.setTextColor(0, 1, 1, blink_alpha);
+				post_gui.highScoreNumber.setTextColor(0, 1, 1, blink_alpha);
+			} else {
+				post_gui.scoreNumber.setTextColor(1, 1, 1, 1);
+				post_gui.highScoreNumber.setTextColor(1, 1, 1, 1);
+			}
+			
+			if (mgr.gameMain.new_best_streak) {
+				post_gui.streakNumber.setTextColor(0, 1, 1, blink_alpha);
+				post_gui.bestStreakNumber.setTextColor(0, 1, 1, blink_alpha);
+			} else {
+				post_gui.streakNumber.setTextColor(1, 1, 1, 1);
+				post_gui.bestStreakNumber.setTextColor(1, 1, 1, 1);
 			}
 			
 			
@@ -323,7 +344,7 @@ class PostGUI extends engine_gui {
         float border = mgr.menuDifficulty.button_border_size/2;
         
         title = new guiDifficultyText(this, idDiff, mgr);
-        title.setTextureSheet(game_textures.TEX_FONT1);
+        title.setTextureSheet(textures.TEX_FONT1);
         title.setTextSize(mgr.gameMain.text_size);
         title.setBorder(border,border,border,border);
         title.setBorderColor(1,1,1,0.3f);
@@ -332,7 +353,7 @@ class PostGUI extends engine_gui {
         
         engine_guiText score = new engine_guiText(this, idScore);
         score.setText("Score");
-        score.setTextureSheet(game_textures.TEX_FONT1);
+        score.setTextureSheet(textures.TEX_FONT1);
         score.setTextSize(mgr.gameMain.text_size);
         score.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
         score.setBorder(0,0,border,0);
@@ -342,7 +363,7 @@ class PostGUI extends engine_gui {
         
         scoreNumber = new engine_guiNumber(this, idScoreNumber);
         scoreNumber.setNumber(000);
-        scoreNumber.setTextureSheet(game_textures.TEX_FONT1);
+        scoreNumber.setTextureSheet(textures.TEX_FONT1);
         scoreNumber.setTextSize(mgr.gameMain.text_size);
         scoreNumber.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         scoreNumber.setBorder(0,0,0,border);
@@ -353,7 +374,7 @@ class PostGUI extends engine_gui {
         
         engine_guiText streak = new engine_guiText(this, idStreak);
         streak.setText("Streak");
-        streak.setTextureSheet(game_textures.TEX_FONT1);
+        streak.setTextureSheet(textures.TEX_FONT1);
         streak.setTextSize(mgr.gameMain.text_size);
         streak.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
         streak.setBorder(0,border/2,border,0);
@@ -363,7 +384,7 @@ class PostGUI extends engine_gui {
         
         streakNumber = new engine_guiNumber(this, idStreakNumber);
         streakNumber.setNumber(3210);
-        streakNumber.setTextureSheet(game_textures.TEX_FONT1);
+        streakNumber.setTextureSheet(textures.TEX_FONT1);
         streakNumber.setTextSize(mgr.gameMain.text_size);
         streakNumber.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         streakNumber.setBorder(0,border/2,0,border);
@@ -373,7 +394,7 @@ class PostGUI extends engine_gui {
         
         engine_guiText highScore = new engine_guiText(this, idHighScore);
         highScore.setText("High Score");
-        highScore.setTextureSheet(game_textures.TEX_FONT1);
+        highScore.setTextureSheet(textures.TEX_FONT1);
         highScore.setTextSize(mgr.gameMain.text_size);
         highScore.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
         highScore.setBorder(border/2,0,border,0);
@@ -384,7 +405,7 @@ class PostGUI extends engine_gui {
         
         highScoreNumber = new engine_guiNumber(this, idHighScoreNumber);
         highScoreNumber.setNumber(000);
-        highScoreNumber.setTextureSheet(game_textures.TEX_FONT1);
+        highScoreNumber.setTextureSheet(textures.TEX_FONT1);
         highScoreNumber.setTextSize(mgr.gameMain.text_size);
         highScoreNumber.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         highScoreNumber.setBorder(border/2,0,0,border);
@@ -395,7 +416,7 @@ class PostGUI extends engine_gui {
         
         engine_guiText bestStreak = new engine_guiText(this, idBestStreak);
         bestStreak.setText("Best Streak");
-        bestStreak.setTextureSheet(game_textures.TEX_FONT1);
+        bestStreak.setTextureSheet(textures.TEX_FONT1);
         bestStreak.setTextSize(mgr.gameMain.text_size);
         bestStreak.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
         bestStreak.setBorder(0,border,border,0);
@@ -407,7 +428,7 @@ class PostGUI extends engine_gui {
         
         bestStreakNumber = new engine_guiNumber(this, idBestStreakNumber);
         bestStreakNumber.setNumber(3210);
-        bestStreakNumber.setTextureSheet(game_textures.TEX_FONT1);
+        bestStreakNumber.setTextureSheet(textures.TEX_FONT1);
         bestStreakNumber.setTextSize(mgr.gameMain.text_size);
         bestStreakNumber.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         bestStreakNumber.setBorder(0,border,0,border);
@@ -418,7 +439,7 @@ class PostGUI extends engine_gui {
         
         records = new engine_guiButton(this, idRecordsButton);
         records.setText("records");
-        records.setTextureSheet(game_textures.TEX_FONT1);
+        records.setTextureSheet(textures.TEX_FONT1);
         records.setTextSize(mgr.gameMain.text_size);
         records.setBorder(border,border,border,border);
         records.setBorderColor(0,1,1,0.3f);
@@ -429,7 +450,7 @@ class PostGUI extends engine_gui {
         
         diff = new engine_guiButton(this, idChangeDiffButton);
         diff.setText("set difficulty");
-        diff.setTextureSheet(game_textures.TEX_FONT1);
+        diff.setTextureSheet(textures.TEX_FONT1);
         diff.setTextSize(mgr.gameMain.text_size);
         diff.setBorder(border,border,border,border);
         diff.setBorderColor(0,1,1,0.3f);
@@ -440,7 +461,7 @@ class PostGUI extends engine_gui {
         
         play = new engine_guiButton(this, idPlayAgainButton);
         play.setText("play again");
-        play.setTextureSheet(game_textures.TEX_FONT1);
+        play.setTextureSheet(textures.TEX_FONT1);
         play.setTextSize(mgr.gameMain.text_size);
         play.setTextColor(0, 1, 0, 1);
         play.setBorder(border,border,border,border);
