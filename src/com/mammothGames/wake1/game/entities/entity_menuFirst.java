@@ -56,6 +56,9 @@ public class entity_menuFirst extends engine_entity {
 		mgr.orbSpawner = new entity_orbSpawner(mgr);
 		ref.main.addEntity(mgr.orbSpawner);
 		
+		mgr.menuDifficulty = new entity_menuDifficulty(mgr);
+		ref.main.addEntity(mgr.menuDifficulty);
+		
 		mgr.menuPostGame = new entity_menuPostGame(mgr);
 		ref.main.addEntity(mgr.menuPostGame);
 		
@@ -65,8 +68,6 @@ public class entity_menuFirst extends engine_entity {
 		mgr.backButton = new entity_backButton(mgr);
 		ref.main.addEntity(mgr.backButton);
 		
-		mgr.menuDifficulty = new entity_menuDifficulty(mgr);
-		ref.main.addEntity(mgr.menuDifficulty);
 
 		mgr.menuMain = new entity_menuMain(mgr);
 		ref.main.addEntity(mgr.menuMain);

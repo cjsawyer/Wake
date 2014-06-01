@@ -1,9 +1,6 @@
 ///// This Commit /////
 
-made game speed up earlier
-added pause continuation countdown
-fixed popup behavior when turning off the screen
-
+Redid postgame screen with the a GUI
 
 //////// TODO /////////
 
@@ -45,6 +42,9 @@ make bar flash red when a combo is broken
 
 //////// ENGINE /////////
 
+make screen size available from initialization. get rid of engine first step function in entities
+engine should take care of updating gui's like entities
+change guiElement constructor to not include parent GUI, make that be set in addElement
 get rid of HUD
 GUI: wrapModeX/Y in element
 figure out why text won't center vertically
@@ -72,6 +72,10 @@ vector image rendering
 
 
 //////// HISTORY ////////
+
+made game speed up earlier
+added pause continuation countdown
+fixed popup behavior when turning off the screen
 
 Finished popup GUIs
 Fixed minimum ApiLevel compatibility with onWindowFocusChanged in engine_android

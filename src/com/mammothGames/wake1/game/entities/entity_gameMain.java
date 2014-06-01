@@ -243,7 +243,6 @@ public class entity_gameMain extends engine_entity {
 		mgr.orbSpawner.restart(current_diff);
 		mgr.orbPatternMaker.restart();
 		mgr.menuPauseHUD.restart();
-		mgr.menuPostGame.restart();
 	}
 	
 	public void endGame() {
