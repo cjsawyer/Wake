@@ -1,6 +1,7 @@
 ///// This Commit /////
 
-
+Switched AdMob for Google Play Services ads
+Added interstitial ads after each game
 
 //////// TODO /////////
 

@@ -11,8 +11,8 @@ public class constants {
 	public static boolean is_landscape = false;
 	
 	// Leave null for no ads.
-//	public static String adMob_publisher_id = "ca-app-pub-6028924870146472/5120597547"; old wake
-	public static String adMob_publisher_id = "ca-app-pub-6028924870146472/6330592345";
+	public static String adMob_banner_id = "ca-app-pub-6028924870146472/6330592345";
+	public static String adMob_interstitial_id = "ca-app-pub-6028924870146472/6297005543";
 	public static String google_analytics_id = "UA-50122948-1";
 	
 	public static int max_particles = 200;

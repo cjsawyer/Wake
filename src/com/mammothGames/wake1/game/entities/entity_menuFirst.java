@@ -32,7 +32,7 @@ public class entity_menuFirst extends engine_entity {
 		
 		fade_out = false;
 		
-		ref.ad.loadAd(ref.ad.H_CENTER, ref.ad.V_BOTTOM);
+		ref.ad.loadBannerAd(ref.ad.H_CENTER, ref.ad.V_BOTTOM);
 
 		ref.main.pauseEntities();
 		

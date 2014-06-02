@@ -30,6 +30,7 @@ public class entity_menuPostGame extends engine_entity {
         post_gui.populate();
         post_gui.setDepth(constants.layer7_overHUD);
         post_gui.setActive(true);
+        ref.ad.loadInterstitialAd();
 	}
 	
 	
@@ -264,7 +265,7 @@ public class entity_menuPostGame extends engine_entity {
 		mgr.gameMain.shade_alpha_target = 1;
 		fade_out = false;
 		ref.room.changeRoom(rooms.ROOM_POSTGAME);
-		
+		ref.ad.showInterstitialAd(); //TODO: make this popup less often
 	}
 	
 	

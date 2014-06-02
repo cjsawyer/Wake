@@ -53,10 +53,10 @@ public class entity_adMob_test extends engine_entity {
 		if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
 			
 			if (ref.collision.point_AABB(size, size, x[0], y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
-				ref.ad.loadAd(ref.ad.H_RIGHT, ref.ad.V_BOTTOM);
+				ref.ad.loadBannerAd(ref.ad.H_RIGHT, ref.ad.V_BOTTOM);
 			}
 			if (ref.collision.point_AABB(size, size, x[1], y, ref.input.get_touch_x(0), ref.input.get_touch_y(0))) {
-				ref.ad.unLoadAd();
+				ref.ad.unLoadBannerAd();
 			}
 		}
 	}

@@ -3,14 +3,14 @@ package com.mammothGames.wake1.gameEngine;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import com.mammothGames.wake1free.R;
 import com.mammothGames.wake1.game.constants;
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
+import com.mammothGames.wake1free.R;
+
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -36,6 +36,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.*;
+import com.google.android.gms.common.*;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.GAServiceManager;
 
@@ -102,9 +104,11 @@ public class engine_android extends Activity {
 		
 		//Touch stuff
 		initate_touch_points();
+		
+		loadInterstitialAd();
 	}
 	
-	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+	@TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 	    if (Integer.valueOf(android.os.Build.VERSION.SDK) >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -137,13 +141,14 @@ public class engine_android extends Activity {
 	    	ref.android.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		} else {
 			ref.android.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		}	
+		}
+		
+		
+		checkGooglePlayServices();
 		
 		super.onResume();
 		open_gl_surface_view.onResume();
-//		ref.main.onLoad();
-
-		//do other unpause stuff here
+		
 	}
 
 	@Override
@@ -185,17 +190,17 @@ public class engine_android extends Activity {
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this);
 	}
+	
 	/// ad stuff //
-//	private int adId = 100000;
 	private AdView av; 
-	protected void loadAd(int h_align, int v_align) {
-		
+	protected void loadBannerAd(int h_align, int v_align) {
+		/*
 		if (av == null) {
 			if (!constants.pro) {
 				RelativeLayout rl = (RelativeLayout)findViewById(R.id.adHolder);
 		
 				
-				av = new AdView(this, AdSize.BANNER, constants.adMob_publisher_id);
+				av = new AdView(this, AdSize.BANNER, constants.adMob_banner_id);
 				
 				RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 				relativeParams.addRule(h_align);
@@ -205,6 +210,9 @@ public class engine_android extends Activity {
 				rl.addView(av, relativeParams);
 		
 				AdRequest adRequest = new AdRequest();
+				
+				if (constants.devmode)
+					adRequest.addTestDevice("8CDF2127BAF995A9AE9BA2B6098E7C34"); // My nexus 5
 		
 				av.setEnabled(true);
 		        av.setVisibility(View.VISIBLE);
@@ -212,9 +220,48 @@ public class engine_android extends Activity {
 				
 			}
 		}
+		*/
+		
+		/*
+		// This setup is for having the ad separate from the game, not on top
+		LinearLayout ll = (LinearLayout)findViewById(R.id.topView);
+		ll.setBackgroundColor(Color.GRAY);
+		av = new AdView(this, AdSize.BANNER, constants.adMob_publisher_id);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		params.gravity=align_mode;
+		av.setLayoutParams(params);
+		ll.addView(av);
+		*/
 	}
 	
-	protected void unLoadAd() {
+	private boolean google_play_services_avaliable = true;
+	private void checkGooglePlayServices() {
+		google_play_services_avaliable = true;
+		// Check for current Google Play Services
+		/*
+		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		if (resultCode == ConnectionResult.SUCCESS) {
+			google_play_services_avaliable = true;
+		} else if (resultCode == ConnectionResult.SERVICE_MISSING ||
+		           resultCode == ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED ||
+		           resultCode == ConnectionResult.SERVICE_DISABLED) {
+		    Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 1);
+		    
+		    // Make it quit the app without this installed
+		    dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialogInterface) {
+                    engine_android.this.finish();
+                }
+            });
+		    
+		    dialog.show();
+		}
+		*/
+		int a = ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED;
+	}
+	
+	protected void unLoadBannerAd() {
 		
 		if (av != null) {
 			av.setEnabled(false);
@@ -223,6 +270,40 @@ public class engine_android extends Activity {
 		}
 		
 	}
+	
+	
+	private InterstitialAd interstitial;
+		
+	protected void loadInterstitialAd() {
+			
+		if ( (!constants.pro) && (google_play_services_avaliable) ) {
+			
+			// Create the Interstitial.
+		    interstitial = new InterstitialAd(this);
+		    interstitial.setAdUnitId(constants.adMob_interstitial_id);
+		
+		    // Create ad request.
+		    AdRequest adRequest;
+			
+			if (constants.devmode)
+				adRequest = new AdRequest.Builder().addTestDevice("8CDF2127BAF995A9AE9BA2B6098E7C34").build();
+			else
+				adRequest = new AdRequest.Builder().build();
+				
+
+			interstitial.loadAd(adRequest);
+			// Begin loading your Interstitial.
+		}
+		
+	}
+	
+	protected void showInterstitialAd() {
+		if ( (google_play_services_avaliable) && (interstitial.isLoaded()) ) {
+			interstitial.show();
+			loadInterstitialAd(); //so we have the next one to show as soon as possible.
+		}
+	}
+	
 	
 	/// Sound management ///
 	
