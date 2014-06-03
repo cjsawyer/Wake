@@ -33,8 +33,6 @@ public class engine_gl_textureLoader {
 	
 	volatile SparseArray<byte[]> byte_map;
 	
-	int temp_i;
-	
 	public engine_gl_textureLoader(engine_reference r){
 		ref = r;
 		number_of_textures = ref.loaded_textures.get_numTextures();
@@ -50,8 +48,8 @@ public class engine_gl_textureLoader {
 		
 		has_loaded = new boolean[number_of_textures+1];
 		
-		for(temp_i=0;temp_i<(number_of_textures+1); temp_i++){
-			has_loaded[temp_i] = false;
+		for(int i=0;i<(number_of_textures+1); i++){
+			has_loaded[i] = false;
 		}
 	}
 	
@@ -248,10 +246,10 @@ public class engine_gl_textureLoader {
 			
 		}
 	public void reloadLoadedTextues() {
-		for(temp_i=2; temp_i<number_of_textures+1; temp_i++) {
+		for(int i=2; i<number_of_textures+1; i++) {
 			
-			if (has_loaded[temp_i-1]==true) {
-				loadTexture(temp_i);
+			if (has_loaded[i-1]==true) {
+				loadTexture(i);
 			}		
 		}
 	}

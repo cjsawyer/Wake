@@ -36,6 +36,7 @@ public class engine_sound {
 	private int music_loaded = -1;
 	private boolean music_playing = false;
 	private boolean music_playing_was_looped = false;
+	private int music_position = 0;
 	
 	public engine_sound(engine_reference ref) {
 	
@@ -49,7 +50,7 @@ public class engine_sound {
 //		music_loaded = -1;
 	}
 
-	private boolean mute = false;
+	private boolean mute_sound = false, mute_music;
 	
 	protected void initSounds(Context theContext) {
 		mContext = theContext;
@@ -77,18 +78,18 @@ public class engine_sound {
 	}
 
 	public void playSound(int index) {
-		if (!mute) {
+		if (!mute_sound) {
 //			float streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 //			streamVolume = streamVolume / mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 			mSoundPool.play(mSoundPoolMap.get(index), 1, 1, 1, 0, 1);
 		}
 	}
 	public void playSoundSpeedChanged(int index, float percentChangeRange) {
-		if (!mute) {
+		if (!mute_sound) {
 //			float streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 //			streamVolume = streamVolume / mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 			
-			percentChangeRange /= 2f;
+			percentChangeRange /= 2;
 			
 			mSoundPool.play(mSoundPoolMap.get(index), 1, 1, 1, 0, ref.main.randomRange(1-percentChangeRange, 1+percentChangeRange));
 		}
@@ -116,7 +117,7 @@ public class engine_sound {
 	
 	
 	public void setMusicState(boolean mute, boolean startPlayingIfNotAlready, boolean loop) {
-		this.mute= mute;   
+		this.mute_music= mute;   
 		if (mute) {
 			// Mute everything
 			for(int i=0; i<sounds.sound_array.length; i++) {
@@ -203,10 +204,11 @@ public class engine_sound {
 	}
 	
 	private void playMusic(boolean loop) {
-		if (!mute) {
+		if (!mute_music) {
 			music_playing = true;
 			mPlayer.setLooping(loop);
 			music_playing_was_looped = loop;
+			mPlayer.seekTo(music_position);
 			mPlayer.start();
 		}
 	}
@@ -221,12 +223,14 @@ public class engine_sound {
 		if (music_playing) {
 			music_playing = false;
 			mPlayer.pause();
+			music_position = mPlayer.getCurrentPosition();
 		}
 	}
 	public void pauseMusicHARD() {
 		if (music_playing) {
 //			music_playing = false;
 			mPlayer.pause();
+			music_position = mPlayer.getCurrentPosition();
 		}
 	}
 	public void stopMusic() {

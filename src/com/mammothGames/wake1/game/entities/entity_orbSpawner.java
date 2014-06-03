@@ -194,6 +194,25 @@ public class entity_orbSpawner extends engine_entity {
 								// Tap'd orb
 								delete_this_one = true;
 								
+								/*
+								ref.sound.playSoundSpeedChanged(sounds.SND_THUD, 0.2f );
+								int ZeroOneOrTwo = (int) ref.main.randomRange(0, 3); 
+								switch (ZeroOneOrTwo){
+									case 0:
+										Log.e("rand", "" + ZeroOneOrTwo);
+										ref.sound.playSoundSpeedChanged(sounds.SND_CRACK1, 0.2f );
+										break;
+									case 1:
+										Log.e("rand", "" + ZeroOneOrTwo);
+										ref.sound.playSoundSpeedChanged(sounds.SND_CRACK2, 0.2f );
+										break;
+									case 2:
+										Log.e("rand", "" + ZeroOneOrTwo);
+										ref.sound.playSoundSpeedChanged(sounds.SND_CRACK3, 0.2f );
+										break;
+								}
+								*/
+								
 								temp_scoreEffect = (poolObj_scoreEffect) scoreEffect_pool.takeObject();
 								temp_scoreEffect.x = temp_orb.x;
 								temp_scoreEffect.y = temp_orb.y;

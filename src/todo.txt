@@ -1,7 +1,8 @@
 ///// This Commit /////
 
-Switched AdMob for Google Play Services ads
-Added interstitial ads after each game
+Added hover color to GUI buttons
+Rebuilt AdMob banner support
+Added settings button in menu
 
 //////// TODO /////////
 
@@ -13,6 +14,10 @@ Added interstitial ads after each game
 
 Wake ----------------------------------------
 
+edit gui buttons to fire on the upclick, add hover animation
+
+fix ad timing on post-game
+
 double points for combo taps
 
 make music restart at same point when restarting app
@@ -21,11 +26,12 @@ tablet screenshot
 
 DOGE DROP
 
-redo postgame screen
 about screen which slides in from the right side of the screen and accompanying menu button
 [later] add about screen from records menu, link to website.
 [later] add per-difficulty heatmaps
 
+
+Register for otehr App Stores: Amazon Play Opera Samsung
 
 
 
@@ -73,6 +79,9 @@ vector image rendering
 
 
 //////// HISTORY ////////
+
+Switched AdMob for Google Play Services ads
+Added interstitial ads after each game
 
 Redid postgame screen with the a GUI
 

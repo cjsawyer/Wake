@@ -109,18 +109,36 @@ public class engine_android extends Activity {
 	}
 	
 	@TargetApi(Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-	    if (Integer.valueOf(android.os.Build.VERSION.SDK) >= Build.VERSION_CODES.JELLY_BEAN) {
-	        getWindow().getDecorView().setSystemUiVisibility(
-	                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-	                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-	                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-	                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-	                | View.SYSTEM_UI_FLAG_FULLSCREEN
-	                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-	    }
-    }
+	public void onWindowFocusChanged(boolean hasFocus) {
+	        super.onWindowFocusChanged(hasFocus);
+	    if (Integer.valueOf(android.os.Build.VERSION.SDK) >= Build.VERSION_CODES.KITKAT) {
+		    if (hasFocus) {
+		    	getWindow().getDecorView().setSystemUiVisibility(
+		                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+		                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+		                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+		                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+		                | View.SYSTEM_UI_FLAG_FULLSCREEN
+		                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+		}
+	}
+	
+//	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//		
+//		
+//		
+//	    //if (Integer.valueOf(android.os.Build.VERSION.SDK) >= Build.VERSION_CODES.JELLY_BEAN) {
+////	        getWindow().getDecorView().setSystemUiVisibility(
+////	                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+////	                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+////	                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+////	                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+////	                | View.SYSTEM_UI_FLAG_FULLSCREEN
+////	                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+//	    //}
+//    }
 	
 	@Override
 	public Object onRetainNonConfigurationInstance() {
@@ -135,6 +153,7 @@ public class engine_android extends Activity {
 	protected void onResume()
 	{
 		Log.e("reywas","onResume");
+		super.onResume();
 		
 		// Set the orientation.
 		if(constants.is_landscape) {
@@ -144,22 +163,27 @@ public class engine_android extends Activity {
 		}
 		
 		
-		checkGooglePlayServices();
+		// checkGooglePlayServices();
+		if(adViewBanner != null)
+			adViewBanner.resume();	
 		
-		super.onResume();
 		open_gl_surface_view.onResume();
+		
 		
 	}
 
 	@Override
 	protected void onPause()
 	{
-		// The activity must call the GL surface view's onPause() on activity onPause().
 		Log.e("reywas","onPause");
 		open_gl_surface_view.onPause();
 		ref.renderer.assets_loaded = false;
 		ref.sound.pauseMusicHARD();
 		ref.main.onScreenSleep();
+		
+		if(adViewBanner != null)
+			adViewBanner.pause();
+		
 //		System.gc();
 		super.onPause();
 	}
@@ -167,60 +191,67 @@ public class engine_android extends Activity {
 	@Override
 	  public void onStart() {
 	    super.onStart();
-//	    EasyTracker.getInstance(this).set("ga_trackingId", "UA-50122948-1");
 	    if (!constants.devmode) {
 	    	EasyTracker.getInstance(this).set("&tid", constants.google_analytics_id);
 	    	EasyTracker.getInstance(this).activityStart(this);
 	    }
-	    
-//	    EasyTracker tracker = EasyTracker.getInstance(this);
-//	    tracker.set("&tid", "UA-XXXX-2");
-//	    tracker.set("&tid", game_constants.google_analytics_id);
 	  }
 	
 	@Override
 	protected void onStop(){
 		Log.e("reywas","onStop");
 		
+		ref.sound.pauseMusicHARD();
+//		ref.sound.pauseMusic();
+		
+		EasyTracker.getInstance(this).activityStop(this);
+		super.onStop();
+	}
+	
+	@Override
+	protected void onDestroy()
+	{
+		
+		if(adViewBanner != null)
+			adViewBanner.destroy();
+		
 		ref.renderer.assets_loaded = false;
 		ref.sound.releaseSounds();
-//		ref.sound.pauseMusic();
 		ref.sound.releaseMusic();
 		
-		super.onStop();
-		EasyTracker.getInstance(this).activityStop(this);
+		super.onDestroy();
 	}
 	
 	/// ad stuff //
-	private AdView av; 
+	private AdView adViewBanner; 
 	protected void loadBannerAd(int h_align, int v_align) {
-		/*
-		if (av == null) {
+		if (adViewBanner == null) {
 			if (!constants.pro) {
 				RelativeLayout rl = (RelativeLayout)findViewById(R.id.adHolder);
-		
 				
-				av = new AdView(this, AdSize.BANNER, constants.adMob_banner_id);
+				adViewBanner = new AdView(this);
+				adViewBanner.setAdUnitId(constants.adMob_banner_id);
+				adViewBanner.setAdSize(AdSize.BANNER);
 				
 				RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 				relativeParams.addRule(h_align);
 				relativeParams.addRule(v_align);
 				
 				
-				rl.addView(av, relativeParams);
-		
-				AdRequest adRequest = new AdRequest();
-				
+				rl.addView(adViewBanner, relativeParams);
+
+				AdRequest request;
 				if (constants.devmode)
-					adRequest.addTestDevice("8CDF2127BAF995A9AE9BA2B6098E7C34"); // My nexus 5
+					request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("8CDF2127BAF995A9AE9BA2B6098E7C34").build();
+				else
+					request = new AdRequest.Builder().build();
 		
-				av.setEnabled(true);
-		        av.setVisibility(View.VISIBLE);
-				av.loadAd(adRequest);
+				adViewBanner.setEnabled(true);
+		        adViewBanner.setVisibility(View.VISIBLE);
+				adViewBanner.loadAd(request);
 				
 			}
 		}
-		*/
 		
 		/*
 		// This setup is for having the ad separate from the game, not on top
@@ -234,11 +265,12 @@ public class engine_android extends Activity {
 		*/
 	}
 	
+	/*
+	// Not needed because AdMob ads work with without the rest of G.P.S. installed.
 	private boolean google_play_services_avaliable = true;
 	private void checkGooglePlayServices() {
 		google_play_services_avaliable = true;
 		// Check for current Google Play Services
-		/*
 		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 		if (resultCode == ConnectionResult.SUCCESS) {
 			google_play_services_avaliable = true;
@@ -247,7 +279,7 @@ public class engine_android extends Activity {
 		           resultCode == ConnectionResult.SERVICE_DISABLED) {
 		    Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 1);
 		    
-		    // Make it quit the app without this installed
+		    // Make it quit the app without installing
 		    dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialogInterface) {
@@ -257,16 +289,15 @@ public class engine_android extends Activity {
 		    
 		    dialog.show();
 		}
-		*/
-		int a = ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED;
 	}
+	 */
 	
 	protected void unLoadBannerAd() {
 		
-		if (av != null) {
-			av.setEnabled(false);
-			av.setVisibility(View.GONE);
-			av = null;
+		if (adViewBanner != null) {
+			adViewBanner.setEnabled(false);
+			adViewBanner.setVisibility(View.GONE);
+			adViewBanner = null;
 		}
 		
 	}
@@ -276,17 +307,18 @@ public class engine_android extends Activity {
 		
 	protected void loadInterstitialAd() {
 			
-		if ( (!constants.pro) && (google_play_services_avaliable) ) {
+		if ( (!constants.pro) ) {
+		// if ( (!constants.pro) && (google_play_services_avaliable) ) {
 			
 			// Create the Interstitial.
-		    interstitial = new InterstitialAd(this);
-		    interstitial.setAdUnitId(constants.adMob_interstitial_id);
+			interstitial = new InterstitialAd(this);
+			interstitial.setAdUnitId(constants.adMob_interstitial_id);
 		
 		    // Create ad request.
 		    AdRequest adRequest;
 			
 			if (constants.devmode)
-				adRequest = new AdRequest.Builder().addTestDevice("8CDF2127BAF995A9AE9BA2B6098E7C34").build();
+				adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("8CDF2127BAF995A9AE9BA2B6098E7C34").build();
 			else
 				adRequest = new AdRequest.Builder().build();
 				
@@ -298,7 +330,8 @@ public class engine_android extends Activity {
 	}
 	
 	protected void showInterstitialAd() {
-		if ( (google_play_services_avaliable) && (interstitial.isLoaded()) ) {
+		if ( (!constants.pro) && (interstitial.isLoaded()) ) {
+		// if ( (google_play_services_avaliable) && (interstitial.isLoaded()) ) {
 			interstitial.show();
 			loadInterstitialAd(); //so we have the next one to show as soon as possible.
 		}

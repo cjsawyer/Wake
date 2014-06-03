@@ -66,8 +66,8 @@ public class entity_menuMain extends engine_entity {
 //					
 //				}
 //				
-				// hack to avoid rewriting the whole menu. Skips drawing the first two buttons
-				if(i<=1) {
+				// hack to avoid rewriting the whole menu. Skips drawing the first button
+				if(i==0) {
 					button_alpha = 0;
 				}
 				
@@ -83,12 +83,16 @@ public class entity_menuMain extends engine_entity {
 				
 				ref.draw.setDrawColor(1, 1, 1, 1 * button_alpha);
 				switch (i) {
-					case 2:
+					case 1:
 						ref.draw.text.append(button0);
 						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 						break;
-					case 3:
+					case 2:
 						ref.draw.text.append(button1);
+						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+						break;
+					case 3:
+						ref.draw.text.append(button2);
 						ref.draw.drawText(draw_x, draw_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
 						break;
 				}
@@ -112,11 +116,15 @@ public class entity_menuMain extends engine_entity {
 					non_fading_button = pressed_button;
 				
 				switch (pressed_button) {
-					case 2:
+					case 1:
 						prepLeave(PREP_menuDifficulty);
 						break;
-					case 3:
+					case 2:
 						prepLeave(PREP_menuRecords);
+						break;
+					case 3:
+						mgr.popup.setPopupState(mgr.popup.STATE_SETTINGS);
+						mgr.popup.setPopupOpenness(true);
 						break;
 				}
 				
@@ -168,6 +176,7 @@ public class entity_menuMain extends engine_entity {
 	
 	private final String button0 = "PLAY";
 	private final String button1 = "RECORDS";
+	private final String button2 = "SETTINGS";
 	
 	private int room_to_leave_to = -1;
 	

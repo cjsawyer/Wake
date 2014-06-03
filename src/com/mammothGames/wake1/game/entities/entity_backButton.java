@@ -57,7 +57,7 @@ public class entity_backButton extends engine_entity {
 				mgr.menuDifficulty.prepLeave(mgr.menuDifficulty.PREP_menuTop);
 				break;
 			case rooms.ROOM_MENUMAIN:
-				if ( ! mgr.popup.getPopupOpenness() ) {
+				if ( !mgr.popup.getPopupOpenness() || (mgr.popup.getPopupState()!=mgr.popup.STATE_QUIT ) ) {
 					
 					mgr.popup.setPopupState(mgr.popup.STATE_QUIT);
 					mgr.popup.setPopupOpenness(true);

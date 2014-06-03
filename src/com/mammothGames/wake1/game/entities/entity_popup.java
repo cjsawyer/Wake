@@ -112,6 +112,7 @@ public class entity_popup extends engine_entity {
                 bool_gui.setAlpha(popup_alpha);
                 
                 bool_gui.text.setText("Leave game?");
+                bool_gui.yes.setTextColor(1, 1, 1, 1);
                 bool_gui.yes.setText("Yes");
                 bool_gui.no.setText("No");
                 
@@ -127,6 +128,7 @@ public class entity_popup extends engine_entity {
                 bool_gui.setAlpha(popup_alpha);
                 
                 bool_gui.text.setText("Are you sure?");
+                bool_gui.yes.setTextColor(1, 0, 0, 1);
                 bool_gui.yes.setText("Erase");
                 bool_gui.no.setText("Cancel");
                 
@@ -160,6 +162,7 @@ public class entity_popup extends engine_entity {
                 bool_gui.setAlpha(popup_alpha);
                 
                 bool_gui.text.setText("Abandon game?");
+                bool_gui.yes.setTextColor(1, 1, 1, 1);
                 bool_gui.yes.setText("Yes");
                 bool_gui.no.setText("No");
                 
@@ -198,8 +201,13 @@ public class entity_popup extends engine_entity {
                 settings_gui.setActive(popup_open);
                 settings_gui.setAlpha(popup_alpha);
                 
-                if (settings_gui.back.getClicked())
-                    setPopupState(STATE_PAUSED);
+                if (settings_gui.back.getClicked()) {
+                	if (ref.room.get_current_room() == rooms.ROOM_GAME)
+                		setPopupState(STATE_PAUSED);
+                	if (ref.room.get_current_room() == rooms.ROOM_MENUMAIN) {
+                		setPopupOpenness(false);
+                	}
+                }
                 if (settings_gui.check.getClicked()) {
                     // Flip the muted var, then start the music
                     game_muted = !game_muted;
@@ -554,6 +562,7 @@ class SettingsGUI extends engine_gui {
         check.setBorderColor(0,1,1,0.3f);
         check.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
         check.setPadding(border);
+        check.setActOnHover(false);
         
         back = new engine_guiButton(this, idBackButton);
         back.setText("back");

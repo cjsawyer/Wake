@@ -92,6 +92,10 @@ public class entity_loadingMammoth extends engine_entity {
 //		ref.sound.loadMusic(game_sounds.MSC_CEPHALOPOD);
 //		ref.sound.loadSound(game_sounds.SND_SPLASH);
 //		ref.sound.loadSound(game_sounds.SND_DING);
+//		ref.sound.loadSound(sounds.SND_THUD);
+//		ref.sound.loadSound(sounds.SND_CRACK1);
+//		ref.sound.loadSound(sounds.SND_CRACK2);
+//		ref.sound.loadSound(sounds.SND_CRACK3);
 		ref.sound.loadMusic(sounds.MSC_SINE);
 	}
 }
