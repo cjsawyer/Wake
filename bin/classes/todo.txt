@@ -1,8 +1,6 @@
 ///// This Commit /////
 
-Added hover color to GUI buttons
-Rebuilt AdMob banner support
-Added settings button in menu
+
 
 //////// TODO /////////
 
@@ -14,7 +12,13 @@ Added settings button in menu
 
 Wake ----------------------------------------
 
-edit gui buttons to fire on the upclick, add hover animation
+Added hover color to GUI buttons
+Rebuilt AdMob banner support
+Added settings button in menu
+
+build GUI for menu, difficulty, and settings
+add back button to settings
+about screen?
 
 fix ad timing on post-game
 
