@@ -1,6 +1,7 @@
 package com.mammothGames.wake1.game.entities;
 
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.mammothGames.wake1.game.constants;
 import com.mammothGames.wake1.game.rooms;
@@ -59,7 +60,7 @@ public class entity_menuPauseHUD extends engine_entity {
 		if ( (ref.room.get_current_room() == rooms.ROOM_GAME) ||  (ref.room.get_current_room() == rooms.ROOM_POSTGAME) ){
 			
 			// The 'if' is so the menu doesn't slide up immediately in the post-game screen
-			if (mgr.gameMain.shade_alpha > 0.98f)
+			if ( (mgr.gameMain.shade_alpha > 0.98f) && (!mgr.menuPauseHUD.getPause()) )
 				HUD_y += (HUD_y_target - HUD_y) * 5 * ref.main.time_scale;
 			
 			streak_bar_alpha += (-streak_bar_alpha) * 5 * ref.main.time_scale;
@@ -80,8 +81,7 @@ public class entity_menuPauseHUD extends engine_entity {
 			
 			
 			//The top rectangle hud
-			if (!game_paused)
-				ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-base_hud_height/2 + HUD_y, ref.screen_width, base_hud_height, 0, 0, 0, constants.layer5_underHUD);
+			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-base_hud_height/2 + HUD_y, ref.screen_width, base_hud_height, 0, 0, 0, constants.layer5_underHUD);
 			
 //			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-rectangle_height/2 - base_hud_height + HUD_y, ref.screen_width, rectangle_height, 0, 0, 0, game_constants.layer5_underHUD);
 			
@@ -206,6 +206,20 @@ public class entity_menuPauseHUD extends engine_entity {
 		newPause = pause;
 	}
 	
+
+	public void doPauseHard(boolean pause) {
+		if(pause) {
+			game_paused = true;
+			ref.draw.captureDraw();
+			ref.main.pauseEntities();
+			menu_open = true;
+		} else {
+			game_paused = false;
+			ref.main.unPauseEntities();
+			menu_open = false;
+		}
+	}
+	
 	public void doPause(boolean pause) {
 		if (startPause) {
 			startPause = false;
@@ -243,10 +257,16 @@ public class entity_menuPauseHUD extends engine_entity {
 	@Override
 	public void onScreenSleep() {
 		if (ref.room.get_current_room() == rooms.ROOM_GAME) {
-			if (!game_paused) {
-				// if not paused, pause
-				setPause(true);
-			}
+			if (!getPause())
+				doPauseHard(true);
 		}
 	}
+	
+	@Override
+	public void onScreenWake() {
+	    if(ref.room.get_current_room() == rooms.ROOM_GAME) {
+	    	alarm[0] = ref.main.time_delta*2;
+	    }
+	}
+	
 }

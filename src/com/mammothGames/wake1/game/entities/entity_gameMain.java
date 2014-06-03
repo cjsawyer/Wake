@@ -20,10 +20,10 @@ public class entity_gameMain extends engine_entity {
 	public float shade_alpha_target = 1;
 	float ANIMATION_SCALE = 7f;
 	
-	public static int DIF_EASY = 250;
-	public static int DIF_MEDIUM = 625;
-	public static int DIF_HARD = 1000;
-	public static int DIF_HELL = 1500;
+	public static final int DIF_EASY = 250;
+	public static final int DIF_MEDIUM = 625;
+	public static final int DIF_HARD = 1000;
+	public static final int DIF_HELL = 1500;
 	public int current_diff;
 	public String current_diff_string;
 	

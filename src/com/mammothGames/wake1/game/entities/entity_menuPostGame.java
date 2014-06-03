@@ -19,8 +19,10 @@ public class entity_menuPostGame extends engine_entity {
 		this.mgr = mgr;
 	}
 	
-	boolean fade_out;
-	PostGUI post_gui;
+	private boolean fade_out;
+	private PostGUI post_gui;
+	
+	private float games_before_next_ad = 0.00001f; // low number to show ad after the first game
 	
 	@Override
 	public void sys_firstStep() {
@@ -261,11 +263,26 @@ public class entity_menuPostGame extends engine_entity {
 	private int room_to_leave_to;
 	
 	public void start() {
+		
+		switch(mgr.gameMain.current_diff) {
+			case (entity_gameMain.DIF_EASY):
+				games_before_next_ad -= 1;
+				break;
+			case (entity_gameMain.DIF_MEDIUM):
+				games_before_next_ad -= 1/2f;
+				break;
+			case (entity_gameMain.DIF_HARD):
+				games_before_next_ad -= 1/3f;
+				break;
+			case (entity_gameMain.DIF_HELL):
+				games_before_next_ad -= 1/5f;
+				break;
+		}
+		
 		mgr.gameMain.floor_height_target = 0;
 		mgr.gameMain.shade_alpha_target = 1;
 		fade_out = false;
 		ref.room.changeRoom(rooms.ROOM_POSTGAME);
-		ref.ad.showInterstitialAd(); //TODO: make this popup less often
 	}
 	
 	
@@ -277,6 +294,12 @@ public class entity_menuPostGame extends engine_entity {
 	}
 	
 	private void leave() {
+		
+		if (games_before_next_ad <= 0) {
+			games_before_next_ad = 1;
+			ref.ad.showInterstitialAd();
+		}
+		
 		
 		switch (room_to_leave_to){
 		case room_game:

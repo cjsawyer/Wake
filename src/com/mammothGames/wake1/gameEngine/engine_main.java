@@ -261,14 +261,16 @@ public class engine_main {
 	
 	protected void onScreenSleep() {
 		for(int i = 0; i < entities_total; i++){
-
-			temp_entity = null;
 			temp_entity = entity_list[i];
-
 			if (temp_entity != null){
 				temp_entity.onScreenSleep();
 			}
 		}
+	}
+
+	private boolean screen_wake = false;
+	protected void onScreenWake() {
+		screen_wake = true;
 	}
 	
 	protected void onRoomLoad() {
@@ -358,6 +360,16 @@ public class engine_main {
 		ref.loadHelper.checkFinished();
 		
 		ref.android.sys_updateTouchDurations();
+		
+		if (screen_wake) {
+			screen_wake = false;
+			for(int i = 0; i < entities_total; i++){
+				temp_entity = entity_list[i];
+				if (temp_entity != null){
+					temp_entity.onScreenWake();
+				}
+			}
+		}
 		
 //		sys_entityBeforeSteps();
 		sys_entitySteps();

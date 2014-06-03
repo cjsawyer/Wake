@@ -25,6 +25,7 @@ public class engine_entity {
 	public void menuButton() { }
 	
 	public void onScreenSleep() { }
+	public void onScreenWake() { }
 	public void onRoomLoad() { }
 	
 	

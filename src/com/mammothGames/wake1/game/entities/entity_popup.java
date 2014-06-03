@@ -259,14 +259,6 @@ public class entity_popup extends engine_entity {
         mgr.gameMain.endGame();
 	}
 
-	@Override
-	public void onScreenSleep() {
-
-	    if(ref.room.get_current_room() == rooms.ROOM_GAME) {
-	        setPopupState(STATE_PAUSED);
-		    setPopupOpennessHard(true);
-	    }
-	}
 
 	private int action = 0;
 

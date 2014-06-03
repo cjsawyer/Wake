@@ -1,5 +1,8 @@
 ///// This Commit /////
 
+added onScreenWake to entities
+fixed pause screen when screen sleeps
+balanced interstitial ad popup frequency
 
 
 //////// TODO /////////
@@ -12,19 +15,16 @@
 
 Wake ----------------------------------------
 
-Added hover color to GUI buttons
-Rebuilt AdMob banner support
-Added settings button in menu
+Remove fade effects from main menu. make records/about/difficulty all slide in/out from the main menu as a single unit
 
 build GUI for menu, difficulty, and settings
 add back button to settings
-about screen?
+about screen
 
 fix ad timing on post-game
 
 double points for combo taps
 
-make music restart at same point when restarting app
 have poastgame score spin up to full number
 tablet screenshot
 
@@ -83,6 +83,10 @@ vector image rendering
 
 
 //////// HISTORY ////////
+
+Added hover color to GUI buttons
+Rebuilt AdMob banner support
+Added settings button in menu
 
 Switched AdMob for Google Play Services ads
 Added interstitial ads after each game

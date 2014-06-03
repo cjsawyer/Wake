@@ -162,6 +162,7 @@ public class engine_android extends Activity {
 			ref.android.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
 		
+		ref.main.onScreenWake();
 		
 		// checkGooglePlayServices();
 		if(adViewBanner != null)
