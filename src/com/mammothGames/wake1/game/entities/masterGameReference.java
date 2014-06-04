@@ -13,8 +13,6 @@ public class masterGameReference {
 	entity_menuDifficulty menuDifficulty;
 	entity_menuMain menuMain;
 	entity_menuRecords menuRecords;
-	entity_menuOptions menuOptions;
-	entity_menuAbout menuAbout;
 	
 	entity_popup popup;
 	

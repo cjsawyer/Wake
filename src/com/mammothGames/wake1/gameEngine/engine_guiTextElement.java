@@ -45,7 +45,7 @@ public class engine_guiTextElement extends engine_guiElement{
     }
     
     @Override
-    void computeSizesAndCenters() {
+    protected void computeSizesAndCenters() {
         
         super.computeSizesAndCenters();
         
@@ -86,11 +86,11 @@ public class engine_guiTextElement extends engine_guiElement{
             size = h/3;//TODO make full content height, check if too wide, if so; set smaller until it fits. fancy resizing.
         }
         
-        if (wrapX) {
-            gui.ref.draw.text.append(text);
-            text_width = gui.ref.draw.getTextWidth(size, texture_sheet);
-        }
-        setContentSize(text_width, size);
+//        if (wrapX) {
+//            gui.ref.draw.text.append(text);
+//            text_width = gui.ref.draw.getTextWidth(size, texture_sheet);
+//        }
+//        setContentSize(text_width, size);
             
     }
     

@@ -74,15 +74,6 @@ public class entity_backButton extends engine_entity {
 					mgr.menuRecords.prepLeave(mgr.menuRecords.PREP_menuTop);
 				
 				break;
-				
-			case rooms.ROOM_MENUOPTIONS:
-				mgr.menuOptions.prepLeave(mgr.menuOptions.PREP_menuTop);
-				break;
-				
-			case rooms.ROOM_MENUABOUT:
-				mgr.menuAbout.prepLeave(mgr.menuAbout.PREP_menuTop);
-				break;
 		}
-		
 	}
 }

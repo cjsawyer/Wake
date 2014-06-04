@@ -21,7 +21,7 @@ public class engine_guiElement {
     protected float borderW, borderH, paddingW, paddingH, contentW, contentH;
     protected float borderX, borderY, paddingX, paddingY, contentX, contentY;
     
-    // RGBA (margin is not drawn, then border [around padding, with lines], then padding [which is the background area], then the content, from outside to inside)
+    // RGBA (margin is not drawn, then border [around padding, with lines], then padding [which is also the background area], then the content, from outside to inside)
     protected float br = 1, bg = 1, bb = 1, ba = 1; // border color
     protected float pr = 1, pg = 1, pb = 1, pa = 1; // padding color
     
@@ -31,7 +31,7 @@ public class engine_guiElement {
     
     
     
-    void computeSizesAndCenters() {
+    protected void computeSizesAndCenters() {
         
         if (wrapX)
             computeWrapX();
@@ -153,10 +153,9 @@ public class engine_guiElement {
     public void setWeight(float weightHorizontal, float weightVertical) {
         this.weightH = weightHorizontal;
         this.weightV = weightVertical;
-        //TODO: weightY
     }
     
-    public void setSize(float w, float h) {
+    protected void setSize(float w, float h) {
         this.w = w;
         this.h = h;
     }
@@ -170,12 +169,12 @@ public class engine_guiElement {
         wrapX = horizontal;
         wrapY = vertical;
     }
-    */
     
     public void setContentSize(float w, float h) {
         this.contentW = w;
         this.contentH = h;
     }
+     */
     
     protected void drawDefaultBackground() {
         

@@ -65,7 +65,7 @@ public class engine_guiButton extends engine_guiTextElement {
     	
     	draw_hover = false;
     	
-    	if ( (state == gui.ref.input.TOUCH_HELD) && started_in_button && touched && act_on_hover)
+    	if ( (state >= gui.ref.input.TOUCH_DOWN) && started_in_button && touched && act_on_hover)
 			draw_hover = true;
     	
     	if (draw_hover)

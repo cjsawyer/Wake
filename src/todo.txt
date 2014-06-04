@@ -1,9 +1,7 @@
 ///// This Commit /////
 
-added onScreenWake to entities
-fixed pause screen when screen sleeps
-balanced interstitial ad popup frequency
-
+Added engine_guiImage
+Rebuilt main menu with a GUI (still need to assign button actions)
 
 //////// TODO /////////
 
@@ -15,6 +13,7 @@ balanced interstitial ad popup frequency
 
 Wake ----------------------------------------
 
+[[[[MENU: redo gui setActive meaning so it still updates, add option setClickable(boolean)]]]]
 Remove fade effects from main menu. make records/about/difficulty all slide in/out from the main menu as a single unit
 
 build GUI for menu, difficulty, and settings
@@ -52,6 +51,10 @@ make bar flash red when a combo is broken
 
 
 //////// ENGINE /////////
+
+added onScreenWake to entities
+fixed pause screen when screen sleeps
+balanced interstitial ad popup frequency
 
 make screen size available from initialization. get rid of engine first step function in entities
 engine should take care of updating gui's like entities
