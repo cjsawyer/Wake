@@ -1,7 +1,7 @@
 ///// This Commit /////
 
-Added engine_guiImage
-Rebuilt main menu with a GUI (still need to assign button actions)
+Added 'clickable' state to GUIs
+Added main menu button actions
 
 //////// TODO /////////
 
@@ -52,10 +52,6 @@ make bar flash red when a combo is broken
 
 //////// ENGINE /////////
 
-added onScreenWake to entities
-fixed pause screen when screen sleeps
-balanced interstitial ad popup frequency
-
 make screen size available from initialization. get rid of engine first step function in entities
 engine should take care of updating gui's like entities
 change guiElement constructor to not include parent GUI, make that be set in addElement
@@ -86,6 +82,13 @@ vector image rendering
 
 
 //////// HISTORY ////////
+
+Added engine_guiImage
+Rebuilt main menu with a GUI (still need to assign button actions)
+
+added onScreenWake to entities
+fixed pause screen when screen sleeps
+balanced interstitial ad popup frequency
 
 Added hover color to GUI buttons
 Rebuilt AdMob banner support

@@ -14,7 +14,7 @@ public class engine_gui {
 
 	public float alpha;
     public int depth;
-    boolean active;
+    boolean active = true, clickable = true;
     int[][] layout;
     
     protected final int NULL = -1;
@@ -191,6 +191,10 @@ public class engine_gui {
     
     public void setActive(boolean active) {
         this.active = active;
+    }
+    
+    public void setClickable(boolean clickable) {
+    	this.clickable = clickable;
     }
     
     public void setPosition(float x, float y) {

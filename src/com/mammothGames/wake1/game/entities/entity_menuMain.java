@@ -29,23 +29,29 @@ public class entity_menuMain extends engine_entity {
 		menu.setDepth(constants.layer6_HUD);
 		menu.populate();
 		menu.setActive(true);
-		menu.setAlpha(1);
 	}
 	
 	@Override
 	public void sys_step() {
 		if (ref.room.get_current_room() == rooms.ROOM_MENUMAIN) {
 			
-			
-			if (mgr.popup.getPopupOpenness()) {
-			}
-			
+			menu.setClickable(!mgr.popup.getPopupOpenness());
+			menu.setAlpha(mgr.gameMain.shade_alpha);
 			menu.update();
+			
+			if (menu.play.getClicked()) 
+				mgr.menuDifficulty.start(); //TODO: make all the menu gui's in this file, have them slide around up/down/left/right
+			
+			if (menu.records.getClicked()) 
+				mgr.menuRecords.start(0); // redo this so hard
 			
 			if (menu.settings.getClicked()) {
 				mgr.popup.setPopupState(mgr.popup.STATE_SETTINGS);
 				mgr.popup.setPopupOpenness(true);
 			}
+			
+			//if (menu.about.getClicked()) 
+				//TODO: about screen
 		}
 	}
 	

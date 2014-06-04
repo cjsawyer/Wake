@@ -47,26 +47,30 @@ public class engine_guiButton extends engine_guiTextElement {
     	
     	captureOriginalBackgroundColor();
     	setDefaultHoverColor();
-    	
-    	boolean touched = false;
-    	int state = gui.ref.input.get_touch_state(0);
-    	
-    	if ( (state != gui.ref.input.TOUCH_NONE) && (gui.alpha > 0.5f) ) {
-    		if (gui.ref.collision.point_AABB(w, h, x, y, gui.ref.input.get_touch_x(0), gui.ref.input.get_touch_y(0)))
-    			touched = true;
-    	}
-    	
-    	if (state == gui.ref.input.TOUCH_DOWN) {
-    		if (touched)
-    			started_in_button = true;
-    		else
-    			started_in_button = false;
-    	}
-    	
     	draw_hover = false;
     	
-    	if ( (state >= gui.ref.input.TOUCH_DOWN) && started_in_button && touched && act_on_hover)
-			draw_hover = true;
+    	if (gui.clickable) {
+	    	boolean touched = false;
+	    	int state = gui.ref.input.get_touch_state(0);
+	    	
+	    	if ( (state != gui.ref.input.TOUCH_NONE) && (gui.alpha > 0.5f) ) {
+	    		if (gui.ref.collision.point_AABB(w, h, x, y, gui.ref.input.get_touch_x(0), gui.ref.input.get_touch_y(0)))
+	    			touched = true;
+	    	}
+	    	
+	    	if (state == gui.ref.input.TOUCH_DOWN) {
+	    		if (touched)
+	    			started_in_button = true;
+	    		else
+	    			started_in_button = false;
+	    	}
+	    	
+	    	if ( (state >= gui.ref.input.TOUCH_DOWN) && started_in_button && touched && act_on_hover)
+	    		draw_hover = true;
+	    	
+	    	if ( (state == gui.ref.input.TOUCH_UP) && started_in_button && touched )
+	    		clicked = true;
+    	}
     	
     	if (draw_hover)
     		setBackgroundColor(hr, hg, hb, ha); // set padding color to hover color
@@ -80,8 +84,6 @@ public class engine_guiButton extends engine_guiTextElement {
         gui.ref.draw.text.append(text);
         gui.ref.draw.drawText(contentX+text_x, contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
         
-        if ( (state == gui.ref.input.TOUCH_UP) && started_in_button && touched )
-            clicked = true;
     }
     
     public boolean getClicked() {
