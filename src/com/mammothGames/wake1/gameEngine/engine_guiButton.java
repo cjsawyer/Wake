@@ -54,7 +54,7 @@ public class engine_guiButton extends engine_guiTextElement {
 	    	int state = gui.ref.input.get_touch_state(0);
 	    	
 	    	if ( (state != gui.ref.input.TOUCH_NONE) && (gui.alpha > 0.5f) ) {
-	    		if (gui.ref.collision.point_AABB(w, h, x, y, gui.ref.input.get_touch_x(0), gui.ref.input.get_touch_y(0)))
+	    		if (gui.ref.collision.point_AABB(w, h, gui.x + x, gui.y + y, gui.ref.input.get_touch_x(0), gui.ref.input.get_touch_y(0)))
 	    			touched = true;
 	    	}
 	    	
@@ -82,7 +82,7 @@ public class engine_guiButton extends engine_guiTextElement {
         // Draw text
         gui.ref.draw.setDrawColor(r, g, b, a*gui.alpha);
         gui.ref.draw.text.append(text);
-        gui.ref.draw.drawText(contentX+text_x, contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
+        gui.ref.draw.drawText(gui.x + contentX+text_x, gui.y + contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
         
     }
     

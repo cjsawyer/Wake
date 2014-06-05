@@ -33,7 +33,7 @@ public class engine_guiNumber extends engine_guiTextElement {
         else
             gui.ref.draw.text.append(number);
         
-        gui.ref.draw.drawText(contentX+text_x, contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
+        gui.ref.draw.drawText(gui.x + contentX+text_x, gui.y + contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
         
     }
     

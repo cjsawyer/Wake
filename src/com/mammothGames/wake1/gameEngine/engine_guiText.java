@@ -19,7 +19,7 @@ public class engine_guiText extends engine_guiTextElement{
         
         gui.ref.draw.setDrawColor(r, g, b, a*gui.alpha);
         gui.ref.draw.text.append(text);
-        gui.ref.draw.drawText(contentX+text_x, contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
+        gui.ref.draw.drawText(gui.x + contentX+text_x, gui.y + contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
         
     }
     

@@ -157,6 +157,8 @@ public class engine_gui {
     }
 
     public void update() {
+//    	if (ref.input.get_touch_state(2) == ref.input.TOUCH_HELD)
+//    		setPosition(ref.input.get_touch_x(2), ref.input.get_touch_y(2));
         if (active)
             for (int i=0;i<num_elements;i++) {
                 tmp_element = elements[i];
@@ -165,7 +167,7 @@ public class engine_gui {
                     tmp_element.update();
                 }
             }
-            
+          
             /*
             ref.draw.setDrawColor(ref.main.randomRange(0, 1), ref.main.randomRange(0, 1), ref.main.randomRange(0, 1), popup_alpha);
             ref.draw.drawRectangle(element_x[i], element_y[i], element_w[i], element_h[i], 0, 0, 0, 100);

@@ -1,7 +1,7 @@
 ///// This Commit /////
 
-Added 'clickable' state to GUIs
-Added main menu button actions
+Rebuilt menu system with 4 GUIs all in one room.
+Main menu and basic slide functionality implemented.
 
 //////// TODO /////////
 
@@ -13,14 +13,13 @@ Added main menu button actions
 
 Wake ----------------------------------------
 
-[[[[MENU: redo gui setActive meaning so it still updates, add option setClickable(boolean)]]]]
+stars paralax!
+
 Remove fade effects from main menu. make records/about/difficulty all slide in/out from the main menu as a single unit
 
 build GUI for menu, difficulty, and settings
 add back button to settings
 about screen
-
-fix ad timing on post-game
 
 double points for combo taps
 
@@ -34,7 +33,7 @@ about screen which slides in from the right side of the screen and accompanying 
 [later] add per-difficulty heatmaps
 
 
-Register for otehr App Stores: Amazon Play Opera Samsung
+Register for other App Stores: Amazon Play Opera Samsung
 
 
 
@@ -50,7 +49,7 @@ make bar flash red when a combo is broken
 ---------------------------------------------
 
 
-//////// ENGINE /////////
+--------------- ENGINE ---------------
 
 make screen size available from initialization. get rid of engine first step function in entities
 engine should take care of updating gui's like entities
@@ -82,6 +81,9 @@ vector image rendering
 
 
 //////// HISTORY ////////
+
+Added 'clickable' state to GUIs
+Added main menu button actions
 
 Added engine_guiImage
 Rebuilt main menu with a GUI (still need to assign button actions)
@@ -198,5 +200,5 @@ Also, move all of those methods somewhere else.
 need to go through every draw call and use the depths in game_constants
 
 Idea to restructure textures/sounds/fonts/other assets:
-	Instead of a big static array of attributes, have a array of texture/sound objects that hold one of these attributes each.
+	Instead of a big static array of attributes, have a array of texture/sound objects that hold one set of these attributes each.
 Still use a constant to reference the position in the array. This would allow dynamic loading!

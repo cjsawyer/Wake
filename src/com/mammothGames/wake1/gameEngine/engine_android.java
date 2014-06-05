@@ -278,6 +278,7 @@ public class engine_android extends Activity {
 		} else if (resultCode == ConnectionResult.SERVICE_MISSING ||
 		           resultCode == ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED ||
 		           resultCode == ConnectionResult.SERVICE_DISABLED) {
+		           
 		    Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 1);
 		    
 		    // Make it quit the app without installing

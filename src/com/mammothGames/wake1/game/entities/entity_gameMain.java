@@ -18,7 +18,7 @@ public class entity_gameMain extends engine_entity {
 	
 	public float shade_alpha = 0;
 	public float shade_alpha_target = 1;
-	float ANIMATION_SCALE = 7f;
+	float ANIMATION_SCALE = 5f;
 	
 	public static final int DIF_EASY = 250;
 	public static final int DIF_MEDIUM = 625;
