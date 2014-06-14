@@ -177,15 +177,14 @@ public class engine_guiElement {
      */
     
     protected void drawDefaultBackground() {
-        
-    gui.ref.draw.setDrawColor(br, bg, bb, ba*gui.alpha);
-    gui.ref.draw.drawRectangle(gui.x + borderTX, gui.y + borderTY, borderTW, borderTH, 0, 0, 0, gui.depth);
-    gui.ref.draw.drawRectangle(gui.x + borderBX, gui.y + borderBY, borderBW, borderBH, 0, 0, 0, gui.depth);
-    gui.ref.draw.drawRectangle(gui.x + borderLX, gui.y + borderLY, borderLW, borderLH, 0, 0, 0, gui.depth);
-    gui.ref.draw.drawRectangle(gui.x + borderRX, gui.y + borderRY, borderRW, borderRH, 0, 0, 0, gui.depth);
-    
-    gui.ref.draw.setDrawColor(pr, pg, pb, pa*gui.alpha);
-    gui.ref.draw.drawRectangle(gui.x + paddingX, gui.y + paddingY, paddingW, paddingH, 0, 0, 0, gui.depth);
+	    gui.ref.draw.setDrawColor(br, bg, bb, ba*gui.alpha);
+	    gui.ref.draw.drawRectangle(gui.x + borderTX, gui.y + borderTY, borderTW, borderTH, 0, 0, 0, gui.depth);
+	    gui.ref.draw.drawRectangle(gui.x + borderBX, gui.y + borderBY, borderBW, borderBH, 0, 0, 0, gui.depth);
+	    gui.ref.draw.drawRectangle(gui.x + borderLX, gui.y + borderLY, borderLW, borderLH, 0, 0, 0, gui.depth);
+	    gui.ref.draw.drawRectangle(gui.x + borderRX, gui.y + borderRY, borderRW, borderRH, 0, 0, 0, gui.depth);
+	    
+	    gui.ref.draw.setDrawColor(pr, pg, pb, pa*gui.alpha);
+	    gui.ref.draw.drawRectangle(gui.x + paddingX, gui.y + paddingY, paddingW, paddingH, 0, 0, 0, gui.depth);
     }
     
     public void update() {

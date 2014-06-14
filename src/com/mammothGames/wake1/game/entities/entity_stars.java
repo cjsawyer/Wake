@@ -19,6 +19,8 @@ public class entity_stars extends engine_entity {
 	
 	float red_alpha=0, red_alpha_target=0;
 	
+	float x, y;
+	
 	masterGameReference mgr;
 	public entity_stars(masterGameReference mgr) {
 		this.mgr = mgr;
@@ -30,13 +32,13 @@ public class entity_stars extends engine_entity {
 	public void sys_firstStep() {
 		
 		persistent = true;
-		pausable = false;
+		pausable = false;		
 		
-		// Calculates the minimum size of the textures for the starfield textures.
+		// Calculates the minimum size for the starfield textures.
 		// It's the length between the bottom middle of the screen and one of the top corners that is the minimum for half of the smaller of the two textures.
 		
-		float tmpWidth = (ref.screen_width/2);
-		float tmpHeight = (ref.screen_height);
+		float tmpWidth = (ref.screen_width/2 + ref.screen_width/6);
+		float tmpHeight = (ref.screen_height*7/6f);
 		
 		tmpWidth = tmpWidth*tmpWidth;
 		tmpHeight = tmpHeight*tmpHeight;
@@ -50,6 +52,9 @@ public class entity_stars extends engine_entity {
 	@Override
 	public void sys_step() {
 		
+		x = mgr.menuMain.x/3 - ref.screen_width/2;
+		y = mgr.menuMain.y/3 - ref.screen_height/2;
+		
 		red_alpha += (red_alpha_target - red_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
 		
 		stars_alpha += 2 * ref.main.time_scale;
@@ -60,9 +65,9 @@ public class entity_stars extends engine_entity {
 		tall_angle -= ref.main.time_scale/4;
 		
 		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 1 * stars_alpha);
-		ref.draw.drawTexture(ref.screen_width/2, 0, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
+		ref.draw.drawTexture(ref.screen_width/2 + x/3, y/3, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
 		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 0.9f * stars_alpha);
-		ref.draw.drawTexture(ref.screen_width/2, 0, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
+		ref.draw.drawTexture(ref.screen_width/2 + x/2, y/2, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
 		
 	}
 	

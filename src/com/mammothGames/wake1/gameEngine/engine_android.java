@@ -202,6 +202,7 @@ public class engine_android extends Activity {
 	protected void onStop(){
 		Log.e("reywas","onStop");
 		
+		ref.renderer.assets_loaded = false;
 		ref.sound.pauseMusicHARD();
 //		ref.sound.pauseMusic();
 		
@@ -216,7 +217,6 @@ public class engine_android extends Activity {
 		if(adViewBanner != null)
 			adViewBanner.destroy();
 		
-		ref.renderer.assets_loaded = false;
 		ref.sound.releaseSounds();
 		ref.sound.releaseMusic();
 		

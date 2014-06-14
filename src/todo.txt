@@ -1,17 +1,9 @@
 ///// This Commit /////
 
-Rebuilt menu system with 4 GUIs all in one room.
-Main menu and basic slide functionality implemented.
-
-//////// TODO /////////
-
-------------
-| 0 = easy |
-| 1 = hard |
-------------
+Finished dynamically sized tabGroups
 
 
-Wake ----------------------------------------
+--------------- WAKE TODO ---------------
 
 stars paralax!
 
@@ -37,19 +29,19 @@ Register for other App Stores: Amazon Play Opera Samsung
 
 
 
-Wake 1.2 FEEDBACK----------------------------
-
-easy is too easy
-exit button is confusing
-don't like background
-pause music when paused
-change font
-make bar flash red when a combo is broken
-
----------------------------------------------
+Wake 1.2 FEEDBACK:
+	easy is too easy
+	exit button is confusing
+	don't like background
+	pause music when paused
+	change font
+	make bar flash red when a combo is broken
 
 
---------------- ENGINE ---------------
+--------------- ENGINE TODO ---------------
+
+Rebuilt menu system with 4 GUIs all in one room.
+Main menu and basic slide functionality implemented.
 
 make screen size available from initialization. get rid of engine first step function in entities
 engine should take care of updating gui's like entities
@@ -64,15 +56,14 @@ switch argument order for collisionAABB, make x,y come before: x,y,w,h
 rename game_constnats/whatever to just whatever. shorten the names.
 make extra, shorter drawing functions for simple drawing cases
 
---Long Term------------------
-accelerometer
-phone vibration
-rewrite font loader
-add Unicode support
-texture compression
-texture sheet generator
-vector image rendering
------------------------------
+Long Term:
+	accelerometer
+	phone vibration
+	rewrite font loader
+	add Unicode support
+	texture compression
+	texture sheet generator
+	vector image rendering
 
 
 
@@ -80,7 +71,7 @@ vector image rendering
 
 
 
-//////// HISTORY ////////
+//////////////////////////////////////////// HISTORY //////////////////////////////////////////////////////////////
 
 Added 'clickable' state to GUIs
 Added main menu button actions
@@ -147,15 +138,15 @@ finished records screen.
 touched up pause screen.
 [X] 1 - build records
 
-[X] 0 - make mammoth longer
-[X] 0 - remove intro wake movement
-[X] 0 - remove main menu button fade
-[X] 0 - change back button behavior in game to back>are you sure?>back>menu
-[X] 0 - change back button behavior in menu to back>are you sure?>back>exit
-[X] 0 - resize the popup a little smaller
-[X] 0 - make post game screen streak/high score gap the same height as the button padding
-[X] 0 - change score flashing color to match button borders
-[X] 1 - add real stats to post screen
+made mammoth longer
+removed intro wake movement
+removed main menu button fade
+changed back button behavior in game to back>are you sure?>back>menu
+changed back button behavior in menu to back>are you sure?>back>exit
+resized the popup a little smaller
+made post game screen streak/high score gap the same height as the button padding
+changed score flashing color to match button borders
+added real stats to post screen
 
 added functional post-game screen
 removed drawTextSingleString, simplified drawText

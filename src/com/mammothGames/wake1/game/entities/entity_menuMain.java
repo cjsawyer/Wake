@@ -22,7 +22,8 @@ public class entity_menuMain extends engine_entity {
 	
 	private final int MAIN = 0, DIFFICULTY = 1, RECORDS = 2, ABOUT = 3;
 	private int active_screen;
-	private float x, y, xtarget = 0, ytarget = 0;
+	public float x, y;
+	private float xtarget = 0, ytarget = 0;
 	private float X_MAIN, Y_MAIN, X_DIFF, Y_DIFF, X_REC, Y_REC, X_ABOUT, Y_ABOUT;
 	
 	@Override
@@ -34,17 +35,19 @@ public class entity_menuMain extends engine_entity {
 		xtarget = x;
 		ytarget = y;
 		
+		float hyp = ref.screen_height; //(float) Math.sqrt(ref.screen_width*ref.screen_width+ref.screen_height*ref.screen_height); 
+		
 		X_MAIN = 0;
 		Y_MAIN = 0;
 		
 		X_DIFF = 0;
-		Y_DIFF = -ref.screen_height;
+		Y_DIFF = hyp;
 		
-		X_REC = -ref.screen_width;
-		Y_REC = 0;
+		X_REC = hyp * (float)Math.cos(210*Math.PI/180f);
+		Y_REC = hyp * (float)Math.sin(210*Math.PI/180f);
 		
-		X_ABOUT = ref.screen_width;
-		Y_ABOUT = 0;
+		X_ABOUT = hyp * (float)Math.cos(330*Math.PI/180f);
+		Y_ABOUT = hyp * (float)Math.sin(330*Math.PI/180f);
 		
 		
 		active_screen = MAIN;
@@ -188,8 +191,8 @@ class MainMenuGUI extends engine_gui {
     private final int idLogo = 0;
     private final int iPlayButton = 1;
     private final int idRecordsButton = 2;
-    private final int idSettingsButton = 3;
-    private final int idAboutButton = 4;
+    private final int idAboutButton = 3;
+    private final int idSettingsButton = 4;
     
     final int[][] layout = {
         { 
@@ -200,8 +203,8 @@ class MainMenuGUI extends engine_gui {
             idLogo,
             iPlayButton,
             idRecordsButton,
-            idSettingsButton,
             idAboutButton,
+            idSettingsButton,
         }
     };
     
@@ -243,15 +246,6 @@ class MainMenuGUI extends engine_gui {
         records.setBackgroundColor(0,0,0,.9f);
         records.setMargin(border,border,0,0);
         
-        settings = new engine_guiButton(this, idSettingsButton);
-        settings.setText("settings");
-        settings.setTextureSheet(textures.TEX_FONT1);
-        settings.setTextSize(mgr.gameMain.text_size);
-        settings.setBorder(border);
-        settings.setBorderColor(0,1,1,0.3f);
-        settings.setBackgroundColor(0,0,0,.9f);
-        settings.setMargin(border,border,0,0);
-        
         about = new engine_guiButton(this, idAboutButton);
         about.setText("about");
         about.setTextureSheet(textures.TEX_FONT1);
@@ -261,12 +255,22 @@ class MainMenuGUI extends engine_gui {
         about.setBackgroundColor(0,0,0,.9f);
         about.setMargin(border,border,0,0);
         
+        settings = new engine_guiButton(this, idSettingsButton);
+        settings.setText("settings");
+        settings.setTextureSheet(textures.TEX_FONT1);
+        settings.setTextSize(mgr.gameMain.text_size);
+        settings.setBorder(border);
+        settings.setBorderColor(0,1,1,0.3f);
+        settings.setBackgroundColor(0,0,0,.9f);
+        settings.setMargin(border,border,0,0);
+        
+
         
         addElement(logo);
         addElement(play);
         addElement(records);
-        addElement(settings);
         addElement(about);
+        addElement(settings);
         
         build();
     }
@@ -275,14 +279,16 @@ class MainMenuGUI extends engine_gui {
 
 class RecordsMenuGUI extends engine_gui {
     
-    private final int idBack = 0;
+	private final int idTabs = 0;
+    private final int idBack = 1;
     
     final int[][] layout = {
         { 
             // horizontal, vertical number of GUI elements
-            1,1
+            1,2
         }, {
             // GUI element ID's
+        	idTabs,
             idBack,
         }
     };
@@ -295,6 +301,7 @@ class RecordsMenuGUI extends engine_gui {
     
 //    engine_guiButton play, settings, records, about;
     engine_guiButton back;
+    engine_guiTabGroup tabs;
     
     
     public void populate() {
@@ -309,8 +316,22 @@ class RecordsMenuGUI extends engine_gui {
         back.setBorder(border);
         back.setBorderColor(0,1,1,0.3f);
         back.setBackgroundColor(0,0,0,.9f);
-        back.setMargin(border,border,0,0);
+//        back.setMargin(border,border,0,0);
         
+        tabs = new engine_guiTabGroup(this, idTabs, 4);
+        tabs.setTabString(0, "E"); tabs.setTabStringColor(0, 1, 1, 1, 1);
+        tabs.setTabString(1, "M"); tabs.setTabStringColor(1, 1, 1, 1, 1);
+        tabs.setTabString(2, "H"); tabs.setTabStringColor(2, 1, 1, 1, 1);
+        tabs.setTabString(3, "H"); tabs.setTabStringColor(3, 1, 0, 0, 1);
+        tabs.setTextureSheet(textures.TEX_FONT1);
+        tabs.setTextSize(mgr.gameMain.text_size);
+        tabs.setBorder(border);
+        tabs.setBorderColor(0,1,1,0.3f);
+        tabs.setBackgroundColor(0,0,0,.9f);
+        tabs.setInactiveBackgroundColor(0.12f, 0.12f, 0.12f, 0.9f);
+//        tabs.setMargin(border,border,0,0);
+        
+        addElement(tabs);
         addElement(back);
         
         build();

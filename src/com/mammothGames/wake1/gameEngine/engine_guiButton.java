@@ -4,11 +4,26 @@ import android.util.Log;
 
 public class engine_guiButton extends engine_guiTextElement {
 
-    private boolean clicked = false, act_on_hover = true, draw_hover = false, default_hover_set = false, backround_captured = false, started_in_button = false;
+    private boolean clicked = false, act_on_hover = true, draw_hover = false, started_in_button = false;
     private float hr,hb,hg,ha, or=1, ob, og, oa; // hover color and original backgrgound color
     
     public engine_guiButton(engine_gui gui, int id) {
         super(gui, id);
+    }
+
+    /**
+     * Requires rebuild with gui.build() for because of hover color 
+     */
+    @Override
+    public void setBackgroundColor(float r, float g, float b, float a) {
+        super.setBackgroundColor(r, g, b, a);
+    }
+    
+    @Override
+	protected void computeSizesAndCenters() {
+    	super.computeSizesAndCenters();
+    	captureOriginalBackgroundColor();
+    	setDefaultHoverColor();
     }
     
     public void setText(String text) {
@@ -23,30 +38,22 @@ public class engine_guiButton extends engine_guiTextElement {
     }
 	
 	private void captureOriginalBackgroundColor() {
-		if (backround_captured == false) {
-			// Copy old background color values
-    		or = pr;
-    		og = pg;
-    		ob = pb;
-    		oa = pa;
-    		backround_captured = true;
-		}
+		// Copy old background color values
+		or = pr;
+		og = pg;
+		ob = pb;
+		oa = pa;
 	}
 	private void setDefaultHoverColor() {
-		if (default_hover_set == false) {
-    		hr = pr + 0.15f;
-    		hg = pg + 0.15f;
-    		hb = pb + 0.15f;
-    		ha = pa + 0.15f;
-    		default_hover_set = true;
-    	}
+		hr = pr + 0.15f;
+		hg = pg + 0.15f;
+		hb = pb + 0.15f;
+		ha = pa;
 	}
 	
     @Override
     public void update() {
     	
-    	captureOriginalBackgroundColor();
-    	setDefaultHoverColor();
     	draw_hover = false;
     	
     	if (gui.clickable) {
@@ -77,7 +84,7 @@ public class engine_guiButton extends engine_guiTextElement {
     	else
     		setBackgroundColor(or, og, ob, oa); // set padding color to original color
     	
-        drawDefaultBackground(); // this includes the modified padding color
+        drawDefaultBackground(); // this includes the modified padding color ie the background color
         
         // Draw text
         gui.ref.draw.setDrawColor(r, g, b, a*gui.alpha);
