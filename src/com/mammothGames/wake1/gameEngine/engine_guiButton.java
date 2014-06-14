@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class engine_guiButton extends engine_guiTextElement {
 
-    private boolean clicked = false, act_on_hover = true, draw_hover = false, started_in_button = false;
+    private boolean clicked = false, act_on_hover = true, draw_hover = false, started_in_button = false, clickable=true;
     private float hr,hb,hg,ha, or=1, ob, og, oa; // hover color and original backgrgound color
     
     public engine_guiButton(engine_gui gui, int id) {
@@ -24,6 +24,10 @@ public class engine_guiButton extends engine_guiTextElement {
     	super.computeSizesAndCenters();
     	captureOriginalBackgroundColor();
     	setDefaultHoverColor();
+    }
+    
+    public void setClickable(boolean clickable) {
+    	this.clickable = clickable;
     }
     
     public void setText(String text) {
@@ -56,7 +60,7 @@ public class engine_guiButton extends engine_guiTextElement {
     	
     	draw_hover = false;
     	
-    	if (gui.clickable) {
+    	if ( (gui.clickable) && (clickable) ) {
 	    	boolean touched = false;
 	    	int state = gui.ref.input.get_touch_state(0);
 	    	

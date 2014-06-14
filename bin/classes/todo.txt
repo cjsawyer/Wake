@@ -1,17 +1,13 @@
 ///// This Commit /////
 
-Finished dynamically sized tabGroups
-
+added guiButton clickable boolean
+added records gui elements
 
 --------------- WAKE TODO ---------------
 
-stars paralax!
+add engine_guiBlank to hold blank spaces open
+redo back button behavior in the main menu
 
-Remove fade effects from main menu. make records/about/difficulty all slide in/out from the main menu as a single unit
-
-build GUI for menu, difficulty, and settings
-add back button to settings
-about screen
 
 double points for combo taps
 
@@ -38,16 +34,18 @@ Wake 1.2 FEEDBACK:
 	make bar flash red when a combo is broken
 
 
---------------- ENGINE TODO ---------------
 
-Rebuilt menu system with 4 GUIs all in one room.
-Main menu and basic slide functionality implemented.
+ _______________________________________________________________
+/  TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO  \
+|  TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO  |
+\  TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO  /
 
 make screen size available from initialization. get rid of engine first step function in entities
-engine should take care of updating gui's like entities
+GUI: give gui universal properties, (like text size), then only set entity properties when different
+GUI: engine should take care of updating gui's like entities
+GUI: wrapModeX/Y in element
 change guiElement constructor to not include parent GUI, make that be set in addElement
 get rid of HUD
-GUI: wrapModeX/Y in element
 figure out why text won't center vertically
 clean up log usage
 redo X/Y_ALIGN_CENTER -> ALIGN_CENTER/TOP/BOTTOM/BASELINE/LEFT/RIGHT
@@ -72,6 +70,11 @@ Long Term:
 
 
 //////////////////////////////////////////// HISTORY //////////////////////////////////////////////////////////////
+
+Finished dynamically sized tabGroups
+
+Rebuilt menu system with 4 GUIs all in one room.
+Main menu and basic slide functionality implemented.
 
 Added 'clickable' state to GUIs
 Added main menu button actions

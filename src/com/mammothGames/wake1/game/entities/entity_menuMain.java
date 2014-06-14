@@ -280,16 +280,33 @@ class MainMenuGUI extends engine_gui {
 class RecordsMenuGUI extends engine_gui {
     
 	private final int idTabs = 0;
-    private final int idBack = 1;
+    private final int idDiff = 1;
+    private final int idHS = 2;
+    private final int idHSN = 3;
+    private final int idBS = 4;
+    private final int idBSN = 5;
+    private final int idGP = 6;
+    private final int idGPN = 7;
+    private final int idErase = 8;
+    private final int idRate = 9;
+    private final int idPro = 10;
+    private final int idBack =11;
     
     final int[][] layout = {
         { 
             // horizontal, vertical number of GUI elements
-            1,2
+            2,9
         }, {
             // GUI element ID's
-        	idTabs,
-            idBack,
+        	idTabs, NULL,
+        	idDiff, NULL,
+        	idHS, idHSN,
+        	idBS, idBSN,
+        	idGP, idGPN,
+        	idErase, NULL,
+        	idRate, NULL,
+        	idPro, NULL,
+        	idBack, NULL
         }
     };
     
@@ -299,8 +316,9 @@ class RecordsMenuGUI extends engine_gui {
         this.mgr = mgr;
     }
     
-//    engine_guiButton play, settings, records, about;
-    engine_guiButton back;
+    engine_guiButton back, erase, rate, pro;
+    engine_guiText diff, hs, bs, gp;
+    engine_guiNumber hsn, bsn, gpn;
     engine_guiTabGroup tabs;
     
     
@@ -309,14 +327,6 @@ class RecordsMenuGUI extends engine_gui {
         
         float border = mgr.menuDifficulty.button_border_size/2;
         
-        back = new engine_guiButton(this, idBack);
-        back.setText("BACKrecords");
-        back.setTextureSheet(textures.TEX_FONT1);
-        back.setTextSize(mgr.gameMain.text_size);
-        back.setBorder(border);
-        back.setBorderColor(0,1,1,0.3f);
-        back.setBackgroundColor(0,0,0,.9f);
-//        back.setMargin(border,border,0,0);
         
         tabs = new engine_guiTabGroup(this, idTabs, 4);
         tabs.setTabString(0, "E"); tabs.setTabStringColor(0, 1, 1, 1, 1);
@@ -329,9 +339,126 @@ class RecordsMenuGUI extends engine_gui {
         tabs.setBorderColor(0,1,1,0.3f);
         tabs.setBackgroundColor(0,0,0,.9f);
         tabs.setInactiveBackgroundColor(0.12f, 0.12f, 0.12f, 0.9f);
-//        tabs.setMargin(border,border,0,0);
-        
         addElement(tabs);
+        
+        diff = new engine_guiText(this, idDiff);
+        diff.setBorderColor(0,1,1,0.3f);
+        diff.setBackgroundColor(0,0,0,.9f);
+        diff.setTextureSheet(textures.TEX_FONT1);
+        diff.setTextSize(mgr.gameMain.text_size);
+        diff.setText("Diff");
+        diff.setBorder(0, 0, border, border);
+        diff.setWeight(1, 0.75f);
+        addElement(diff);
+        
+        hs = new engine_guiText(this, idHS);
+        hs.setBorderColor(0,1,1,0.3f);
+        hs.setBackgroundColor(0,0,0,.9f);
+        hs.setTextureSheet(textures.TEX_FONT1);
+        hs.setTextSize(mgr.gameMain.text_size);
+        hs.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
+        hs.setText("High Score");
+        hs.setWeight(4, 0.75f);
+        hs.setBorder(0,0,border,0);
+        hs.setPadding(border);
+        addElement(hs);
+        
+        bs = new engine_guiText(this, idBS);
+        bs.setBorderColor(0,1,1,0.3f);
+        bs.setBackgroundColor(0,0,0,.9f);
+        bs.setTextureSheet(textures.TEX_FONT1);
+        bs.setTextSize(mgr.gameMain.text_size);
+        bs.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
+        bs.setText("Best Streak");
+        bs.setWeight(4, 0.75f);
+        bs.setBorder(0,0,border,0);
+        bs.setPadding(border);
+        addElement(bs);
+        
+        gp = new engine_guiText(this, idGP);
+        gp.setBorderColor(0,1,1,0.3f);
+        gp.setBackgroundColor(0,0,0,.9f);
+        gp.setTextureSheet(textures.TEX_FONT1);
+        gp.setTextSize(mgr.gameMain.text_size);
+        gp.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
+        gp.setText("Games Played");
+        gp.setWeight(4, 0.75f);
+        gp.setBorder(0,border,border,0);
+        gp.setPadding(border);
+        addElement(gp);
+        
+        hsn = new engine_guiNumber(this, idHSN);
+        hsn.setBorderColor(0,1,1,0.3f);
+        hsn.setBackgroundColor(0,0,0,.9f);
+        hsn.setTextureSheet(textures.TEX_FONT1);
+        hsn.setTextSize(mgr.gameMain.text_size);
+        hsn.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
+        hsn.setBorder(0,0,0,border);
+        hsn.setPadding(border);
+        hsn.setWeight(1, 0.75f);
+        addElement(hsn);
+        
+        bsn = new engine_guiNumber(this, idBSN);
+        bsn.setBorderColor(0,1,1,0.3f);
+        bsn.setBackgroundColor(0,0,0,.9f);
+        bsn.setTextureSheet(textures.TEX_FONT1);
+        bsn.setTextSize(mgr.gameMain.text_size);
+        bsn.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
+        bsn.setBorder(0,0,0,border);
+        bsn.setPadding(border);
+        bsn.setWeight(1, 0.75f);
+        addElement(bsn);
+        
+        gpn = new engine_guiNumber(this, idGPN);
+        gpn.setBorderColor(0,1,1,0.3f);
+        gpn.setBackgroundColor(0,0,0,.9f);
+        gpn.setTextureSheet(textures.TEX_FONT1);
+        gpn.setTextSize(mgr.gameMain.text_size);
+        gpn.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
+        gpn.setBorder(0,border,0,border);
+        gpn.setPadding(border);
+        gpn.setWeight(1, 0.75f);
+        addElement(gpn);
+        
+        
+        erase = new engine_guiButton(this, idErase);
+        erase.setText("erase");
+        erase.setTextureSheet(textures.TEX_FONT1);
+        erase.setTextSize(mgr.gameMain.text_size);
+        erase.setBorder(border);
+        erase.setBorderColor(0,1,1,0.3f);
+        erase.setBackgroundColor(0,0,0,.9f);
+        erase.setMargin(border,border/2,0,0);
+        addElement(erase);
+        
+        rate = new engine_guiButton(this, idRate);
+        rate.setText("rate");
+        rate.setTextureSheet(textures.TEX_FONT1);
+        rate.setTextSize(mgr.gameMain.text_size);
+        rate.setBorder(border);
+        rate.setBorderColor(0,1,1,0.3f);
+        rate.setBackgroundColor(0,0,0,.9f);
+        rate.setMargin(border/2,border/2,0,0);
+        addElement(rate);
+        
+        pro = new engine_guiButton(this, idPro);
+        pro.setText("pro");
+        pro.setTextureSheet(textures.TEX_FONT1);
+        pro.setTextSize(mgr.gameMain.text_size);
+        pro.setBorder(border);
+        pro.setBorderColor(0,1,1,0.3f);
+        pro.setBackgroundColor(0,0,0,.9f);
+        pro.setMargin(border/2,border/2,0,0);
+        addElement(pro);
+        
+        back = new engine_guiButton(this, idBack);
+        back.setText("BACKrecords");
+        back.setTextureSheet(textures.TEX_FONT1);
+        back.setTextSize(mgr.gameMain.text_size);
+        back.setBorder(border);
+        back.setBorderColor(0,1,1,0.3f);
+        back.setBackgroundColor(0,0,0,.9f);
+        back.setMargin(border/2,0,0,0);
         addElement(back);
         
         build();
