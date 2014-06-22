@@ -149,7 +149,7 @@ public class entity_popup extends engine_entity {
                     ref.file.save("STR_HE", String.valueOf(0) );
                     ref.file.save("PLY_HE", String.valueOf(0) );
                     
-                    mgr.menuRecords.loadScores();
+                    mgr.menuMain.loadScores();
                     mgr.popup.setPopupOpenness(false);
                 }
                 else if (bool_gui.no.getClicked())

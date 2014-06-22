@@ -10,7 +10,11 @@ public class engine_gui {
 
     Random rand = new Random();
     
-    float x, y, w, h;
+    public float x;
+	public float y;
+
+	float w;
+	float h;
 
 	public float alpha;
     public int depth;

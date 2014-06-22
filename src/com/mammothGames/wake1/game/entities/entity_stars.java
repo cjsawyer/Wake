@@ -65,9 +65,9 @@ public class entity_stars extends engine_entity {
 		tall_angle -= ref.main.time_scale/4;
 		
 		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 1 * stars_alpha);
-		ref.draw.drawTexture(ref.screen_width/2 + x/3, y/3, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
+		ref.draw.drawTexture(ref.screen_width/2 + x/5, y/5, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
 		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 0.9f * stars_alpha);
-		ref.draw.drawTexture(ref.screen_width/2 + x/2, y/2, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
+		ref.draw.drawTexture(ref.screen_width/2 + x/3, y/3, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
 		
 	}
 	

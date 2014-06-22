@@ -1,5 +1,9 @@
 package com.mammothGames.wake1.game.entities;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
+
 import com.mammothGames.wake1.game.constants;
 import com.mammothGames.wake1.game.rooms;
 import com.mammothGames.wake1.game.textures;
@@ -25,6 +29,29 @@ public class entity_menuMain extends engine_entity {
 	public float x, y;
 	private float xtarget = 0, ytarget = 0;
 	private float X_MAIN, Y_MAIN, X_DIFF, Y_DIFF, X_REC, Y_REC, X_ABOUT, Y_ABOUT;
+	
+	private int tab = 0;
+	private int last_tab = -1;
+	
+	// c/p from gameMain
+	final String SCO_E = "SCO_E";
+	final String SCO_M = "SCO_M";
+	final String SCO_H = "SCO_H";
+	final String SCO_HE = "SCO_HE";
+	
+	final String STR_E = "STR_E";
+	final String STR_M = "STR_M";
+	final String STR_H = "STR_H";
+	final String STR_HE = "STR_HE";
+	
+	final String PLY_E = "PLY_E";
+	final String PLY_M = "PLY_M";
+	final String PLY_H = "PLY_H";
+	final String PLY_HE = "PLY_HE";
+	
+	private String STR, SCO, PLY;
+	
+	int high_score, best_streak, games_played;
 	
 	@Override
 	public void sys_firstStep() {
@@ -77,6 +104,8 @@ public class entity_menuMain extends engine_entity {
 		records.populate();
 		records.setActive(true);
 		
+		loadScores();
+		
 		about = new AboutMenuGUI(ref,mgr);
 		about.setSize(
 				ref.screen_width - 2*mgr.gameMain.padding_x,
@@ -93,7 +122,7 @@ public class entity_menuMain extends engine_entity {
 			x += (xtarget - x) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
 			y += (ytarget - y) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
 			
-			menu.setClickable(false);//TODO fix the fxn
+			menu.setClickable(false);
 			difficulty.setClickable(false);
 			records.setClickable(false);
 			about.setClickable(false);
@@ -124,8 +153,10 @@ public class entity_menuMain extends engine_entity {
 					
 					difficulty.setClickable(true);
 					
-					if (difficulty.back.getClicked())
-						active_screen = MAIN; // TODO: build rest of this
+					if (difficulty.back.getClicked()) {
+						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_HARD);
+						mgr.gameMain.startGame();
+					}
 					
 					setRelativePositionTarget(-X_DIFF, -Y_DIFF);
 					
@@ -134,8 +165,25 @@ public class entity_menuMain extends engine_entity {
 					
 					records.setClickable(!mgr.popup.getPopupOpenness());
 					
+					int previous_tab = tab;
+					tab = records.tabs.getActiveTab();
+					
+					if (previous_tab != tab) {
+						loadScores();
+					}
+					
+					
 					if (records.back.getClicked())
-						active_screen = MAIN; // TODO: build rest of this
+						active_screen = MAIN;
+					
+					if (records.rate.getClicked())
+						ratePlayStore();
+						
+					if (records.pro.getClicked())
+						getProPlayStore();
+						
+					if (records.erase.getClicked())
+						showErasePopup();
 					
 					setRelativePositionTarget(-X_REC, -Y_REC);
 					
@@ -183,6 +231,87 @@ public class entity_menuMain extends engine_entity {
 		xtarget = xt + ref.screen_width/2;
 		ytarget = yt + ref.screen_height/2;
 	}
+	
+	public void loadScores() {
+		// Load high scores
+		
+		switch(tab) {
+			case 0:
+				SCO  = SCO_E;
+				STR  = STR_E;
+				PLY = PLY_E;
+				records.diff.setText("EASY");
+				break;
+			case 1:
+				SCO  = SCO_M;
+				STR  = STR_M;
+				PLY = PLY_M;
+				records.diff.setText("MEDIUM");
+				break;
+			case 2:
+				SCO  = SCO_H;
+				STR  = STR_H;
+				PLY = PLY_H;
+				records.diff.setText("HARD");
+				break;
+			case 3:
+				SCO  = SCO_HE;
+				STR  = STR_HE;
+				PLY = PLY_HE;
+				records.diff.setText("HELL");
+				break;
+		}
+		
+		String high_score_string = ref.file.load(SCO);
+		if (high_score_string.equals("")) {
+			high_score = 0;
+		} else {
+			high_score = Integer.parseInt(ref.file.load(SCO)); 
+		}
+		String best_streak_string = ref.file.load(STR);
+		if (best_streak_string.equals("")) {
+			best_streak = 0;
+		} else {
+			best_streak = Integer.parseInt(ref.file.load(STR)); 
+		}
+		String games_played_string = ref.file.load(PLY);
+		if (games_played_string.equals("")) {
+			games_played = 0;
+		} else {
+			games_played = Integer.parseInt(ref.file.load(PLY)); 
+		}
+		
+		records.hsn.setNumber(high_score);
+		records.bsn.setNumber(best_streak);
+		records.gpn.setNumber(games_played);
+		records.diff.setDifficulty(tab);
+		
+		
+	}
+	
+	private void showErasePopup() {
+		mgr.popup.setPopupState(mgr.popup.STATE_ERASE);
+		mgr.popup.setPopupOpenness(true);
+	}
+	
+	private void ratePlayStore() {
+		final String appPackageName = ref.android.getPackageName();
+		try {
+			ref.android.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+		} catch (android.content.ActivityNotFoundException anfe) {
+			ref.android.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+		}
+	}
+	
+	private void getProPlayStore() {
+		final String appPackageName = "com.mammothGames.wake1"; // getPackageName() from Context or Activity object
+		try {
+			ref.android.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+		} catch (android.content.ActivityNotFoundException anfe) {
+			ref.android.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+		}
+	}
+
 }
 
 
@@ -317,7 +446,8 @@ class RecordsMenuGUI extends engine_gui {
     }
     
     engine_guiButton back, erase, rate, pro;
-    engine_guiText diff, hs, bs, gp;
+    engine_guiText hs, bs, gp;
+    guiDifficultyText diff; 
     engine_guiNumber hsn, bsn, gpn;
     engine_guiTabGroup tabs;
     
@@ -341,7 +471,7 @@ class RecordsMenuGUI extends engine_gui {
         tabs.setInactiveBackgroundColor(0.12f, 0.12f, 0.12f, 0.9f);
         addElement(tabs);
         
-        diff = new engine_guiText(this, idDiff);
+        diff = new guiDifficultyText(this, idDiff, mgr);
         diff.setBorderColor(0,1,1,0.3f);
         diff.setBackgroundColor(0,0,0,.9f);
         diff.setTextureSheet(textures.TEX_FONT1);
@@ -360,7 +490,7 @@ class RecordsMenuGUI extends engine_gui {
         hs.setText("High Score");
         hs.setWeight(4, 0.75f);
         hs.setBorder(0,0,border,0);
-        hs.setPadding(border);
+        hs.setPadding(0,border,border,0);
         addElement(hs);
         
         bs = new engine_guiText(this, idBS);
@@ -372,7 +502,7 @@ class RecordsMenuGUI extends engine_gui {
         bs.setText("Best Streak");
         bs.setWeight(4, 0.75f);
         bs.setBorder(0,0,border,0);
-        bs.setPadding(border);
+        bs.setPadding(0,border,border,0);
         addElement(bs);
         
         gp = new engine_guiText(this, idGP);
@@ -384,7 +514,7 @@ class RecordsMenuGUI extends engine_gui {
         gp.setText("Games Played");
         gp.setWeight(4, 0.75f);
         gp.setBorder(0,border,border,0);
-        gp.setPadding(border);
+        gp.setPadding(0,border,border,0);
         addElement(gp);
         
         hsn = new engine_guiNumber(this, idHSN);
@@ -394,7 +524,7 @@ class RecordsMenuGUI extends engine_gui {
         hsn.setTextSize(mgr.gameMain.text_size);
         hsn.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         hsn.setBorder(0,0,0,border);
-        hsn.setPadding(border);
+        hsn.setPadding(0,border,0,border);
         hsn.setWeight(1, 0.75f);
         addElement(hsn);
         
@@ -405,7 +535,7 @@ class RecordsMenuGUI extends engine_gui {
         bsn.setTextSize(mgr.gameMain.text_size);
         bsn.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         bsn.setBorder(0,0,0,border);
-        bsn.setPadding(border);
+        bsn.setPadding(0,border,0,border);
         bsn.setWeight(1, 0.75f);
         addElement(bsn);
         
@@ -416,7 +546,7 @@ class RecordsMenuGUI extends engine_gui {
         gpn.setTextSize(mgr.gameMain.text_size);
         gpn.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
         gpn.setBorder(0,border,0,border);
-        gpn.setPadding(border);
+        gpn.setPadding(0,border,0,border);
         gpn.setWeight(1, 0.75f);
         addElement(gpn);
         

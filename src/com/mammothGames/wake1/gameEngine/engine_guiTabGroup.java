@@ -33,6 +33,10 @@ public class engine_guiTabGroup extends engine_guiTextElement {
         }
     }
     
+    public int getActiveTab() {
+    	return active_tab;
+    }
+    
     public void setTabString(int tab, String s) {
     	strings[tab] = s;
     }

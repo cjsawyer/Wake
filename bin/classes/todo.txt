@@ -1,13 +1,13 @@
 ///// This Commit /////
 
-added guiButton clickable boolean
-added records gui elements
+Implemented button actions in new records screen
 
 --------------- WAKE TODO ---------------
 
 add engine_guiBlank to hold blank spaces open
 redo back button behavior in the main menu
 
+have graphics levels in pause menu
 
 double points for combo taps
 
@@ -70,6 +70,9 @@ Long Term:
 
 
 //////////////////////////////////////////// HISTORY //////////////////////////////////////////////////////////////
+
+added guiButton clickable boolean
+added records gui elements
 
 Finished dynamically sized tabGroups
 

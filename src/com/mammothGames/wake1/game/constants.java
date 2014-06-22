@@ -5,7 +5,7 @@ public class constants {
 	// To rename the package, right click the project > Android Tools > Rename Application Package
 	
 	public static boolean devmode = true;
-	public static boolean godmode = true;
+	public static boolean godmode = false;
 	public static boolean pro = false;
 
 	public static boolean is_landscape = false;
@@ -15,7 +15,7 @@ public class constants {
 	public static String adMob_interstitial_id = "ca-app-pub-6028924870146472/6297005543";
 	public static String google_analytics_id = "UA-50122948-1";
 	
-	public static int max_particles = 200;
+	public static int max_particles = 2000;
 	
 	public static int layer0_backgroundSquares = 10;
 	public static int layer1_waterSpreadEffect = 11;

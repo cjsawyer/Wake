@@ -32,6 +32,7 @@ public class entity_menuPostGame extends engine_entity {
         post_gui.populate();
         post_gui.setDepth(constants.layer7_overHUD);
         post_gui.setActive(true);
+        post_gui.setAlpha(0);
         ref.ad.loadInterstitialAd();
 	}
 	
@@ -51,6 +52,8 @@ public class entity_menuPostGame extends engine_entity {
 			post_gui.highScoreNumber.setNumber(mgr.gameMain.high_score);
 			post_gui.bestStreakNumber.setNumber(mgr.gameMain.best_points_streak);
 			
+			
+			
 			if (mgr.gameMain.shade_alpha > 0.98f) {
 				
 				if (post_gui.diff.getClicked()) {
@@ -68,7 +71,6 @@ public class entity_menuPostGame extends engine_entity {
 			// For blinking high score text
 			float blink_alpha = ((float)Math.sin((float)(SystemClock.uptimeMillis() * mgr.menuFirst.DEG_TO_RAD / 500f * 180f))) + 1;
 			blink_alpha = blink_alpha > 1 ? 1:blink_alpha;
-			blink_alpha *= mgr.gameMain.shade_alpha;
 			
 			if (mgr.gameMain.new_high_score) {
 				post_gui.scoreNumber.setTextColor(0, 1, 1, blink_alpha);
@@ -513,40 +515,4 @@ class PostGUI extends engine_gui {
         build();
     }
 
-}
-
-class guiDifficultyText extends engine_guiText {
-
-	masterGameReference mgr;
-	
-	public guiDifficultyText(engine_gui gui, int id, masterGameReference mgr) {
-		super(gui, id);
-		this.mgr = mgr;
-	}
-	
-	@Override
-	public void update() {
-	    
-	    drawDefaultBackground();
-	    
-	    float dx=0;
-		float dy=0;
-		if(mgr.gameMain.current_diff==entity_gameMain.DIF_HELL) {
-			// Do the shaky text for hell mode
-			float shake_range = mgr.gameMain.text_size/20;
-			dx = gui.ref.main.randomRange(-shake_range, shake_range);
-			dy = gui.ref.main.randomRange(-shake_range, shake_range);
-			gui.ref.draw.setDrawColor(1, 0, 0, a*gui.alpha);
-			gui.ref.draw.text.append("HELL");
-		} else {
-			// Normal text for the other modes
-			gui.ref.draw.setDrawColor(1, 1, 1, a*gui.alpha);
-			gui.ref.draw.text.append(mgr.gameMain.current_diff_string);	
-		}
-	    
-	    
-	    gui.ref.draw.drawText(contentX+text_x+dx, contentY+text_y+dy, size, x_align, y_align, gui.depth, texture_sheet);
-	    
-	}
-	
 }
