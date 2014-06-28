@@ -90,10 +90,7 @@ public class engine_guiButton extends engine_guiTextElement {
     	
         drawDefaultBackground(); // this includes the modified padding color ie the background color
         
-        // Draw text
-        gui.ref.draw.setDrawColor(r, g, b, a*gui.alpha);
-        gui.ref.draw.text.append(text);
-        gui.ref.draw.drawText(gui.x + contentX+text_x, gui.y + contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
+        updateText();
         
     }
     
@@ -101,6 +98,12 @@ public class engine_guiButton extends engine_guiTextElement {
     	boolean rtn = clicked;
         clicked = false;
         return rtn;
+    }
+    
+    public void updateText() {
+    	gui.ref.draw.setDrawColor(r, g, b, a*gui.alpha);
+        gui.ref.draw.text.append(text);
+        gui.ref.draw.drawText(gui.x + contentX+text_x, gui.y + contentY+text_y, size, x_align, y_align, gui.depth, texture_sheet);
     }
     
     public void setActOnHover(boolean act_on_hover) {

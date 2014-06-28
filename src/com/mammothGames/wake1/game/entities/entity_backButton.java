@@ -51,20 +51,32 @@ public class entity_backButton extends engine_entity {
 				break;
 			case rooms.ROOM_POSTGAME:
 				mgr.popup.setPopupOpenness(false);
+				
+				mgr.menuMain.setDefaultPositionHard();
+				
 				mgr.menuMain.start();
 				break;
 			case rooms.ROOM_DIFFICULTY:
 				mgr.menuDifficulty.prepLeave(mgr.menuDifficulty.PREP_menuTop);
 				break;
 			case rooms.ROOM_MENUMAIN:
-				if ( !mgr.popup.getPopupOpenness() || (mgr.popup.getPopupState()!=mgr.popup.STATE_QUIT ) ) {
-					
-					mgr.popup.setPopupState(mgr.popup.STATE_QUIT);
-					mgr.popup.setPopupOpenness(true);
-				} else {
-				    mgr.popup.ref.main.exitApp();
-				}
-//				mgr.menuMain.prepLeave(mgr.menuMain.PREP_menuMain);
+					if (mgr.menuMain.active_screen != mgr.menuMain.MAIN) {
+						if (mgr.popup.getPopupOpenness()) {
+							mgr.popup.setPopupOpenness(false);
+						} else {
+							mgr.menuMain.active_screen = mgr.menuMain.MAIN;
+						}
+					} else {
+						if (!mgr.popup.getPopupOpenness()) {
+							mgr.popup.setPopupState(mgr.popup.STATE_QUIT);
+							mgr.popup.setPopupOpenness(true);
+						} else {
+							if (mgr.popup.getPopupState() != mgr.popup.STATE_QUIT)
+								mgr.popup.setPopupOpenness(false); // close the settings menu
+							else
+								mgr.popup.ref.main.exitApp();
+						}
+					}
 				break;
 
 			case rooms.ROOM_MENURECORDS:

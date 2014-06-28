@@ -1,11 +1,15 @@
 ///// This Commit /////
 
-Implemented button actions in new records screen
+added difficulty menu buttons
+fixed pause hud redrawing
+added back button behavior in menus
+increased menu drawing efficiency
+made postgame and records screens display the correct difficulty text
+added guiBlank
 
 --------------- WAKE TODO ---------------
 
-add engine_guiBlank to hold blank spaces open
-redo back button behavior in the main menu
+make staring/restarting the game feel less bumpy and sudden
 
 have graphics levels in pause menu
 
@@ -70,6 +74,8 @@ Long Term:
 
 
 //////////////////////////////////////////// HISTORY //////////////////////////////////////////////////////////////
+
+Implemented button actions in new records screen
 
 added guiButton clickable boolean
 added records gui elements

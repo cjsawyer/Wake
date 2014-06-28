@@ -8,7 +8,7 @@ import com.mammothGames.wake1.gameEngine.*;
 public class entity_countdown extends engine_entity {
 
     private float size,x,y,alpha;
-    private boolean counting;
+    boolean counting;
     private int number;
     
     
@@ -69,10 +69,6 @@ public class entity_countdown extends engine_entity {
 	    counting = true;
 	    alarm[0] = 1000;
 	    alarm[1] = number*alarm[0];
-	}
-	
-	public boolean getCounting() {
-	    return counting;
 	}
 	
 }

@@ -19,7 +19,7 @@ public class entity_menuPauseHUD extends engine_entity {
 		this.mgr = mgr;
 	}
 	
-	private boolean game_paused, menu_open;
+	private boolean game_paused;
 	private float text_x, text_y, button_size;
 	float base_hud_height;
 	float HUD_y;
@@ -37,8 +37,6 @@ public class entity_menuPauseHUD extends engine_entity {
 	@Override
 	public void sys_firstStep() {
 		
-		menu_open = false;
-				
 		button_size = mgr.gameMain.text_size;
 		base_hud_height = button_size*2;
 		
@@ -64,14 +62,6 @@ public class entity_menuPauseHUD extends engine_entity {
 				HUD_y += (HUD_y_target - HUD_y) * 5 * ref.main.time_scale;
 			
 			streak_bar_alpha += (-streak_bar_alpha) * 5 * ref.main.time_scale;
-//			if (streak_bar_alpha < 0)
-//				streak_bar_alpha = 0;
-			
-//			if (menu_open)
-//				pause_menu_y_target = ref.screen_height - 2*button_size;
-//			else
-//				pause_menu_y_target = 0;
-			
 			
 			
 				
@@ -81,7 +71,8 @@ public class entity_menuPauseHUD extends engine_entity {
 			
 			
 			//The top rectangle hud
-			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-base_hud_height/2 + HUD_y, ref.screen_width, base_hud_height, 0, 0, 0, constants.layer5_underHUD);
+			if ( (!game_paused) && (!startPause) ) // to avoid drawing it over the captured pause copy
+				ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-base_hud_height/2 + HUD_y, ref.screen_width, base_hud_height, 0, 0, 0, constants.layer5_underHUD);
 			
 //			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-rectangle_height/2 - base_hud_height + HUD_y, ref.screen_width, rectangle_height, 0, 0, 0, game_constants.layer5_underHUD);
 			
@@ -89,39 +80,37 @@ public class entity_menuPauseHUD extends engine_entity {
 			//Draw inner hud rectangle
 			float small_rec_width = ref.screen_width - button_size*4;
 			float small_rec_height = base_hud_height * 2f/3;
-	//		ref.draw.setDrawColor(0, 0.1f, 0.1f, 1);//0.5
+
 			
 			// Draw progress bar for streak in smaller hud bar. 
-//			if (mgr.gameMain.streak!=0) {
-				float current_progress = mgr.gameMain.streak/mgr.gameMain.STREAK_PER_LEVEL;
-				
-				float extra_x = 0;
-				float extra_y = 0;
-				
-				float streak_bar_height = small_rec_height - streak_bar_padding;
-				if (current_progress >= 3) {
-					// if we're at max streak of 4
-					extra_x = streak_bar_alpha * streak_bar_padding/2;
-					extra_y = streak_bar_alpha * (small_rec_height - streak_bar_height)/2 ;
-				}
-				
-				//Draw back border rectangle for streak bar
-				ref.draw.setDrawColor(0, 0, 0, 1);//0.5
-				ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size + HUD_y, small_rec_width + extra_x, small_rec_height + extra_y, 0, 0, 0, constants.layer6_HUD);
-				
-				
-				current_progress = (current_progress < 3) ? mgr.gameMain.streak%mgr.gameMain.STREAK_PER_LEVEL : mgr.gameMain.STREAK_PER_LEVEL;
-				
-				float percent_bar = (current_progress)/mgr.gameMain.STREAK_PER_LEVEL;
-				
-				
-				// Draw streak bar
-				ref.draw.setDrawColor(0, 1, 1, 0.3f + streak_bar_alpha);//0.5
-				float full_streak_width = (small_rec_width-streak_bar_padding);
-				float target_streak_width = full_streak_width * percent_bar;
-				streak_width += (target_streak_width - streak_width) * ref.screen_width/(mgr.gameMain.STREAK_PER_LEVEL*4) * ref.main.time_scale;
-				ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size + HUD_y, streak_width + extra_x, streak_bar_height + extra_y, -streak_width/2, 0, 0, constants.layer6_HUD);
-//			}
+			float current_progress = mgr.gameMain.streak/mgr.gameMain.STREAK_PER_LEVEL;
+			
+			float extra_x = 0;
+			float extra_y = 0;
+			
+			float streak_bar_height = small_rec_height - streak_bar_padding;
+			if (current_progress >= 3) {
+				// if we're at max streak of 4
+				extra_x = streak_bar_alpha * streak_bar_padding/2;
+				extra_y = streak_bar_alpha * (small_rec_height - streak_bar_height)/2 ;
+			}
+			
+			//Draw back border rectangle for streak bar
+			ref.draw.setDrawColor(0, 0, 0, 1);//0.5
+			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size + HUD_y, small_rec_width + extra_x, small_rec_height + extra_y, 0, 0, 0, constants.layer6_HUD);
+			
+			
+			current_progress = (current_progress < 3) ? mgr.gameMain.streak%mgr.gameMain.STREAK_PER_LEVEL : mgr.gameMain.STREAK_PER_LEVEL;
+			
+			float percent_bar = (current_progress)/mgr.gameMain.STREAK_PER_LEVEL;
+			
+			
+			// Draw streak bar
+			ref.draw.setDrawColor(0, 1, 1, 0.3f + streak_bar_alpha);//0.5
+			float full_streak_width = (small_rec_width-streak_bar_padding);
+			float target_streak_width = full_streak_width * percent_bar;
+			streak_width += (target_streak_width - streak_width) * ref.screen_width/(mgr.gameMain.STREAK_PER_LEVEL*4) * ref.main.time_scale;
+			ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size + HUD_y, streak_width + extra_x, streak_bar_height + extra_y, -streak_width/2, 0, 0, constants.layer6_HUD);
 	
 
 			
@@ -151,41 +140,15 @@ public class entity_menuPauseHUD extends engine_entity {
 			        textures.TEX_SPRITES);
 			
 
-			// Unpause if the screen is touched
+			// Un-pause if the pause button is touched
 			if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
-				
 				//right corner
 				if (ref.room.get_current_room() == rooms.ROOM_GAME)
 					if (  (ref.input.get_touch_x(0) <= button_size*2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
 						if (!mgr.popup.getPopupOpenness() && (game_paused == false))
 							setPause(true);
 					}
-//					if ( (ref.input.get_touch_x(0) >= ref.screen_width - button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
-				
 			}
-			
-			// mute/unmute button
-//			if (ref.room.get_current_room() == rooms.ROOM_GAME)  {
-//				if (ref.input.get_touch_state(0) == ref.input.TOUCH_DOWN) {
-//					// Left corner
-//					if (  (ref.input.get_touch_x(0) <= button_size*3/2) && (ref.input.get_touch_y(0) >= ref.screen_height - button_size*3/2)  ) {
-//						gameMuted = !gameMuted;
-//						ref.file.save("muted", "" + gameMuted);
-//						// Play music.
-//						ref.sound.setMusicState(gameMuted, true, true);
-//					}
-//				}
-//			}	
-			
-			//draw button
-//			if ( (ref.room.get_current_room() == rooms.ROOM_GAME) || (ref.room.get_current_room() == rooms.ROOM_POSTGAME) )  {
-//				ref.draw.setDrawColor(1, 1, 1, 1);
-//				if (gameMuted) {
-//					ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, -button_size/2, button_size/2, 0, constants.layer6_HUD, textures.SUB_MUTED, textures.TEX_SPRITES);
-//				} else {
-//					ref.draw.drawTexture(button_size/2, ref.screen_height - button_size/2 + HUD_y, button_size, button_size, -button_size/2, button_size/2, 0, constants.layer6_HUD, textures.SUB_MUTE, textures.TEX_SPRITES);
-//				}
-//			}
 		}
 
 		doPause(newPause);
@@ -212,11 +175,9 @@ public class entity_menuPauseHUD extends engine_entity {
 			game_paused = true;
 			ref.draw.captureDraw();
 			ref.main.pauseEntities();
-			menu_open = true;
 		} else {
 			game_paused = false;
 			ref.main.unPauseEntities();
-			menu_open = false;
 		}
 	}
 	
@@ -228,13 +189,11 @@ public class entity_menuPauseHUD extends engine_entity {
 				game_paused = true;
 				ref.draw.captureDraw();
 				ref.main.pauseEntities();
-				menu_open = true;
 				// this is in an alarm so the just-starting-to-fade-in popup won't be captured with the pause image
 				alarm[0] = ref.main.time_delta*2;
 			} else {
 				game_paused = false;
 				ref.main.unPauseEntities();
-				menu_open = false;
 			}
 		}
 	}

@@ -24,14 +24,14 @@ public class entity_menuMain extends engine_entity {
 	private RecordsMenuGUI records;
 	private AboutMenuGUI about;
 	
-	private final int MAIN = 0, DIFFICULTY = 1, RECORDS = 2, ABOUT = 3;
-	private int active_screen;
+	public final int MAIN = 0, DIFFICULTY = 1, RECORDS = 2, ABOUT = 3;
+	public int LAST = MAIN;
+	public int active_screen;
 	public float x, y;
-	private float xtarget = 0, ytarget = 0;
-	private float X_MAIN, Y_MAIN, X_DIFF, Y_DIFF, X_REC, Y_REC, X_ABOUT, Y_ABOUT;
+	public float xtarget = 0, ytarget = 0;
+	public float X_MAIN, Y_MAIN, X_DIFF, Y_DIFF, X_REC, Y_REC, X_ABOUT, Y_ABOUT;
 	
 	private int tab = 0;
-	private int last_tab = -1;
 	
 	// c/p from gameMain
 	final String SCO_E = "SCO_E";
@@ -133,43 +133,84 @@ public class entity_menuMain extends engine_entity {
 					
 					menu.setClickable(!mgr.popup.getPopupOpenness());
 					
-					if (menu.play.getClicked())
+					if (menu.play.getClicked()) {
 						active_screen = DIFFICULTY;
+						LAST = DIFFICULTY;
+					}
 					
-					if (menu.records.getClicked()) 
+					if (menu.records.getClicked()) {
 						active_screen = RECORDS;
+						LAST = RECORDS;
+					}
 					
 					if (menu.settings.getClicked()) {
 						mgr.popup.setPopupState(mgr.popup.STATE_SETTINGS);
 						mgr.popup.setPopupOpenness(true);
 					}
 					
-					if (menu.about.getClicked())
+					if (menu.about.getClicked()) {
 						active_screen = ABOUT;
-					
+						LAST = ABOUT;
+					}
 					
 					break;
+					
 				case DIFFICULTY:
 					
 					difficulty.setClickable(true);
 					
-					if (difficulty.back.getClicked()) {
+					if (difficulty.easy.getClicked()) {
+						mgr.menuPostGame.post_gui.title.setDifficulty(mgr.gameMain.DIF_EASY);
+						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_EASY);
+						mgr.gameMain.startGame();
+					}
+					if (difficulty.medium.getClicked()) {
+						mgr.menuPostGame.post_gui.title.setDifficulty(mgr.gameMain.DIF_MEDIUM);
+						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_MEDIUM);
+						mgr.gameMain.startGame();
+					}
+					if (difficulty.hard.getClicked()) {
+						mgr.menuPostGame.post_gui.title.setDifficulty(mgr.gameMain.DIF_HARD);
 						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_HARD);
 						mgr.gameMain.startGame();
 					}
+					if (difficulty.hell.getClicked()) {
+						mgr.menuPostGame.post_gui.title.setDifficulty(mgr.gameMain.DIF_HELL);
+						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_HELL);
+						mgr.gameMain.startGame();
+					}
+					
+					if (difficulty.back.getClicked())
+						active_screen = MAIN;
 					
 					setRelativePositionTarget(-X_DIFF, -Y_DIFF);
-					
 					break;
+					
 				case RECORDS:
 					
 					records.setClickable(!mgr.popup.getPopupOpenness());
 					
 					int previous_tab = tab;
 					tab = records.tabs.getActiveTab();
-					
+					//TODO: FIX DIFF HERE TODO TODO TODO
 					if (previous_tab != tab) {
 						loadScores();
+					}
+					
+					// set difficulty text
+					switch(tab) {
+						case 0:
+							records.diff.setDifficulty(entity_gameMain.DIF_EASY);
+							break;
+						case 1:
+							records.diff.setDifficulty(entity_gameMain.DIF_MEDIUM);
+							break;
+						case 2:
+							records.diff.setDifficulty(entity_gameMain.DIF_HARD);
+							break;
+						case 3:
+							records.diff.setDifficulty(entity_gameMain.DIF_HELL);
+							break;
 					}
 					
 					
@@ -186,8 +227,8 @@ public class entity_menuMain extends engine_entity {
 						showErasePopup();
 					
 					setRelativePositionTarget(-X_REC, -Y_REC);
-					
 					break;
+					
 				case ABOUT:
 					
 					about.setClickable(true);
@@ -196,25 +237,35 @@ public class entity_menuMain extends engine_entity {
 						active_screen = MAIN; // TODO: build rest of this
 					
 					setRelativePositionTarget(-X_ABOUT, -Y_ABOUT);
-					
 					break;
 			}
 			
+			
+			// Always visible from other screens
 			menu.setAlpha(mgr.gameMain.shade_alpha);
 			menu.setPosition(x + X_MAIN, y + Y_MAIN);
 			menu.update();
 			
-			difficulty.setAlpha(mgr.gameMain.shade_alpha);
-			difficulty.setPosition(x + X_DIFF, y + Y_DIFF);
-			difficulty.update();
-			
-			records.setAlpha(mgr.gameMain.shade_alpha);
-			records.setPosition(x + X_REC, y + Y_REC);
-			records.update();
-			
-			about.setAlpha(mgr.gameMain.shade_alpha);
-			about.setPosition(x + X_ABOUT, y + Y_ABOUT);
-			about.update();
+			// Only draw the next visible menu to avoi lag
+			switch(LAST) {
+				case DIFFICULTY:
+					difficulty.setAlpha(mgr.gameMain.shade_alpha);
+					difficulty.setPosition(x + X_DIFF, y + Y_DIFF);
+					difficulty.update();
+					break;
+	
+				case RECORDS:	
+					records.setAlpha(mgr.gameMain.shade_alpha);
+					records.setPosition(x + X_REC, y + Y_REC);
+					records.update();
+					break;
+
+				case ABOUT:
+					about.setAlpha(mgr.gameMain.shade_alpha);
+					about.setPosition(x + X_ABOUT, y + Y_ABOUT);
+					about.update();
+					break;
+			}
 			
 		}
 	}
@@ -312,6 +363,12 @@ public class entity_menuMain extends engine_entity {
 		}
 	}
 
+	public void setDefaultPositionHard() {
+		active_screen = MAIN;
+		setRelativePositionTarget(X_MAIN,Y_MAIN);
+		x = xtarget;
+		y = ytarget;
+	}
 }
 
 
@@ -419,7 +476,8 @@ class RecordsMenuGUI extends engine_gui {
     private final int idErase = 8;
     private final int idRate = 9;
     private final int idPro = 10;
-    private final int idBack =11;
+    private final int idBlank =11;
+    private final int idBack =12;
     
     final int[][] layout = {
         { 
@@ -435,7 +493,7 @@ class RecordsMenuGUI extends engine_gui {
         	idErase, NULL,
         	idRate, NULL,
         	idPro, NULL,
-        	idBack, NULL
+        	idBlank, idBack
         }
     };
     
@@ -581,8 +639,11 @@ class RecordsMenuGUI extends engine_gui {
         pro.setMargin(border/2,border/2,0,0);
         addElement(pro);
         
+        engine_guiBlank blank = new engine_guiBlank(this, idBlank);
+        addElement(blank);
+        
         back = new engine_guiButton(this, idBack);
-        back.setText("BACKrecords");
+        back.setText("BACK");
         back.setTextureSheet(textures.TEX_FONT1);
         back.setTextSize(mgr.gameMain.text_size);
         back.setBorder(border);
@@ -598,15 +659,21 @@ class RecordsMenuGUI extends engine_gui {
 
 class DifficultyMenuGUI extends engine_gui {
     
-    private final int idBack = 0;
+    private final int idEasy = 0;
+    private final int idMedium = 1;
+    private final int idHard = 2;
+    private final int idHell = 3;
+    private final int idBack = 4;
     
     final int[][] layout = {
         { 
             // horizontal, vertical number of GUI elements
-            1,1
+            2,3
         }, {
             // GUI element ID's
-            idBack,
+        	idEasy, idMedium,
+        	idHard, idHell,
+            idBack, NULL
         }
     };
     
@@ -617,7 +684,7 @@ class DifficultyMenuGUI extends engine_gui {
     }
     
 //    engine_guiButton play, settings, records, about;
-    engine_guiButton back;
+    engine_guiButton easy, medium, hard, hell, back;
     
     
     public void populate() {
@@ -625,15 +692,54 @@ class DifficultyMenuGUI extends engine_gui {
         
         float border = mgr.menuDifficulty.button_border_size/2;
         
+        easy = new engine_guiButton(this, idEasy);
+        easy.setText("EASY");
+        easy.setTextureSheet(textures.TEX_FONT1);
+        easy.setTextSize(mgr.gameMain.text_size);
+        easy.setBorder(border);
+        easy.setBorderColor(0,1,1,0.3f);
+        easy.setBackgroundColor(0,0,0,.9f);
+        easy.setMargin(0,border,0,border);
+        addElement(easy);
+        
+        medium = new engine_guiButton(this, idMedium);
+        medium.setText("MEDIUM");
+        medium.setTextureSheet(textures.TEX_FONT1);
+        medium.setTextSize(mgr.gameMain.text_size);
+        medium.setBorder(border);
+        medium.setBorderColor(0,1,1,0.3f);
+        medium.setBackgroundColor(0,0,0,.9f);
+        medium.setMargin(0,border,border,0);
+        addElement(medium);
+        
+        hard = new engine_guiButton(this, idHard);
+        hard.setText("HARD");
+        hard.setTextureSheet(textures.TEX_FONT1);
+        hard.setTextSize(mgr.gameMain.text_size);
+        hard.setBorder(border);
+        hard.setBorderColor(0,1,1,0.3f);
+        hard.setBackgroundColor(0,0,0,.9f);
+        hard.setMargin(border,0,0,border);
+        addElement(hard);
+        
+        hell = new HellTextGuiButton(this, mgr, idHell);
+        hell.setTextureSheet(textures.TEX_FONT1);
+        hell.setTextSize(mgr.gameMain.text_size);
+        hell.setBorder(border);
+        hell.setBorderColor(0,1,1,0.3f);
+        hell.setBackgroundColor(0,0,0,.9f);
+        hell.setMargin(border,0,border,0);
+        addElement(hell);
+        
         back = new engine_guiButton(this, idBack);
-        back.setText("BACKdifff");
+        back.setText("BACK");
         back.setTextureSheet(textures.TEX_FONT1);
         back.setTextSize(mgr.gameMain.text_size);
         back.setBorder(border);
         back.setBorderColor(0,1,1,0.3f);
+        back.setWeight(1, 0.5f);
         back.setBackgroundColor(0,0,0,.9f);
-        back.setMargin(border,border,0,0);
-        
+        back.setMargin(2*border, 0, 0, 0);
         addElement(back);
         
         build();
@@ -684,4 +790,27 @@ class AboutMenuGUI extends engine_gui {
         build();
     }
 
+}
+
+class HellTextGuiButton extends engine_guiButton {
+	
+	masterGameReference mgr;
+	
+	public HellTextGuiButton(engine_gui gui, masterGameReference mgr, int id) {
+        super(gui, id);
+        this.mgr = mgr;
+    }
+	
+	@Override
+	public void updateText() {
+		float dx=0;
+		float dy=0;
+		float shake_range = mgr.gameMain.text_size/20;
+		dx = gui.ref.main.randomRange(-shake_range, shake_range);
+		dy = gui.ref.main.randomRange(-shake_range, shake_range);
+		gui.ref.draw.setDrawColor(1, 0, 0, a*gui.alpha);
+		gui.ref.draw.text.append("HELL");
+        gui.ref.draw.drawText(gui.x+contentX+text_x+dx, gui.y+contentY+text_y+dy, size, x_align, y_align, gui.depth, texture_sheet);
+			
+	}
 }
