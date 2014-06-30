@@ -9,6 +9,8 @@ added guiBlank
 
 --------------- WAKE TODO ---------------
 
+about screen
+
 make staring/restarting the game feel less bumpy and sudden
 
 have graphics levels in pause menu
@@ -20,8 +22,6 @@ tablet screenshot
 
 DOGE DROP
 
-about screen which slides in from the right side of the screen and accompanying menu button
-[later] add about screen from records menu, link to website.
 [later] add per-difficulty heatmaps
 
 
