@@ -315,6 +315,15 @@ public class engine_android extends Activity {
 			// Create the Interstitial.
 			interstitial = new InterstitialAd(this);
 			interstitial.setAdUnitId(constants.adMob_interstitial_id);
+			
+			// Set adListener so we know when the interstitial is closed
+			/*interstitial.setAdListener(new AdListener() {
+	             @Override
+	             public void onAdClosed() {
+	            	 super.onAdClosed();
+	                 ref.ad.ad_closed = true;
+	             }
+	         });*/
 		
 		    // Create ad request.
 		    AdRequest adRequest;
@@ -333,7 +342,6 @@ public class engine_android extends Activity {
 	
 	protected void showInterstitialAd() {
 		if ( (!constants.pro) && (interstitial.isLoaded()) ) {
-		// if ( (google_play_services_avaliable) && (interstitial.isLoaded()) ) {
 			interstitial.show();
 			loadInterstitialAd(); //so we have the next one to show as soon as possible.
 		}

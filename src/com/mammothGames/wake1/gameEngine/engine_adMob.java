@@ -33,6 +33,7 @@ public class engine_adMob {
 		this.ref = ref;
 	}
 	
+	
 	public void loadBannerAd(final int h_align, final int v_align) {
 		
 		switch(h_align) {

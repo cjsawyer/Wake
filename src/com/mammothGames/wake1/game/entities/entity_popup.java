@@ -184,8 +184,7 @@ public class entity_popup extends engine_entity {
                 
                 if (pause_gui.play.getClicked()) {
                     setPopupOpennessHard(false);
-                    mgr.countdown.startUnpauseCountdown();
-                    //mgr.menuPauseHUD.setPause(false);
+                    mgr.countdown.startCountdown();
                 }
                 if (pause_gui.leave.getClicked()) {
                     setPopupState(STATE_ABANDON);
@@ -240,8 +239,10 @@ public class entity_popup extends engine_entity {
         
 		// black veil covering everything under popup
         // duplicated in countdown
-		ref.draw.setDrawColor(0,0,0, 0.7f * popup_alpha);
-		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD);
+        if (mgr.gameMain.game_running) {
+        	ref.draw.setDrawColor(0,0,0, 0.7f * popup_alpha);
+        	ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD, true);
+        }
 
 		pause_gui.update();
 		bool_gui.update();

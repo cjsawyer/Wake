@@ -1,6 +1,9 @@
 package com.mammothGames.wake1.game.entities;
 
+import android.util.Log;
+
 import com.mammothGames.wake1.game.constants;
+import com.mammothGames.wake1.game.rooms;
 import com.mammothGames.wake1.game.textures;
 import com.mammothGames.wake1.gameEngine.*;
 
@@ -9,7 +12,7 @@ public class entity_countdown extends engine_entity {
 
     private float size,x,y,alpha;
     boolean counting;
-    private int number;
+    private int number=-1;
     
     
     masterGameReference mgr;
@@ -27,23 +30,24 @@ public class entity_countdown extends engine_entity {
 	    y = ref.screen_height/2;
 	    
 	    counting = false;
-	    
 	}
 	
 	@Override
 	public void sys_step() {
 	    
-	    if (counting) {
+	    if ( counting ) {
 	        
 	        // black veil covering everything under popup
-	        // duplicated in popup
-	        alpha = alarm[1]/3000f;
-	        ref.draw.setDrawColor(0,0,0, 0.7f * alpha);
-	        ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD);
+	    	// duplicated in popup
+	    	if (mgr.gameMain.game_running) { //game is paused, we need to fade the black vail out
+	    		alpha = alarm[2]/3000f;
+	    		ref.draw.setDrawColor(0,0,0, 0.7f * alpha);
+	    		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD);
+	    	}
 	        
 	        
-	        alpha = alarm[0]/1000 * 1.2f;
-            size = ref.screen_width * alarm[0]/1000;
+	        alpha = alarm[1]/1000 * 1.2f;
+            size = ref.screen_width * alarm[1]/1000;
             
             
             ref.draw.setDrawColor(1, 1, 1, alpha);
@@ -53,22 +57,36 @@ public class entity_countdown extends engine_entity {
 	    }
 	}
 	
+	public void stopCountdown() {
+		
+		Log.e("countdown", "countdown stopped!");
+		
+		counting = false;
+		alarm[0] = -1;
+		alarm[1] = -1;
+		alarm[2] = -1;
+		number = -1;
+	}
+	
 	@Override
-	public void alarm0() {
-	    alarm[0] = 1000;
-	    number -= 1;
+	public void alarm1() {
+		alarm[1] = 1000;
+		number -= 1;
 	    if (number == 0) {
-	        mgr.menuPauseHUD.setPause(false);
+	        mgr.menuPauseHUD.doPauseHard(false);
 	        counting = false;
+	        if ( !mgr.gameMain.game_running )
+	        	mgr.gameMain.startGame();
 	    }
 	}
 	
-	
-	public void startUnpauseCountdown() {
+	public void startCountdown() {
 	    number = 3;
 	    counting = true;
-	    alarm[0] = 1000;
-	    alarm[1] = number*alarm[0];
+	    alarm[1] = 1000;
+		alarm[2] = number*alarm[1]; // used for shade alpha
+		if ( !mgr.gameMain.game_running )
+			mgr.gameMain.prepGame();
 	}
 	
 }

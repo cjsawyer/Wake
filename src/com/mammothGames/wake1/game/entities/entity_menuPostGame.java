@@ -101,7 +101,7 @@ public class entity_menuPostGame extends engine_entity {
 		
 		switch(mgr.gameMain.current_diff) {
 			case (entity_gameMain.DIF_EASY):
-				games_before_next_ad -= 1;
+				games_before_next_ad -= 1/2f;
 				break;
 			case (entity_gameMain.DIF_MEDIUM):
 				games_before_next_ad -= 1/2f;
@@ -113,6 +113,7 @@ public class entity_menuPostGame extends engine_entity {
 				games_before_next_ad -= 1/5f;
 				break;
 		}
+		
 		
 		mgr.gameMain.floor_height_target = 0;
 		mgr.gameMain.shade_alpha_target = 1;
@@ -135,17 +136,16 @@ public class entity_menuPostGame extends engine_entity {
 			ref.ad.showInterstitialAd();
 		}
 		
-		
 		switch (room_to_leave_to){
-		case room_game:
-			mgr.gameMain.startGame();
-			break;
-		case room_records:
-			mgr.menuRecords.start(mgr.menuDifficulty.tab);
-			break;
-		case room_diff:
-			mgr.menuDifficulty.start();
-			break;
+			case room_game:
+				mgr.countdown.startCountdown();
+				break;
+			case room_records:
+				mgr.menuRecords.start(mgr.menuDifficulty.tab);
+				break;
+			case room_diff:
+				mgr.menuDifficulty.start();
+				break;
 		}
 	
 	}

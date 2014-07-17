@@ -90,6 +90,14 @@ SOUNDS:
 
 DRAWING:
 
+	Overlay:
+		Using a draw call with overlay set to true will prevent that element from being redrawn if you capture the draw frame with ref.draw.captureDraw(),
+		which allows you to draw it as normal while the pause is active.
+		This and avoids the problem of keeping that elements drawing synchronized to pause events, which if done incorrectly would cause blinking or double-drawing.
+		
+		An applicable case would be a HUD element which is both moving and is visible during game-play.
+		Using overlay would prevent that element from being redrawn with the rest of the captured draw frame and you would be free to draw it as normal while the game is paused. 
+
 	COLOR:
 		Background:
 		Sprite/Shape:

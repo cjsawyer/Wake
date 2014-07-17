@@ -1,31 +1,42 @@
 ///// This Commit /////
 
-added difficulty menu buttons
-fixed pause hud redrawing
-added back button behavior in menus
-increased menu drawing efficiency
-made postgame and records screens display the correct difficulty text
-added guiBlank
+Added overlay argument to all draw methods
+Added count-down before game start, not just from pause
+Handled screen locking and ad pop-ups around game re/start
+Added fade out from main menu to game
+Shrunk back button in difficulty menu
 
 --------------- WAKE TODO ---------------
 
+add some sort of transision between popup states
+
+when you quit -> leave -> restart, it spawns an odd partial pattern at game start 
+
+fix double S/Z timing
+
+investigate how there is a second blue bar being drawn in the hud on emulator
+
+make postgame screen buttons not reference old menus
+		
 about screen
 
-make staring/restarting the game feel less bumpy and sudden
+lower water line
+
+score pop-up number permanence
+
+screen slide equation-ize
 
 have graphics levels in pause menu
 
 double points for combo taps
 
-have poastgame score spin up to full number
 tablet screenshot
 
 DOGE DROP
 
-[later] add per-difficulty heatmaps
+per-difficulty heatmaps
 
-
-Register for other App Stores: Amazon Play Opera Samsung
+[logistics] Register for other App Stores: Amazon Play Opera Samsung
 
 
 
@@ -74,6 +85,13 @@ Long Term:
 
 
 //////////////////////////////////////////// HISTORY //////////////////////////////////////////////////////////////
+
+added difficulty menu buttons
+fixed pause hud redrawing
+added back button behavior in menus
+increased menu drawing efficiency
+made postgame and records screens display the correct difficulty text
+added guiBlank
 
 Implemented button actions in new records screen
 

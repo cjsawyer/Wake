@@ -74,6 +74,8 @@ public class engine_gl_draw {
                 list.list_color_b = new float[lengths];
                 list.list_color_a = new float[lengths];
                 
+                list.overlay = new boolean[lengths];
+                
         }
 
 
@@ -109,11 +111,29 @@ public class engine_gl_draw {
          * @param texture_sheet
          */
         public void drawTexture(float x, float y, float size_x, float size_y, float origin_x, float origin_y, float draw_angle, int depth, int textureID, int texture_sheet){
+        	drawTexture(x, y, size_x, size_y, origin_x, origin_y, draw_angle, depth, textureID, texture_sheet, false);
+        }
+        
+        /**
+         * 
+         * @param x
+         * @param y
+         * @param size_x
+         * @param size_y
+         * @param origin_x
+         * @param origin_y
+         * @param draw_angle
+         * @param depth
+         * @param textureID
+         * @param texture_sheet
+         * @param overlay Set to true to make this draw call not be captured in screenshots
+         */
+        public void drawTexture(float x, float y, float size_x, float size_y, float origin_x, float origin_y, float draw_angle, int depth, int textureID, int texture_sheet, boolean overlay){
                 if (ref.textureLoader.has_loaded[texture_sheet-1]) {
-                        addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, textureID, texture_sheet, DRAW_TYPE_TEXTURE);
+                        addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, textureID, texture_sheet, DRAW_TYPE_TEXTURE, overlay);
                 } else {
                         setDrawColor(1,1,1,1);
-                        addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 1, textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+                        addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 1, textures.TEX_ERROR, DRAW_TYPE_TEXTURE, overlay);
                 }
         }
         
@@ -129,7 +149,22 @@ public class engine_gl_draw {
          * @param depth
          */
         public void drawRectangle(float x, float y, float size_x, float size_y, float origin_x, float origin_y, float draw_angle, int depth){
-                addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 0, 0, DRAW_TYPE_RECTANGLE);
+        	drawRectangle(x, y, size_x, size_y, origin_x, origin_y, draw_angle, depth, false);
+        }
+        /**
+         * 
+         * @param x
+         * @param y
+         * @param size_x
+         * @param size_y
+         * @param origin_x
+         * @param origin_y
+         * @param draw_angle
+         * @param depth
+         * @param overlay
+         */
+        public void drawRectangle(float x, float y, float size_x, float size_y, float origin_x, float origin_y, float draw_angle, int depth, boolean overlay){
+                addToDrawList(x, y, 0, 0, size_x, size_y, origin_x, origin_y, draw_angle, depth, 0, 0, DRAW_TYPE_RECTANGLE, overlay);
         }
         
         /**
@@ -144,9 +179,27 @@ public class engine_gl_draw {
          * @param depth
          */
         public void drawCircle(float x, float y, float radius, float origin_x, float origin_y, float arc_angle, float draw_angle, int depth){
-                addToDrawList(x, y, arc_angle, draw_angle, radius, radius, origin_x, origin_y, draw_angle, depth, 0, 0, DRAW_TYPE_CIRCLE);
+        	drawCircle(x, y, radius, origin_x, origin_y, arc_angle, draw_angle, depth, false);
+        }
+        /**
+         * 
+         * @param x
+         * @param y
+         * @param radius
+         * @param origin_x
+         * @param origin_y
+         * @param arc_angle
+         * @param draw_angle
+         * @param depth
+         * @param overlay
+         */
+        public void drawCircle(float x, float y, float radius, float origin_x, float origin_y, float arc_angle, float draw_angle, int depth, boolean overlay){
+                addToDrawList(x, y, arc_angle, draw_angle, radius, radius, origin_x, origin_y, draw_angle, depth, 0, 0, DRAW_TYPE_CIRCLE, overlay);
         }
         
+        public void drawLine(float x, float y, float x2, float y2, float width, int depth){
+        	drawLine(x, y, x2, y2, width, depth, false);
+        }
         /**
          * 
          * @param x
@@ -155,9 +208,10 @@ public class engine_gl_draw {
          * @param y2
          * @param width
          * @param depth
+         * @param overlay
          */
-        public void drawLine(float x, float y, float x2, float y2, float width, int depth){
-                addToDrawList(x, y, x2, y2, width, 0, 0, 0, 0, depth, 0, 0, DRAW_TYPE_LINE);
+    	public void drawLine(float x, float y, float x2, float y2, float width, int depth, boolean overlay){
+                addToDrawList(x, y, x2, y2, width, 0, 0, 0, 0, depth, 0, 0, DRAW_TYPE_LINE, overlay);
         }
         
         public void setDrawColor(float r, float g, float b, float a){
@@ -180,6 +234,9 @@ public class engine_gl_draw {
         final public static int Y_ALIGN_CENTER = 2; 
         final public static int Y_ALIGN_TOP = 3;
 
+        public void drawText(float x, float y, float size, int x_align, int y_align, int depth, int texture_sheet){
+        	sys_drawText(x, y, size, x_align, y_align, depth, texture_sheet, true, false);
+        }
         /**
          * 
          * @param x
@@ -192,17 +249,18 @@ public class engine_gl_draw {
          * @param charArray
          * @param charLength
          * @param texture_sheet
+         * @param overlay
          * @return
          */      
-        public void drawText(float x, float y, float size, int x_align, int y_align, int depth, int texture_sheet){
-        	sys_drawText(x, y, size, x_align, y_align, depth, texture_sheet, true);
+        public void drawText(float x, float y, float size, int x_align, int y_align, int depth, int texture_sheet, boolean overlay){
+        	sys_drawText(x, y, size, x_align, y_align, depth, texture_sheet, true, overlay);
         }
         
         public float getTextWidth(float size, int texture_sheet){
-        	return sys_drawText(0, 0, size, 0, 0, 0, texture_sheet, false);
+        	return sys_drawText(0, 0, size, 0, 0, 0, texture_sheet, false, false);
         }
         
-    	private float sys_drawText(float x, float y, float size, int x_align, int y_align, int depth, int texture_sheet, boolean draw_characters){
+    	private float sys_drawText(float x, float y, float size, int x_align, int y_align, int depth, int texture_sheet, boolean draw_characters, boolean overlay){
             if (ref.textureLoader.has_loaded[texture_sheet-1]) {
             	
 //            	char[] charArray = ;
@@ -272,7 +330,8 @@ public class engine_gl_draw {
                                                 		(ref.text.cell_height[texture_sheet-1])*temp_scale,
                                                 		-(ref.text.cell_width[texture_sheet-1]/2)*temp_scale,
                                                 		-(ref.text.cell_height[texture_sheet-1]/2)*temp_scale,
-                                                		0, depth, i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
+                                                		0, depth, i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE,
+                                                		overlay);
                                             
     //                                        addToDrawList(x + temp_total_width - (ref.text.padding_x[texture_sheet-1]*temp_scale) + temp_alignment_x, y + temp_alignment_y, 0, 0, (ref.text.cell_width[texture_sheet-1])*temp_scale, (ref.text.cell_height[texture_sheet-1])*temp_scale, (ref.text.cell_width[texture_sheet-1]/2)*temp_scale, (ref.text.cell_height[texture_sheet-1]/2)*temp_scale, rotate_angle, depth, temp_i_char_width-31, texture_sheet, DRAW_TYPE_TEXTURE);
                                             temp_total_width += ((ref.text.char_widths[texture_sheet-1][i_char_width-31]) * temp_scale);
@@ -313,7 +372,7 @@ public class engine_gl_draw {
                     temp_alignment_x=0;
                     if (draw_characters) {
                     	ref.draw.setDrawColor(1, 1, 1, 1);
-                    	addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, 0, depth, 1, textures.TEX_ERROR, DRAW_TYPE_TEXTURE);
+                    	addToDrawList(x, y, 0, 0, temp_total_width , size, 0, 0, 0, depth, 1, textures.TEX_ERROR, DRAW_TYPE_TEXTURE, overlay);
                     }
             }
             
@@ -327,7 +386,7 @@ public class engine_gl_draw {
         private final int DRAW_TYPE_LINE = 2;
         private final int DRAW_TYPE_CIRCLE = 3;
         
-        private void addToDrawList(float x, float y, float x2, float y2, float size_x, float size_y, float origin_x, float origin_y, float rotate_angle, int depth, int textureID, int texture_sheet, int draw_type){
+        private void addToDrawList(float x, float y, float x2, float y2, float size_x, float size_y, float origin_x, float origin_y, float rotate_angle, int depth, int textureID, int texture_sheet, int draw_type, boolean overlay){
                 
                 int temp_draw_number = mainDrawList.temp_number_of_calls;
                 
@@ -351,6 +410,8 @@ public class engine_gl_draw {
                 mainDrawList.list_color_b[temp_draw_number] = ref.floatbuffers.system_current_b;
                 mainDrawList.list_color_a[temp_draw_number] = ref.floatbuffers.system_current_a;
 
+                mainDrawList.overlay[temp_draw_number] = overlay;
+                
                 mainDrawList.temp_number_of_calls += 1;
                 
                 if (depth > mainDrawList.temp_max_depth){
@@ -360,7 +421,7 @@ public class engine_gl_draw {
         
         final float RAD_TO_DEG = (float) (180/Math.PI);
         
-        private void drawList(engine_gl_drawlist list, boolean clearList){
+        private void drawList(engine_gl_drawlist list, boolean clearList, boolean list_is_captured){
                 int temp_draw_type;
                 int temp_array_lengths = 0;
                 
@@ -382,7 +443,7 @@ public class engine_gl_draw {
                                 // loop through all of the arrays,
                                 for (i_list_index=0; i_list_index < temp_array_lengths; i_list_index++){
                                         // if this is the correct depth, draw
-                                        if (list.list_depth[i_list_index] == i_depth){
+                                        if ( (list.list_depth[i_list_index] == i_depth) && !(list_is_captured && list.overlay[i_list_index]) ){
                                                 
                                                 temp_draw_type = list.list_draw_type[i_list_index];
                                                 
@@ -477,12 +538,12 @@ public class engine_gl_draw {
                 } else {
                         // We only want to draw the captured list if we aren't still in the same frame it was captured in, to avoid drawing it twice.
                         if (drawCapturedDrawList) {
-                                drawList(capturedDrawList, false);
+                                drawList(capturedDrawList, false, true);
                         }
                 }
                 
                 // Draw main drawList
-                drawList(mainDrawList, true);
+                drawList(mainDrawList, true, false);
                 
                 // Reset
                 captureDrawList = false;
@@ -562,6 +623,7 @@ class engine_gl_drawlist {
         float[] list_color_g;
         float[] list_color_b;
         float[] list_color_a;
+        boolean[] overlay;
         
         public void copy(engine_gl_drawlist outputList) {
                 outputList.temp_max_depth = temp_max_depth;
@@ -584,5 +646,6 @@ class engine_gl_drawlist {
                 outputList.list_color_g = list_color_g.clone();
                 outputList.list_color_b = list_color_b.clone();
                 outputList.list_color_a = list_color_a.clone();
+                outputList.overlay = overlay.clone();
         }
 }

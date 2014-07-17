@@ -45,6 +45,10 @@ public class entity_orbSpawner extends engine_entity {
 			emitterWhite.returnAllParticles();
 			greenOrb_pool.resetSystem();
 		}
+		
+		greenOrb_pool.resetSystem();
+		
+		resettingTimeCounter = 0;
 	}
 	
 	@Override
@@ -163,7 +167,7 @@ public class entity_orbSpawner extends engine_entity {
 //			greenOrb_pool.takeObject();
 //		}
 
-		if (ref.room.get_current_room() == rooms.ROOM_GAME) {
+		if ( (ref.room.get_current_room() == rooms.ROOM_GAME) && mgr.gameMain.game_running ) {
 			resettingTimeCounter += ref.main.time_delta;
 	        if (resettingTimeCounter > Integer.MAX_VALUE/2) {
 	            if (resettingTimeCounter%1000 == 0)
@@ -187,7 +191,7 @@ public class entity_orbSpawner extends engine_entity {
 					tBoxY = (temp_orb.y - tRadius) + tHalfTotalV;
 					
 					
-					for(int i_finger = 0; i_finger<2; i_finger++) {
+					for(int i_finger = 0; i_finger<4; i_finger++) {
 						if (ref.input.get_touch_state(i_finger) == ref.input.TOUCH_DOWN) {
 							if (ref.collision.point_AABB(tRadius*2, tRadius*2 + tExtraV, temp_orb.x, tBoxY,  ref.input.get_touch_x(i_finger), ref.input.get_touch_y(i_finger))) {
 								

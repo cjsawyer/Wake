@@ -62,6 +62,8 @@ public class entity_gameMain extends engine_entity {
 	
 	public boolean new_high_score, new_best_streak;
 	
+	boolean game_running = false;
+	
 	public void restart() {
 //		target_shade_alpha = 0;
 		
@@ -78,6 +80,7 @@ public class entity_gameMain extends engine_entity {
 		floor_height = 0;
 		time_between_orbs = time_start_between_orbs;
 		speed_multiplier = 1;
+
 	}
 	
 	@Override
@@ -153,13 +156,13 @@ public class entity_gameMain extends engine_entity {
 
 		// Draw floor/water line
 		ref.draw.setDrawColor(0.54f, 0.54f, 0.54f, 0.8f); // Floor color
-		ref.draw.drawRectangle(0,0, ref.screen_width, floor_height, -ref.screen_width/2, -floor_height/2, 0, constants.layer4_overGame);
+		ref.draw.drawRectangle(0,0, ref.screen_width, floor_height, -ref.screen_width/2, -floor_height/2, 0, constants.layer4_overGame, true);
 		
 		if (floor_height_target < 0)
 			floor_height_target = 0;
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
-		ref.draw.drawLine(ref.screen_width, floor_height, 0, floor_height, ref.screen_width/25, constants.layer4_overGame);
+		ref.draw.drawLine(ref.screen_width, floor_height, 0, floor_height, ref.screen_width/25, constants.layer4_overGame, true);
 		
 		
 		if ( (floor_height >= ref.screen_height) && (ref.room.get_current_room() == rooms.ROOM_GAME) )
@@ -236,17 +239,26 @@ public class entity_gameMain extends engine_entity {
 		
 	}
 	
-	public void startGame() {
+	public void prepGame() {
 		ref.room.changeRoom(rooms.ROOM_GAME);
-		ref.main.unPauseEntities();
+//		mgr.menuPauseHUD.HUD_y = -300;
+//		mgr.menuPauseHUD.HUD_y_target = -300;
+		mgr.menuPauseHUD.restart();
 		mgr.gameMain.restart();
 		mgr.orbSpawner.restart(current_diff);
 		mgr.orbPatternMaker.restart();
-		mgr.menuPauseHUD.restart();
+		
+	}
+	
+	public void startGame() {
+		game_running = true;
+//		mgr.menuPauseHUD.restart();
 	}
 	
 	public void endGame() {
 //		ref.draw.captureDraw();
+		
+		game_running = false;
 		
 		if(score > high_score) {
 			high_score = score;

@@ -47,11 +47,12 @@ public class entity_orbPatternMaker extends engine_entity {
 	public void restart() {
 
 		state = -1;
-
+		state_finished = true;
+		
 		// So it starts the state the same way as if it has just finished one
 		current_position = number_positions;
 		spawn_orb = false;
-
+		
 	}
 
 	@Override
@@ -61,177 +62,177 @@ public class entity_orbPatternMaker extends engine_entity {
 
 	@Override
 	public void sys_step() {
-
-		switch(state) {
-
-			case STATE_STRIPE_RIGHT: {
-				if (spawn_orb) {
-					spawn_orb = false;
-					mgr.orbSpawner.spawnOrb(
-                            // x
-                            (current_position - 1) * oneWidth + oneWidth / 2,
-//							(   (  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * STRIPE_position   ) + mgr.masterOrbSpawner.radius_total,
-                            //y
-                            ref.screen_height + mgr.orbSpawner.radius_total,
-                            //speed
-                            mgr.gameMain.speed,
-                            mgr.orbSpawner.radius,
-                            mgr.orbSpawner.border_size);
-				}
-				break;
-			}
-
-			case STATE_STRIPE_LEFT: {
-				if (spawn_orb) {
-					spawn_orb = false;
-					mgr.orbSpawner.spawnOrb(
-                            // x
-                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
-                            //(   -(  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * (STRIPE_position-1)   ) - mgr.masterOrbSpawner.radius_total + ref.screen_width,
-                            //y
-                            ref.screen_height + mgr.orbSpawner.radius_total,
-                            //speed
-                            mgr.gameMain.speed,
-                            mgr.orbSpawner.radius,
-                            mgr.orbSpawner.border_size);
-				}
-				break;
-			}
-			case STATE_STRIPE_HELIX: {
-				if (spawn_orb) {
-					spawn_orb = false;
-					//right 
-					mgr.orbSpawner.spawnOrb(
-                            //x
-                            (current_position - 1) * oneWidth + oneWidth / 2,
-                            //(   (  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * (STRIPE_position-1)   ) + mgr.masterOrbSpawner.radius_total,
-                            //y
-                            ref.screen_height + mgr.orbSpawner.radius_total,
-                            //speed
-                            mgr.gameMain.speed,
-                            mgr.orbSpawner.radius,
-                            mgr.orbSpawner.border_size);
-					//left
-					mgr.orbSpawner.spawnOrb(
-                            // x
-                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
-                            //y
-                            ref.screen_height + mgr.orbSpawner.radius_total,
-                            //speed
-                            mgr.gameMain.speed,
-                            mgr.orbSpawner.radius,
-                            mgr.orbSpawner.border_size);
-				}
-				break;
-			}
-
-			case STATE_2TIER_S: {
-				if (spawn_orb) {
-					spawn_orb = false;
-
-					mgr.orbSpawner.spawnOrb(
-                            (current_position - 2) * oneWidth + oneWidth / 2,
-                            ref.screen_height + mgr.orbSpawner.radius_total,
-                            mgr.gameMain.speed,
-                            mgr.orbSpawner.radius,
-                            mgr.orbSpawner.border_size);
-
-					mgr.orbSpawner.spawnOrb(
-                            (current_position - 1) * oneWidth + oneWidth / 2,
-                            ref.screen_height + mgr.orbSpawner.radius_total,
-                            mgr.gameMain.speed,
-                            mgr.orbSpawner.radius,
-                            mgr.orbSpawner.border_size);
-				}
-				break;
-			}
-
-			case STATE_2TIER_Z: {
-				if (spawn_orb) {
-					spawn_orb = false;
-
-					mgr.orbSpawner.spawnOrb(
-                            -((current_position - 2) * oneWidth + oneWidth / 2) + ref.screen_width,
-                            ref.screen_height + mgr.orbSpawner.radius_total,
-                            mgr.gameMain.speed,
-                            mgr.orbSpawner.radius,
-                            mgr.orbSpawner.border_size);
-
-					mgr.orbSpawner.spawnOrb(
-                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
-                            ref.screen_height + mgr.orbSpawner.radius_total,
-                            mgr.gameMain.speed,
-                            mgr.orbSpawner.radius,
-                            mgr.orbSpawner.border_size);
-				}
-				break;
-			}
-//			
-			case STATE_WIDE_Z: {
-				if (spawn_orb) {
-					spawn_orb = false;
-
-					int fake_position;
-
-					switch(current_position){
-						case 1:
-							fake_position = 3;
-							break;
-						case 2:
-							fake_position = 2;
-							break;
-						case 3:
-							fake_position = 4;
-							break;
-						case 4:
-							fake_position = 1;
-							break;
-						default:
-							fake_position = 0;
-
+		if (mgr.gameMain.game_running)
+			switch(state) {
+	
+				case STATE_STRIPE_RIGHT: {
+					if (spawn_orb) {
+						spawn_orb = false;
+						mgr.orbSpawner.spawnOrb(
+	                            // x
+	                            (current_position - 1) * oneWidth + oneWidth / 2,
+	//							(   (  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * STRIPE_position   ) + mgr.masterOrbSpawner.radius_total,
+	                            //y
+	                            ref.screen_height + mgr.orbSpawner.radius_total,
+	                            //speed
+	                            mgr.gameMain.speed,
+	                            mgr.orbSpawner.radius,
+	                            mgr.orbSpawner.border_size);
 					}
-					mgr.orbSpawner.spawnOrb(
-							(fake_position-1)*oneWidth + oneWidth/2,
-							ref.screen_height + mgr.orbSpawner.radius_total,
-							mgr.gameMain.speed,
-							mgr.orbSpawner.radius,
-							mgr.orbSpawner.border_size);
+					break;
 				}
-				break;
-			}
-			case STATE_WIDE_S: {
-				if (spawn_orb) {
-					spawn_orb = false;
-
-					int fake_position;
-
-					switch(current_position){
-						case 1:
-							fake_position = 2;
-							break;
-						case 2:
-							fake_position = 3;
-							break;
-						case 3:
-							fake_position = 1;
-							break;
-						case 4:
-							fake_position = 4;
-							break;
-						default:
-							fake_position = 0;
-
+	
+				case STATE_STRIPE_LEFT: {
+					if (spawn_orb) {
+						spawn_orb = false;
+						mgr.orbSpawner.spawnOrb(
+	                            // x
+	                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
+	                            //(   -(  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * (STRIPE_position-1)   ) - mgr.masterOrbSpawner.radius_total + ref.screen_width,
+	                            //y
+	                            ref.screen_height + mgr.orbSpawner.radius_total,
+	                            //speed
+	                            mgr.gameMain.speed,
+	                            mgr.orbSpawner.radius,
+	                            mgr.orbSpawner.border_size);
 					}
-					mgr.orbSpawner.spawnOrb(
-							(fake_position-1)*oneWidth + oneWidth/2,
-							ref.screen_height + mgr.orbSpawner.radius_total,
-							mgr.gameMain.speed,
-							mgr.orbSpawner.radius,
-							mgr.orbSpawner.border_size);
+					break;
 				}
-				break;
+				case STATE_STRIPE_HELIX: {
+					if (spawn_orb) {
+						spawn_orb = false;
+						//right 
+						mgr.orbSpawner.spawnOrb(
+	                            //x
+	                            (current_position - 1) * oneWidth + oneWidth / 2,
+	                            //(   (  ( ref.screen_width - mgr.masterOrbSpawner.radius_total*2 ) / (STRIPE_number_positions-1)   ) * (STRIPE_position-1)   ) + mgr.masterOrbSpawner.radius_total,
+	                            //y
+	                            ref.screen_height + mgr.orbSpawner.radius_total,
+	                            //speed
+	                            mgr.gameMain.speed,
+	                            mgr.orbSpawner.radius,
+	                            mgr.orbSpawner.border_size);
+						//left
+						mgr.orbSpawner.spawnOrb(
+	                            // x
+	                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
+	                            //y
+	                            ref.screen_height + mgr.orbSpawner.radius_total,
+	                            //speed
+	                            mgr.gameMain.speed,
+	                            mgr.orbSpawner.radius,
+	                            mgr.orbSpawner.border_size);
+					}
+					break;
+				}
+	
+				case STATE_2TIER_S: {
+					if (spawn_orb) {
+						spawn_orb = false;
+	
+						mgr.orbSpawner.spawnOrb(
+	                            (current_position - 2) * oneWidth + oneWidth / 2,
+	                            ref.screen_height + mgr.orbSpawner.radius_total,
+	                            mgr.gameMain.speed,
+	                            mgr.orbSpawner.radius,
+	                            mgr.orbSpawner.border_size);
+	
+						mgr.orbSpawner.spawnOrb(
+	                            (current_position - 1) * oneWidth + oneWidth / 2,
+	                            ref.screen_height + mgr.orbSpawner.radius_total,
+	                            mgr.gameMain.speed,
+	                            mgr.orbSpawner.radius,
+	                            mgr.orbSpawner.border_size);
+					}
+					break;
+				}
+	
+				case STATE_2TIER_Z: {
+					if (spawn_orb) {
+						spawn_orb = false;
+	
+						mgr.orbSpawner.spawnOrb(
+	                            -((current_position - 2) * oneWidth + oneWidth / 2) + ref.screen_width,
+	                            ref.screen_height + mgr.orbSpawner.radius_total,
+	                            mgr.gameMain.speed,
+	                            mgr.orbSpawner.radius,
+	                            mgr.orbSpawner.border_size);
+	
+						mgr.orbSpawner.spawnOrb(
+	                            -((current_position - 1) * oneWidth + oneWidth / 2) + ref.screen_width,
+	                            ref.screen_height + mgr.orbSpawner.radius_total,
+	                            mgr.gameMain.speed,
+	                            mgr.orbSpawner.radius,
+	                            mgr.orbSpawner.border_size);
+					}
+					break;
+				}
+	//			
+				case STATE_WIDE_Z: {
+					if (spawn_orb) {
+						spawn_orb = false;
+	
+						int fake_position;
+	
+						switch(current_position){
+							case 1:
+								fake_position = 3;
+								break;
+							case 2:
+								fake_position = 2;
+								break;
+							case 3:
+								fake_position = 4;
+								break;
+							case 4:
+								fake_position = 1;
+								break;
+							default:
+								fake_position = 0;
+	
+						}
+						mgr.orbSpawner.spawnOrb(
+								(fake_position-1)*oneWidth + oneWidth/2,
+								ref.screen_height + mgr.orbSpawner.radius_total,
+								mgr.gameMain.speed,
+								mgr.orbSpawner.radius,
+								mgr.orbSpawner.border_size);
+					}
+					break;
+				}
+				case STATE_WIDE_S: {
+					if (spawn_orb) {
+						spawn_orb = false;
+	
+						int fake_position;
+	
+						switch(current_position){
+							case 1:
+								fake_position = 2;
+								break;
+							case 2:
+								fake_position = 3;
+								break;
+							case 3:
+								fake_position = 1;
+								break;
+							case 4:
+								fake_position = 4;
+								break;
+							default:
+								fake_position = 0;
+	
+						}
+						mgr.orbSpawner.spawnOrb(
+								(fake_position-1)*oneWidth + oneWidth/2,
+								ref.screen_height + mgr.orbSpawner.radius_total,
+								mgr.gameMain.speed,
+								mgr.orbSpawner.radius,
+								mgr.orbSpawner.border_size);
+					}
+					break;
+				}
 			}
-		}
 	}
 
 	public void setState(int state) {

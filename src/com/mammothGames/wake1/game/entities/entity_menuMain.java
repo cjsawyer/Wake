@@ -53,6 +53,8 @@ public class entity_menuMain extends engine_entity {
 	
 	int high_score, best_streak, games_played;
 	
+	private boolean fade_out = false;
+	
 	@Override
 	public void sys_firstStep() {
 		
@@ -127,6 +129,8 @@ public class entity_menuMain extends engine_entity {
 			records.setClickable(false);
 			about.setClickable(false);
 			
+			updateLeave();
+			
 			switch(active_screen) {
 				case MAIN:
 					setRelativePositionTarget(-X_MAIN, -Y_MAIN);
@@ -162,22 +166,22 @@ public class entity_menuMain extends engine_entity {
 					if (difficulty.easy.getClicked()) {
 						mgr.menuPostGame.post_gui.title.setDifficulty(mgr.gameMain.DIF_EASY);
 						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_EASY);
-						mgr.gameMain.startGame();
+						startLeave();
 					}
-					if (difficulty.medium.getClicked()) {
+					else if (difficulty.medium.getClicked()) {
 						mgr.menuPostGame.post_gui.title.setDifficulty(mgr.gameMain.DIF_MEDIUM);
 						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_MEDIUM);
-						mgr.gameMain.startGame();
+						startLeave();
 					}
-					if (difficulty.hard.getClicked()) {
+					else if (difficulty.hard.getClicked()) {
 						mgr.menuPostGame.post_gui.title.setDifficulty(mgr.gameMain.DIF_HARD);
 						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_HARD);
-						mgr.gameMain.startGame();
+						startLeave();
 					}
-					if (difficulty.hell.getClicked()) {
+					else if (difficulty.hell.getClicked()) {
 						mgr.menuPostGame.post_gui.title.setDifficulty(mgr.gameMain.DIF_HELL);
 						mgr.gameMain.setDifficulty(mgr.gameMain.DIF_HELL);
-						mgr.gameMain.startGame();
+						startLeave();
 					}
 					
 					if (difficulty.back.getClicked())
@@ -246,7 +250,7 @@ public class entity_menuMain extends engine_entity {
 			menu.setPosition(x + X_MAIN, y + Y_MAIN);
 			menu.update();
 			
-			// Only draw the next visible menu to avoi lag
+			// Only draw the next visible menu to avoid lag by drawing too much
 			switch(LAST) {
 				case DIFFICULTY:
 					difficulty.setAlpha(mgr.gameMain.shade_alpha);
@@ -278,6 +282,21 @@ public class entity_menuMain extends engine_entity {
 		ref.room.changeRoom(rooms.ROOM_MENUMAIN);
 	}
 
+	private void updateLeave() {
+		if ( (mgr.gameMain.shade_alpha < 0.02f) && fade_out )
+			leave();
+	}
+	
+	public void startLeave() {
+		mgr.gameMain.shade_alpha_target = 0;
+		fade_out = true;
+	}
+	
+	private void leave() {
+		fade_out = false;
+		mgr.countdown.startCountdown();
+	}
+	
 	private void setRelativePositionTarget(float xt, float yt) {
 		xtarget = xt + ref.screen_width/2;
 		ytarget = yt + ref.screen_height/2;
@@ -482,7 +501,7 @@ class RecordsMenuGUI extends engine_gui {
     final int[][] layout = {
         { 
             // horizontal, vertical number of GUI elements
-            2,9
+            2,8
         }, {
             // GUI element ID's
         	idTabs, NULL,
@@ -491,8 +510,7 @@ class RecordsMenuGUI extends engine_gui {
         	idBS, idBSN,
         	idGP, idGPN,
         	idErase, NULL,
-        	idRate, NULL,
-        	idPro, NULL,
+        	idRate, idPro,
         	idBlank, idBack
         }
     };
@@ -610,7 +628,7 @@ class RecordsMenuGUI extends engine_gui {
         
         
         erase = new engine_guiButton(this, idErase);
-        erase.setText("erase");
+        erase.setText("erase all");
         erase.setTextureSheet(textures.TEX_FONT1);
         erase.setTextSize(mgr.gameMain.text_size);
         erase.setBorder(border);
@@ -626,7 +644,7 @@ class RecordsMenuGUI extends engine_gui {
         rate.setBorder(border);
         rate.setBorderColor(0,1,1,0.3f);
         rate.setBackgroundColor(0,0,0,.9f);
-        rate.setMargin(border/2,border/2,0,0);
+        rate.setMargin(border/2,border/2,0,border/2);
         addElement(rate);
         
         pro = new engine_guiButton(this, idPro);
@@ -636,7 +654,7 @@ class RecordsMenuGUI extends engine_gui {
         pro.setBorder(border);
         pro.setBorderColor(0,1,1,0.3f);
         pro.setBackgroundColor(0,0,0,.9f);
-        pro.setMargin(border/2,border/2,0,0);
+        pro.setMargin(border/2,border/2,border/2,0);
         addElement(pro);
         
         engine_guiBlank blank = new engine_guiBlank(this, idBlank);
@@ -650,6 +668,7 @@ class RecordsMenuGUI extends engine_gui {
         back.setBorderColor(0,1,1,0.3f);
         back.setBackgroundColor(0,0,0,.9f);
         back.setMargin(border/2,0,0,0);
+        back.setWeight(3, 1);
         addElement(back);
         
         build();
@@ -663,17 +682,19 @@ class DifficultyMenuGUI extends engine_gui {
     private final int idMedium = 1;
     private final int idHard = 2;
     private final int idHell = 3;
-    private final int idBack = 4;
+    private final int idBlank = 4;
+    private final int idBack = 5;
+    private final int idBlank2 = 6;
     
     final int[][] layout = {
         { 
             // horizontal, vertical number of GUI elements
-            2,3
+            3,3
         }, {
             // GUI element ID's
-        	idEasy, idMedium,
-        	idHard, idHell,
-            idBack, NULL
+        	idEasy, idMedium, NULL,
+        	idHard, idHell, NULL,
+            idBlank, idBack, idBlank2
         }
     };
     
@@ -731,16 +752,24 @@ class DifficultyMenuGUI extends engine_gui {
         hell.setMargin(border,0,border,0);
         addElement(hell);
         
+        engine_guiBlank blank = new engine_guiBlank(this, idBlank);
+        addElement(blank);
+        blank.setWeight(1, 0.4f);
+        
         back = new engine_guiButton(this, idBack);
         back.setText("BACK");
         back.setTextureSheet(textures.TEX_FONT1);
         back.setTextSize(mgr.gameMain.text_size);
         back.setBorder(border);
         back.setBorderColor(0,1,1,0.3f);
-        back.setWeight(1, 0.5f);
+        back.setWeight(6, 0.4f);
         back.setBackgroundColor(0,0,0,.9f);
         back.setMargin(2*border, 0, 0, 0);
         addElement(back);
+        
+        engine_guiBlank blank2 = new engine_guiBlank(this, idBlank2);
+        blank2.setWeight(1, 0.4f);
+        addElement(blank2);
         
         build();
     }

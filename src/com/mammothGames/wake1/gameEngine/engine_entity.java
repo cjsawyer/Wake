@@ -9,7 +9,7 @@ public class engine_entity {
 	protected int id = -1;
 	
 	protected boolean persistent = false;
-	protected boolean paused = false, pausable = true;
+	protected boolean paused = false, pausable = true, overlay = false;
 	
 	
 //	public void sys_set_id(int id){ this.id = id; }
