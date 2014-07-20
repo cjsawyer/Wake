@@ -162,7 +162,8 @@ public class entity_gameMain extends engine_entity {
 			floor_height_target = 0;
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
-		ref.draw.drawLine(ref.screen_width, floor_height, 0, floor_height, ref.screen_width/25, constants.layer4_overGame, true);
+		float height = ref.screen_width/25;
+		ref.draw.drawLine(ref.screen_width, floor_height-height/2, 0, floor_height-height/2, height, constants.layer4_overGame, true);
 		
 		
 		if ( (floor_height >= ref.screen_height) && (ref.room.get_current_room() == rooms.ROOM_GAME) )
@@ -241,24 +242,21 @@ public class entity_gameMain extends engine_entity {
 	
 	public void prepGame() {
 		ref.room.changeRoom(rooms.ROOM_GAME);
-//		mgr.menuPauseHUD.HUD_y = -300;
-//		mgr.menuPauseHUD.HUD_y_target = -300;
 		mgr.menuPauseHUD.restart();
 		mgr.gameMain.restart();
 		mgr.orbSpawner.restart(current_diff);
-		mgr.orbPatternMaker.restart();
 		
 	}
 	
 	public void startGame() {
+//		mgr.orbPatternMaker.alarm0();
+		mgr.orbPatternMaker.restart();
 		game_running = true;
-//		mgr.menuPauseHUD.restart();
 	}
 	
 	public void endGame() {
-//		ref.draw.captureDraw();
 		
-		game_running = false;
+		//game_running = false;
 		
 		if(score > high_score) {
 			high_score = score;
@@ -283,7 +281,6 @@ public class entity_gameMain extends engine_entity {
 		
 		
 		
-//		floor_height_target = 0; // make floor sink
 		mgr.gameMain.shade_alpha = -2; // so there's an offset before you can start to see it while fading in
 		mgr.gameMain.shade_alpha_target = 1; // fade in post game text
 		mgr.menuPauseHUD.HUD_y_target = mgr.menuPauseHUD.base_hud_height*2; // slide HUD back up

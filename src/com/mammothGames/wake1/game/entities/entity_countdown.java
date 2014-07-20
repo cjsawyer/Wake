@@ -42,7 +42,7 @@ public class entity_countdown extends engine_entity {
 	    	if (mgr.gameMain.game_running) { //game is paused, we need to fade the black vail out
 	    		alpha = alarm[2]/3000f;
 	    		ref.draw.setDrawColor(0,0,0, 0.7f * alpha);
-	    		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD);
+	    		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD, true);
 	    	}
 	        
 	        
@@ -52,20 +52,22 @@ public class entity_countdown extends engine_entity {
             
             ref.draw.setDrawColor(1, 1, 1, alpha);
             ref.draw.text.append(number);
-            ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1);
+            ref.draw.drawText(x, y, size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer6_HUD, textures.TEX_FONT1, true);
             
 	    }
 	}
+
+	public void startCountdown() {
+	    number = 3;
+	    counting = true;
+	    alarm[1] = 1000;
+		alarm[2] = number*alarm[1]; // used for shade alpha
+		if ( !mgr.gameMain.game_running )
+			mgr.gameMain.prepGame();
+	}
 	
 	public void stopCountdown() {
-		
-		Log.e("countdown", "countdown stopped!");
-		
-		counting = false;
-		alarm[0] = -1;
-		alarm[1] = -1;
-		alarm[2] = -1;
-		number = -1;
+		alarm[3] = 1; // delay so the background can update once, so the pause capture works
 	}
 	
 	@Override
@@ -80,13 +82,21 @@ public class entity_countdown extends engine_entity {
 	    }
 	}
 	
-	public void startCountdown() {
-	    number = 3;
-	    counting = true;
-	    alarm[1] = 1000;
-		alarm[2] = number*alarm[1]; // used for shade alpha
-		if ( !mgr.gameMain.game_running )
-			mgr.gameMain.prepGame();
+	@Override
+	public void alarm2() {
+		// Does nothing, just used as a secondary fade ticker for the black veil under the pause menu
+	}
+	
+	@Override
+	public void alarm3() {
+		
+		// Stop the countdown
+		
+		counting = false;
+		alarm[0] = -1;
+		alarm[1] = -1;
+		alarm[2] = -1;
+		number = -1;
 	}
 	
 }

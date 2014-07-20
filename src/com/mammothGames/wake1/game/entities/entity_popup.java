@@ -239,7 +239,7 @@ public class entity_popup extends engine_entity {
         
 		// black veil covering everything under popup
         // duplicated in countdown
-        if (mgr.gameMain.game_running) {
+        if (mgr.gameMain.game_running || (ref.room.get_current_room() != rooms.ROOM_GAME)) {
         	ref.draw.setDrawColor(0,0,0, 0.7f * popup_alpha);
         	ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer7_overHUD, true);
         }

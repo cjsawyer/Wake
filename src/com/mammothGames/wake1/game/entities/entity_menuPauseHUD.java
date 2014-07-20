@@ -25,6 +25,8 @@ public class entity_menuPauseHUD extends engine_entity {
 	float HUD_y;
 	float HUD_y_target;
 	public float streak_bar_alpha=0;
+	
+	boolean leaving_post = false; // set in menuPostGame
 
 	public void restart() {
 		streak_width = 0;
@@ -60,7 +62,8 @@ public class entity_menuPauseHUD extends engine_entity {
 		if ( (ref.room.get_current_room() == rooms.ROOM_GAME) ||  (ref.room.get_current_room() == rooms.ROOM_POSTGAME) ){
 			
 			// The 'if' is so the menu doesn't slide up immediately in the post-game screen
-			if (mgr.gameMain.shade_alpha > 0.98f)
+			// or is so it doesn't stutter when leaving the post screen and fading out
+			if ( (mgr.gameMain.shade_alpha > 0.98f) || leaving_post )
 				HUD_y += (HUD_y_target - HUD_y) * 5 * ref.main.time_scale;
 			
 			streak_bar_alpha += (-streak_bar_alpha) * 5 * ref.main.time_scale;
@@ -98,7 +101,7 @@ public class entity_menuPauseHUD extends engine_entity {
 			
 			//Draw back border rectangle for streak bar
 			ref.draw.setDrawColor(0, 0, 0, 1);//0.5
-			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size + HUD_y, small_rec_width + extra_x, small_rec_height + extra_y, 0, 0, 0, constants.layer6_HUD);
+			ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height-button_size + HUD_y, small_rec_width + extra_x, small_rec_height + extra_y, 0, 0, 0, constants.layer6_HUD, true);
 			
 			
 			current_progress = (current_progress < 3) ? mgr.gameMain.streak%mgr.gameMain.STREAK_PER_LEVEL : mgr.gameMain.STREAK_PER_LEVEL;
@@ -111,21 +114,21 @@ public class entity_menuPauseHUD extends engine_entity {
 			float full_streak_width = (small_rec_width-streak_bar_padding);
 			float target_streak_width = full_streak_width * percent_bar;
 			streak_width += (target_streak_width - streak_width) * ref.screen_width/(mgr.gameMain.STREAK_PER_LEVEL*4) * ref.main.time_scale;
-			ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size + HUD_y, streak_width + extra_x, streak_bar_height + extra_y, -streak_width/2, 0, 0, constants.layer6_HUD);
+			ref.draw.drawRectangle(ref.screen_width/2-full_streak_width/2, ref.screen_height-button_size + HUD_y, streak_width + extra_x, streak_bar_height + extra_y, -streak_width/2, 0, 0, constants.layer6_HUD, true);
 	
 
 			
 			//Draw score
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			ref.draw.text.append(  mgr.gameMain.score  );
-			ref.draw.drawText(ref.screen_width/2, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
+			ref.draw.drawText(ref.screen_width/2, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1, true);
 			
 
 			//Draw score multiplier
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			ref.draw.text.append(  "+"   );
 			ref.draw.text.append(  mgr.gameMain.score_multiplier   );
-			ref.draw.drawText(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1);
+			ref.draw.drawText(text_x, text_y + HUD_y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1, true);
 			
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			ref.draw.drawTexture(
@@ -138,7 +141,8 @@ public class entity_menuPauseHUD extends engine_entity {
 			        0,
 			        constants.layer6_HUD,
 			        textures.SUB_PAUSE,
-			        textures.TEX_SPRITES);
+			        textures.TEX_SPRITES,
+			        true);
 			
 
 			// Un-pause if the pause button is touched
@@ -186,7 +190,7 @@ public class entity_menuPauseHUD extends engine_entity {
 		if (startPause) {
 			startPause = false;
 			
-			if(pause) {
+			if ( (pause) && (mgr.gameMain.floor_height < ref.screen_height) ) {
 				game_paused = true;
 				ref.draw.captureDraw();
 				ref.main.pauseEntities();

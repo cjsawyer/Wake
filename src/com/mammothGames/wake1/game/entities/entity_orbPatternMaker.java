@@ -49,8 +49,10 @@ public class entity_orbPatternMaker extends engine_entity {
 		state = -1;
 		state_finished = true;
 		
+		alarm[0] = 1;
+		
 		// So it starts the state the same way as if it has just finished one
-		current_position = number_positions;
+		current_position = 0;//number_positions;
 		spawn_orb = false;
 		
 	}
@@ -284,26 +286,27 @@ public class entity_orbPatternMaker extends engine_entity {
 
 	@Override
 	public void alarm0() {
-
-		if (current_position == number_positions) {
-			alarm[0] = -1;
-			current_position = 0;
-			state_finished = true;
-		} else {
-
-			if(four_step_pattern)
-				current_position++;
-			else
-				current_position += 2;
-
-			spawn_orb = true;
-
-			if ( (use_double_spawn_time) && (current_position != number_positions) ) {
-				alarm[0] = mgr.gameMain.time_between_orbs*2;
+		if (mgr.gameMain.game_running) {
+			if (current_position == number_positions) {
+				alarm[0] = -1;
+				current_position = 0;
+				state_finished = true;
 			} else {
-				alarm[0] = mgr.gameMain.time_between_orbs;
+	
+				if(four_step_pattern)
+					current_position++;
+				else
+					current_position += 2;
+	
+				spawn_orb = true;
+	
+				if (use_double_spawn_time) {
+					alarm[0] = mgr.gameMain.time_between_orbs*2;
+				} else {
+					alarm[0] = mgr.gameMain.time_between_orbs;
+				}
+	
 			}
-
 		}
 //		Log.e("eaedsd", STRIPE_position + " " + alarm[0]);
 

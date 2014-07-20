@@ -119,12 +119,16 @@ public class entity_menuPostGame extends engine_entity {
 		mgr.gameMain.shade_alpha_target = 1;
 		fade_out = false;
 		ref.room.changeRoom(rooms.ROOM_POSTGAME);
+		
+		mgr.gameMain.game_running = false;
+		
 	}
 	
 	
 	public void prepLeave(int room_to_leave_to) {
 		mgr.gameMain.shade_alpha_target = 0;
 		fade_out = true;
+		mgr.menuPauseHUD.leaving_post = true;
 		
 		this.room_to_leave_to = room_to_leave_to;  
 	}
@@ -141,13 +145,17 @@ public class entity_menuPostGame extends engine_entity {
 				mgr.countdown.startCountdown();
 				break;
 			case room_records:
-				mgr.menuRecords.start(mgr.menuDifficulty.tab);
+				mgr.menuMain.setRecordsPositionHard();
+				mgr.menuMain.start();
 				break;
 			case room_diff:
-				mgr.menuDifficulty.start();
+				mgr.menuMain.setDifficultyPositionHard();
+				mgr.menuMain.start();
 				break;
 		}
 	
+		mgr.menuPauseHUD.leaving_post = false;
+		
 	}
 	
 }

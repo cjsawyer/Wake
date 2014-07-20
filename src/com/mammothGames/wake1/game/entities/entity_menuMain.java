@@ -276,7 +276,6 @@ public class entity_menuMain extends engine_entity {
 	
 	
 	public void start() {
-		mgr.gameMain.floor_height_target = 0; // Make the water go back down
 		mgr.gameMain.shade_alpha = 0;
 		mgr.gameMain.shade_alpha_target = 1;
 		ref.room.changeRoom(rooms.ROOM_MENUMAIN);
@@ -388,6 +387,37 @@ public class entity_menuMain extends engine_entity {
 		x = xtarget;
 		y = ytarget;
 	}
+	public void setRecordsPositionHard() {
+		active_screen = RECORDS;
+		LAST = RECORDS;
+		setRelativePositionTarget(-X_REC,-Y_REC);
+		x = xtarget;
+		y = ytarget;
+		
+		switch (mgr.gameMain.current_diff) {
+			case entity_gameMain.DIF_EASY:
+				mgr.menuMain.records.tabs.setActiveTab(0);
+				break;
+			case entity_gameMain.DIF_MEDIUM:
+				mgr.menuMain.records.tabs.setActiveTab(1);
+				break;
+			case entity_gameMain.DIF_HARD:
+				mgr.menuMain.records.tabs.setActiveTab(2);
+				break;
+			case entity_gameMain.DIF_HELL:
+				mgr.menuMain.records.tabs.setActiveTab(3);
+				break;
+		}
+		
+	}
+	public void setDifficultyPositionHard() {
+		active_screen = DIFFICULTY;
+		LAST = DIFFICULTY;
+		setRelativePositionTarget(-X_DIFF,-Y_DIFF);
+		x = xtarget;
+		y = ytarget;
+	}
+	
 }
 
 

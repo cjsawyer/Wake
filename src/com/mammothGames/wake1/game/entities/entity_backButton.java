@@ -46,7 +46,8 @@ public class entity_backButton extends engine_entity {
 					}
 					
 				} else {
-					mgr.menuPauseHUD.setPause(true);
+					if (!mgr.countdown.counting)
+						mgr.menuPauseHUD.setPause(true);
 				}
 				break;
 			case rooms.ROOM_POSTGAME:

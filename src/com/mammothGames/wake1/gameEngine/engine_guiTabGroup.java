@@ -37,6 +37,12 @@ public class engine_guiTabGroup extends engine_guiTextElement {
     	return active_tab;
     }
     
+    public void setActiveTab(int tab) {
+    	previous_active_tab = active_tab;
+    	active_tab = tab;
+    }
+    
+    
     public void setTabString(int tab, String s) {
     	strings[tab] = s;
     }
@@ -117,8 +123,7 @@ public class engine_guiTabGroup extends engine_guiTextElement {
     	
     	for (int i=0; i<num_tabs; i++) {
     		if(container.tabs[i].getClicked()) {
-    			previous_active_tab = active_tab;
-    			active_tab = i;
+    			setActiveTab(i);
     		}
     	}
     	

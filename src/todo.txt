@@ -1,28 +1,30 @@
 ///// This Commit /////
 
-Added overlay argument to all draw methods
-Added count-down before game start, not just from pause
-Handled screen locking and ad pop-ups around game re/start
-Added fade out from main menu to game
-Shrunk back button in difficulty menu
+Added real actions to postgame buttons
+Fixed bug where restarting after quitting a game would spawn a broken pattern of orbs
+Made orbs explode when quitting a game
+Polished countdown
+Fixed HUD stutter when restarting game
+Lowered water line
+multiplier popups now remember their numbers
 
 --------------- WAKE TODO ---------------
 
-add some sort of transision between popup states
 
-when you quit -> leave -> restart, it spawns an odd partial pattern at game start 
+BEFORE NEXT RELEASE, get this done!!!!!:
+	about screen
+	[last part] black screen if lock during countdown -> after unlock, rescreenshot. also make popup unscreenshotable
+
+
+
+fix up transition between postgame and records menu
+
+add some sort of transision between popup states
 
 fix double S/Z timing
 
 investigate how there is a second blue bar being drawn in the hud on emulator
-
-make postgame screen buttons not reference old menus
 		
-about screen
-
-lower water line
-
-score pop-up number permanence
 
 screen slide equation-ize
 
@@ -85,6 +87,12 @@ Long Term:
 
 
 //////////////////////////////////////////// HISTORY //////////////////////////////////////////////////////////////
+
+Added overlay argument to all draw methods
+Added count-down before game start, not just from pause
+Handled screen locking and ad pop-ups around game re/start
+Added fade out from main menu to game
+Shrunk back button in difficulty menu
 
 added difficulty menu buttons
 fixed pause hud redrawing
