@@ -25,7 +25,7 @@ public class entity_menuMain extends engine_entity {
 	private AboutMenuGUI about;
 	
 	public final int MAIN = 0, DIFFICULTY = 1, RECORDS = 2, ABOUT = 3;
-	public int LAST = MAIN;
+	public int other_screen = MAIN;
 	public int active_screen;
 	public float x, y;
 	public float xtarget = 0, ytarget = 0;
@@ -139,12 +139,12 @@ public class entity_menuMain extends engine_entity {
 					
 					if (menu.play.getClicked()) {
 						active_screen = DIFFICULTY;
-						LAST = DIFFICULTY;
+						other_screen = DIFFICULTY;
 					}
 					
 					if (menu.records.getClicked()) {
 						active_screen = RECORDS;
-						LAST = RECORDS;
+						other_screen = RECORDS;
 					}
 					
 					if (menu.settings.getClicked()) {
@@ -154,7 +154,7 @@ public class entity_menuMain extends engine_entity {
 					
 					if (menu.about.getClicked()) {
 						active_screen = ABOUT;
-						LAST = ABOUT;
+						other_screen = ABOUT;
 					}
 					
 					break;
@@ -196,7 +196,6 @@ public class entity_menuMain extends engine_entity {
 					
 					int previous_tab = tab;
 					tab = records.tabs.getActiveTab();
-					//TODO: FIX DIFF HERE TODO TODO TODO
 					if (previous_tab != tab) {
 						loadScores();
 					}
@@ -218,13 +217,15 @@ public class entity_menuMain extends engine_entity {
 					}
 					
 					
-					if (records.back.getClicked())
+					if (records.back.getClicked()) {
 						active_screen = MAIN;
+						other_screen = RECORDS;
+					}
 					
 					if (records.rate.getClicked())
 						ratePlayStore();
 						
-					if (records.pro.getClicked())
+					if (records.pro.getClicked() && (!constants.pro))
 						getProPlayStore();
 						
 					if (records.erase.getClicked())
@@ -240,14 +241,16 @@ public class entity_menuMain extends engine_entity {
 					if (about.rate.getClicked())
 						ratePlayStore();
 						
-					if (about.pro.getClicked())
+					if (about.pro.getClicked() && (!constants.pro))
 						getProPlayStore();
 					
 					if (about.web.getClicked())
 						openWebsite();
 					
-					if (about.back.getClicked())
+					if (about.back.getClicked()) {
 						active_screen = MAIN;
+						other_screen = ABOUT;
+					}
 					
 					setRelativePositionTarget(-X_ABOUT, -Y_ABOUT);
 					break;
@@ -259,8 +262,8 @@ public class entity_menuMain extends engine_entity {
 			menu.setPosition(x + X_MAIN, y + Y_MAIN);
 			menu.update();
 			
-			// Only draw the next visible menu to avoid lag by drawing too much
-			switch(LAST) {
+			// Only draw the other visible menu to avoid lag by drawing too much
+			switch(other_screen) {
 				case DIFFICULTY:
 					difficulty.setAlpha(mgr.gameMain.shade_alpha);
 					difficulty.setPosition(x + X_DIFF, y + Y_DIFF);
@@ -397,13 +400,14 @@ public class entity_menuMain extends engine_entity {
 
 	public void setDefaultPositionHard() {
 		active_screen = MAIN;
+		other_screen = MAIN;
 		setRelativePositionTarget(X_MAIN,Y_MAIN);
 		x = xtarget;
 		y = ytarget;
 	}
 	public void setRecordsPositionHard() {
 		active_screen = RECORDS;
-		LAST = RECORDS;
+		other_screen = RECORDS;
 		setRelativePositionTarget(-X_REC,-Y_REC);
 		x = xtarget;
 		y = ytarget;
@@ -426,7 +430,7 @@ public class entity_menuMain extends engine_entity {
 	}
 	public void setDifficultyPositionHard() {
 		active_screen = DIFFICULTY;
-		LAST = DIFFICULTY;
+		other_screen = DIFFICULTY;
 		setRelativePositionTarget(-X_DIFF,-Y_DIFF);
 		x = xtarget;
 		y = ytarget;
@@ -687,17 +691,21 @@ class RecordsMenuGUI extends engine_gui {
         rate.setTextSize(mgr.gameMain.text_size);
         rate.setBorder(border);
         rate.setBorderColor(0,1,1,0.3f);
-        rate.setBackgroundColor(0,0,0,.9f);
+//        rate.setBackgroundColor(0,0,0,.9f);
+        rate.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
         rate.setMargin(border/2,border/2,0,border/2);
         addElement(rate);
         
         pro = new engine_guiButton(this, idPro);
         pro.setText("pro");
+        if (constants.pro)
+        	pro.setTextColor(.5f, .5f, .5f, 1);
         pro.setTextureSheet(textures.TEX_FONT1);
         pro.setTextSize(mgr.gameMain.text_size);
         pro.setBorder(border);
         pro.setBorderColor(0,1,1,0.3f);
-        pro.setBackgroundColor(0,0,0,.9f);
+        pro.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
+//        pro.setBackgroundColor(0,0,0,.9f);
         pro.setMargin(border/2,border/2,border/2,0);
         addElement(pro);
         
@@ -875,7 +883,8 @@ class AboutMenuGUI extends engine_gui {
         web.setTextSize(mgr.gameMain.text_size);
         web.setBorder(border/2,border,border,border);
         web.setBorderColor(0,1,1,0.3f);
-        web.setBackgroundColor(0,0,0,.9f);
+//        web.setBackgroundColor(0,0,0,.9f);
+        web.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
         web.setMargin(0,border/2,0,0);
         
         rate = new engine_guiButton(this, idRate);
@@ -884,17 +893,21 @@ class AboutMenuGUI extends engine_gui {
         rate.setTextSize(mgr.gameMain.text_size);
         rate.setBorder(border);
         rate.setBorderColor(0,1,1,0.3f);
-        rate.setBackgroundColor(0,0,0,.9f);
+        rate.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
+//        rate.setBackgroundColor(0,0,0,.9f);
         rate.setMargin(border/2,border/2,0,border/2);
         addElement(rate);
         
         pro = new engine_guiButton(this, idPro);
         pro.setText("pro");
+        if (constants.pro)
+        	pro.setTextColor(.5f, .5f, .5f, 1);
         pro.setTextureSheet(textures.TEX_FONT1);
         pro.setTextSize(mgr.gameMain.text_size);
         pro.setBorder(border);
         pro.setBorderColor(0,1,1,0.3f);
-        pro.setBackgroundColor(0,0,0,.9f);
+        pro.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
+//        pro.setBackgroundColor(0,0,0,.9f);
         pro.setMargin(border/2,border/2,border/2,0);
         addElement(pro);
         

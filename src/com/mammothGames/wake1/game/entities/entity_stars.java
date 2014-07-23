@@ -9,10 +9,9 @@ public class entity_stars extends engine_entity {
 	float starTextureTallHeight;
 	
 	float small_angle = 0, tall_angle = 0;
-	float stars_alpha = 0;
 	
 	float red_alpha=0, red_alpha_target=0;
-	private float transition_alpha=0, transition_alpha_target=0;
+	float stars_alpha = 0, stars_alpha_target = 0, transition_alpha=0, transition_alpha_target=0;
 	
 	float x, y;
 	
@@ -52,27 +51,21 @@ public class entity_stars extends engine_entity {
 			pausable = true;
 		else
 			pausable = false;
+			
+		// Tick linear fade functions
+		red_alpha += (red_alpha_target - red_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
+		transition_alpha += (transition_alpha_target - transition_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale / 2f;
+		stars_alpha += (stars_alpha_target - stars_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale/2f;
 		
+		// Compute base position
+		x = mgr.menuMain.x/3 - ref.screen_width/2;
+		y = mgr.menuMain.y/3 - ref.screen_height/2;
 		
-		if (mgr.popup.show_stars) { // save is loaded here
+		// Rotate over time
+		small_angle += ref.main.time_scale/3.5f; // Rotate 1/2 degree per second
+		tall_angle -= ref.main.time_scale/4;
 			
-			// Tick linear fade functions
-			red_alpha += (red_alpha_target - red_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
-			transition_alpha += (transition_alpha_target - transition_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale / 2f;
-			
-			// Compute base position
-			x = mgr.menuMain.x/3 - ref.screen_width/2;
-			y = mgr.menuMain.y/3 - ref.screen_height/2;
-			
-			// Fade in at start
-			stars_alpha += 2 * ref.main.time_scale;
-			if (stars_alpha > 1)
-				stars_alpha = 1;
-			
-			// Rotate over time
-			small_angle += ref.main.time_scale/3.5f; // Rotate 1/2 degree per second
-			tall_angle -= ref.main.time_scale/4;
-			
+		if (stars_alpha > 0.01f) {
 			// Draw both textures
 			ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 1 * stars_alpha);
 			ref.draw.drawTexture(ref.screen_width/2 + x/6, y/6, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);

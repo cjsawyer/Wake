@@ -51,13 +51,13 @@ public class entity_popup extends engine_entity {
         
         bool_gui = new BooleanGUI(ref, mgr);
         bool_gui.setPosition(draw_x, draw_y);
-        bool_gui.setSize(draw_width, draw_width);
+        bool_gui.setSize(draw_width, draw_width*7/8f);
         bool_gui.populate();
         bool_gui.setDepth(constants.layer7_overHUD);
         
         settings_gui = new SettingsGUI(ref, mgr);
         settings_gui.setPosition(draw_x, draw_y);
-        settings_gui.setSize(draw_width, draw_width);
+        settings_gui.setSize(draw_width, draw_width*1.33f);
         settings_gui.populate();
         settings_gui.setDepth(constants.layer7_overHUD);
         
@@ -291,9 +291,11 @@ public class entity_popup extends engine_entity {
 		if(show_stars){
 			settings_gui.checkStars.setTextColor(0,1,0,popup_alpha);
 			settings_gui.checkStars.setText("ON");
+			mgr.stars.stars_alpha_target = 1;
         } else {
         	settings_gui.checkStars.setTextColor(1,0,0,popup_alpha);
         	settings_gui.checkStars.setText("OFF");
+        	mgr.stars.stars_alpha_target = 0;
         }
 		
 	}
