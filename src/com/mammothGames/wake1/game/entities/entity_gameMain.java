@@ -23,7 +23,7 @@ public class entity_gameMain extends engine_entity {
 	public static final int DIF_EASY = 250;
 	public static final int DIF_MEDIUM = 625;
 	public static final int DIF_HARD = 1000;
-	public static final int DIF_HELL = 1500;
+	public static final int DIF_HELL = 1350;
 	public int current_diff;
 	public String current_diff_string;
 	
@@ -55,10 +55,10 @@ public class entity_gameMain extends engine_entity {
 	int high_score = 0;
 	float floor_height_target;
 	float floor_per_miss; 
-	float floor_per_hit; 
+	float floor_per_hit;
 	float floor_height;
 	
-	final int SCORE_BALANCE = 2;
+	final float SCORE_BALANCE = 1.75f;//2;
 	
 	public boolean new_high_score, new_best_streak;
 	

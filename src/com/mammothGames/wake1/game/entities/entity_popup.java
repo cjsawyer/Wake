@@ -10,7 +10,7 @@ public class entity_popup extends engine_entity {
 
 	private boolean popup_open = false;
 	private float popup_alpha = 0, popup_alpha_target = 0;
-	private boolean game_muted;
+	public boolean game_muted, high_gfx, show_stars;
 
 	PauseGUI pause_gui;
 	BooleanGUI bool_gui;
@@ -61,8 +61,10 @@ public class entity_popup extends engine_entity {
         settings_gui.populate();
         settings_gui.setDepth(constants.layer7_overHUD);
         
+        ////////////////
+        // Load settings
+        ////////////////
         
-        // Load weather or not to play music
         String muted = ref.file.load("muted");
         // If first boot, save "not muted"
         if (muted.equals("")) {
@@ -73,15 +75,25 @@ public class entity_popup extends engine_entity {
         }
         ref.sound.setMusicState(game_muted, true, true);
         
-        // Set button color in settings menu
-        if(game_muted){
-            settings_gui.check.setTextColor(1,0,0,1);
-            settings_gui.check.setText("OFF");
+        String gfx = ref.file.load("gfx");
+        // If first boot, save "high gfx"
+        if (gfx.equals("")) {
+            high_gfx = true;
+            ref.file.save("gfx", "" + high_gfx);
         } else {
-            settings_gui.check.setTextColor(0,1,0,1);
-            settings_gui.check.setText("ON");
+        	high_gfx = Boolean.parseBoolean(gfx);
         }
         
+        String stars = ref.file.load("stars");
+        // If first boot, save "show stars"
+        if (stars.equals("")) {
+            show_stars = true;
+            ref.file.save("stars", "" + stars);
+        } else {
+        	show_stars = Boolean.parseBoolean(stars);
+        }
+        
+        updateSettingsButtons();
         
     }
 
@@ -207,31 +219,37 @@ public class entity_popup extends engine_entity {
                 		setPopupOpenness(false);
                 	}
                 }
-                if (settings_gui.check.getClicked()) {
+                if (settings_gui.checkMusic.getClicked()) {
                     // Flip the muted var, then start the music
                     game_muted = !game_muted;
                     
-                    if(game_muted){
-                        settings_gui.check.setTextColor(1,0,0,popup_alpha);
-                        settings_gui.check.setText("OFF");
-                    } else {
-                        settings_gui.check.setTextColor(0,1,0,popup_alpha);
-                        settings_gui.check.setText("ON");
-                    }
-                    
                     ref.file.save("muted", "" + game_muted);
                     ref.sound.setMusicState(game_muted, true, true);
+                    
+                    updateSettingsButtons();
                 }
                 
-//                if 
                 
+                if (settings_gui.checkGfx.getClicked()) {
+                    high_gfx = !high_gfx;
+                	updateSettingsButtons();
+                    ref.file.save("gfx", "" + high_gfx);
+                }
+                
+                if (settings_gui.checkStars.getClicked()) {
+                    show_stars = !show_stars;
+                	updateSettingsButtons();
+                    ref.file.save("stars", "" + show_stars);
+                }
+                
+                updateSettingsButtons();
                 
                 break;
                 
         }
 
 
-
+//		A bit of debug fun :)
 //		if (ref.input.get_touch_state(0) == ref.input.TOUCH_HELD) {
 //		    pause_gui.setPosition(ref.input.get_touch_x(0), ref.input.get_touch_y(0));
 //		}
@@ -248,6 +266,36 @@ public class entity_popup extends engine_entity {
 		bool_gui.update();
 		settings_gui.update();
 
+	}
+	
+	private void updateSettingsButtons() {
+		
+		if(game_muted){
+            settings_gui.checkMusic.setTextColor(1,0,0,popup_alpha);
+            settings_gui.checkMusic.setText("OFF");
+        } else {
+            settings_gui.checkMusic.setTextColor(0,1,0,popup_alpha);
+            settings_gui.checkMusic.setText("ON");
+        }
+		
+		
+		if(high_gfx){
+			settings_gui.checkGfx.setTextColor(0,1,0,popup_alpha);
+			settings_gui.checkGfx.setText("high");
+        } else {
+        	settings_gui.checkGfx.setTextColor(1,0,0,popup_alpha);
+        	settings_gui.checkGfx.setText("low");
+        }
+		
+		
+		if(show_stars){
+			settings_gui.checkStars.setTextColor(0,1,0,popup_alpha);
+			settings_gui.checkStars.setText("ON");
+        } else {
+        	settings_gui.checkStars.setTextColor(1,0,0,popup_alpha);
+        	settings_gui.checkStars.setText("OFF");
+        }
+		
 	}
 
 	public void quitGame() {
@@ -497,17 +545,23 @@ class SettingsGUI extends engine_gui {
     
     private final int idTitle = 0;
     private final int idMusic = 1;
-    private final int idCheckbox = 2;
-    private final int idBackButton = 3;
+    private final int idMusicCheckbox = 2;
+    private final int idGfx = 3;
+    private final int idGfxCheckbox = 4;
+    private final int idStars = 5;
+    private final int idStarsCheckbox = 6;
+    private final int idBackButton = 7;
     
     final int[][] layout = {
         { 
             // horizontal, vertical number of GUI elements
-            2,3
+            2,5
         }, {
             // GUI element ID's
             NULL,    idTitle,
-            idMusic, idCheckbox,
+            idMusic, idMusicCheckbox,
+            idGfx, idGfxCheckbox,
+            idStars, idStarsCheckbox,
             NULL,    idBackButton,
         }
     };
@@ -518,7 +572,7 @@ class SettingsGUI extends engine_gui {
         this.mgr = mgr;
     }
     
-    engine_guiButton back, check;
+    engine_guiButton back, checkMusic, checkGfx, checkStars;
     
     
     public void populate() {
@@ -545,17 +599,63 @@ class SettingsGUI extends engine_gui {
         music.setBorderColor(0,1,1,0.3f);
         music.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
         music.setPadding(border);
-        music.setWeight(1, 2);
+        music.setWeight(1, 0.75f);
         
-        check = new engine_guiButton(this, idCheckbox);
-        check.setTextureSheet(textures.TEX_FONT1);
-        check.setTextSize(mgr.gameMain.text_size);
-        check.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
-        check.setBorder(0,0,0,border);
-        check.setBorderColor(0,1,1,0.3f);
-        check.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
-        check.setPadding(border);
-        check.setActOnHover(false);
+        checkMusic = new engine_guiButton(this, idMusicCheckbox);
+        checkMusic.setTextureSheet(textures.TEX_FONT1);
+        checkMusic.setTextSize(mgr.gameMain.text_size);
+        checkMusic.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
+        checkMusic.setBorder(0,0,0,border);
+        checkMusic.setBorderColor(0,1,1,0.3f);
+        checkMusic.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
+        checkMusic.setPadding(border);
+        checkMusic.setActOnHover(false);
+
+        
+        engine_guiText gfx = new engine_guiText(this, idGfx);
+        gfx.setText("GFX");
+        gfx.setTextureSheet(textures.TEX_FONT1);
+        gfx.setTextSize(mgr.gameMain.text_size);
+        gfx.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
+        gfx.setBorder(0,0,border,0);
+        gfx.setBorderColor(0,1,1,0.3f);
+        gfx.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
+        gfx.setPadding(border);
+        gfx.setWeight(1, 0.75f);
+        
+        checkGfx = new engine_guiButton(this, idGfxCheckbox);
+        checkGfx.setTextureSheet(textures.TEX_FONT1);
+        checkGfx.setTextSize(mgr.gameMain.text_size);
+        checkGfx.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
+        checkGfx.setBorder(0,0,0,border);
+        checkGfx.setBorderColor(0,1,1,0.3f);
+        checkGfx.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
+        checkGfx.setPadding(border);
+        checkGfx.setActOnHover(false);
+        
+        
+        engine_guiText stars = new engine_guiText(this, idStars);
+        stars.setText("Stars");
+        stars.setTextureSheet(textures.TEX_FONT1);
+        stars.setTextSize(mgr.gameMain.text_size);
+        stars.setAlignment(ref.draw.X_ALIGN_RIGHT, ref.draw.Y_ALIGN_CENTER);
+        stars.setBorder(0,0,border,0);
+        stars.setBorderColor(0,1,1,0.3f);
+        stars.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
+        stars.setPadding(border);
+        stars.setWeight(1, 0.75f);
+        
+        checkStars = new engine_guiButton(this, idStarsCheckbox);
+        checkStars.setTextureSheet(textures.TEX_FONT1);
+        checkStars.setTextSize(mgr.gameMain.text_size);
+        checkStars.setAlignment(ref.draw.X_ALIGN_LEFT, ref.draw.Y_ALIGN_CENTER);
+        checkStars.setBorder(0,0,0,border);
+        checkStars.setBorderColor(0,1,1,0.3f);
+        checkStars.setBackgroundColor(0.12f,0.12f,0.12f,.9f);
+        checkStars.setPadding(border);
+        checkStars.setActOnHover(false);
+        
+        
         
         back = new engine_guiButton(this, idBackButton);
         back.setText("back");
@@ -568,8 +668,12 @@ class SettingsGUI extends engine_gui {
         
         
         addElement(title);
-        addElement(check);
         addElement(music);
+        addElement(checkMusic);
+        addElement(gfx);
+        addElement(checkGfx);
+        addElement(stars);
+        addElement(checkStars);
         addElement(back);
         
         build();

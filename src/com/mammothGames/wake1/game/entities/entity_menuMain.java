@@ -237,8 +237,17 @@ public class entity_menuMain extends engine_entity {
 					
 					about.setClickable(true);
 					
+					if (about.rate.getClicked())
+						ratePlayStore();
+						
+					if (about.pro.getClicked())
+						getProPlayStore();
+					
+					if (about.web.getClicked())
+						openWebsite();
+					
 					if (about.back.getClicked())
-						active_screen = MAIN; // TODO: build rest of this
+						active_screen = MAIN;
 					
 					setRelativePositionTarget(-X_ABOUT, -Y_ABOUT);
 					break;
@@ -370,6 +379,11 @@ public class entity_menuMain extends engine_entity {
 		} catch (android.content.ActivityNotFoundException anfe) {
 			ref.android.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
 		}
+	}
+	
+	private void openWebsite() {
+		final String website = "http://cjsdev.com";
+		ref.android.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(website)));
 	}
 	
 	private void getProPlayStore() {
@@ -808,15 +822,25 @@ class DifficultyMenuGUI extends engine_gui {
 
 class AboutMenuGUI extends engine_gui {
     
-    private final int idBack = 0;
+	private final int idLogo = 0;
+    private final int idWebButton = 1;
+    
+    private final int idRate = 2;
+    private final int idPro = 3;
+    
+    private final int idBackButton = 4;
+    private final int idBackBlank = 5;
     
     final int[][] layout = {
         { 
             // horizontal, vertical number of GUI elements
-            1,1
+            2,4
         }, {
             // GUI element ID's
-            idBack,
+            idLogo, NULL,
+            idWebButton, NULL,
+            idRate, idPro,
+            idBackButton, idBackBlank
         }
     };
     
@@ -826,8 +850,7 @@ class AboutMenuGUI extends engine_gui {
         this.mgr = mgr;
     }
     
-//    engine_guiButton play, settings, records, about;
-    engine_guiButton back;
+    engine_guiButton web, rate, pro, back;
     
     
     public void populate() {
@@ -835,16 +858,67 @@ class AboutMenuGUI extends engine_gui {
         
         float border = mgr.menuDifficulty.button_border_size/2;
         
-        back = new engine_guiButton(this, idBack);
-        back.setText("BACKabout");
+        engine_guiImage logo = new engine_guiImage(this, idLogo);
+        logo.setTexture(textures.TEX_SPRITES, textures.SUB_MAMMOTH);
+        logo.setTextureSheet(textures.TEX_FONT1);
+        logo.setScale(0.9f);
+        logo.setWeight(1, 4);
+        logo.setDrawBackground(true);
+        logo.setBorder(border,border/2,border,border);
+        logo.setBorderColor(0,1,1,0.3f);
+        logo.setBackgroundColor(0,0,0,.9f);
+        
+        web = new engine_guiButton(this, idWebButton);
+        web.setText("cjsdev.com");
+        web.setTextureSheet(textures.TEX_FONT1);
+        web.setTextColor(0, 1, 0, 1);
+        web.setTextSize(mgr.gameMain.text_size);
+        web.setBorder(border/2,border,border,border);
+        web.setBorderColor(0,1,1,0.3f);
+        web.setBackgroundColor(0,0,0,.9f);
+        web.setMargin(0,border/2,0,0);
+        
+        rate = new engine_guiButton(this, idRate);
+        rate.setText("rate");
+        rate.setTextureSheet(textures.TEX_FONT1);
+        rate.setTextSize(mgr.gameMain.text_size);
+        rate.setBorder(border);
+        rate.setBorderColor(0,1,1,0.3f);
+        rate.setBackgroundColor(0,0,0,.9f);
+        rate.setMargin(border/2,border/2,0,border/2);
+        addElement(rate);
+        
+        pro = new engine_guiButton(this, idPro);
+        pro.setText("pro");
+        pro.setTextureSheet(textures.TEX_FONT1);
+        pro.setTextSize(mgr.gameMain.text_size);
+        pro.setBorder(border);
+        pro.setBorderColor(0,1,1,0.3f);
+        pro.setBackgroundColor(0,0,0,.9f);
+        pro.setMargin(border/2,border/2,border/2,0);
+        addElement(pro);
+        
+        back = new engine_guiButton(this, idBackButton);
+        back.setText("BACK");
         back.setTextureSheet(textures.TEX_FONT1);
         back.setTextSize(mgr.gameMain.text_size);
         back.setBorder(border);
         back.setBorderColor(0,1,1,0.3f);
         back.setBackgroundColor(0,0,0,.9f);
-        back.setMargin(border,border,0,0);
-        
+        back.setMargin(border/2,0,0,0);
+        back.setWeight(3, 1);
         addElement(back);
+        
+        engine_guiBlank blank = new engine_guiBlank(this, idBackBlank);
+        addElement(blank);
+
+        
+        addElement(logo);
+        addElement(web);
+        addElement(rate);
+        addElement(pro);
+        addElement(back);
+        addElement(blank);
         
         build();
     }

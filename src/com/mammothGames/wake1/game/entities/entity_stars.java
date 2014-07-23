@@ -1,13 +1,7 @@
 package com.mammothGames.wake1.game.entities;
 
-import android.util.FloatMath;
-import android.util.Log;
-
-import com.mammothGames.wake1.game.constants;
-import com.mammothGames.wake1.game.rooms;
-import com.mammothGames.wake1.game.textures;
+import com.mammothGames.wake1.game.*;
 import com.mammothGames.wake1.gameEngine.*;
-
 
 public class entity_stars extends engine_entity {
 
@@ -18,6 +12,7 @@ public class entity_stars extends engine_entity {
 	float stars_alpha = 0;
 	
 	float red_alpha=0, red_alpha_target=0;
+	private float transition_alpha=0, transition_alpha_target=0;
 	
 	float x, y;
 	
@@ -52,32 +47,53 @@ public class entity_stars extends engine_entity {
 	@Override
 	public void sys_step() {
 		
-		x = mgr.menuMain.x/3 - ref.screen_width/2;
-		y = mgr.menuMain.y/3 - ref.screen_height/2;
+		// So it never stops outside of being paused in the game, and still updates during the count-down to avoid being gone if the screen locks and is there to be captured
+		if ( (ref.room.get_current_room() == rooms.ROOM_GAME) || (mgr.countdown.counting) )
+			pausable = true;
+		else
+			pausable = false;
 		
-		red_alpha += (red_alpha_target - red_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
 		
-		stars_alpha += 2 * ref.main.time_scale;
-		if (stars_alpha > 1)
-			stars_alpha = 1;
+		if (mgr.popup.show_stars) { // save is loaded here
+			
+			// Tick linear fade functions
+			red_alpha += (red_alpha_target - red_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
+			transition_alpha += (transition_alpha_target - transition_alpha) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale / 2f;
+			
+			// Compute base position
+			x = mgr.menuMain.x/3 - ref.screen_width/2;
+			y = mgr.menuMain.y/3 - ref.screen_height/2;
+			
+			// Fade in at start
+			stars_alpha += 2 * ref.main.time_scale;
+			if (stars_alpha > 1)
+				stars_alpha = 1;
+			
+			// Rotate over time
+			small_angle += ref.main.time_scale/3.5f; // Rotate 1/2 degree per second
+			tall_angle -= ref.main.time_scale/4;
+			
+			// Draw both textures
+			ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 1 * stars_alpha);
+			ref.draw.drawTexture(ref.screen_width/2 + x/6, y/6, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
+			ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 0.9f * stars_alpha);
+			ref.draw.drawTexture(ref.screen_width/2 + x/4, y/4, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
+		}
 		
-		small_angle += ref.main.time_scale/3.5f; // Rotate 1/2 degree per second
-		tall_angle -= ref.main.time_scale/4;
-		
-		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 1 * stars_alpha);
-		ref.draw.drawTexture(ref.screen_width/2 + x/6, y/6, starTextureSmallHeight, starTextureSmallHeight, 0, 0, small_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
-		ref.draw.setDrawColor(1, 1-red_alpha, 1-red_alpha, 0.9f * stars_alpha);
-		ref.draw.drawTexture(ref.screen_width/2 + x/4, y/4, starTextureTallHeight, starTextureTallHeight, 0, 0, tall_angle, constants.layer0_backgroundSquares, 1, textures.TEX_STARS);
+		// Draw white overlay for transition into records screen
+		ref.draw.setDrawColor(1, 1, 1, 1 * transition_alpha);
+		ref.draw.drawRectangle(ref.screen_width/2, ref.screen_height/2, ref.screen_width, ref.screen_height, 0, 0, 0, constants.layer0_backgroundSquares);
 		
 	}
 	
 	@Override
 	public void onRoomLoad() {
-		if (ref.room.get_current_room() == rooms.ROOM_GAME)
-			pausable = true;
-		else
-			pausable = false;
+		//
 	}
 	
+	public void transition() {
+		transition_alpha = 1;
+		transition_alpha_target = 0;
+	}
 	
 }

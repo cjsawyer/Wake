@@ -443,7 +443,9 @@ public class engine_gl_draw {
                                 // loop through all of the arrays,
                                 for (i_list_index=0; i_list_index < temp_array_lengths; i_list_index++){
                                         // if this is the correct depth, draw
-                                        if ( (list.list_depth[i_list_index] == i_depth) && !(list_is_captured && list.overlay[i_list_index]) ){
+                                        if (list.list_depth[i_list_index] == i_depth) {
+                                        	// do not draw the overlay draw calls if this is a captured draw list
+                                        	if (!(list_is_captured && list.overlay[i_list_index])){
                                                 
                                                 temp_draw_type = list.list_draw_type[i_list_index];
                                                 
@@ -517,6 +519,7 @@ public class engine_gl_draw {
                                                         }
                                                 }//end switch
                                                 temp_draw_type = -1;
+                                        	}
                                         }
                                 }
                         }

@@ -138,6 +138,10 @@ public class entity_menuPostGame extends engine_entity {
 		if (games_before_next_ad <= 0) {
 			games_before_next_ad = 1;
 			ref.ad.showInterstitialAd();
+		} else {
+			// We only want to have the flash happen if there is no as, as it shows up right before the ad opens otherwise, which looks bad.
+			if (room_to_leave_to == room_records)
+				mgr.stars.transition();
 		}
 		
 		switch (room_to_leave_to){
