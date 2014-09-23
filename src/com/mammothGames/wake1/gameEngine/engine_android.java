@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.mammothGames.wake1.game.constants;
-import com.mammothGames.wake1free.R;
+import com.mammothGames.wake1.R;
 
 
 import android.annotation.TargetApi;
@@ -99,7 +99,7 @@ public class engine_android extends Activity {
 
 		ref.floatbuffers = new engine_gl_floatbuffers(ref);
 		
-		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+		// drains the batt Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 			
 		
 		//Touch stuff

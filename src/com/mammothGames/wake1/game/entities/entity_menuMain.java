@@ -2,6 +2,7 @@ package com.mammothGames.wake1.game.entities;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.mammothGames.wake1.game.constants;
@@ -18,7 +19,7 @@ public class entity_menuMain extends engine_entity {
 		persistent = true;
 		pausable = false;
 	}
-	
+	 
 	private MainMenuGUI menu;
 	private DifficultyMenuGUI difficulty;
 	private RecordsMenuGUI records;
@@ -26,7 +27,7 @@ public class entity_menuMain extends engine_entity {
 	
 	public final int MAIN = 0, DIFFICULTY = 1, RECORDS = 2, ABOUT = 3;
 	public int other_screen = MAIN;
-	public int active_screen;
+	public int active_screen, old_screen;
 	public float x, y;
 	public float xtarget = 0, ytarget = 0;
 	public float X_MAIN, Y_MAIN, X_DIFF, Y_DIFF, X_REC, Y_REC, X_ABOUT, Y_ABOUT;
@@ -55,14 +56,13 @@ public class entity_menuMain extends engine_entity {
 	
 	private boolean fade_out = false;
 	
+	float tween_start = 0;
+	float oldx, oldy;
+	boolean tween = false;
+	
 	@Override
 	public void sys_firstStep() {
 		
-		x = ref.screen_width/2;
-		y = ref.screen_height/2;
-		
-		xtarget = x;
-		ytarget = y;
 		
 		float hyp = ref.screen_height; //(float) Math.sqrt(ref.screen_width*ref.screen_width+ref.screen_height*ref.screen_height); 
 		
@@ -78,8 +78,14 @@ public class entity_menuMain extends engine_entity {
 		X_ABOUT = hyp * (float)Math.cos(330*Math.PI/180f);
 		Y_ABOUT = hyp * (float)Math.sin(330*Math.PI/180f);
 		
+		x = X_MAIN + ref.screen_width/2;
+		y = Y_MAIN + ref.screen_height/2;
+		
+		xtarget = x;
+		ytarget = y;
 		
 		active_screen = MAIN;
+		old_screen = MAIN;
 		
 		
 		menu = new MainMenuGUI(ref,mgr);
@@ -117,12 +123,38 @@ public class entity_menuMain extends engine_entity {
 		about.setActive(true);
 	}
 	
+	private void setRelativePositionTarget(float xt, float yt) {
+		setEasePosition(xt, yt);
+	}
+	
+	private void setEasePosition(float xt, float yt) {
+//		if (!tween) {
+			xtarget = xt + ref.screen_width/2;
+			oldx = x;
+			ytarget = yt + ref.screen_height/2;
+			oldy = y;
+			tween_start = SystemClock.uptimeMillis();
+//			tween = true;
+//		}
+	}
+	
 	@Override
 	public void sys_step() {
 		if (ref.room.get_current_room() == rooms.ROOM_MENUMAIN) {
 			
-			x += (xtarget - x) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
-			y += (ytarget - y) * mgr.gameMain.ANIMATION_SCALE * ref.main.time_scale;
+			old_screen = active_screen;
+			
+//			if (tween) {
+				float current_time = SystemClock.uptimeMillis() - tween_start;
+				x = tween(current_time, oldx, xtarget-oldx, 500);
+				y = tween(current_time, oldy, ytarget-oldy, 500);
+				if (500 - current_time < 1) {
+//					tween = false;
+					x = xtarget;
+					y = ytarget;
+				}
+//			}
+			
 			
 			menu.setClickable(false);
 			difficulty.setClickable(false);
@@ -133,18 +165,27 @@ public class entity_menuMain extends engine_entity {
 			
 			switch(active_screen) {
 				case MAIN:
-					setRelativePositionTarget(-X_MAIN, -Y_MAIN);
+					
+//					setRelativePositionTarget(-X_MAIN, -Y_MAIN);
 					
 					menu.setClickable(!mgr.popup.getPopupOpenness());
 					
 					if (menu.play.getClicked()) {
 						active_screen = DIFFICULTY;
 						other_screen = DIFFICULTY;
+						setRelativePositionTarget(-X_DIFF, -Y_DIFF);
 					}
 					
 					if (menu.records.getClicked()) {
 						active_screen = RECORDS;
 						other_screen = RECORDS;
+						setRelativePositionTarget(-X_REC, -Y_REC);
+					}
+					
+					if (menu.about.getClicked()) {
+						active_screen = ABOUT;
+						other_screen = ABOUT;
+						setRelativePositionTarget(-X_ABOUT, -Y_ABOUT);
 					}
 					
 					if (menu.settings.getClicked()) {
@@ -152,14 +193,12 @@ public class entity_menuMain extends engine_entity {
 						mgr.popup.setPopupOpenness(true);
 					}
 					
-					if (menu.about.getClicked()) {
-						active_screen = ABOUT;
-						other_screen = ABOUT;
-					}
 					
 					break;
 					
 				case DIFFICULTY:
+					
+//					setRelativePositionTarget(-X_DIFF, -Y_DIFF);
 					
 					difficulty.setClickable(true);
 					
@@ -184,13 +223,16 @@ public class entity_menuMain extends engine_entity {
 						startLeave();
 					}
 					
-					if (difficulty.back.getClicked())
+					if (difficulty.back.getClicked()) {
 						active_screen = MAIN;
+						setRelativePositionTarget(-X_MAIN, -Y_MAIN);
+					}
 					
-					setRelativePositionTarget(-X_DIFF, -Y_DIFF);
 					break;
 					
 				case RECORDS:
+					
+//					setRelativePositionTarget(-X_REC, -Y_REC);
 					
 					records.setClickable(!mgr.popup.getPopupOpenness());
 					
@@ -220,6 +262,7 @@ public class entity_menuMain extends engine_entity {
 					if (records.back.getClicked()) {
 						active_screen = MAIN;
 						other_screen = RECORDS;
+						setRelativePositionTarget(-X_MAIN, -Y_MAIN);
 					}
 					
 					if (records.rate.getClicked())
@@ -231,10 +274,11 @@ public class entity_menuMain extends engine_entity {
 					if (records.erase.getClicked())
 						showErasePopup();
 					
-					setRelativePositionTarget(-X_REC, -Y_REC);
 					break;
 					
 				case ABOUT:
+					
+					//setRelativePositionTarget(-X_ABOUT, -Y_ABOUT);
 					
 					about.setClickable(true);
 					
@@ -248,11 +292,11 @@ public class entity_menuMain extends engine_entity {
 						openWebsite();
 					
 					if (about.back.getClicked()) {
+						setRelativePositionTarget(-X_MAIN, -Y_MAIN);
 						active_screen = MAIN;
 						other_screen = ABOUT;
 					}
 					
-					setRelativePositionTarget(-X_ABOUT, -Y_ABOUT);
 					break;
 			}
 			
@@ -308,10 +352,6 @@ public class entity_menuMain extends engine_entity {
 		mgr.countdown.startCountdown();
 	}
 	
-	private void setRelativePositionTarget(float xt, float yt) {
-		xtarget = xt + ref.screen_width/2;
-		ytarget = yt + ref.screen_height/2;
-	}
 	
 	public void loadScores() {
 		// Load high scores
@@ -404,6 +444,8 @@ public class entity_menuMain extends engine_entity {
 		setRelativePositionTarget(X_MAIN,Y_MAIN);
 		x = xtarget;
 		y = ytarget;
+		oldx = x;
+		oldy = y;
 	}
 	public void setRecordsPositionHard() {
 		active_screen = RECORDS;
@@ -411,6 +453,8 @@ public class entity_menuMain extends engine_entity {
 		setRelativePositionTarget(-X_REC,-Y_REC);
 		x = xtarget;
 		y = ytarget;
+		oldx = x;
+		oldy = y;
 		
 		switch (mgr.gameMain.current_diff) {
 			case entity_gameMain.DIF_EASY:
@@ -434,8 +478,36 @@ public class entity_menuMain extends engine_entity {
 		setRelativePositionTarget(-X_DIFF,-Y_DIFF);
 		x = xtarget;
 		y = ytarget;
+		oldx = x;
+		oldy = y;
 	}
 	
+	 /**
+     * 
+     * @param t current time
+     * @param b start value
+     * @param c change in value
+     * @param d duration
+     * @return
+     */
+    private float tween(float t, float b, float c, float d) {
+    	t/=d;
+    	float ts=t*t;
+    	float tc=ts*t;
+    	return b+c*(-19.2925f*tc*ts + 56.9825f*ts*ts + -58.185f*tc + 21.295f*ts + 0.2f*t);
+    	
+//    	t /= d;
+//    	float ts=t*t;
+//    	float tc=ts*t;
+//    	return b+c*(33*tc*ts + -106*ts*ts + 126*tc + -67*ts + 15*t);
+    	
+    	// linear
+//    	t/=d;
+//    	return b+c*(t);
+
+    	
+    	//x = tween(SystemClock.uptimeMillis() - tween_start, oldx, xtarget-oldx, 1500);
+    }
 }
 
 

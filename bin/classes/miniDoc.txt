@@ -2,12 +2,12 @@ WAKE, HOW TO RELEASE NEW VERSION
 	free:
 		constants.pro = false;
 		rename application package "com.mammothGames.wake1free"
-		rename application name "Wake"
+		rename application "Wake" in res>values>strings
 		
 	pro:
 		constants.pro = true;
 		rename application package "com.mammothGames.wake1"
-		rename application name "Wake Pro"
+		rename application "Wake Pro" in res>values>strings
 
 timer:
 	double time = System.currentTimeMillis();

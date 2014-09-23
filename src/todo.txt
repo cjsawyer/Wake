@@ -1,10 +1,16 @@
 ///// This Commit /////
 
-Wake 1.3 release!
-Tweaked about and records menus
-Made main menu smoother, found a few cases where the previous fix wasn't implemented
+Changed menu slide behavior
+Fixed battery drain problem
+Fixed tab difficulty tab change bug
 
 --------------- WAKE TODO ---------------
+
+
+
+||| LATER:
+
+--Just port the thing to LibGDX--
 
 Google PLay Games support
 
@@ -16,8 +22,6 @@ add some sort of transition between popup states
 fix double S/Z timing
 
 investigate how there is a second blue bar being drawn in the hud on emulator
-
-screen slide equation-ize
 
 double points for combo taps
 
@@ -39,6 +43,8 @@ Wake 1.2 FEEDBACK:
 	change font
 	make bar flash red when a combo is broken
 
+TEXTURE GLITCH: 
+samsung galaxy tab
 
 
  _______________________________________________________________
@@ -78,6 +84,10 @@ Long Term:
 
 
 //////////////////////////////////////////// HISTORY //////////////////////////////////////////////////////////////
+
+Wake 1.3 release!
+Tweaked about and records menus
+Made main menu smoother, found a few cases where the previous fix wasn't implemented
 
 Added real actions to postgame buttons
 Fixed bug where restarting after quitting a game would spawn a broken pattern of orbs

@@ -163,7 +163,7 @@ public class entity_gameMain extends engine_entity {
 		
 		ref.draw.setDrawColor(1, 1, 1, 1);
 		float height = ref.screen_width/25;
-		ref.draw.drawLine(ref.screen_width, floor_height-height/2, 0, floor_height-height/2, height, constants.layer4_overGame, true);
+		ref.draw.drawLine(ref.screen_width, floor_height-height/4, 0, floor_height-height/4, height, constants.layer4_overGame, true);
 		
 		
 		if ( (floor_height >= ref.screen_height) && (ref.room.get_current_room() == rooms.ROOM_GAME) )
