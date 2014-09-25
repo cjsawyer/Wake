@@ -66,6 +66,7 @@ public class entity_backButton extends engine_entity {
 							mgr.popup.setPopupOpenness(false);
 						} else {
 							mgr.menuMain.active_screen = mgr.menuMain.MAIN;
+							mgr.menuMain.setRelativePositionTarget(-mgr.menuMain.X_MAIN, -mgr.menuMain.Y_MAIN);
 						}
 					} else {
 						if (!mgr.popup.getPopupOpenness()) {

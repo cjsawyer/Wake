@@ -97,7 +97,15 @@ public class entity_menuPostGame extends engine_entity {
 	private final int room_game=0, room_records=1, room_diff=2;
 	private int room_to_leave_to;
 	
+	@Override
+	public void alarm0() {
+		mgr.menuPauseHUD.setTweenPosition(mgr.menuPauseHUD.base_hud_height); // slide HUD back up
+	}
+	
 	public void start() {
+		
+		alarm[0] = 1000; // start timer of 1 sec to slide hug back up
+		
 		
 		switch(mgr.gameMain.current_diff) {
 			case (entity_gameMain.DIF_EASY):

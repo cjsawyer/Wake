@@ -1,4 +1,6 @@
-WAKE, HOW TO RELEASE NEW VERSION
+WAKE, HOW TO RELEASE NEW VERSION:
+
+------------------
 	free:
 		constants.pro = false;
 		rename application package "com.mammothGames.wake1free"
@@ -9,6 +11,8 @@ WAKE, HOW TO RELEASE NEW VERSION
 		rename application package "com.mammothGames.wake1"
 		rename application "Wake Pro" in res>values>strings
 
+manifest, change release numbers
+------------------
 timer:
 	double time = System.currentTimeMillis();
 	Log.e("reywas", (System.currentTimeMillis() - time) + "");

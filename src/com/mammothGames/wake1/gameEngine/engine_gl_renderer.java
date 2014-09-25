@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import com.mammothGames.wake1.R;
+import com.mammothGames.wake1free.R;
 import com.mammothGames.wake1.game.constants;
 import com.mammothGames.wake1.game.textures;
 //import com.reywas.testGameName.*;

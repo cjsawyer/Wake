@@ -306,6 +306,7 @@ public class entity_popup extends engine_entity {
 	public void abandonCurrentGame() {
 	    setPopupOpenness(false);
         mgr.menuPauseHUD.setPause(false);
+        popup_alpha = 0;
         mgr.gameMain.floor_height_target = 0;
         mgr.gameMain.endGame();
 	}

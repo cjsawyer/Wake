@@ -123,20 +123,47 @@ public class entity_menuMain extends engine_entity {
 		about.setActive(true);
 	}
 	
-	private void setRelativePositionTarget(float xt, float yt) {
-		setEasePosition(xt, yt);
+	void setRelativePositionTarget(float xt, float yt) {
+		setTweenPosition(xt, yt);
 	}
 	
-	private void setEasePosition(float xt, float yt) {
-//		if (!tween) {
+	private void setTweenPosition(float xt, float yt) {
 			xtarget = xt + ref.screen_width/2;
 			oldx = x;
 			ytarget = yt + ref.screen_height/2;
 			oldy = y;
 			tween_start = SystemClock.uptimeMillis();
-//			tween = true;
-//		}
 	}
+	/**
+     * 
+     * @param t current time
+     * @param b start value
+     * @param c change in value
+     * @param d duration
+     * @return
+     */
+    private float tween(float t, float b, float c, float d) {
+    	
+    	t/=d;
+    	float ts=t*t;
+    	float tc=ts*t;
+    	return b+c*(8.145f*tc*ts + -28.0325f*ts*ts + 38.08f*tc + -25.49f*ts + 8.2975f*t);
+
+    	
+    	// big bounce
+//    	t/=d;
+//    	float ts=t*t;
+//    	float tc=ts*t;
+//    	return b+c*(-19.2925f*tc*ts + 56.9825f*ts*ts + -58.185f*tc + 21.295f*ts + 0.2f*t);
+    	
+    	
+    	// linear
+//    	t/=d;
+//    	return b+c*(t);
+
+    	
+    	//x = tween(SystemClock.uptimeMillis() - tween_start, oldx, xtarget-oldx, 1500);
+    }
 	
 	@Override
 	public void sys_step() {
@@ -146,9 +173,9 @@ public class entity_menuMain extends engine_entity {
 			
 //			if (tween) {
 				float current_time = SystemClock.uptimeMillis() - tween_start;
-				x = tween(current_time, oldx, xtarget-oldx, 500);
-				y = tween(current_time, oldy, ytarget-oldy, 500);
-				if (500 - current_time < 1) {
+				x = tween(current_time, oldx, xtarget-oldx, 300);
+				y = tween(current_time, oldy, ytarget-oldy, 300);
+				if (300 - current_time < 1) {
 //					tween = false;
 					x = xtarget;
 					y = ytarget;
@@ -482,32 +509,6 @@ public class entity_menuMain extends engine_entity {
 		oldy = y;
 	}
 	
-	 /**
-     * 
-     * @param t current time
-     * @param b start value
-     * @param c change in value
-     * @param d duration
-     * @return
-     */
-    private float tween(float t, float b, float c, float d) {
-    	t/=d;
-    	float ts=t*t;
-    	float tc=ts*t;
-    	return b+c*(-19.2925f*tc*ts + 56.9825f*ts*ts + -58.185f*tc + 21.295f*ts + 0.2f*t);
-    	
-//    	t /= d;
-//    	float ts=t*t;
-//    	float tc=ts*t;
-//    	return b+c*(33*tc*ts + -106*ts*ts + 126*tc + -67*ts + 15*t);
-    	
-    	// linear
-//    	t/=d;
-//    	return b+c*(t);
-
-    	
-    	//x = tween(SystemClock.uptimeMillis() - tween_start, oldx, xtarget-oldx, 1500);
-    }
 }
 
 
