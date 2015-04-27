@@ -149,6 +149,7 @@ public class entity_orbSpawner extends engine_entity {
 	private float number_shards;
     private float resettingTimeCounter = 0;
     
+    
     private void scorePoint(boolean report_score) {
         float scale = 1;
         
@@ -160,6 +161,22 @@ public class entity_orbSpawner extends engine_entity {
     		mgr.gameMain.score += mgr.gameMain.score_multiplier;
     		mgr.gameMain.streak += 1;
     		mgr.gameMain.points_streak += mgr.gameMain.score_multiplier;
+    		
+    		int old_mult = mgr.gameMain.score_multiplier;
+    		
+    		mgr.gameMain.score_multiplier = mgr.gameMain.streak / mgr.gameMain.STREAK_PER_LEVEL + 1;
+            // If larger than 4, set to 4
+//            mgr.gameMain.score_multiplier = mgr.gameMain.score_multiplier > 4 ? 4 : mgr.gameMain.score_multiplier;
+    		if ( mgr.gameMain.score_multiplier > 4) {
+    		    mgr.gameMain.score_multiplier = 4;
+    		}
+    		
+    		if ( (mgr.gameMain.score_multiplier != old_mult) && (mgr.popup.high_gfx) ) {
+                // Make the +1 jump around when changed. Easing function in pause HUD 
+                mgr.menuPauseHUD.mult_scale = 1.5f;//ref.main.randomRange(-mgr.gameMain.text_size*.3f, mgr.gameMain.text_size*.3f);
+            }
+    		
+    		
 //    		ref.sound.playSoundSpeedChanged(game_sounds.SND_DING, 0.3f);
     	}
     	
@@ -363,9 +380,9 @@ public class entity_orbSpawner extends engine_entity {
 				ref.draw.setDrawColor(1, 1, 1, temp_scoreEffect.alpha);
 					
 				
-				mgr.gameMain.score_multiplier = mgr.gameMain.streak / mgr.gameMain.STREAK_PER_LEVEL + 1;
-				// If larger than 4, set to 4
-				mgr.gameMain.score_multiplier = mgr.gameMain.score_multiplier > 4 ? 4 : mgr.gameMain.score_multiplier;
+//				mgr.gameMain.score_multiplier = mgr.gameMain.streak / mgr.gameMain.STREAK_PER_LEVEL + 1;
+//				// If larger than 4, set to 4
+//				mgr.gameMain.score_multiplier = mgr.gameMain.score_multiplier > 4 ? 4 : mgr.gameMain.score_multiplier;
 				
 				ref.draw.text.append(  "+"  );
 				ref.draw.text.append(  temp_scoreEffect.number  );

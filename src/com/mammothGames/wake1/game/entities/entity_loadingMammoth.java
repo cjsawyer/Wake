@@ -55,7 +55,7 @@ public class entity_loadingMammoth extends engine_entity {
 			
 			if (!fade_out)
 				logo_alpha += ref.main.time_scale * 8f;
-			else if (current_time-start_time > 1750)
+			else if (current_time-start_time > 2500)
 				logo_alpha -= ref.main.time_scale * 8f;
 			
 			if (logo_alpha > 1)

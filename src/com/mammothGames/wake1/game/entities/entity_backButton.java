@@ -34,8 +34,10 @@ public class entity_backButton extends engine_entity {
 			case rooms.ROOM_GAME:
 				if (mgr.menuPauseHUD.getPause()) {
 					if ( ! mgr.popup.getPopupOpenness() ) {
-						mgr.popup.setPopupState(mgr.popup.STATE_PAUSED);
-						mgr.popup.setPopupOpenness(true);
+					    if (!mgr.countdown.counting) {
+					        mgr.popup.setPopupState(mgr.popup.STATE_PAUSED);
+					        mgr.popup.setPopupOpenness(true);
+					    }
 					} else {
 					    if (mgr.popup.getPopupState() == mgr.popup.STATE_PAUSED)
 					        mgr.popup.setPopupState(mgr.popup.STATE_ABANDON);
@@ -81,13 +83,13 @@ public class entity_backButton extends engine_entity {
 					}
 				break;
 
-			case rooms.ROOM_MENURECORDS:
-				if ( mgr.popup.getPopupOpenness() )
-					mgr.popup.setPopupOpenness(false);
-				else 
-					mgr.menuRecords.prepLeave(mgr.menuRecords.PREP_menuTop);
-				
-				break;
+//			case rooms.ROOM_MENURECORDS:
+//				if ( mgr.popup.getPopupOpenness() )
+//					mgr.popup.setPopupOpenness(false);
+//				else 
+//					mgr.menuRecords.prepLeave(mgr.menuRecords.PREP_menuTop);
+//				
+////				break;
 		}
 	}
 }

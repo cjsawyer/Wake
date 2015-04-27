@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mammothGames.wake1free"
+    package="com.mammothGames.wake1"
     android:versionCode="6"
     android:versionName="1.4" >
 
@@ -32,6 +32,10 @@
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 			
 			android:configChanges="orientation"
+			
+			android:clearTaskOnLaunch="true"  
+            android:stateNotNeeded="true"
+			
              >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

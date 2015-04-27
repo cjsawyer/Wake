@@ -171,16 +171,20 @@ public class entity_menuMain extends engine_entity {
 			
 			old_screen = active_screen;
 			
-//			if (tween) {
 				float current_time = SystemClock.uptimeMillis() - tween_start;
-				x = tween(current_time, oldx, xtarget-oldx, 300);
-				y = tween(current_time, oldy, ytarget-oldy, 300);
-				if (300 - current_time < 1) {
-//					tween = false;
+				
+				x += (xtarget - x) * 15 * ref.main.time_scale;
+				y += (ytarget - y) * 15 * ref.main.time_scale;
+				
+				/*
+				 * this method is too slow on my Nexus 5, probably on mosto ther thing too. The simple one is smpoother 
+				x = tween(current_time, oldx, xtarget-oldx, 500);
+				y = tween(current_time, oldy, ytarget-oldy, 500);
+				if (500 - current_time < 1) {
 					x = xtarget;
 					y = ytarget;
 				}
-//			}
+				*/
 			
 			
 			menu.setClickable(false);
@@ -333,7 +337,7 @@ public class entity_menuMain extends engine_entity {
 			menu.setPosition(x + X_MAIN, y + Y_MAIN);
 			menu.update();
 			
-			// Only draw the other visible menu to avoid lag by drawing too much
+			// Only draw the other visible menu to avoid lag by drawing too much. Visibility culling!
 			switch(other_screen) {
 				case DIFFICULTY:
 					difficulty.setAlpha(mgr.gameMain.shade_alpha);
@@ -452,7 +456,7 @@ public class entity_menuMain extends engine_entity {
 	}
 	
 	private void openWebsite() {
-		final String website = "http://cjsdev.com";
+		final String website = "http://mammothgames.net";
 		ref.android.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(website)));
 	}
 	
@@ -950,7 +954,7 @@ class AboutMenuGUI extends engine_gui {
         logo.setBackgroundColor(0,0,0,.9f);
         
         web = new engine_guiButton(this, idWebButton);
-        web.setText("cjsdev.com");
+        web.setText("our website");
         web.setTextureSheet(textures.TEX_FONT1);
         web.setTextColor(0, 1, 0, 1);
         web.setTextSize(mgr.gameMain.text_size);

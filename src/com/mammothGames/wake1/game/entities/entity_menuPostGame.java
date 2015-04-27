@@ -104,7 +104,7 @@ public class entity_menuPostGame extends engine_entity {
 	
 	public void start() {
 		
-		alarm[0] = 1000; // start timer of 1 sec to slide hug back up
+		alarm[0] = 1000; // start timer of 1 sec to slide hud back up
 		
 		
 		switch(mgr.gameMain.current_diff) {
@@ -156,6 +156,7 @@ public class entity_menuPostGame extends engine_entity {
 				mgr.menuMain.setRecordsPositionHard();
 				mgr.stars.transition();
 				mgr.menuMain.start();
+				mgr.menuMain.loadScores();
 				break;
 			case room_diff:
 				mgr.menuMain.setDifficultyPositionHard();

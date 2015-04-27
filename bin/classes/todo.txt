@@ -1,8 +1,10 @@
 ///// This Commit /////
 
-release 1.4
-added bounce to hud
-fixed stutter in popup veil when game ends
+release 1.5
+renamed to hypnic, changed logo
+added new mammoth foot logo
+
+
 
 --------------- WAKE TODO ---------------
 
@@ -84,6 +86,10 @@ Long Term:
 
 
 //////////////////////////////////////////// HISTORY //////////////////////////////////////////////////////////////
+
+release 1.4
+added bounce to hud
+fixed stutter in popup veil when game ends
 
 Changed menu slide behavior
 Fixed battery drain problem

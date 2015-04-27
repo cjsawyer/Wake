@@ -11,6 +11,7 @@ import com.mammothGames.wake1.gameEngine.*;
 
 public class entity_menuRecords extends engine_entity {
 
+    /*
 	private boolean fade_main;
 	private float tab_w = 0, tab_h = 0;
 	private final int tabs = 4;
@@ -383,4 +384,5 @@ public class entity_menuRecords extends engine_entity {
 	}
 	
 	
+     */
 }

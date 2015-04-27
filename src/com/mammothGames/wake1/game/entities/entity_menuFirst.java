@@ -73,8 +73,8 @@ public class entity_menuFirst extends engine_entity {
 		mgr.menuMain = new entity_menuMain(mgr);
 		ref.main.addEntity(mgr.menuMain);
 		
-		mgr.menuRecords = new entity_menuRecords(mgr);
-		ref.main.addEntity(mgr.menuRecords);
+//		mgr.menuRecords = new entity_menuRecords(mgr);
+//		ref.main.addEntity(mgr.menuRecords);
 		
 		mgr.popup = new entity_popup(mgr);
 		ref.main.addEntity(mgr.popup);

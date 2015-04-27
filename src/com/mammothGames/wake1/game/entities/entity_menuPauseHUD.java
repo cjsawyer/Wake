@@ -40,6 +40,8 @@ public class entity_menuPauseHUD extends engine_entity {
 	
 	float y2;
 	
+	float mult_scale = 1;
+	
 	@Override
 	public void sys_firstStep() {
 		
@@ -110,7 +112,6 @@ public class entity_menuPauseHUD extends engine_entity {
 			
 			streak_bar_alpha += (-streak_bar_alpha) * 5 * ref.main.time_scale;
 			
-			
 				
 			if (game_paused)
 				ref.draw.drawCapturedDraw();
@@ -165,14 +166,19 @@ public class entity_menuPauseHUD extends engine_entity {
 			ref.draw.text.append(  mgr.gameMain.score  );
 			ref.draw.drawText(ref.screen_width/2, text_y + y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1, true);
 			
+			
+			// Slide the multiplier back to neutral position, if it isn't already there. Is moved by orbSpawnder when multiplier changes.
+			mult_scale += (1 - mult_scale) * mgr.gameMain.ANIMATION_SCALE * 2 * ref.main.time_scale;
 
 			//Draw score multiplier
 			ref.draw.setDrawColor(1, 1, 1, 1);
 			ref.draw.text.append(  "+"   );
 			ref.draw.text.append(  mgr.gameMain.score_multiplier   );
-			ref.draw.drawText(text_x, text_y + y, mgr.gameMain.text_size, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_TOP, constants.layer7_overHUD, textures.TEX_FONT1, true);
-			
+			ref.draw.drawText(text_x, ref.screen_height + y - base_hud_height/2 , mgr.gameMain.text_size * mult_scale, ref.draw.X_ALIGN_CENTER, ref.draw.Y_ALIGN_CENTER, constants.layer7_overHUD, textures.TEX_FONT1, true);
+
+			//Draw the pause button
 			ref.draw.setDrawColor(1, 1, 1, 1);
+			
 			ref.draw.drawTexture(
 			        button_size/2,
 			        ref.screen_height - button_size/2 + y,
