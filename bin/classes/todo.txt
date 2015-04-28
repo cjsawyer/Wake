@@ -1,9 +1,16 @@
 ///// This Commit /////
 
 release 1.5
-renamed to hypnic, changed logo
-added new mammoth foot logo
 
+renamed hypnic
+added new mammoth foot logo
+changed website text to "our website"
+fixed: multiplier doesn't work when gfx are set to low
+fixed: menu shouldn't pause during countdown
+fixed: set record-> open record smenu from post screen, need to update values!!
+added multiplier change effect
+game sometimes pauses if you jump wright into a game, dies it in menu too if you wait? 
+caused by ANDROID ART. Unfixable.
 
 
 --------------- WAKE TODO ---------------

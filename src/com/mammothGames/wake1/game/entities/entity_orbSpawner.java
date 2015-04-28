@@ -171,9 +171,9 @@ public class entity_orbSpawner extends engine_entity {
     		    mgr.gameMain.score_multiplier = 4;
     		}
     		
+    		// Make the +1 bounce bigger or smaller when the multiplier changes. Easing function in pause HUD 
     		if ( (mgr.gameMain.score_multiplier != old_mult) && (mgr.popup.high_gfx) ) {
-                // Make the +1 jump around when changed. Easing function in pause HUD 
-                mgr.menuPauseHUD.mult_scale = 1.5f;//ref.main.randomRange(-mgr.gameMain.text_size*.3f, mgr.gameMain.text_size*.3f);
+    		    mgr.menuPauseHUD.mult_scale = (mgr.gameMain.score_multiplier > old_mult) ? 1.5f : 0.75f;
             }
     		
     		

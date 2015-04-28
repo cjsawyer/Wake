@@ -46,6 +46,7 @@ class tex_font1 extends base_texture {
 	public tex_font1(){
 		
 		nameAndExtension = "Square.ttf";
+//		nameAndExtension = "JosefinSansSemiBold.ttf";
 		
 		isFont = true;
 		fontSize = 50;

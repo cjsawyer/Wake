@@ -1,6 +1,6 @@
 ///// This Commit /////
 
-release 1.5
+Commit before graphics overhaul
 
 renamed hypnic
 added new mammoth foot logo

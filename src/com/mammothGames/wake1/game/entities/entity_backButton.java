@@ -1,5 +1,7 @@
 package com.mammothGames.wake1.game.entities;
 
+import android.util.Log;
+
 import com.mammothGames.wake1.game.rooms;
 import com.mammothGames.wake1.gameEngine.*;
 

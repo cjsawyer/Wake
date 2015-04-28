@@ -173,18 +173,17 @@ public class entity_menuMain extends engine_entity {
 			
 				float current_time = SystemClock.uptimeMillis() - tween_start;
 				
-				x += (xtarget - x) * 15 * ref.main.time_scale;
-				y += (ytarget - y) * 15 * ref.main.time_scale;
+//				x += (xtarget - x) * 15 * ref.main.time_scale;
+//				y += (ytarget - y) * 15 * ref.main.time_scale;
 				
-				/*
-				 * this method is too slow on my Nexus 5, probably on mosto ther thing too. The simple one is smpoother 
-				x = tween(current_time, oldx, xtarget-oldx, 500);
-				y = tween(current_time, oldy, ytarget-oldy, 500);
-				if (500 - current_time < 1) {
+//				/*
+				x = tween(current_time, oldx, xtarget-oldx, 450);
+				y = tween(current_time, oldy, ytarget-oldy, 450);
+				if (450 - current_time < 1) {
 					x = xtarget;
 					y = ytarget;
 				}
-				*/
+//				*/
 			
 			
 			menu.setClickable(false);
